@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kedi</title>
+  <style>
+    :root { --blue: #2e8ad6; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--blue); }
+    body {
+      overflow: hidden;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background: var(--blue);
+    }
+    .hint, .hud, .load {
+      position: fixed;
+      z-index: 2;
+      pointer-events: none;
+      color: #fff;
+    }
+    .hint {
+      top: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      transition: opacity 0.4s ease;
+    }
+    .hint span {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .hint.is-gone { opacity: 0; }
+    .hud {
+      left: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    .hud strong { font-size: 1.05rem; }
+    .load {
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      font-weight: 600;
+      transition: opacity 0.35s ease;
+    }
+    .load.is-gone { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="load" id="load"><span>Kedi hazırlanıyor…</span></div>
+  <div class="hint" id="hint"><span>Fareyi ekranda gezdir</span></div>
+  <div class="hud">
+    <div><strong id="hudTime">0.00 sn</strong></div>
+    <div id="hudMeta">hazırlanıyor</div>
+  </div>
+  <canvas id="view"></canvas>
+
+  <script>
+window.KEDI_MANIFEST = {"width": 800, "height": 450, "center": {"t": 0.06, "name": "orta", "file": "f_0_0600.webp"}, "keys": [{"u": 0.0, "t": 0.48, "name": "aşağı"}, {"u": 0.125, "t": 1.45, "name": "sol-alt"}, {"u": 0.25, "t": 2.5, "name": "sol"}, {"u": 0.375, "t": 3.42, "name": "sol-üst"}, {"u": 0.5, "t": 5.3, "name": "üst"}, {"u": 0.625, "t": 6.2, "name": "sağ-üst"}, {"u": 0.75, "t": 7.5, "name": "sağ"}, {"u": 0.875, "t": 7.68, "name": "sağ-alt"}], "starts": [0, 23, 48, 70, 115, 137, 168, 172], "counts": [23, 25, 22, 45, 22, 31, 4, 45], "ring": [{"t": 0.48, "name": "aşağı", "file": "f_0_4800.webp"}, {"t": 0.5222, "name": "aşağı", "file": "f_0_5222.webp"}, {"t": 0.5643, "name": "aşağı", "file": "f_0_5643.webp"}, {"t": 0.6065, "name": "aşağı", "file": "f_0_6065.webp"}, {"t": 0.6487, "name": "aşağı", "file": "f_0_6487.webp"}, {"t": 0.6909, "name": "aşağı", "file": "f_0_6909.webp"}, {"t": 0.733, "name": "aşağı", "file": "f_0_7330.webp"}, {"t": 0.7752, "name": "aşağı", "file": "f_0_7752.webp"}, {"t": 0.8174, "name": "aşağı", "file": "f_0_8174.webp"}, {"t": 0.8596, "name": "aşağı", "file": "f_0_8596.webp"}, {"t": 0.9017, "name": "aşağı", "file": "f_0_9017.webp"}, {"t": 0.9439, "name": "aşağı", "file": "f_0_9439.webp"}, {"t": 0.9861, "name": "sol-alt", "file": "f_0_9861.webp"}, {"t": 1.0283, "name": "sol-alt", "file": "f_1_0283.webp"}, {"t": 1.0704, "name": "sol-alt", "file": "f_1_0704.webp"}, {"t": 1.1126, "name": "sol-alt", "file": "f_1_1126.webp"}, {"t": 1.1548, "name": "sol-alt", "file": "f_1_1548.webp"}, {"t": 1.197, "name": "sol-alt", "file": "f_1_1970.webp"}, {"t": 1.2391, "name": "sol-alt", "file": "f_1_2391.webp"}, {"t": 1.2813, "name": "sol-alt", "file": "f_1_2813.webp"}, {"t": 1.3235, "name": "sol-alt", "file": "f_1_3235.webp"}, {"t": 1.3657, "name": "sol-alt", "file": "f_1_3657.webp"}, {"t": 1.4078, "name": "sol-alt", "file": "f_1_4078.webp"}, {"t": 1.45, "name": "sol-alt", "file": "f_1_4500.webp"}, {"t": 1.492, "name": "sol-alt", "file": "f_1_4920.webp"}, {"t": 1.534, "name": "sol-alt", "file": "f_1_5340.webp"}, {"t": 1.576, "name": "sol-alt", "file": "f_1_5760.webp"}, {"t": 1.618, "name": "sol-alt", "file": "f_1_6180.webp"}, {"t": 1.66, "name": "sol-alt", "file": "f_1_6600.webp"}, {"t": 1.702, "name": "sol-alt", "file": "f_1_7020.webp"}, {"t": 1.744, "name": "sol-alt", "file": "f_1_7440.webp"}, {"t": 1.786, "name": "sol-alt", "file": "f_1_7860.webp"}, {"t": 1.828, "name": "sol-alt", "file": "f_1_8280.webp"}, {"t": 1.87, "name": "sol-alt", "file": "f_1_8700.webp"}, {"t": 1.912, "name": "sol-alt", "file": "f_1_9120.webp"}, {"t": 1.954, "name": "sol-alt", "file": "f_1_9540.webp"}, {"t": 1.996, "name": "sol", "file": "f_1_9960.webp"}, {"t": 2.038, "name": "sol", "file": "f_2_0380.webp"}, {"t": 2.08, "name": "sol", "file": "f_2_0800.webp"}, {"t": 2.122, "name": "sol", "file": "f_2_1220.webp"}, {"t": 2.164, "name": "sol", "file": "f_2_1640.webp"}, {"t": 2.206, "name": "sol", "file": "f_2_2060.webp"}, {"t": 2.248, "name": "sol", "file": "f_2_2480.webp"}, {"t": 2.29, "name": "sol", "file": "f_2_2900.webp"}, {"t": 2.332, "name": "sol", "file": "f_2_3320.webp"}, {"t": 2.374, "name": "sol", "file": "f_2_3740.webp"}, {"t": 2.416, "name": "sol", "file": "f_2_4160.webp"}, {"t": 2.458, "name": "sol", "file": "f_2_4580.webp"}, {"t": 2.5, "name": "sol", "file": "f_2_5000.webp"}, {"t": 2.5418, "name": "sol", "file": "f_2_5418.webp"}, {"t": 2.5836, "name": "sol", "file": "f_2_5836.webp"}, {"t": 2.6255, "name": "sol", "file": "f_2_6255.webp"}, {"t": 2.6673, "name": "sol", "file": "f_2_6673.webp"}, {"t": 2.7091, "name": "sol", "file": "f_2_7091.webp"}, {"t": 2.7509, "name": "sol", "file": "f_2_7509.webp"}, {"t": 2.7927, "name": "sol", "file": "f_2_7927.webp"}, {"t": 2.8345, "name": "sol", "file": "f_2_8345.webp"}, {"t": 2.8764, "name": "sol", "file": "f_2_8764.webp"}, {"t": 2.9182, "name": "sol", "file": "f_2_9182.webp"}, {"t": 2.96, "name": "sol-üst", "file": "f_2_9600.webp"}, {"t": 3.0018, "name": "sol-üst", "file": "f_3_0018.webp"}, {"t": 3.0436, "name": "sol-üst", "file": "f_3_0436.webp"}, {"t": 3.0855, "name": "sol-üst", "file": "f_3_0855.webp"}, {"t": 3.1273, "name": "sol-üst", "file": "f_3_1273.webp"}, {"t": 3.1691, "name": "sol-üst", "file": "f_3_1691.webp"}, {"t": 3.2109, "name": "sol-üst", "file": "f_3_2109.webp"}, {"t": 3.2527, "name": "sol-üst", "file": "f_3_2527.webp"}, {"t": 3.2945, "name": "sol-üst", "file": "f_3_2945.webp"}, {"t": 3.3364, "name": "sol-üst", "file": "f_3_3364.webp"}, {"t": 3.3782, "name": "sol-üst", "file": "f_3_3782.webp"}, {"t": 3.42, "name": "sol-üst", "file": "f_3_4200.webp"}, {"t": 3.4618, "name": "sol-üst", "file": "f_3_4618.webp"}, {"t": 3.5036, "name": "sol-üst", "file": "f_3_5036.webp"}, {"t": 3.5453, "name": "sol-üst", "file": "f_3_5453.webp"}, {"t": 3.5871, "name": "sol-üst", "file": "f_3_5871.webp"}, {"t": 3.6289, "name": "sol-üst", "file": "f_3_6289.webp"}, {"t": 3.6707, "name": "sol-üst", "file": "f_3_6707.webp"}, {"t": 3.7124, "name": "sol-üst", "file": "f_3_7124.webp"}, {"t": 3.7542, "name": "sol-üst", "file": "f_3_7542.webp"}, {"t": 3.796, "name": "sol-üst", "file": "f_3_7960.webp"}, {"t": 3.8378, "name": "sol-üst", "file": "f_3_8378.webp"}, {"t": 3.8796, "name": "sol-üst", "file": "f_3_8796.webp"}, {"t": 3.9213, "name": "sol-üst", "file": "f_3_9213.webp"}, {"t": 3.9631, "name": "sol-üst", "file": "f_3_9631.webp"}, {"t": 4.0049, "name": "sol-üst", "file": "f_4_0049.webp"}, {"t": 4.0467, "name": "sol-üst", "file": "f_4_0467.webp"}, {"t": 4.0884, "name": "sol-üst", "file": "f_4_0884.webp"}, {"t": 4.1302, "name": "sol-üst", "file": "f_4_1302.webp"}, {"t": 4.172, "name": "sol-üst", "file": "f_4_1720.webp"}, {"t": 4.2138, "name": "sol-üst", "file": "f_4_2138.webp"}, {"t": 4.2556, "name": "sol-üst", "file": "f_4_2556.webp"}, {"t": 4.2973, "name": "sol-üst", "file": "f_4_2973.webp"}, {"t": 4.3391, "name": "sol-üst", "file": "f_4_3391.webp"}, {"t": 4.3809, "name": "üst", "file": "f_4_3809.webp"}, {"t": 4.4227, "name": "üst", "file": "f_4_4227.webp"}, {"t": 4.4644, "name": "üst", "file": "f_4_4644.webp"}, {"t": 4.5062, "name": "üst", "file": "f_4_5062.webp"}, {"t": 4.548, "name": "üst", "file": "f_4_5480.webp"}, {"t": 4.5898, "name": "üst", "file": "f_4_5898.webp"}, {"t": 4.6316, "name": "üst", "file": "f_4_6316.webp"}, {"t": 4.6733, "name": "üst", "file": "f_4_6733.webp"}, {"t": 4.7151, "name": "üst", "file": "f_4_7151.webp"}, {"t": 4.7569, "name": "üst", "file": "f_4_7569.webp"}, {"t": 4.7987, "name": "üst", "file": "f_4_7987.webp"}, {"t": 4.8404, "name": "üst", "file": "f_4_8404.webp"}, {"t": 4.8822, "name": "üst", "file": "f_4_8822.webp"}, {"t": 4.924, "name": "üst", "file": "f_4_9240.webp"}, {"t": 4.9658, "name": "üst", "file": "f_4_9658.webp"}, {"t": 5.0076, "name": "üst", "file": "f_5_0076.webp"}, {"t": 5.0493, "name": "üst", "file": "f_5_0493.webp"}, {"t": 5.0911, "name": "üst", "file": "f_5_0911.webp"}, {"t": 5.1329, "name": "üst", "file": "f_5_1329.webp"}, {"t": 5.1747, "name": "üst", "file": "f_5_1747.webp"}, {"t": 5.2164, "name": "üst", "file": "f_5_2164.webp"}, {"t": 5.2582, "name": "üst", "file": "f_5_2582.webp"}, {"t": 5.3, "name": "üst", "file": "f_5_3000.webp"}, {"t": 5.3409, "name": "üst", "file": "f_5_3409.webp"}, {"t": 5.3818, "name": "üst", "file": "f_5_3818.webp"}, {"t": 5.4227, "name": "üst", "file": "f_5_4227.webp"}, {"t": 5.4636, "name": "üst", "file": "f_5_4636.webp"}, {"t": 5.5045, "name": "üst", "file": "f_5_5045.webp"}, {"t": 5.5455, "name": "üst", "file": "f_5_5455.webp"}, {"t": 5.5864, "name": "üst", "file": "f_5_5864.webp"}, {"t": 5.6273, "name": "üst", "file": "f_5_6273.webp"}, {"t": 5.6682, "name": "üst", "file": "f_5_6682.webp"}, {"t": 5.7091, "name": "üst", "file": "f_5_7091.webp"}, {"t": 5.75, "name": "sağ-üst", "file": "f_5_7500.webp"}, {"t": 5.7909, "name": "sağ-üst", "file": "f_5_7909.webp"}, {"t": 5.8318, "name": "sağ-üst", "file": "f_5_8318.webp"}, {"t": 5.8727, "name": "sağ-üst", "file": "f_5_8727.webp"}, {"t": 5.9136, "name": "sağ-üst", "file": "f_5_9136.webp"}, {"t": 5.9545, "name": "sağ-üst", "file": "f_5_9545.webp"}, {"t": 5.9955, "name": "sağ-üst", "file": "f_5_9955.webp"}, {"t": 6.0364, "name": "sağ-üst", "file": "f_6_0364.webp"}, {"t": 6.0773, "name": "sağ-üst", "file": "f_6_0773.webp"}, {"t": 6.1182, "name": "sağ-üst", "file": "f_6_1182.webp"}, {"t": 6.1591, "name": "sağ-üst", "file": "f_6_1591.webp"}, {"t": 6.2, "name": "sağ-üst", "file": "f_6_2000.webp"}, {"t": 6.2419, "name": "sağ-üst", "file": "f_6_2419.webp"}, {"t": 6.2839, "name": "sağ-üst", "file": "f_6_2839.webp"}, {"t": 6.3258, "name": "sağ-üst", "file": "f_6_3258.webp"}, {"t": 6.3677, "name": "sağ-üst", "file": "f_6_3677.webp"}, {"t": 6.4097, "name": "sağ-üst", "file": "f_6_4097.webp"}, {"t": 6.4516, "name": "sağ-üst", "file": "f_6_4516.webp"}, {"t": 6.4935, "name": "sağ-üst", "file": "f_6_4935.webp"}, {"t": 6.5355, "name": "sağ-üst", "file": "f_6_5355.webp"}, {"t": 6.5774, "name": "sağ-üst", "file": "f_6_5774.webp"}, {"t": 6.6194, "name": "sağ-üst", "file": "f_6_6194.webp"}, {"t": 6.6613, "name": "sağ-üst", "file": "f_6_6613.webp"}, {"t": 6.7032, "name": "sağ-üst", "file": "f_6_7032.webp"}, {"t": 6.7452, "name": "sağ-üst", "file": "f_6_7452.webp"}, {"t": 6.7871, "name": "sağ-üst", "file": "f_6_7871.webp"}, {"t": 6.829, "name": "sağ-üst", "file": "f_6_8290.webp"}, {"t": 6.871, "name": "sağ", "file": "f_6_8710.webp"}, {"t": 6.9129, "name": "sağ", "file": "f_6_9129.webp"}, {"t": 6.9548, "name": "sağ", "file": "f_6_9548.webp"}, {"t": 6.9968, "name": "sağ", "file": "f_6_9968.webp"}, {"t": 7.0387, "name": "sağ", "file": "f_7_0387.webp"}, {"t": 7.0806, "name": "sağ", "file": "f_7_0806.webp"}, {"t": 7.1226, "name": "sağ", "file": "f_7_1226.webp"}, {"t": 7.1645, "name": "sağ", "file": "f_7_1645.webp"}, {"t": 7.2065, "name": "sağ", "file": "f_7_2065.webp"}, {"t": 7.2484, "name": "sağ", "file": "f_7_2484.webp"}, {"t": 7.2903, "name": "sağ", "file": "f_7_2903.webp"}, {"t": 7.3323, "name": "sağ", "file": "f_7_3323.webp"}, {"t": 7.3742, "name": "sağ", "file": "f_7_3742.webp"}, {"t": 7.4161, "name": "sağ", "file": "f_7_4161.webp"}, {"t": 7.4581, "name": "sağ", "file": "f_7_4581.webp"}, {"t": 7.5, "name": "sağ", "file": "f_7_5000.webp"}, {"t": 7.545, "name": "sağ", "file": "f_7_5450.webp"}, {"t": 7.59, "name": "sağ-alt", "file": "f_7_5900.webp"}, {"t": 7.635, "name": "sağ-alt", "file": "f_7_6350.webp"}, {"t": 7.68, "name": "sağ-alt", "file": "f_7_6800.webp"}, {"t": 7.7221, "name": "sağ-alt", "file": "f_7_7221.webp"}, {"t": 7.7643, "name": "sağ-alt", "file": "f_7_7643.webp"}, {"t": 7.8064, "name": "sağ-alt", "file": "f_7_8064.webp"}, {"t": 7.8486, "name": "sağ-alt", "file": "f_7_8486.webp"}, {"t": 7.8907, "name": "sağ-alt", "file": "f_7_8907.webp"}, {"t": 7.9329, "name": "sağ-alt", "file": "f_7_9329.webp"}, {"t": 7.975, "name": "sağ-alt", "file": "f_7_9750.webp"}, {"t": 8.0171, "name": "sağ-alt", "file": "f_8_0171.webp"}, {"t": 8.0593, "name": "sağ-alt", "file": "f_8_0593.webp"}, {"t": 8.1014, "name": "sağ-alt", "file": "f_8_1014.webp"}, {"t": 8.1436, "name": "sağ-alt", "file": "f_8_1436.webp"}, {"t": 8.1857, "name": "sağ-alt", "file": "f_8_1857.webp"}, {"t": 8.2279, "name": "sağ-alt", "file": "f_8_2279.webp"}, {"t": 8.27, "name": "sağ-alt", "file": "f_8_2700.webp"}, {"t": 8.3121, "name": "sağ-alt", "file": "f_8_3121.webp"}, {"t": 8.3543, "name": "sağ-alt", "file": "f_8_3543.webp"}, {"t": 8.3964, "name": "sağ-alt", "file": "f_8_3964.webp"}, {"t": 8.4386, "name": "sağ-alt", "file": "f_8_4386.webp"}, {"t": 8.4807, "name": "sağ-alt", "file": "f_8_4807.webp"}, {"t": 8.5229, "name": "sağ-alt", "file": "f_8_5229.webp"}, {"t": 8.565, "name": "sağ-alt", "file": "f_8_5650.webp"}, {"t": 8.6071, "name": "sağ-alt", "file": "f_8_6071.webp"}, {"t": 8.6493, "name": "sağ-alt", "file": "f_8_6493.webp"}, {"t": 8.6914, "name": "sağ-alt", "file": "f_8_6914.webp"}, {"t": 8.7336, "name": "sağ-alt", "file": "f_8_7336.webp"}, {"t": 8.7757, "name": "sağ-alt", "file": "f_8_7757.webp"}, {"t": 8.8179, "name": "sağ-alt", "file": "f_8_8179.webp"}, {"t": 8.86, "name": "sağ-alt", "file": "f_8_8600.webp"}, {"t": 8.9021, "name": "sağ-alt", "file": "f_8_9021.webp"}, {"t": 8.9443, "name": "sağ-alt", "file": "f_8_9443.webp"}, {"t": 8.9864, "name": "sağ-alt", "file": "f_8_9864.webp"}, {"t": 9.0286, "name": "sağ-alt", "file": "f_9_0286.webp"}, {"t": 9.0707, "name": "sağ-alt", "file": "f_9_0707.webp"}, {"t": 9.1129, "name": "sağ-alt", "file": "f_9_1129.webp"}, {"t": 9.155, "name": "sağ-alt", "file": "f_9_1550.webp"}, {"t": 9.1971, "name": "sağ-alt", "file": "f_9_1971.webp"}, {"t": 9.2393, "name": "sağ-alt", "file": "f_9_2393.webp"}, {"t": 9.2814, "name": "sağ-alt", "file": "f_9_2814.webp"}, {"t": 9.3236, "name": "sağ-alt", "file": "f_9_3236.webp"}, {"t": 9.3657, "name": "sağ-alt", "file": "f_9_3657.webp"}, {"t": 9.4079, "name": "sağ-alt", "file": "f_9_4079.webp"}, {"t": 0.35, "name": "aşağı", "file": "f_0_3500.webp"}, {"t": 0.3933, "name": "aşağı", "file": "f_0_3933.webp"}, {"t": 0.4367, "name": "aşağı", "file": "f_0_4367.webp"}]};
+  </script>
+
+  <script>
+    (function () {
+      const BASE = new URL("kedi-canvas/", location.href).href;
+      const HEAD_NX = 0.63;
+      const HEAD_NY = 0.42;
+      const FOLLOW = 11;
+      const SETTLE = 4;
+
+      const canvas = document.getElementById("view");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const hint = document.getElementById("hint");
+      const load = document.getElementById("load");
+      const hudTime = document.getElementById("hudTime");
+      const hudMeta = document.getElementById("hudMeta");
+
+      let keys = [];
+      let ring = [];
+      let centerBmp = null;
+      let ready = false;
+      let targetU = 0;
+      let softU = 0;
+      let targetDist = 0;
+      let dist = 0;
+      let lastTs = 0;
+      let lastMove = 0;
+      let shown = -2;
+      let box = null;
+      let lastHud = "";
+      let hintHidden = false;
+      let pointerX = 0;
+      let pointerY = 0;
+      let hasPointer = false;
+
+      function clamp(v, a, b) {
+        return v < a ? a : v > b ? b : v;
+      }
+
+      function wrap01(v) {
+        v %= 1;
+        return v < 0 ? v + 1 : v;
+      }
+
+      function lerpU(a, b, k) {
+        let d = b - a;
+        if (d > 0.5) d -= 1;
+        if (d < -0.5) d += 1;
+        return wrap01(a + d * k);
+      }
+
+      function angleToU(dx, dy) {
+        let a = Math.atan2(dy, dx) - Math.PI / 2;
+        if (a < 0) a += Math.PI * 2;
+        return a / (Math.PI * 2);
+      }
+
+      function headOnScreen() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        if (!box) {
+          return {
+            x: innerWidth * 0.5,
+            y: innerHeight * 0.5,
+            reach: Math.min(innerWidth, innerHeight) * 0.42
+          };
+        }
+        return {
+          x: (box.dx + HEAD_NX * box.dw) / dpr,
+          y: (box.dy + HEAD_NY * box.dh) / dpr,
+          reach: Math.min(innerWidth, innerHeight) * 0.42
+        };
+      }
+
+      function indexFromU(u) {
+        const n = keys.length;
+        const x = wrap01(u) * n;
+        const i = Math.min(n - 1, Math.floor(x));
+        const p = x - i;
+        const start = ring.starts[i];
+        const count = ring.counts[i];
+        if (count <= 1) return start;
+        return start + p * (count - 1);
+      }
+
+      function layout() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const w = Math.floor(innerWidth * dpr);
+        const h = Math.floor(innerHeight * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+        const sample = centerBmp || (ring[0] && ring[0].bmp);
+        if (!sample) return;
+        const s = Math.max(w / sample.width, h / sample.height);
+        const dw = sample.width * s;
+        const dh = sample.height * s;
+        box = { w: w, h: h, dx: (w - dw) / 2, dy: (h - dh) / 2, dw: dw, dh: dh };
+      }
+
+      function draw(bmp, clear) {
+        if (!box || !bmp) return;
+        if (clear !== false) {
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = "#2e8ad6";
+          ctx.fillRect(0, 0, box.w, box.h);
+        }
+        ctx.drawImage(bmp, box.dx, box.dy, box.dw, box.dh);
+      }
+
+      function setHud(t, name) {
+        const text = Number(t).toFixed(2) + " sn";
+        if (text === lastHud) return;
+        lastHud = text;
+        hudTime.textContent = text;
+        hudMeta.textContent = "yön: " + name;
+      }
+
+      function paint() {
+        if (!ready || !box) return;
+
+        if (dist < 0.16) {
+          if (shown !== -1) {
+            shown = -1;
+            draw(centerBmp, true);
+            setHud(0.06, "orta");
+          }
+          return;
+        }
+
+        const len = ring.length;
+        let i = Math.round(indexFromU(softU));
+        i = ((i % len) + len) % len;
+        const frame = ring[i];
+        if (shown !== i) {
+          shown = i;
+          draw(frame.bmp, true);
+          setHud(frame.t, frame.name);
+        }
+      }
+
+      function onMove(e) {
+        pointerX = e.clientX;
+        pointerY = e.clientY;
+        hasPointer = true;
+        lastMove = performance.now();
+        if (!hintHidden) {
+          hintHidden = true;
+          hint.classList.add("is-gone");
+        }
+      }
+
+      function tick(ts) {
+        if (!ready) {
+          requestAnimationFrame(tick);
+          return;
+        }
+        const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0.016;
+        lastTs = ts;
+
+        if (!hasPointer) {
+          targetDist = 0;
+        } else {
+          const head = headOnScreen();
+          const dx = pointerX - head.x;
+          const dy = pointerY - head.y;
+          targetDist = Math.hypot(dx, dy) / head.reach;
+          targetU = angleToU(dx, dy);
+        }
+
+        const moving = hasPointer && ts - lastMove < 160;
+        const k = 1 - Math.exp(-(moving ? FOLLOW : SETTLE) * dt);
+        dist += (targetDist - dist) * k;
+        softU = lerpU(softU, targetU, k);
+        paint();
+        requestAnimationFrame(tick);
+      }
+
+      function loadImage(src) {
+        return new Promise(function (resolve, reject) {
+          const img = new Image();
+          img.onload = function () { resolve(img); };
+          img.onerror = function () { reject(new Error("img:" + src)); };
+          img.src = src;
+        });
+      }
+
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+          const s = document.createElement("script");
+          s.src = src;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { reject(new Error("script:" + src)); };
+          document.head.appendChild(s);
+        });
+      }
+
+      async function boot() {
+        // file:// üzerinde fetch engelli; manifest.js script ile yüklenir
+        if (!window.KEDI_MANIFEST) {
+          await loadScript(BASE + "manifest.js");
+        }
+        const manifest = window.KEDI_MANIFEST;
+        if (!manifest || !manifest.ring || !manifest.ring.length) {
+          throw new Error("manifest boş");
+        }
+
+        keys = manifest.keys;
+        const files = {};
+        files[manifest.center.file] = true;
+        for (let i = 0; i < manifest.ring.length; i++) {
+          files[manifest.ring[i].file] = true;
+        }
+        const list = Object.keys(files);
+        const images = {};
+        let done = 0;
+        const CONCURRENCY = 12;
+
+        async function loadOne(file) {
+          images[file] = await loadImage(BASE + file);
+          done += 1;
+          load.firstChild.textContent =
+            "Kedi hazırlanıyor… " + Math.round((done / list.length) * 100) + "%";
+        }
+
+        for (let i = 0; i < list.length; i += CONCURRENCY) {
+          await Promise.all(list.slice(i, i + CONCURRENCY).map(loadOne));
+        }
+
+        ring = manifest.ring.map(function (item) {
+          return {
+            bmp: images[item.file],
+            t: item.t,
+            name: item.name
+          };
+        });
+        ring.starts = manifest.starts;
+        ring.counts = manifest.counts;
+        centerBmp = images[manifest.center.file];
+
+        layout();
+        ready = true;
+        softU = 0;
+        load.classList.add("is-gone");
+        paint();
+        requestAnimationFrame(tick);
+      }
+
+      let resizeT = 0;
+      addEventListener("resize", function () {
+        clearTimeout(resizeT);
+        resizeT = setTimeout(function () {
+          layout();
+          shown = -2;
+          if (ready) paint();
+        }, 100);
+      });
+      addEventListener("pointermove", onMove, { passive: true });
+      addEventListener("pointerleave", function () {
+        hasPointer = false;
+        targetDist = 0;
+      });
+
+      boot().catch(function (err) {
+        console.error(err);
+        load.firstChild.textContent =
+          "kedi-canvas yüklenemedi (" + (err && err.message ? err.message : "hata") + ")";
+      });
+    })();
+  </script>
+</body>
+</html>

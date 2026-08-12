@@ -1,0 +1,1144 @@
+{
+  "width": 800,
+  "height": 450,
+  "bg": "#849445",
+  "center": {
+    "t": 0.05,
+    "name": "orta",
+    "file": "f_0_0500.webp"
+  },
+  "keys": [
+    {
+      "u": 0.0,
+      "t": 4.15,
+      "name": "aşağı"
+    },
+    {
+      "u": 0.125,
+      "t": 5.35,
+      "name": "sol-alt"
+    },
+    {
+      "u": 0.25,
+      "t": 6.15,
+      "name": "sol"
+    },
+    {
+      "u": 0.375,
+      "t": 7.4,
+      "name": "sol-üst"
+    },
+    {
+      "u": 0.5,
+      "t": 8.15,
+      "name": "üst"
+    },
+    {
+      "u": 0.625,
+      "t": 1.15,
+      "name": "sağ-üst"
+    },
+    {
+      "u": 0.75,
+      "t": 2.15,
+      "name": "sağ"
+    },
+    {
+      "u": 0.875,
+      "t": 3.15,
+      "name": "sağ-alt"
+    }
+  ],
+  "starts": [
+    0,
+    24,
+    44,
+    75,
+    94,
+    139,
+    164,
+    189
+  ],
+  "counts": [
+    24,
+    20,
+    31,
+    19,
+    45,
+    25,
+    25,
+    25
+  ],
+  "ring": [
+    {
+      "t": 4.15,
+      "name": "aşağı",
+      "file": "f_4_1500.webp"
+    },
+    {
+      "t": 4.1914,
+      "name": "aşağı",
+      "file": "f_4_1914.webp"
+    },
+    {
+      "t": 4.2328,
+      "name": "aşağı",
+      "file": "f_4_2328.webp"
+    },
+    {
+      "t": 4.2741,
+      "name": "aşağı",
+      "file": "f_4_2741.webp"
+    },
+    {
+      "t": 4.3155,
+      "name": "aşağı",
+      "file": "f_4_3155.webp"
+    },
+    {
+      "t": 4.3569,
+      "name": "aşağı",
+      "file": "f_4_3569.webp"
+    },
+    {
+      "t": 4.3983,
+      "name": "aşağı",
+      "file": "f_4_3983.webp"
+    },
+    {
+      "t": 4.4397,
+      "name": "aşağı",
+      "file": "f_4_4397.webp"
+    },
+    {
+      "t": 4.481,
+      "name": "aşağı",
+      "file": "f_4_4810.webp"
+    },
+    {
+      "t": 4.5224,
+      "name": "aşağı",
+      "file": "f_4_5224.webp"
+    },
+    {
+      "t": 4.5638,
+      "name": "aşağı",
+      "file": "f_4_5638.webp"
+    },
+    {
+      "t": 4.6052,
+      "name": "aşağı",
+      "file": "f_4_6052.webp"
+    },
+    {
+      "t": 4.6466,
+      "name": "aşağı",
+      "file": "f_4_6466.webp"
+    },
+    {
+      "t": 4.6879,
+      "name": "aşağı",
+      "file": "f_4_6879.webp"
+    },
+    {
+      "t": 4.7293,
+      "name": "aşağı",
+      "file": "f_4_7293.webp"
+    },
+    {
+      "t": 4.7707,
+      "name": "sol-alt",
+      "file": "f_4_7707.webp"
+    },
+    {
+      "t": 4.8121,
+      "name": "sol-alt",
+      "file": "f_4_8121.webp"
+    },
+    {
+      "t": 4.8534,
+      "name": "sol-alt",
+      "file": "f_4_8534.webp"
+    },
+    {
+      "t": 4.8948,
+      "name": "sol-alt",
+      "file": "f_4_8948.webp"
+    },
+    {
+      "t": 4.9362,
+      "name": "sol-alt",
+      "file": "f_4_9362.webp"
+    },
+    {
+      "t": 5.2259,
+      "name": "sol-alt",
+      "file": "f_5_2259.webp"
+    },
+    {
+      "t": 5.2672,
+      "name": "sol-alt",
+      "file": "f_5_2672.webp"
+    },
+    {
+      "t": 5.3086,
+      "name": "sol-alt",
+      "file": "f_5_3086.webp"
+    },
+    {
+      "t": 5.35,
+      "name": "sol-alt",
+      "file": "f_5_3500.webp"
+    },
+    {
+      "t": 5.35,
+      "name": "sol-alt",
+      "file": "f_5_3500.webp"
+    },
+    {
+      "t": 5.3921,
+      "name": "sol-alt",
+      "file": "f_5_3921.webp"
+    },
+    {
+      "t": 5.4342,
+      "name": "sol-alt",
+      "file": "f_5_4342.webp"
+    },
+    {
+      "t": 5.4763,
+      "name": "sol-alt",
+      "file": "f_5_4763.webp"
+    },
+    {
+      "t": 5.5184,
+      "name": "sol-alt",
+      "file": "f_5_5184.webp"
+    },
+    {
+      "t": 5.5605,
+      "name": "sol-alt",
+      "file": "f_5_5605.webp"
+    },
+    {
+      "t": 5.6026,
+      "name": "sol-alt",
+      "file": "f_5_6026.webp"
+    },
+    {
+      "t": 5.6447,
+      "name": "sol-alt",
+      "file": "f_5_6447.webp"
+    },
+    {
+      "t": 5.6868,
+      "name": "sol-alt",
+      "file": "f_5_6868.webp"
+    },
+    {
+      "t": 5.7289,
+      "name": "sol-alt",
+      "file": "f_5_7289.webp"
+    },
+    {
+      "t": 5.7711,
+      "name": "sol",
+      "file": "f_5_7711.webp"
+    },
+    {
+      "t": 5.8132,
+      "name": "sol",
+      "file": "f_5_8132.webp"
+    },
+    {
+      "t": 5.8553,
+      "name": "sol",
+      "file": "f_5_8553.webp"
+    },
+    {
+      "t": 5.8974,
+      "name": "sol",
+      "file": "f_5_8974.webp"
+    },
+    {
+      "t": 5.9395,
+      "name": "sol",
+      "file": "f_5_9395.webp"
+    },
+    {
+      "t": 5.9816,
+      "name": "sol",
+      "file": "f_5_9816.webp"
+    },
+    {
+      "t": 6.0237,
+      "name": "sol",
+      "file": "f_6_0237.webp"
+    },
+    {
+      "t": 6.0658,
+      "name": "sol",
+      "file": "f_6_0658.webp"
+    },
+    {
+      "t": 6.1079,
+      "name": "sol",
+      "file": "f_6_1079.webp"
+    },
+    {
+      "t": 6.15,
+      "name": "sol",
+      "file": "f_6_1500.webp"
+    },
+    {
+      "t": 6.15,
+      "name": "sol",
+      "file": "f_6_1500.webp"
+    },
+    {
+      "t": 6.1917,
+      "name": "sol",
+      "file": "f_6_1917.webp"
+    },
+    {
+      "t": 6.2333,
+      "name": "sol",
+      "file": "f_6_2333.webp"
+    },
+    {
+      "t": 6.275,
+      "name": "sol",
+      "file": "f_6_2750.webp"
+    },
+    {
+      "t": 6.3167,
+      "name": "sol",
+      "file": "f_6_3167.webp"
+    },
+    {
+      "t": 6.3583,
+      "name": "sol",
+      "file": "f_6_3583.webp"
+    },
+    {
+      "t": 6.4,
+      "name": "sol",
+      "file": "f_6_4000.webp"
+    },
+    {
+      "t": 6.4417,
+      "name": "sol",
+      "file": "f_6_4417.webp"
+    },
+    {
+      "t": 6.4833,
+      "name": "sol",
+      "file": "f_6_4833.webp"
+    },
+    {
+      "t": 6.525,
+      "name": "sol",
+      "file": "f_6_5250.webp"
+    },
+    {
+      "t": 6.5667,
+      "name": "sol",
+      "file": "f_6_5667.webp"
+    },
+    {
+      "t": 6.6083,
+      "name": "sol",
+      "file": "f_6_6083.webp"
+    },
+    {
+      "t": 6.65,
+      "name": "sol",
+      "file": "f_6_6500.webp"
+    },
+    {
+      "t": 6.6917,
+      "name": "sol",
+      "file": "f_6_6917.webp"
+    },
+    {
+      "t": 6.7333,
+      "name": "sol",
+      "file": "f_6_7333.webp"
+    },
+    {
+      "t": 6.775,
+      "name": "sol-üst",
+      "file": "f_6_7750.webp"
+    },
+    {
+      "t": 6.8167,
+      "name": "sol-üst",
+      "file": "f_6_8167.webp"
+    },
+    {
+      "t": 6.8583,
+      "name": "sol-üst",
+      "file": "f_6_8583.webp"
+    },
+    {
+      "t": 6.9,
+      "name": "sol-üst",
+      "file": "f_6_9000.webp"
+    },
+    {
+      "t": 6.9417,
+      "name": "sol-üst",
+      "file": "f_6_9417.webp"
+    },
+    {
+      "t": 6.9833,
+      "name": "sol-üst",
+      "file": "f_6_9833.webp"
+    },
+    {
+      "t": 7.025,
+      "name": "sol-üst",
+      "file": "f_7_0250.webp"
+    },
+    {
+      "t": 7.0667,
+      "name": "sol-üst",
+      "file": "f_7_0667.webp"
+    },
+    {
+      "t": 7.1083,
+      "name": "sol-üst",
+      "file": "f_7_1083.webp"
+    },
+    {
+      "t": 7.15,
+      "name": "sol-üst",
+      "file": "f_7_1500.webp"
+    },
+    {
+      "t": 7.1917,
+      "name": "sol-üst",
+      "file": "f_7_1917.webp"
+    },
+    {
+      "t": 7.2333,
+      "name": "sol-üst",
+      "file": "f_7_2333.webp"
+    },
+    {
+      "t": 7.275,
+      "name": "sol-üst",
+      "file": "f_7_2750.webp"
+    },
+    {
+      "t": 7.3167,
+      "name": "sol-üst",
+      "file": "f_7_3167.webp"
+    },
+    {
+      "t": 7.3583,
+      "name": "sol-üst",
+      "file": "f_7_3583.webp"
+    },
+    {
+      "t": 7.4,
+      "name": "sol-üst",
+      "file": "f_7_4000.webp"
+    },
+    {
+      "t": 7.4,
+      "name": "sol-üst",
+      "file": "f_7_4000.webp"
+    },
+    {
+      "t": 7.4417,
+      "name": "sol-üst",
+      "file": "f_7_4417.webp"
+    },
+    {
+      "t": 7.4833,
+      "name": "sol-üst",
+      "file": "f_7_4833.webp"
+    },
+    {
+      "t": 7.525,
+      "name": "sol-üst",
+      "file": "f_7_5250.webp"
+    },
+    {
+      "t": 7.5667,
+      "name": "sol-üst",
+      "file": "f_7_5667.webp"
+    },
+    {
+      "t": 7.6083,
+      "name": "sol-üst",
+      "file": "f_7_6083.webp"
+    },
+    {
+      "t": 7.65,
+      "name": "sol-üst",
+      "file": "f_7_6500.webp"
+    },
+    {
+      "t": 7.6917,
+      "name": "sol-üst",
+      "file": "f_7_6917.webp"
+    },
+    {
+      "t": 7.7333,
+      "name": "sol-üst",
+      "file": "f_7_7333.webp"
+    },
+    {
+      "t": 7.775,
+      "name": "sol-üst",
+      "file": "f_7_7750.webp"
+    },
+    {
+      "t": 7.8167,
+      "name": "sol-üst",
+      "file": "f_7_8167.webp"
+    },
+    {
+      "t": 7.8583,
+      "name": "sol-üst",
+      "file": "f_7_8583.webp"
+    },
+    {
+      "t": 7.9,
+      "name": "sol-üst",
+      "file": "f_7_9000.webp"
+    },
+    {
+      "t": 7.9417,
+      "name": "sol-üst",
+      "file": "f_7_9417.webp"
+    },
+    {
+      "t": 7.9833,
+      "name": "sol-üst",
+      "file": "f_7_9833.webp"
+    },
+    {
+      "t": 8.025,
+      "name": "üst",
+      "file": "f_8_0250.webp"
+    },
+    {
+      "t": 8.0667,
+      "name": "üst",
+      "file": "f_8_0667.webp"
+    },
+    {
+      "t": 8.1083,
+      "name": "üst",
+      "file": "f_8_1083.webp"
+    },
+    {
+      "t": 8.15,
+      "name": "üst",
+      "file": "f_8_1500.webp"
+    },
+    {
+      "t": 8.15,
+      "name": "üst",
+      "file": "f_8_1500.webp"
+    },
+    {
+      "t": 8.1937,
+      "name": "üst",
+      "file": "f_8_1937.webp"
+    },
+    {
+      "t": 8.2375,
+      "name": "üst",
+      "file": "f_8_2375.webp"
+    },
+    {
+      "t": 8.2812,
+      "name": "üst",
+      "file": "f_8_2812.webp"
+    },
+    {
+      "t": 8.325,
+      "name": "üst",
+      "file": "f_8_3250.webp"
+    },
+    {
+      "t": 8.3688,
+      "name": "üst",
+      "file": "f_8_3688.webp"
+    },
+    {
+      "t": 8.4125,
+      "name": "üst",
+      "file": "f_8_4125.webp"
+    },
+    {
+      "t": 8.4563,
+      "name": "üst",
+      "file": "f_8_4563.webp"
+    },
+    {
+      "t": 8.5,
+      "name": "üst",
+      "file": "f_8_5000.webp"
+    },
+    {
+      "t": 9.05,
+      "name": "orta",
+      "file": "f_9_0500.webp"
+    },
+    {
+      "t": 9.0917,
+      "name": "orta",
+      "file": "f_9_0917.webp"
+    },
+    {
+      "t": 9.1333,
+      "name": "orta",
+      "file": "f_9_1333.webp"
+    },
+    {
+      "t": 9.175,
+      "name": "orta",
+      "file": "f_9_1750.webp"
+    },
+    {
+      "t": 9.2167,
+      "name": "orta",
+      "file": "f_9_2167.webp"
+    },
+    {
+      "t": 9.2583,
+      "name": "orta",
+      "file": "f_9_2583.webp"
+    },
+    {
+      "t": 9.3,
+      "name": "orta",
+      "file": "f_9_3000.webp"
+    },
+    {
+      "t": 9.3417,
+      "name": "orta",
+      "file": "f_9_3417.webp"
+    },
+    {
+      "t": 9.3833,
+      "name": "orta",
+      "file": "f_9_3833.webp"
+    },
+    {
+      "t": 9.425,
+      "name": "orta",
+      "file": "f_9_4250.webp"
+    },
+    {
+      "t": 9.4667,
+      "name": "orta",
+      "file": "f_9_4667.webp"
+    },
+    {
+      "t": 9.5083,
+      "name": "orta",
+      "file": "f_9_5083.webp"
+    },
+    {
+      "t": 9.55,
+      "name": "orta",
+      "file": "f_9_5500.webp"
+    },
+    {
+      "t": 0.05,
+      "name": "orta",
+      "file": "f_0_0500.webp"
+    },
+    {
+      "t": 0.09,
+      "name": "orta",
+      "file": "f_0_0900.webp"
+    },
+    {
+      "t": 0.13,
+      "name": "orta",
+      "file": "f_0_1300.webp"
+    },
+    {
+      "t": 0.17,
+      "name": "orta",
+      "file": "f_0_1700.webp"
+    },
+    {
+      "t": 0.21,
+      "name": "orta",
+      "file": "f_0_2100.webp"
+    },
+    {
+      "t": 0.25,
+      "name": "orta",
+      "file": "f_0_2500.webp"
+    },
+    {
+      "t": 0.29,
+      "name": "orta",
+      "file": "f_0_2900.webp"
+    },
+    {
+      "t": 0.33,
+      "name": "orta",
+      "file": "f_0_3300.webp"
+    },
+    {
+      "t": 0.37,
+      "name": "orta",
+      "file": "f_0_3700.webp"
+    },
+    {
+      "t": 0.41,
+      "name": "orta",
+      "file": "f_0_4100.webp"
+    },
+    {
+      "t": 0.45,
+      "name": "orta",
+      "file": "f_0_4500.webp"
+    },
+    {
+      "t": 0.7,
+      "name": "sağ-üst",
+      "file": "f_0_7000.webp"
+    },
+    {
+      "t": 0.7409,
+      "name": "sağ-üst",
+      "file": "f_0_7409.webp"
+    },
+    {
+      "t": 0.7818,
+      "name": "sağ-üst",
+      "file": "f_0_7818.webp"
+    },
+    {
+      "t": 0.8227,
+      "name": "sağ-üst",
+      "file": "f_0_8227.webp"
+    },
+    {
+      "t": 0.8636,
+      "name": "sağ-üst",
+      "file": "f_0_8636.webp"
+    },
+    {
+      "t": 0.9045,
+      "name": "sağ-üst",
+      "file": "f_0_9045.webp"
+    },
+    {
+      "t": 0.9455,
+      "name": "sağ-üst",
+      "file": "f_0_9455.webp"
+    },
+    {
+      "t": 0.9864,
+      "name": "sağ-üst",
+      "file": "f_0_9864.webp"
+    },
+    {
+      "t": 1.0273,
+      "name": "sağ-üst",
+      "file": "f_1_0273.webp"
+    },
+    {
+      "t": 1.0682,
+      "name": "sağ-üst",
+      "file": "f_1_0682.webp"
+    },
+    {
+      "t": 1.1091,
+      "name": "sağ-üst",
+      "file": "f_1_1091.webp"
+    },
+    {
+      "t": 1.15,
+      "name": "sağ-üst",
+      "file": "f_1_1500.webp"
+    },
+    {
+      "t": 1.15,
+      "name": "sağ-üst",
+      "file": "f_1_1500.webp"
+    },
+    {
+      "t": 1.1917,
+      "name": "sağ-üst",
+      "file": "f_1_1917.webp"
+    },
+    {
+      "t": 1.2333,
+      "name": "sağ-üst",
+      "file": "f_1_2333.webp"
+    },
+    {
+      "t": 1.275,
+      "name": "sağ-üst",
+      "file": "f_1_2750.webp"
+    },
+    {
+      "t": 1.3167,
+      "name": "sağ-üst",
+      "file": "f_1_3167.webp"
+    },
+    {
+      "t": 1.3583,
+      "name": "sağ-üst",
+      "file": "f_1_3583.webp"
+    },
+    {
+      "t": 1.4,
+      "name": "sağ-üst",
+      "file": "f_1_4000.webp"
+    },
+    {
+      "t": 1.4417,
+      "name": "sağ-üst",
+      "file": "f_1_4417.webp"
+    },
+    {
+      "t": 1.4833,
+      "name": "sağ-üst",
+      "file": "f_1_4833.webp"
+    },
+    {
+      "t": 1.525,
+      "name": "sağ-üst",
+      "file": "f_1_5250.webp"
+    },
+    {
+      "t": 1.5667,
+      "name": "sağ-üst",
+      "file": "f_1_5667.webp"
+    },
+    {
+      "t": 1.6083,
+      "name": "sağ-üst",
+      "file": "f_1_6083.webp"
+    },
+    {
+      "t": 1.65,
+      "name": "sağ",
+      "file": "f_1_6500.webp"
+    },
+    {
+      "t": 1.6917,
+      "name": "sağ",
+      "file": "f_1_6917.webp"
+    },
+    {
+      "t": 1.7333,
+      "name": "sağ",
+      "file": "f_1_7333.webp"
+    },
+    {
+      "t": 1.775,
+      "name": "sağ",
+      "file": "f_1_7750.webp"
+    },
+    {
+      "t": 1.8167,
+      "name": "sağ",
+      "file": "f_1_8167.webp"
+    },
+    {
+      "t": 1.8583,
+      "name": "sağ",
+      "file": "f_1_8583.webp"
+    },
+    {
+      "t": 1.9,
+      "name": "sağ",
+      "file": "f_1_9000.webp"
+    },
+    {
+      "t": 1.9417,
+      "name": "sağ",
+      "file": "f_1_9417.webp"
+    },
+    {
+      "t": 1.9833,
+      "name": "sağ",
+      "file": "f_1_9833.webp"
+    },
+    {
+      "t": 2.025,
+      "name": "sağ",
+      "file": "f_2_0250.webp"
+    },
+    {
+      "t": 2.0667,
+      "name": "sağ",
+      "file": "f_2_0667.webp"
+    },
+    {
+      "t": 2.1083,
+      "name": "sağ",
+      "file": "f_2_1083.webp"
+    },
+    {
+      "t": 2.15,
+      "name": "sağ",
+      "file": "f_2_1500.webp"
+    },
+    {
+      "t": 2.15,
+      "name": "sağ",
+      "file": "f_2_1500.webp"
+    },
+    {
+      "t": 2.1917,
+      "name": "sağ",
+      "file": "f_2_1917.webp"
+    },
+    {
+      "t": 2.2333,
+      "name": "sağ",
+      "file": "f_2_2333.webp"
+    },
+    {
+      "t": 2.275,
+      "name": "sağ",
+      "file": "f_2_2750.webp"
+    },
+    {
+      "t": 2.3167,
+      "name": "sağ",
+      "file": "f_2_3167.webp"
+    },
+    {
+      "t": 2.3583,
+      "name": "sağ",
+      "file": "f_2_3583.webp"
+    },
+    {
+      "t": 2.4,
+      "name": "sağ",
+      "file": "f_2_4000.webp"
+    },
+    {
+      "t": 2.4417,
+      "name": "sağ",
+      "file": "f_2_4417.webp"
+    },
+    {
+      "t": 2.4833,
+      "name": "sağ",
+      "file": "f_2_4833.webp"
+    },
+    {
+      "t": 2.525,
+      "name": "sağ",
+      "file": "f_2_5250.webp"
+    },
+    {
+      "t": 2.5667,
+      "name": "sağ",
+      "file": "f_2_5667.webp"
+    },
+    {
+      "t": 2.6083,
+      "name": "sağ",
+      "file": "f_2_6083.webp"
+    },
+    {
+      "t": 2.65,
+      "name": "sağ-alt",
+      "file": "f_2_6500.webp"
+    },
+    {
+      "t": 2.6917,
+      "name": "sağ-alt",
+      "file": "f_2_6917.webp"
+    },
+    {
+      "t": 2.7333,
+      "name": "sağ-alt",
+      "file": "f_2_7333.webp"
+    },
+    {
+      "t": 2.775,
+      "name": "sağ-alt",
+      "file": "f_2_7750.webp"
+    },
+    {
+      "t": 2.8167,
+      "name": "sağ-alt",
+      "file": "f_2_8167.webp"
+    },
+    {
+      "t": 2.8583,
+      "name": "sağ-alt",
+      "file": "f_2_8583.webp"
+    },
+    {
+      "t": 2.9,
+      "name": "sağ-alt",
+      "file": "f_2_9000.webp"
+    },
+    {
+      "t": 2.9417,
+      "name": "sağ-alt",
+      "file": "f_2_9417.webp"
+    },
+    {
+      "t": 2.9833,
+      "name": "sağ-alt",
+      "file": "f_2_9833.webp"
+    },
+    {
+      "t": 3.025,
+      "name": "sağ-alt",
+      "file": "f_3_0250.webp"
+    },
+    {
+      "t": 3.0667,
+      "name": "sağ-alt",
+      "file": "f_3_0667.webp"
+    },
+    {
+      "t": 3.1083,
+      "name": "sağ-alt",
+      "file": "f_3_1083.webp"
+    },
+    {
+      "t": 3.15,
+      "name": "sağ-alt",
+      "file": "f_3_1500.webp"
+    },
+    {
+      "t": 3.15,
+      "name": "sağ-alt",
+      "file": "f_3_1500.webp"
+    },
+    {
+      "t": 3.1917,
+      "name": "sağ-alt",
+      "file": "f_3_1917.webp"
+    },
+    {
+      "t": 3.2333,
+      "name": "sağ-alt",
+      "file": "f_3_2333.webp"
+    },
+    {
+      "t": 3.275,
+      "name": "sağ-alt",
+      "file": "f_3_2750.webp"
+    },
+    {
+      "t": 3.3167,
+      "name": "sağ-alt",
+      "file": "f_3_3167.webp"
+    },
+    {
+      "t": 3.3583,
+      "name": "sağ-alt",
+      "file": "f_3_3583.webp"
+    },
+    {
+      "t": 3.4,
+      "name": "sağ-alt",
+      "file": "f_3_4000.webp"
+    },
+    {
+      "t": 3.4417,
+      "name": "sağ-alt",
+      "file": "f_3_4417.webp"
+    },
+    {
+      "t": 3.4833,
+      "name": "sağ-alt",
+      "file": "f_3_4833.webp"
+    },
+    {
+      "t": 3.525,
+      "name": "sağ-alt",
+      "file": "f_3_5250.webp"
+    },
+    {
+      "t": 3.5667,
+      "name": "sağ-alt",
+      "file": "f_3_5667.webp"
+    },
+    {
+      "t": 3.6083,
+      "name": "sağ-alt",
+      "file": "f_3_6083.webp"
+    },
+    {
+      "t": 3.65,
+      "name": "aşağı",
+      "file": "f_3_6500.webp"
+    },
+    {
+      "t": 3.6917,
+      "name": "aşağı",
+      "file": "f_3_6917.webp"
+    },
+    {
+      "t": 3.7333,
+      "name": "aşağı",
+      "file": "f_3_7333.webp"
+    },
+    {
+      "t": 3.775,
+      "name": "aşağı",
+      "file": "f_3_7750.webp"
+    },
+    {
+      "t": 3.8167,
+      "name": "aşağı",
+      "file": "f_3_8167.webp"
+    },
+    {
+      "t": 3.8583,
+      "name": "aşağı",
+      "file": "f_3_8583.webp"
+    },
+    {
+      "t": 3.9,
+      "name": "aşağı",
+      "file": "f_3_9000.webp"
+    },
+    {
+      "t": 3.9417,
+      "name": "aşağı",
+      "file": "f_3_9417.webp"
+    },
+    {
+      "t": 3.9833,
+      "name": "aşağı",
+      "file": "f_3_9833.webp"
+    },
+    {
+      "t": 4.025,
+      "name": "aşağı",
+      "file": "f_4_0250.webp"
+    },
+    {
+      "t": 4.0667,
+      "name": "aşağı",
+      "file": "f_4_0667.webp"
+    },
+    {
+      "t": 4.1083,
+      "name": "aşağı",
+      "file": "f_4_1083.webp"
+    },
+    {
+      "t": 4.15,
+      "name": "aşağı",
+      "file": "f_4_1500.webp"
+    }
+  ]
+}
