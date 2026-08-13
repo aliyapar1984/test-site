@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Balık</title>
+  <style>
+    :root { --theme: #f56f1d; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--theme); }
+    body {
+      overflow: hidden;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background: var(--theme);
+    }
+    .hint, .hud, .load {
+      position: fixed;
+      z-index: 2;
+      pointer-events: none;
+      color: #fff;
+    }
+    .hint {
+      top: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      transition: opacity 0.4s ease;
+    }
+    .hint span {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .hint.is-gone { opacity: 0; }
+    .hud {
+      left: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    .hud strong { font-size: 1.05rem; }
+    .load {
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      background: var(--theme);
+      font-weight: 600;
+      transition: opacity 0.35s ease;
+    }
+    .load.is-gone { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="load" id="load"><span>Balık hazırlanıyor…</span></div>
+  <div class="hint" id="hint"><span>Fareyi ekranda gezdir</span></div>
+  <div class="hud">
+    <div><strong id="hudTime">0.00 sn</strong></div>
+    <div id="hudMeta">hazırlanıyor</div>
+  </div>
+  <canvas id="view"></canvas>
+
+  <script>
+window.BALIK_MANIFEST = {"width": 800, "height": 450, "bg": "#f56f1d", "center": {"t": 0.18, "name": "orta", "file": "f_0_1800.webp"}, "keys": [{"u": 0.0, "t": 5.7, "name": "aşağı"}, {"u": 0.125, "t": 7.2, "name": "sol-alt"}, {"u": 0.25, "t": 8.3, "name": "sol"}, {"u": 0.375, "t": 1.8714, "name": "sol-üst"}, {"u": 0.5, "t": 2.3, "name": "üst"}, {"u": 0.625, "t": 3.2, "name": "sağ-üst"}, {"u": 0.75, "t": 4.1, "name": "sağ"}, {"u": 0.875, "t": 5.0, "name": "sağ-alt"}], "starts": [0, 36, 62, 73, 83, 105, 127, 149], "counts": [36, 26, 11, 10, 22, 22, 22, 17], "ring": [{"t": 5.7, "name": "aşağı", "file": "f_5_7000.webp"}, {"t": 5.7417, "name": "aşağı", "file": "f_5_7417.webp"}, {"t": 5.7833, "name": "aşağı", "file": "f_5_7833.webp"}, {"t": 5.825, "name": "aşağı", "file": "f_5_8250.webp"}, {"t": 5.8667, "name": "aşağı", "file": "f_5_8667.webp"}, {"t": 5.9083, "name": "aşağı", "file": "f_5_9083.webp"}, {"t": 5.95, "name": "aşağı", "file": "f_5_9500.webp"}, {"t": 5.9917, "name": "aşağı", "file": "f_5_9917.webp"}, {"t": 6.0333, "name": "aşağı", "file": "f_6_0333.webp"}, {"t": 6.075, "name": "aşağı", "file": "f_6_0750.webp"}, {"t": 6.1167, "name": "aşağı", "file": "f_6_1167.webp"}, {"t": 6.1583, "name": "aşağı", "file": "f_6_1583.webp"}, {"t": 6.2, "name": "aşağı", "file": "f_6_2000.webp"}, {"t": 6.2417, "name": "aşağı", "file": "f_6_2417.webp"}, {"t": 6.2833, "name": "aşağı", "file": "f_6_2833.webp"}, {"t": 6.325, "name": "aşağı", "file": "f_6_3250.webp"}, {"t": 6.3667, "name": "aşağı", "file": "f_6_3667.webp"}, {"t": 6.4083, "name": "aşağı", "file": "f_6_4083.webp"}, {"t": 6.45, "name": "aşağı", "file": "f_6_4500.webp"}, {"t": 6.4917, "name": "aşağı", "file": "f_6_4917.webp"}, {"t": 6.5333, "name": "aşağı", "file": "f_6_5333.webp"}, {"t": 6.575, "name": "aşağı", "file": "f_6_5750.webp"}, {"t": 6.6167, "name": "aşağı", "file": "f_6_6167.webp"}, {"t": 6.6583, "name": "aşağı", "file": "f_6_6583.webp"}, {"t": 6.7, "name": "aşağı", "file": "f_6_7000.webp"}, {"t": 6.7417, "name": "aşağı", "file": "f_6_7417.webp"}, {"t": 6.7833, "name": "sol-alt", "file": "f_6_7833.webp"}, {"t": 6.825, "name": "sol-alt", "file": "f_6_8250.webp"}, {"t": 6.8667, "name": "sol-alt", "file": "f_6_8667.webp"}, {"t": 6.9083, "name": "sol-alt", "file": "f_6_9083.webp"}, {"t": 6.95, "name": "sol-alt", "file": "f_6_9500.webp"}, {"t": 6.9917, "name": "sol-alt", "file": "f_6_9917.webp"}, {"t": 7.0333, "name": "sol-alt", "file": "f_7_0333.webp"}, {"t": 7.075, "name": "sol-alt", "file": "f_7_0750.webp"}, {"t": 7.1167, "name": "sol-alt", "file": "f_7_1167.webp"}, {"t": 7.1583, "name": "sol-alt", "file": "f_7_1583.webp"}, {"t": 7.2, "name": "sol-alt", "file": "f_7_2000.webp"}, {"t": 7.2423, "name": "sol-alt", "file": "f_7_2423.webp"}, {"t": 7.2846, "name": "sol-alt", "file": "f_7_2846.webp"}, {"t": 7.3269, "name": "sol-alt", "file": "f_7_3269.webp"}, {"t": 7.3692, "name": "sol-alt", "file": "f_7_3692.webp"}, {"t": 7.4115, "name": "sol-alt", "file": "f_7_4115.webp"}, {"t": 7.4538, "name": "sol-alt", "file": "f_7_4538.webp"}, {"t": 7.4962, "name": "sol-alt", "file": "f_7_4962.webp"}, {"t": 7.5385, "name": "sol-alt", "file": "f_7_5385.webp"}, {"t": 7.5808, "name": "sol-alt", "file": "f_7_5808.webp"}, {"t": 7.6231, "name": "sol-alt", "file": "f_7_6231.webp"}, {"t": 7.6654, "name": "sol-alt", "file": "f_7_6654.webp"}, {"t": 7.7077, "name": "sol-alt", "file": "f_7_7077.webp"}, {"t": 7.75, "name": "sol-alt", "file": "f_7_7500.webp"}, {"t": 7.7923, "name": "sol-alt", "file": "f_7_7923.webp"}, {"t": 7.8346, "name": "sol-alt", "file": "f_7_8346.webp"}, {"t": 7.8769, "name": "sol-alt", "file": "f_7_8769.webp"}, {"t": 7.9192, "name": "sol-alt", "file": "f_7_9192.webp"}, {"t": 7.9615, "name": "sol", "file": "f_7_9615.webp"}, {"t": 8.0038, "name": "sol", "file": "f_8_0038.webp"}, {"t": 8.0462, "name": "sol", "file": "f_8_0462.webp"}, {"t": 8.0885, "name": "sol", "file": "f_8_0885.webp"}, {"t": 8.1308, "name": "sol", "file": "f_8_1308.webp"}, {"t": 8.1731, "name": "sol", "file": "f_8_1731.webp"}, {"t": 8.2154, "name": "sol", "file": "f_8_2154.webp"}, {"t": 8.2577, "name": "sol", "file": "f_8_2577.webp"}, {"t": 8.3, "name": "sol", "file": "f_8_3000.webp"}, {"t": 1.0938, "name": "sol", "file": "f_1_0938.webp"}, {"t": 1.1696, "name": "sol", "file": "f_1_1696.webp"}, {"t": 1.2453, "name": "sol", "file": "f_1_2453.webp"}, {"t": 1.3211, "name": "sol", "file": "f_1_3211.webp"}, {"t": 1.3969, "name": "sol", "file": "f_1_3969.webp"}, {"t": 1.4727, "name": "sol", "file": "f_1_4727.webp"}, {"t": 1.5484, "name": "sol", "file": "f_1_5484.webp"}, {"t": 1.6242, "name": "sol-üst", "file": "f_1_6242.webp"}, {"t": 1.7857, "name": "sol-üst", "file": "f_1_7857.webp"}, {"t": 1.8286, "name": "sol-üst", "file": "f_1_8286.webp"}, {"t": 1.8714, "name": "sol-üst", "file": "f_1_8714.webp"}, {"t": 1.9143, "name": "sol-üst", "file": "f_1_9143.webp"}, {"t": 1.9571, "name": "sol-üst", "file": "f_1_9571.webp"}, {"t": 2.0, "name": "sol-üst", "file": "f_2_0000.webp"}, {"t": 2.0429, "name": "sol-üst", "file": "f_2_0429.webp"}, {"t": 2.0857, "name": "sol-üst", "file": "f_2_0857.webp"}, {"t": 2.1286, "name": "sol-üst", "file": "f_2_1286.webp"}, {"t": 2.1714, "name": "üst", "file": "f_2_1714.webp"}, {"t": 2.2143, "name": "üst", "file": "f_2_2143.webp"}, {"t": 2.2571, "name": "üst", "file": "f_2_2571.webp"}, {"t": 2.3, "name": "üst", "file": "f_2_3000.webp"}, {"t": 2.3409, "name": "üst", "file": "f_2_3409.webp"}, {"t": 2.3818, "name": "üst", "file": "f_2_3818.webp"}, {"t": 2.4227, "name": "üst", "file": "f_2_4227.webp"}, {"t": 2.4636, "name": "üst", "file": "f_2_4636.webp"}, {"t": 2.5045, "name": "üst", "file": "f_2_5045.webp"}, {"t": 2.5455, "name": "üst", "file": "f_2_5455.webp"}, {"t": 2.5864, "name": "üst", "file": "f_2_5864.webp"}, {"t": 2.6273, "name": "üst", "file": "f_2_6273.webp"}, {"t": 2.6682, "name": "üst", "file": "f_2_6682.webp"}, {"t": 2.7091, "name": "üst", "file": "f_2_7091.webp"}, {"t": 2.75, "name": "üst", "file": "f_2_7500.webp"}, {"t": 2.7909, "name": "üst", "file": "f_2_7909.webp"}, {"t": 2.8318, "name": "üst", "file": "f_2_8318.webp"}, {"t": 2.8727, "name": "üst", "file": "f_2_8727.webp"}, {"t": 2.9136, "name": "üst", "file": "f_2_9136.webp"}, {"t": 2.9545, "name": "sağ-üst", "file": "f_2_9545.webp"}, {"t": 2.9955, "name": "sağ-üst", "file": "f_2_9955.webp"}, {"t": 3.0364, "name": "sağ-üst", "file": "f_3_0364.webp"}, {"t": 3.0773, "name": "sağ-üst", "file": "f_3_0773.webp"}, {"t": 3.1182, "name": "sağ-üst", "file": "f_3_1182.webp"}, {"t": 3.1591, "name": "sağ-üst", "file": "f_3_1591.webp"}, {"t": 3.2, "name": "sağ-üst", "file": "f_3_2000.webp"}, {"t": 3.2409, "name": "sağ-üst", "file": "f_3_2409.webp"}, {"t": 3.2818, "name": "sağ-üst", "file": "f_3_2818.webp"}, {"t": 3.3227, "name": "sağ-üst", "file": "f_3_3227.webp"}, {"t": 3.3636, "name": "sağ-üst", "file": "f_3_3636.webp"}, {"t": 3.4045, "name": "sağ-üst", "file": "f_3_4045.webp"}, {"t": 3.4455, "name": "sağ-üst", "file": "f_3_4455.webp"}, {"t": 3.4864, "name": "sağ-üst", "file": "f_3_4864.webp"}, {"t": 3.5273, "name": "sağ-üst", "file": "f_3_5273.webp"}, {"t": 3.5682, "name": "sağ-üst", "file": "f_3_5682.webp"}, {"t": 3.6091, "name": "sağ-üst", "file": "f_3_6091.webp"}, {"t": 3.65, "name": "sağ-üst", "file": "f_3_6500.webp"}, {"t": 3.6909, "name": "sağ-üst", "file": "f_3_6909.webp"}, {"t": 3.7318, "name": "sağ-üst", "file": "f_3_7318.webp"}, {"t": 3.7727, "name": "sağ-üst", "file": "f_3_7727.webp"}, {"t": 3.8136, "name": "sağ-üst", "file": "f_3_8136.webp"}, {"t": 3.8545, "name": "sağ", "file": "f_3_8545.webp"}, {"t": 3.8955, "name": "sağ", "file": "f_3_8955.webp"}, {"t": 3.9364, "name": "sağ", "file": "f_3_9364.webp"}, {"t": 3.9773, "name": "sağ", "file": "f_3_9773.webp"}, {"t": 4.0182, "name": "sağ", "file": "f_4_0182.webp"}, {"t": 4.0591, "name": "sağ", "file": "f_4_0591.webp"}, {"t": 4.1, "name": "sağ", "file": "f_4_1000.webp"}, {"t": 4.1409, "name": "sağ", "file": "f_4_1409.webp"}, {"t": 4.1818, "name": "sağ", "file": "f_4_1818.webp"}, {"t": 4.2227, "name": "sağ", "file": "f_4_2227.webp"}, {"t": 4.2636, "name": "sağ", "file": "f_4_2636.webp"}, {"t": 4.3045, "name": "sağ", "file": "f_4_3045.webp"}, {"t": 4.3455, "name": "sağ", "file": "f_4_3455.webp"}, {"t": 4.3864, "name": "sağ", "file": "f_4_3864.webp"}, {"t": 4.4273, "name": "sağ", "file": "f_4_4273.webp"}, {"t": 4.4682, "name": "sağ", "file": "f_4_4682.webp"}, {"t": 4.5091, "name": "sağ", "file": "f_4_5091.webp"}, {"t": 4.55, "name": "sağ", "file": "f_4_5500.webp"}, {"t": 4.5909, "name": "sağ", "file": "f_4_5909.webp"}, {"t": 4.6318, "name": "sağ", "file": "f_4_6318.webp"}, {"t": 4.6727, "name": "sağ", "file": "f_4_6727.webp"}, {"t": 4.7136, "name": "sağ", "file": "f_4_7136.webp"}, {"t": 4.7545, "name": "sağ-alt", "file": "f_4_7545.webp"}, {"t": 4.7955, "name": "sağ-alt", "file": "f_4_7955.webp"}, {"t": 4.8364, "name": "sağ-alt", "file": "f_4_8364.webp"}, {"t": 4.8773, "name": "sağ-alt", "file": "f_4_8773.webp"}, {"t": 4.9182, "name": "sağ-alt", "file": "f_4_9182.webp"}, {"t": 4.9591, "name": "sağ-alt", "file": "f_4_9591.webp"}, {"t": 5.0, "name": "sağ-alt", "file": "f_5_0000.webp"}, {"t": 5.0412, "name": "sağ-alt", "file": "f_5_0412.webp"}, {"t": 5.0824, "name": "sağ-alt", "file": "f_5_0824.webp"}, {"t": 5.1235, "name": "sağ-alt", "file": "f_5_1235.webp"}, {"t": 5.1647, "name": "sağ-alt", "file": "f_5_1647.webp"}, {"t": 5.2059, "name": "sağ-alt", "file": "f_5_2059.webp"}, {"t": 5.2471, "name": "sağ-alt", "file": "f_5_2471.webp"}, {"t": 5.2882, "name": "sağ-alt", "file": "f_5_2882.webp"}, {"t": 5.3294, "name": "sağ-alt", "file": "f_5_3294.webp"}, {"t": 5.3706, "name": "sağ-alt", "file": "f_5_3706.webp"}, {"t": 5.4118, "name": "sağ-alt", "file": "f_5_4118.webp"}, {"t": 5.4529, "name": "sağ-alt", "file": "f_5_4529.webp"}, {"t": 5.4941, "name": "aşağı", "file": "f_5_4941.webp"}, {"t": 5.5353, "name": "aşağı", "file": "f_5_5353.webp"}, {"t": 5.5765, "name": "aşağı", "file": "f_5_5765.webp"}, {"t": 5.6176, "name": "aşağı", "file": "f_5_6176.webp"}, {"t": 5.6588, "name": "aşağı", "file": "f_5_6588.webp"}]};
+  </script>
+
+  <script>
+    (function () {
+      const BASE = new URL("balik-canvas/", location.href).href;
+      const HEAD_NX = 0.70;
+      const HEAD_NY = 0.48;
+      const FOLLOW = 11;
+      const SETTLE = 4;
+      const MANIFEST_KEY = "BALIK_MANIFEST";
+      const FILL = "#f56f1d";
+      const LABEL = "Balık";
+
+      const canvas = document.getElementById("view");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const hint = document.getElementById("hint");
+      const load = document.getElementById("load");
+      const hudTime = document.getElementById("hudTime");
+      const hudMeta = document.getElementById("hudMeta");
+
+      let keys = [];
+      let ring = [];
+      let centerBmp = null;
+      let ready = false;
+      let targetU = 0;
+      let softU = 0;
+      let targetDist = 0;
+      let dist = 0;
+      let lastTs = 0;
+      let lastMove = 0;
+      let shown = -2;
+      let box = null;
+      let lastHud = "";
+      let hintHidden = false;
+      let pointerX = 0;
+      let pointerY = 0;
+      let hasPointer = false;
+
+      function wrap01(v) {
+        v %= 1;
+        return v < 0 ? v + 1 : v;
+      }
+
+      function lerpU(a, b, k) {
+        let d = b - a;
+        if (d > 0.5) d -= 1;
+        if (d < -0.5) d += 1;
+        return wrap01(a + d * k);
+      }
+
+      function angleToU(dx, dy) {
+        let a = Math.atan2(dy, dx) - Math.PI / 2;
+        if (a < 0) a += Math.PI * 2;
+        return a / (Math.PI * 2);
+      }
+
+      function headOnScreen() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        if (!box) {
+          return {
+            x: innerWidth * 0.5,
+            y: innerHeight * 0.5,
+            reach: Math.min(innerWidth, innerHeight) * 0.42
+          };
+        }
+        return {
+          x: (box.dx + HEAD_NX * box.dw) / dpr,
+          y: (box.dy + HEAD_NY * box.dh) / dpr,
+          reach: Math.min(innerWidth, innerHeight) * 0.42
+        };
+      }
+
+      function indexFromU(u) {
+        const n = keys.length;
+        const x = wrap01(u) * n;
+        const i = Math.min(n - 1, Math.floor(x));
+        const p = x - i;
+        const start = ring.starts[i];
+        const count = ring.counts[i];
+        if (count <= 1) return start;
+        return start + p * (count - 1);
+      }
+
+      function layout() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const w = Math.floor(innerWidth * dpr);
+        const h = Math.floor(innerHeight * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+        const sample = centerBmp || (ring[0] && ring[0].bmp);
+        if (!sample) return;
+        const s = Math.max(w / sample.width, h / sample.height);
+        const dw = sample.width * s;
+        const dh = sample.height * s;
+        box = { w: w, h: h, dx: (w - dw) / 2, dy: (h - dh) / 2, dw: dw, dh: dh };
+      }
+
+      function draw(bmp, clear) {
+        if (!box || !bmp) return;
+        if (clear !== false) {
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = FILL;
+          ctx.fillRect(0, 0, box.w, box.h);
+        }
+        ctx.drawImage(bmp, box.dx, box.dy, box.dw, box.dh);
+      }
+
+      function setHud(t, name) {
+        const text = Number(t).toFixed(2) + " sn";
+        if (text === lastHud) return;
+        lastHud = text;
+        hudTime.textContent = text;
+        hudMeta.textContent = "yön: " + name;
+      }
+
+      function paint() {
+        if (!ready || !box) return;
+
+        if (dist < 0.16) {
+          if (shown !== -1) {
+            shown = -1;
+            draw(centerBmp, true);
+            setHud(0.06, "orta");
+          }
+          return;
+        }
+
+        const len = ring.length;
+        let x = indexFromU(softU);
+        x = ((x % len) + len) % len;
+        const i0 = Math.floor(x);
+        const i1 = (i0 + 1) % len;
+        const p = x - i0;
+        const a = ring[i0];
+        const b = ring[i1];
+        draw(a.bmp, true);
+        if (p > 0.02 && b && b.bmp) {
+          ctx.globalAlpha = p;
+          ctx.drawImage(b.bmp, box.dx, box.dy, box.dw, box.dh);
+          ctx.globalAlpha = 1;
+        }
+        shown = i0;
+        setHud(a.t, p < 0.5 ? a.name : b.name);
+      }
+
+      function onMove(e) {
+        pointerX = e.clientX;
+        pointerY = e.clientY;
+        hasPointer = true;
+        lastMove = performance.now();
+        if (!hintHidden) {
+          hintHidden = true;
+          hint.classList.add("is-gone");
+        }
+      }
+
+      function tick(ts) {
+        if (!ready) {
+          requestAnimationFrame(tick);
+          return;
+        }
+        const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0.016;
+        lastTs = ts;
+
+        if (!hasPointer) {
+          targetDist = 0;
+        } else {
+          const head = headOnScreen();
+          const dx = pointerX - head.x;
+          const dy = pointerY - head.y;
+          targetDist = Math.hypot(dx, dy) / head.reach;
+          targetU = angleToU(dx, dy);
+        }
+
+        const moving = hasPointer && ts - lastMove < 160;
+        const k = 1 - Math.exp(-(moving ? FOLLOW : SETTLE) * dt);
+        dist += (targetDist - dist) * k;
+        softU = lerpU(softU, targetU, k);
+        paint();
+        requestAnimationFrame(tick);
+      }
+
+      function loadImage(src) {
+        return new Promise(function (resolve, reject) {
+          const img = new Image();
+          img.onload = function () { resolve(img); };
+          img.onerror = function () { reject(new Error("img:" + src)); };
+          img.src = src;
+        });
+      }
+
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+          const s = document.createElement("script");
+          s.src = src;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { reject(new Error("script:" + src)); };
+          document.head.appendChild(s);
+        });
+      }
+
+      async function boot() {
+        if (!window[MANIFEST_KEY]) {
+          await loadScript(BASE + "manifest.js");
+        }
+        const manifest = window[MANIFEST_KEY];
+        if (!manifest || !manifest.ring || !manifest.ring.length) {
+          throw new Error("manifest boş");
+        }
+
+        keys = manifest.keys;
+        const files = {};
+        files[manifest.center.file] = true;
+        for (let i = 0; i < manifest.ring.length; i++) {
+          files[manifest.ring[i].file] = true;
+        }
+        const list = Object.keys(files);
+        const images = {};
+        let done = 0;
+        const CONCURRENCY = 12;
+
+        async function loadOne(file) {
+          images[file] = await loadImage(BASE + file);
+          done += 1;
+          load.firstChild.textContent =
+            LABEL + " hazırlanıyor… " + Math.round((done / list.length) * 100) + "%";
+        }
+
+        for (let i = 0; i < list.length; i += CONCURRENCY) {
+          await Promise.all(list.slice(i, i + CONCURRENCY).map(loadOne));
+        }
+
+        ring = manifest.ring.map(function (item) {
+          return {
+            bmp: images[item.file],
+            t: item.t,
+            name: item.name
+          };
+        });
+        ring.starts = manifest.starts;
+        ring.counts = manifest.counts;
+        centerBmp = images[manifest.center.file];
+
+        layout();
+        ready = true;
+        softU = 0;
+        load.classList.add("is-gone");
+        paint();
+        requestAnimationFrame(tick);
+      }
+
+      let resizeT = 0;
+      addEventListener("resize", function () {
+        clearTimeout(resizeT);
+        resizeT = setTimeout(function () {
+          layout();
+          shown = -2;
+          if (ready) paint();
+        }, 100);
+      });
+      addEventListener("pointermove", onMove, { passive: true });
+      addEventListener("pointerleave", function () {
+        hasPointer = false;
+        targetDist = 0;
+      });
+
+      boot().catch(function (err) {
+        console.error(err);
+        load.firstChild.textContent =
+          "balik-canvas yüklenemedi (" + (err && err.message ? err.message : "hata") + ")";
+      });
+    })();
+  </script>
+</body>
+</html>

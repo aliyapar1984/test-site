@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kuş</title>
+  <style>
+    :root { --theme: #a24b5d; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--theme); }
+    body {
+      overflow: hidden;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background: var(--theme);
+    }
+    .hint, .hud, .load {
+      position: fixed;
+      z-index: 2;
+      pointer-events: none;
+      color: #fff;
+    }
+    .hint {
+      top: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      transition: opacity 0.4s ease;
+    }
+    .hint span {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .hint.is-gone { opacity: 0; }
+    .hud {
+      left: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    .hud strong { font-size: 1.05rem; }
+    .load {
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      background: var(--theme);
+      font-weight: 600;
+      transition: opacity 0.35s ease;
+    }
+    .load.is-gone { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="load" id="load"><span>Kuş hazırlanıyor…</span></div>
+  <div class="hint" id="hint"><span>Fareyi ekranda gezdir</span></div>
+  <div class="hud">
+    <div><strong id="hudTime">0.00 sn</strong></div>
+    <div id="hudMeta">hazırlanıyor</div>
+  </div>
+  <canvas id="view"></canvas>
+
+  <script>
+window.KUS_MANIFEST = {"width": 800, "height": 450, "bg": "#a24b5d", "center": {"t": 0.0684, "name": "orta", "file": "f_0_0684.webp"}, "keys": [{"u": 0.0, "t": 6.6, "name": "aşağı"}, {"u": 0.125, "t": 7.75, "name": "sol-alt"}, {"u": 0.25, "t": 8.4998, "name": "sol"}, {"u": 0.375, "t": 1.7421, "name": "sol-üst"}, {"u": 0.5, "t": 2.1632, "name": "üst"}, {"u": 0.625, "t": 2.5, "name": "sağ-üst"}, {"u": 0.75, "t": 4.76, "name": "sağ"}, {"u": 0.875, "t": 5.45, "name": "sağ-alt"}], "starts": [0, 21, 33, 47, 57, 65, 83, 92], "counts": [21, 12, 14, 10, 8, 18, 9, 16], "ring": [{"t": 6.6, "name": "aşağı", "file": "f_6_6000.webp"}, {"t": 6.6767, "name": "aşağı", "file": "f_6_6767.webp"}, {"t": 6.7533, "name": "aşağı", "file": "f_6_7533.webp"}, {"t": 6.83, "name": "aşağı", "file": "f_6_8300.webp"}, {"t": 6.9067, "name": "aşağı", "file": "f_6_9067.webp"}, {"t": 6.9833, "name": "aşağı", "file": "f_6_9833.webp"}, {"t": 7.06, "name": "aşağı", "file": "f_7_0600.webp"}, {"t": 7.1367, "name": "aşağı", "file": "f_7_1367.webp"}, {"t": 7.2133, "name": "aşağı", "file": "f_7_2133.webp"}, {"t": 7.25, "name": "aşağı", "file": "f_7_2500.webp"}, {"t": 7.2917, "name": "aşağı", "file": "f_7_2917.webp"}, {"t": 7.3333, "name": "aşağı", "file": "f_7_3333.webp"}, {"t": 7.3816, "name": "aşağı", "file": "f_7_3816.webp"}, {"t": 7.4167, "name": "aşağı", "file": "f_7_4167.webp"}, {"t": 7.4583, "name": "aşağı", "file": "f_7_4583.webp"}, {"t": 7.5, "name": "sol-alt", "file": "f_7_5000.webp"}, {"t": 7.5417, "name": "sol-alt", "file": "f_7_5417.webp"}, {"t": 7.5833, "name": "sol-alt", "file": "f_7_5833.webp"}, {"t": 7.625, "name": "sol-alt", "file": "f_7_6250.webp"}, {"t": 7.6667, "name": "sol-alt", "file": "f_7_6667.webp"}, {"t": 7.7083, "name": "sol-alt", "file": "f_7_7083.webp"}, {"t": 7.75, "name": "sol-alt", "file": "f_7_7500.webp"}, {"t": 7.7762, "name": "sol-alt", "file": "f_7_7762.webp"}, {"t": 7.842, "name": "sol-alt", "file": "f_7_8420.webp"}, {"t": 7.9078, "name": "sol-alt", "file": "f_7_9078.webp"}, {"t": 7.9736, "name": "sol-alt", "file": "f_7_9736.webp"}, {"t": 8.0393, "name": "sol-alt", "file": "f_8_0393.webp"}, {"t": 8.1051, "name": "sol-alt", "file": "f_8_1051.webp"}, {"t": 8.1709, "name": "sol-alt", "file": "f_8_1709.webp"}, {"t": 8.2367, "name": "sol", "file": "f_8_2367.webp"}, {"t": 8.3024, "name": "sol", "file": "f_8_3024.webp"}, {"t": 8.3682, "name": "sol", "file": "f_8_3682.webp"}, {"t": 8.434, "name": "sol", "file": "f_8_4340.webp"}, {"t": 8.4998, "name": "sol", "file": "f_8_4998.webp"}, {"t": 8.5656, "name": "sol", "file": "f_8_5656.webp"}, {"t": 8.6313, "name": "sol", "file": "f_8_6313.webp"}, {"t": 8.6971, "name": "sol", "file": "f_8_6971.webp"}, {"t": 1.07, "name": "sol", "file": "f_1_0700.webp"}, {"t": 1.112, "name": "sol", "file": "f_1_1120.webp"}, {"t": 1.196, "name": "sol", "file": "f_1_1960.webp"}, {"t": 1.28, "name": "sol", "file": "f_1_2800.webp"}, {"t": 1.322, "name": "sol", "file": "f_1_3220.webp"}, {"t": 1.406, "name": "sol", "file": "f_1_4060.webp"}, {"t": 1.49, "name": "sol-üst", "file": "f_1_4900.webp"}, {"t": 1.532, "name": "sol-üst", "file": "f_1_5320.webp"}, {"t": 1.616, "name": "sol-üst", "file": "f_1_6160.webp"}, {"t": 1.658, "name": "sol-üst", "file": "f_1_6580.webp"}, {"t": 1.7421, "name": "sol-üst", "file": "f_1_7421.webp"}, {"t": 1.7842, "name": "sol-üst", "file": "f_1_7842.webp"}, {"t": 1.8263, "name": "sol-üst", "file": "f_1_8263.webp"}, {"t": 1.8684, "name": "sol-üst", "file": "f_1_8684.webp"}, {"t": 1.9105, "name": "sol-üst", "file": "f_1_9105.webp"}, {"t": 1.9526, "name": "sol-üst", "file": "f_1_9526.webp"}, {"t": 1.9947, "name": "sol-üst", "file": "f_1_9947.webp"}, {"t": 2.0368, "name": "üst", "file": "f_2_0368.webp"}, {"t": 2.0789, "name": "üst", "file": "f_2_0789.webp"}, {"t": 2.1211, "name": "üst", "file": "f_2_1211.webp"}, {"t": 2.1632, "name": "üst", "file": "f_2_1632.webp"}, {"t": 2.2053, "name": "üst", "file": "f_2_2053.webp"}, {"t": 2.2474, "name": "üst", "file": "f_2_2474.webp"}, {"t": 2.2895, "name": "üst", "file": "f_2_2895.webp"}, {"t": 2.3316, "name": "üst", "file": "f_2_3316.webp"}, {"t": 2.3737, "name": "üst", "file": "f_2_3737.webp"}, {"t": 2.4158, "name": "sağ-üst", "file": "f_2_4158.webp"}, {"t": 2.4579, "name": "sağ-üst", "file": "f_2_4579.webp"}, {"t": 2.5, "name": "sağ-üst", "file": "f_2_5000.webp"}, {"t": 2.5412, "name": "sağ-üst", "file": "f_2_5412.webp"}, {"t": 2.5824, "name": "sağ-üst", "file": "f_2_5824.webp"}, {"t": 2.6235, "name": "sağ-üst", "file": "f_2_6235.webp"}, {"t": 2.7059, "name": "sağ-üst", "file": "f_2_7059.webp"}, {"t": 2.7471, "name": "sağ-üst", "file": "f_2_7471.webp"}, {"t": 2.7882, "name": "sağ-üst", "file": "f_2_7882.webp"}, {"t": 2.8294, "name": "sağ-üst", "file": "f_2_8294.webp"}, {"t": 4.0885, "name": "sağ-üst", "file": "f_4_0885.webp"}, {"t": 4.1308, "name": "sağ-üst", "file": "f_4_1308.webp"}, {"t": 4.2154, "name": "sağ-üst", "file": "f_4_2154.webp"}, {"t": 4.2577, "name": "sağ-üst", "file": "f_4_2577.webp"}, {"t": 4.3, "name": "sağ-üst", "file": "f_4_3000.webp"}, {"t": 4.3767, "name": "sağ", "file": "f_4_3767.webp"}, {"t": 4.4533, "name": "sağ", "file": "f_4_4533.webp"}, {"t": 4.53, "name": "sağ", "file": "f_4_5300.webp"}, {"t": 4.6067, "name": "sağ", "file": "f_4_6067.webp"}, {"t": 4.6833, "name": "sağ", "file": "f_4_6833.webp"}, {"t": 4.76, "name": "sağ", "file": "f_4_7600.webp"}, {"t": 4.8367, "name": "sağ", "file": "f_4_8367.webp"}, {"t": 4.9133, "name": "sağ", "file": "f_4_9133.webp"}, {"t": 4.99, "name": "sağ", "file": "f_4_9900.webp"}, {"t": 5.0667, "name": "sağ", "file": "f_5_0667.webp"}, {"t": 5.1433, "name": "sağ", "file": "f_5_1433.webp"}, {"t": 5.22, "name": "sağ-alt", "file": "f_5_2200.webp"}, {"t": 5.2967, "name": "sağ-alt", "file": "f_5_2967.webp"}, {"t": 5.3733, "name": "sağ-alt", "file": "f_5_3733.webp"}, {"t": 5.45, "name": "sağ-alt", "file": "f_5_4500.webp"}, {"t": 5.5267, "name": "sağ-alt", "file": "f_5_5267.webp"}, {"t": 5.6033, "name": "sağ-alt", "file": "f_5_6033.webp"}, {"t": 5.68, "name": "sağ-alt", "file": "f_5_6800.webp"}, {"t": 5.7567, "name": "sağ-alt", "file": "f_5_7567.webp"}, {"t": 5.8333, "name": "sağ-alt", "file": "f_5_8333.webp"}, {"t": 5.9, "name": "sağ-alt", "file": "f_5_9000.webp"}, {"t": 5.91, "name": "sağ-alt", "file": "f_5_9100.webp"}, {"t": 5.9867, "name": "sağ-alt", "file": "f_5_9867.webp"}, {"t": 6.0633, "name": "sağ-alt", "file": "f_6_0633.webp"}, {"t": 6.14, "name": "sağ-alt", "file": "f_6_1400.webp"}, {"t": 6.2167, "name": "aşağı", "file": "f_6_2167.webp"}, {"t": 6.2933, "name": "aşağı", "file": "f_6_2933.webp"}, {"t": 6.37, "name": "aşağı", "file": "f_6_3700.webp"}, {"t": 6.4467, "name": "aşağı", "file": "f_6_4467.webp"}, {"t": 6.5233, "name": "aşağı", "file": "f_6_5233.webp"}]};
+  </script>
+
+  <script>
+    (function () {
+      const BASE = new URL("kus-canvas/", location.href).href;
+      const HEAD_NX = 0.68;
+      const HEAD_NY = 0.42;
+      const FOLLOW = 11;
+      const SETTLE = 4;
+      const MANIFEST_KEY = "KUS_MANIFEST";
+      const FILL = "#a24b5d";
+      const LABEL = "Kuş";
+
+      const canvas = document.getElementById("view");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const hint = document.getElementById("hint");
+      const load = document.getElementById("load");
+      const hudTime = document.getElementById("hudTime");
+      const hudMeta = document.getElementById("hudMeta");
+
+      let keys = [];
+      let ring = [];
+      let centerBmp = null;
+      let ready = false;
+      let targetU = 0;
+      let softU = 0;
+      let targetDist = 0;
+      let dist = 0;
+      let lastTs = 0;
+      let lastMove = 0;
+      let shown = -2;
+      let box = null;
+      let lastHud = "";
+      let hintHidden = false;
+      let pointerX = 0;
+      let pointerY = 0;
+      let hasPointer = false;
+
+      function wrap01(v) {
+        v %= 1;
+        return v < 0 ? v + 1 : v;
+      }
+
+      function lerpU(a, b, k) {
+        let d = b - a;
+        if (d > 0.5) d -= 1;
+        if (d < -0.5) d += 1;
+        return wrap01(a + d * k);
+      }
+
+      function angleToU(dx, dy) {
+        let a = Math.atan2(dy, dx) - Math.PI / 2;
+        if (a < 0) a += Math.PI * 2;
+        return a / (Math.PI * 2);
+      }
+
+      function headOnScreen() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        if (!box) {
+          return {
+            x: innerWidth * 0.5,
+            y: innerHeight * 0.5,
+            reach: Math.min(innerWidth, innerHeight) * 0.42
+          };
+        }
+        return {
+          x: (box.dx + HEAD_NX * box.dw) / dpr,
+          y: (box.dy + HEAD_NY * box.dh) / dpr,
+          reach: Math.min(innerWidth, innerHeight) * 0.42
+        };
+      }
+
+      function indexFromU(u) {
+        const n = keys.length;
+        const x = wrap01(u) * n;
+        const i = Math.min(n - 1, Math.floor(x));
+        const p = x - i;
+        const start = ring.starts[i];
+        const count = ring.counts[i];
+        if (count <= 1) return start;
+        return start + p * (count - 1);
+      }
+
+      function layout() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const w = Math.floor(innerWidth * dpr);
+        const h = Math.floor(innerHeight * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+        const sample = centerBmp || (ring[0] && ring[0].bmp);
+        if (!sample) return;
+        const s = Math.max(w / sample.width, h / sample.height);
+        const dw = sample.width * s;
+        const dh = sample.height * s;
+        box = { w: w, h: h, dx: (w - dw) / 2, dy: (h - dh) / 2, dw: dw, dh: dh };
+      }
+
+      function draw(bmp, clear) {
+        if (!box || !bmp) return;
+        if (clear !== false) {
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = FILL;
+          ctx.fillRect(0, 0, box.w, box.h);
+        }
+        ctx.drawImage(bmp, box.dx, box.dy, box.dw, box.dh);
+      }
+
+      function setHud(t, name) {
+        const text = Number(t).toFixed(2) + " sn";
+        if (text === lastHud) return;
+        lastHud = text;
+        hudTime.textContent = text;
+        hudMeta.textContent = "yön: " + name;
+      }
+
+      function paint() {
+        if (!ready || !box) return;
+
+        if (dist < 0.16) {
+          if (shown !== -1) {
+            shown = -1;
+            draw(centerBmp, true);
+            setHud(0.06, "orta");
+          }
+          return;
+        }
+
+        const len = ring.length;
+        let i = Math.round(indexFromU(softU));
+        i = ((i % len) + len) % len;
+        const frame = ring[i];
+        if (shown !== i) {
+          shown = i;
+          draw(frame.bmp, true);
+          setHud(frame.t, frame.name);
+        }
+      }
+
+      function onMove(e) {
+        pointerX = e.clientX;
+        pointerY = e.clientY;
+        hasPointer = true;
+        lastMove = performance.now();
+        if (!hintHidden) {
+          hintHidden = true;
+          hint.classList.add("is-gone");
+        }
+      }
+
+      function tick(ts) {
+        if (!ready) {
+          requestAnimationFrame(tick);
+          return;
+        }
+        const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0.016;
+        lastTs = ts;
+
+        if (!hasPointer) {
+          targetDist = 0;
+        } else {
+          const head = headOnScreen();
+          const dx = pointerX - head.x;
+          const dy = pointerY - head.y;
+          targetDist = Math.hypot(dx, dy) / head.reach;
+          targetU = angleToU(dx, dy);
+        }
+
+        const moving = hasPointer && ts - lastMove < 160;
+        const k = 1 - Math.exp(-(moving ? FOLLOW : SETTLE) * dt);
+        dist += (targetDist - dist) * k;
+        softU = lerpU(softU, targetU, k);
+        paint();
+        requestAnimationFrame(tick);
+      }
+
+      function loadImage(src) {
+        return new Promise(function (resolve, reject) {
+          const img = new Image();
+          img.onload = function () { resolve(img); };
+          img.onerror = function () { reject(new Error("img:" + src)); };
+          img.src = src;
+        });
+      }
+
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+          const s = document.createElement("script");
+          s.src = src;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { reject(new Error("script:" + src)); };
+          document.head.appendChild(s);
+        });
+      }
+
+      async function boot() {
+        if (!window[MANIFEST_KEY]) {
+          await loadScript(BASE + "manifest.js");
+        }
+        const manifest = window[MANIFEST_KEY];
+        if (!manifest || !manifest.ring || !manifest.ring.length) {
+          throw new Error("manifest boş");
+        }
+
+        keys = manifest.keys;
+        const files = {};
+        files[manifest.center.file] = true;
+        for (let i = 0; i < manifest.ring.length; i++) {
+          files[manifest.ring[i].file] = true;
+        }
+        const list = Object.keys(files);
+        const images = {};
+        let done = 0;
+        const CONCURRENCY = 12;
+
+        async function loadOne(file) {
+          images[file] = await loadImage(BASE + file);
+          done += 1;
+          load.firstChild.textContent =
+            LABEL + " hazırlanıyor… " + Math.round((done / list.length) * 100) + "%";
+        }
+
+        for (let i = 0; i < list.length; i += CONCURRENCY) {
+          await Promise.all(list.slice(i, i + CONCURRENCY).map(loadOne));
+        }
+
+        ring = manifest.ring.map(function (item) {
+          return {
+            bmp: images[item.file],
+            t: item.t,
+            name: item.name
+          };
+        });
+        ring.starts = manifest.starts;
+        ring.counts = manifest.counts;
+        centerBmp = images[manifest.center.file];
+
+        layout();
+        ready = true;
+        softU = 0;
+        load.classList.add("is-gone");
+        paint();
+        requestAnimationFrame(tick);
+      }
+
+      let resizeT = 0;
+      addEventListener("resize", function () {
+        clearTimeout(resizeT);
+        resizeT = setTimeout(function () {
+          layout();
+          shown = -2;
+          if (ready) paint();
+        }, 100);
+      });
+      addEventListener("pointermove", onMove, { passive: true });
+      addEventListener("pointerleave", function () {
+        hasPointer = false;
+        targetDist = 0;
+      });
+
+      boot().catch(function (err) {
+        console.error(err);
+        load.firstChild.textContent =
+          "kus-canvas yüklenemedi (" + (err && err.message ? err.message : "hata") + ")";
+      });
+    })();
+  </script>
+</body>
+</html>

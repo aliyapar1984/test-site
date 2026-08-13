@@ -240,8 +240,8 @@
     @media (max-width: 720px) {
       .stage { inset: 8px; border-radius: 20px; }
       header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      nav.menu { gap: 18px; }
-      nav.menu button span { font-size: 1rem; }
+      nav.menu { gap: 14px; flex-wrap: wrap; }
+      nav.menu button span { font-size: 0.98rem; }
       .cta { position: static; margin-top: 28px; align-self: flex-start; }
       .ui { pointer-events: auto; }
       .copy { margin-bottom: 30vh; }
@@ -262,6 +262,7 @@
           <button type="button" class="is-on" data-go="kedi"><em>01</em><span>Kedi</span></button>
           <button type="button" data-go="kopek"><em>02</em><span>Köpek</span></button>
           <button type="button" data-go="kus"><em>03</em><span>Kuş</span></button>
+          <button type="button" data-go="balik"><em>04</em><span>Balık</span></button>
         </nav>
       </header>
 
@@ -320,9 +321,28 @@
       kus: {
         a: "Hafif",
         b: "Kanat",
-        lead: "Kuş field study’si yolda. Üçüncü karakterle bakış ve hareket dili genişleyecek.",
-        wait: true,
-        waitText: "Kuş yakında"
+        lead: "Fareyi gezdir, kuş seni izlesin. 360° bakış halkasıyla üçüncü field study’yi keşfet.",
+        wait: false,
+        canvas: "kus",
+        folder: "kus-canvas/",
+        manifestKey: "KUS_MANIFEST",
+        bg: "#a24b5d",
+        headX: 0.68,
+        headY: 0.42,
+        pillDot: "#6e2f3d"
+      },
+      balik: {
+        a: "Sakin",
+        b: "Dalga",
+        lead: "Fareyi gezdir, balık sana dönsün. Kase içindeki bakış halkasıyla dördüncü field study’yi keşfet.",
+        wait: false,
+        canvas: "balik",
+        folder: "balik-canvas/",
+        manifestKey: "BALIK_MANIFEST",
+        bg: "#f56f1d",
+        headX: 0.70,
+        headY: 0.48,
+        pillDot: "#b84810"
       }
     };
   </script>
@@ -428,6 +448,7 @@
 
       function draw(bmp) {
         if (!box || !bmp) return;
+        ctx.globalAlpha = 1;
         ctx.fillStyle = fill;
         ctx.fillRect(0, 0, box.w, box.h);
         ctx.drawImage(bmp, box.dx, box.dy, box.dw, box.dh);
@@ -445,13 +466,31 @@
           return;
         }
         const len = ring.length;
-        let i = Math.round(indexFromU(softU));
-        i = ((i % len) + len) % len;
-        const frame = ring[i];
-        if (shown !== i) {
-          shown = i;
-          draw(frame.bmp);
+        const mix = page.canvas === "balik";
+        let x = indexFromU(softU);
+        x = ((x % len) + len) % len;
+        if (!mix) {
+          let i = Math.round(x);
+          i = ((i % len) + len) % len;
+          const frame = ring[i];
+          if (shown !== i) {
+            shown = i;
+            draw(frame.bmp);
+          }
+          return;
         }
+        const i0 = Math.floor(x);
+        const i1 = (i0 + 1) % len;
+        const p = x - i0;
+        const a = ring[i0];
+        const b = ring[i1];
+        draw(a.bmp);
+        if (p > 0.02 && b && b.bmp && box) {
+          ctx.globalAlpha = p;
+          ctx.drawImage(b.bmp, box.dx, box.dy, box.dw, box.dh);
+          ctx.globalAlpha = 1;
+        }
+        shown = i0;
       }
 
       function onMove(e) {
