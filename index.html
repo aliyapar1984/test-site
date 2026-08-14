@@ -24,17 +24,17 @@
     }
 
     html, body {
-      height: 100%;
+      min-height: 100%;
       background: #ffffff;
       color: var(--ink);
       font-family: "DM Sans", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
-      overflow: hidden;
     }
 
     .stage {
-      position: fixed;
-      inset: 14px;
+      position: relative;
+      height: calc(100svh - 28px);
+      margin: 14px 14px 0;
       border-radius: 28px;
       overflow: hidden;
       background: var(--bg);
@@ -231,26 +231,372 @@
       transition: opacity 0.4s, visibility 0.4s;
     }
 
+    .load-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .load-bar {
+      width: 140px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      overflow: hidden;
+    }
+
+    .load-bar > i {
+      display: block;
+      height: 1px;
+      width: 0;
+      background: #fff;
+    }
+
     .load.is-gone {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
 
+    .home-bento {
+      background: #ffffff;
+      margin: 0;
+      padding: 96px 14px 80px;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 96px;
+      color: #180102;
+    }
+
+    .home-bento__title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      text-align: center;
+      max-width: 18em;
+      color: #180102;
+    }
+
+    .home-bento__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: repeat(12, minmax(3.5rem, 1fr));
+      gap: 1rem;
+      width: 100%;
+      min-height: min(78vw, 1080px);
+    }
+
+    .home-bento__grid-item {
+      z-index: 1;
+      background: #ece4d7;
+      border-radius: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .home-bento__grid-item.is--3 h3 {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: #180102;
+      position: relative;
+      z-index: 1;
+    }
+
+    .home-bento__grid-item.is--2::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(#ece4d7 0 28%, rgba(236, 228, 215, 0) 52%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .home-bento__grid-item.is--1 { grid-area: 1 / 1 / 8 / 2; gap: 1.25rem; justify-content: flex-start; align-items: center; padding: 3rem 2rem 2.75rem; }
+    .home-bento__grid-item.is--2 { grid-area: 1 / 2 / 9 / 3; padding-top: 2.625rem; justify-content: flex-start; }
+    .home-bento__grid-item.is--3 { grid-area: 1 / 3 / 8 / 4; gap: 2rem; text-align: center; justify-content: center; padding: 0 1.7rem; }
+    .home-bento__grid-item.is--4 { grid-area: 8 / 1 / 13 / 2; justify-content: flex-end; align-items: center; padding-bottom: 2rem; }
+    .home-bento__grid-item.is--5 { grid-area: 8 / 3 / 13 / 4; justify-content: flex-end; align-items: center; padding-bottom: 2rem; }
+    .home-bento__grid-item.is--6 { grid-area: 9 / 2 / 13 / 3; padding: 2.5rem 2rem; justify-content: center; }
+
+    .bento-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.55rem;
+      max-width: 19.3rem;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bento-header .bento-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      object-fit: contain;
+      display: block;
+      margin-bottom: 0.55rem;
+    }
+
+    .bento-header h3 {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: #180102;
+    }
+
+    .bento-header p {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .bento-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bento-product {
+      width: min(78%, 16rem);
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      margin: auto;
+      align-self: center;
+      pointer-events: none;
+    }
+
+    .bento-mark {
+      width: 5.5rem;
+      height: 5.5rem;
+      position: relative;
+    }
+
+    .bento-mark i {
+      position: absolute;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .bento-mark .a {
+      width: 3.6rem;
+      height: 3.6rem;
+      background: #e36b4f;
+      left: 0;
+      top: 0.4rem;
+    }
+
+    .bento-mark .b {
+      width: 3.2rem;
+      height: 3.2rem;
+      background: #f3b8c4;
+      right: 0;
+      bottom: 0;
+    }
+
+    .bento-tag {
+      position: relative;
+      z-index: 1;
+      background: rgba(24, 1, 2, 0.2);
+      backdrop-filter: blur(44px);
+      color: #f8f0e3;
+      border-radius: 2.5rem;
+      padding: 1rem 1.15rem;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .site-footer {
+      padding: 16px 16px 0;
+      color: #180102;
+      background: transparent;
+      margin: 0;
+    }
+
+    .footer-panel {
+      background: #f8f0e3;
+      border-radius: 64px 64px 0 0;
+      padding: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 144px;
+    }
+
+    .footer-row {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      max-width: 410px;
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .footer-title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.35rem, 2.2vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #180102;
+    }
+
+    .footer-note {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+      font-weight: 400;
+    }
+
+    .footer-cols {
+      flex: 1 1 420px;
+      max-width: 652px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 16px;
+      row-gap: 124px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer-col h3 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.7rem;
+    }
+
+    .footer-col a {
+      color: #180102;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-col a:hover { opacity: 0.55; }
+
+    .footer-col a svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .footer-contact {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .footer-copy,
+    .footer-legal a {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #aca396;
+      text-decoration: none;
+    }
+
+    .footer-legal a:hover { opacity: 0.7; }
+
+    .footer-row.is-bottom {
+      align-items: flex-end;
+    }
+
+    .footer-row.is-bottom .footer-brand { gap: 0; }
+
+    @media (max-width: 1280px) {
+      .home-bento__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(12, minmax(4.2rem, 1fr));
+        min-height: 70rem;
+      }
+      .home-bento__grid-item.is--1 { grid-area: 1 / 1 / 5 / 2; }
+      .home-bento__grid-item.is--2 { grid-area: 1 / 2 / 6 / 3; }
+      .home-bento__grid-item.is--3 { grid-area: 9 / 1 / 13 / 2; }
+      .home-bento__grid-item.is--4 { grid-area: 5 / 1 / 9 / 2; }
+      .home-bento__grid-item.is--5 { grid-area: 10 / 2 / 13 / 3; }
+      .home-bento__grid-item.is--6 { grid-area: 6 / 2 / 10 / 3; }
+    }
+
+    @media (max-width: 900px) {
+      .footer-panel { padding: 40px 28px 48px; gap: 72px; border-radius: 40px 40px 0 0; }
+      .footer-row { flex-direction: column; gap: 48px; }
+      .footer-brand { max-width: none; gap: 20px; }
+      .footer-cols { max-width: none; width: 100%; row-gap: 40px; }
+      .footer-row.is-bottom { gap: 20px; }
+      .home-bento { padding: 64px 14px 56px; gap: 48px; }
+    }
+
     @media (max-width: 720px) {
-      .stage { inset: 8px; border-radius: 20px; }
+      .stage { height: calc(100svh - 16px); margin: 8px 8px 0; border-radius: 20px; }
       header { flex-direction: column; align-items: flex-start; gap: 16px; }
       nav.menu { gap: 14px; flex-wrap: wrap; }
       nav.menu button span { font-size: 0.98rem; }
       .cta { position: static; margin-top: 28px; align-self: flex-start; }
       .ui { pointer-events: auto; }
       .copy { margin-bottom: 30vh; }
+      .footer-cols { grid-template-columns: 1fr 1fr; }
+      .site-footer { padding: 12px 8px 0; }
+      .home-bento { padding: 48px 8px 40px; }
+      .home-bento__grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        min-height: 0;
+      }
+      .home-bento__grid-item {
+        grid-area: auto !important;
+        min-height: 17rem;
+      }
+      .home-bento__grid-item.is--2 { min-height: 22rem; }
     }
   </style>
 </head>
 <body>
   <div class="stage">
-    <div class="load" id="load">Hazırlanıyor…</div>
+    <div class="load" id="load">
+      <div class="load-inner">
+        <span id="loadText">Hazırlanıyor…</span>
+        <div class="load-bar" aria-hidden="true"><i id="loadBar"></i></div>
+      </div>
+    </div>
     <canvas id="view" aria-hidden="true"></canvas>
 
     <div class="ui">
@@ -277,7 +623,7 @@
       </div>
     </div>
 
-    <a class="cta" href="#kesfet" id="cta">
+    <a class="cta" href="#icerik" id="cta">
       Keşfet
       <i aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
@@ -289,6 +635,134 @@
     <div class="hint" id="hint">Fareyi gezdir</div>
     <div class="wait" id="wait">Yakında</div>
   </div>
+
+  <main class="page-content" id="icerik">
+  <section class="home-bento">
+    <h2 class="home-bento__title">Dostlarınız için modern<br>bir bakım dünyası</h2>
+    <div class="home-bento__grid">
+      <a class="home-bento__grid-item is--1" href="#kedi" data-go="kedi">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/cat.svg" alt="" />
+          <h3>Kedi Mama Kapları</h3>
+          <p>Mama, kum ve tırmalama ürünleriyle kedinizin günlük konforunu tamamlayın.</p>
+        </div>
+        <img class="bento-product" src="media/kedi-kabi.png" alt="Kedi mama kabı" />
+      </a>
+
+      <a class="home-bento__grid-item is--2" href="#kopek" data-go="kopek">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/dog.svg" alt="" />
+          <h3>Köpek bakımı</h3>
+          <p>Gezdirme, ödül ve oyuncaklarla sadık dostunuzun enerjisini doğru yönlendirin.</p>
+        </div>
+        <img class="bento-cover" src="media/kopek.png" alt="Köpek bakımı" />
+      </a>
+
+      <a class="home-bento__grid-item is--3" href="#kus" data-go="kus">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/bird.svg" alt="" />
+          <h3>Kuş bakımı</h3>
+          <p>Yem, kafes ve bakım ürünleriyle kuşlarınız için ferah bir yaşam alanı kurun.</p>
+        </div>
+      </a>
+
+      <a class="home-bento__grid-item is--4" href="#kedi" data-go="kedi">
+        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
+          <source src="media/cat-look.mp4" type="video/mp4" />
+        </video>
+        <div class="bento-tag">Kedi koleksiyonu</div>
+      </a>
+
+      <a class="home-bento__grid-item is--5" href="#balik" data-go="balik">
+        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
+          <source src="media/fish-eat.mp4" type="video/mp4" />
+        </video>
+        <div class="bento-tag">Akvaryum</div>
+      </a>
+
+      <a class="home-bento__grid-item is--6" href="#balik" data-go="balik">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/fish.svg" alt="" />
+          <h3>Balık bakımı</h3>
+          <p>Yem, su düzenleyici ve akvaryum ekipmanlarıyla sakin ve sağlıklı bir ortam sağlayın.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer" id="kesfet">
+    <div class="footer-panel">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <h2 class="footer-title">PETDOSTUM, dostlarınızın her yerde mutlu ve bakımlı olabildiği bir dünya kuruyor.</h2>
+          <p class="footer-note">Türkiye’de tasarlandı.<br />Dostlarınız için özenle seçildi.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h3>Keşfet</h3>
+            <ul>
+              <li><a href="#kedi" data-go="kedi">Kedi</a></li>
+              <li><a href="#kopek" data-go="kopek">Köpek</a></li>
+              <li>
+                <a href="#kus" data-go="kus">
+                  Bakım rehberi
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="#balik" data-go="balik">
+                  Ürün kataloğu
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Mağaza</h3>
+            <ul>
+              <li><a href="#hakkimizda">Hakkımızda</a></li>
+              <li><a href="#siparis">Sipariş takibi</a></li>
+              <li><a href="#sss">Sıkça sorulanlar</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Sosyal</h3>
+            <ul>
+              <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+              <li><a href="https://x.com/" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+              <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <ul>
+              <li><a class="footer-contact" href="mailto:merhaba@petdostum.com">Bize yazın</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-row is-bottom">
+        <div class="footer-brand">
+          <div class="footer-copy">© 2026 PETDOSTUM</div>
+        </div>
+        <div class="footer-cols footer-legal">
+          <div class="footer-col">
+            <a href="#gizlilik">Gizlilik Politikası</a>
+          </div>
+          <div class="footer-col">
+            <a href="#iade">Teslimat ve İade</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
     window.PAGES = {
@@ -356,6 +830,8 @@
       const ctx = canvas.getContext("2d", { alpha: false });
       const hint = document.getElementById("hint");
       const load = document.getElementById("load");
+      const loadText = document.getElementById("loadText");
+      const loadBar = document.getElementById("loadBar");
       const waitEl = document.getElementById("wait");
       const stage = canvas.parentElement;
 
@@ -466,31 +942,13 @@
           return;
         }
         const len = ring.length;
-        const mix = page.canvas === "balik";
-        let x = indexFromU(softU);
-        x = ((x % len) + len) % len;
-        if (!mix) {
-          let i = Math.round(x);
-          i = ((i % len) + len) % len;
-          const frame = ring[i];
-          if (shown !== i) {
-            shown = i;
-            draw(frame.bmp);
-          }
-          return;
+        let i = Math.round(indexFromU(softU));
+        i = ((i % len) + len) % len;
+        const frame = ring[i];
+        if (shown !== i) {
+          shown = i;
+          draw(frame.bmp);
         }
-        const i0 = Math.floor(x);
-        const i1 = (i0 + 1) % len;
-        const p = x - i0;
-        const a = ring[i0];
-        const b = ring[i1];
-        draw(a.bmp);
-        if (p > 0.02 && b && b.bmp && box) {
-          ctx.globalAlpha = p;
-          ctx.drawImage(b.bmp, box.dx, box.dy, box.dw, box.dh);
-          ctx.globalAlpha = 1;
-        }
-        shown = i0;
       }
 
       function onMove(e) {
@@ -584,7 +1042,8 @@
         loading = true;
         ready = false;
         load.classList.remove("is-gone");
-        load.textContent = "Hazırlanıyor…";
+        loadText.textContent = "Hazırlanıyor…";
+        loadBar.style.width = "0%";
 
         const base = new URL(page.folder, location.href).href;
         if (!window[page.manifestKey]) await loadScript(base + "manifest.js");
@@ -601,7 +1060,9 @@
         async function loadOne(file) {
           images[file] = await loadImage(base + file);
           done += 1;
-          load.textContent = "Hazırlanıyor… " + Math.round((done / list.length) * 100) + "%";
+          const pct = Math.round((done / list.length) * 100);
+          loadText.textContent = "Hazırlanıyor… " + pct + "%";
+          loadBar.style.width = pct + "%";
         }
 
         for (let i = 0; i < list.length; i += 12) {
@@ -639,9 +1100,6 @@
         document.getElementById("lead").textContent = data.lead;
         history.replaceState(null, "", "#" + id);
 
-        hint.classList.remove("is-gone");
-        hintHidden = false;
-
         if (data.wait) {
           document.body.classList.add("is-wait");
           waitEl.textContent = data.waitText;
@@ -657,7 +1115,7 @@
           await loadAnimal(data);
         } catch (err) {
           console.error(err);
-          load.textContent = "Yüklenemedi";
+          loadText.textContent = "Yüklenemedi";
           load.classList.remove("is-gone");
         }
       }
@@ -682,17 +1140,16 @@
         el.addEventListener("click", function (e) {
           e.preventDefault();
           setPage(el.dataset.go);
+          if (el.closest(".site-footer") || el.closest(".home-bento")) {
+            stage.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
         });
       });
 
       document.getElementById("cta").addEventListener("click", function (e) {
         e.preventDefault();
-        const page = window.PAGES[active];
-        if (!page || page.wait) setPage("kedi");
-        else {
-          hint.classList.remove("is-gone");
-          hintHidden = false;
-        }
+        const dest = document.getElementById("icerik");
+        if (dest) dest.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 
       if (!tickStarted) {

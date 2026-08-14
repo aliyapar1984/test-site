@@ -204,21 +204,14 @@ window.BALIK_MANIFEST = {"width": 800, "height": 450, "bg": "#f56f1d", "center":
         }
 
         const len = ring.length;
-        let x = indexFromU(softU);
-        x = ((x % len) + len) % len;
-        const i0 = Math.floor(x);
-        const i1 = (i0 + 1) % len;
-        const p = x - i0;
-        const a = ring[i0];
-        const b = ring[i1];
-        draw(a.bmp, true);
-        if (p > 0.02 && b && b.bmp) {
-          ctx.globalAlpha = p;
-          ctx.drawImage(b.bmp, box.dx, box.dy, box.dw, box.dh);
-          ctx.globalAlpha = 1;
+        let i = Math.round(indexFromU(softU));
+        i = ((i % len) + len) % len;
+        const frame = ring[i];
+        if (shown !== i) {
+          shown = i;
+          draw(frame.bmp, true);
+          setHud(frame.t, frame.name);
         }
-        shown = i0;
-        setHud(a.t, p < 0.5 ? a.name : b.name);
       }
 
       function onMove(e) {
