@@ -427,6 +427,181 @@
       line-height: 1;
     }
 
+    .newsroom {
+      width: 100%;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 80px 14px 96px;
+      color: #180102;
+    }
+
+    .newsroom__title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(2rem, 4vw, 2.25rem);
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-bottom: 5rem;
+      color: #180102;
+    }
+
+    .news-featured {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1rem;
+      align-items: stretch;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .news-featured__image {
+      aspect-ratio: 696 / 492;
+      background: #ece4d7;
+      border-radius: 2rem 4rem 2rem 2rem;
+      overflow: hidden;
+    }
+
+    .news-featured__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .news-featured__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.5rem 2.5rem;
+      text-align: left;
+      gap: 2rem;
+    }
+
+    .news-featured__top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+      max-width: 24rem;
+    }
+
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .news-tag {
+      padding: 0.625rem 0.9rem;
+      border-radius: 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #f8f0e3;
+      background: #3dac91;
+      line-height: 1;
+    }
+
+    .news-tag.is-blog { background: #dbb154; }
+
+    .news-date {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .news-featured__top h3,
+    .news-card h3 {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.35rem, 2vw, 1.5rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: #180102;
+    }
+
+    .news-featured__top p,
+    .news-card p {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .news-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 60px;
+      padding: 0 24px 0 28px;
+      border: 1.5px solid #180102;
+      border-radius: 40px;
+      color: #180102;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .news-read svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .news-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      padding-top: 5rem;
+    }
+
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 4rem;
+      padding: 2.5rem;
+      background: #ece4d7;
+      border-radius: 4rem;
+      text-decoration: none;
+      color: inherit;
+      min-height: 22rem;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .news-card:nth-child(1) { border-radius: 4rem 4rem 4rem 1rem; }
+    .news-card:nth-child(2) { border-radius: 4rem 4rem 1rem 1rem; }
+    .news-card:nth-child(3) { border-radius: 4rem 1rem 4rem 4rem; }
+
+    .news-card__top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .news-card .news-read {
+      height: auto;
+      padding: 0;
+      border: 0;
+    }
+
+    .news-card:hover {
+      background: #dbb154;
+      color: #f8f0e3;
+    }
+
+    .news-card.is-announce:hover { background: #3dac91; }
+    .news-card.is-care:hover { background: #63a4bc; }
+
+    .news-card:hover h3 { color: #f8f0e3; }
+    .news-card:hover p,
+    .news-card:hover .news-date,
+    .news-card:hover .news-read { color: rgba(248, 240, 227, 0.8); }
+    .news-card:hover .news-tag { background: rgba(248, 240, 227, 0.2); color: #f8f0e3; }
+
     .site-footer {
       padding: 16px 16px 0;
       color: #180102;
@@ -563,6 +738,9 @@
       .footer-cols { max-width: none; width: 100%; row-gap: 40px; }
       .footer-row.is-bottom { gap: 20px; }
       .home-bento { padding: 64px 14px 56px; gap: 48px; }
+      .news-featured { grid-template-columns: 1fr; }
+      .news-featured__content { padding: 1.5rem 0 0; }
+      .news-list { grid-template-columns: 1fr; padding-top: 2.5rem; }
     }
 
     @media (max-width: 720px) {
@@ -576,6 +754,9 @@
       .footer-cols { grid-template-columns: 1fr 1fr; }
       .site-footer { padding: 12px 8px 0; }
       .home-bento { padding: 48px 8px 40px; }
+      .newsroom { padding: 56px 8px 64px; }
+      .newsroom__title { margin-bottom: 2.5rem; }
+      .news-card { min-height: 0; gap: 2.5rem; border-radius: 2.5rem !important; }
       .home-bento__grid {
         grid-template-columns: 1fr;
         grid-template-rows: none;
@@ -686,6 +867,85 @@
           <h3>Balık bakımı</h3>
           <p>Yem, su düzenleyici ve akvaryum ekipmanlarıyla sakin ve sağlıklı bir ortam sağlayın.</p>
         </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="newsroom" id="blog">
+    <h2 class="newsroom__title">Blog</h2>
+    <a class="news-featured" href="#blog">
+      <div class="news-featured__image">
+        <img src="media/kopek.png" alt="Yaz bakımı rehberi" />
+      </div>
+      <div class="news-featured__content">
+        <div class="news-featured__top">
+          <div class="news-meta">
+            <span class="news-tag">Duyuru</span>
+            <span class="news-date">12 Ağustos 2026</span>
+          </div>
+          <h3>PETDOSTUM yaz bakımı rehberi yayında</h3>
+          <p>Sıcak havalarda kedi ve köpekler için mama, su ve yürüyüş önerilerini bir araya getirdik. Dostunuzun yazı daha rahat geçsin diye pratik ipuçları paylaştık.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+    <div class="news-list">
+      <a class="news-card" href="#blog">
+        <div class="news-card__top">
+          <div class="news-meta">
+            <span class="news-tag is-blog">Blog yazısı</span>
+            <span class="news-date">27 Temmuz 2026</span>
+          </div>
+          <h3>Kediniz için doğru mama kabı nasıl seçilir?</h3>
+          <p>Yükseklik, malzeme ve kaymaz taban… Evdeki kediniz için mama kabı seçerken dikkat etmeniz gerekenleri özetledik.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="news-card is-announce" href="#blog">
+        <div class="news-card__top">
+          <div class="news-meta">
+            <span class="news-tag">Duyuru</span>
+            <span class="news-date">27 Temmuz 2026</span>
+          </div>
+          <h3>Balık yemlerinde yüzde 20 indirim başladı</h3>
+          <p>Seçili akvaryum yemlerinde sınırlı süre kampanya. Dostlarınız için taze ve dengeli beslenmeyi kaçırmayın.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="news-card is-care" href="#blog">
+        <div class="news-card__top">
+          <div class="news-meta">
+            <span class="news-tag is-blog">Blog yazısı</span>
+            <span class="news-date">14 Temmuz 2026</span>
+          </div>
+          <h3>Kuş kafesi kurulumunda dikkat edilmesi gerekenler</h3>
+          <p>Yer seçimi, tüneklik ve yemlik düzeni… Kuşunuz için ferah ve güvenli bir yaşam alanı nasıl kurulur, adım adım anlattık.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
       </a>
     </div>
   </section>
