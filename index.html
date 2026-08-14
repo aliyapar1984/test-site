@@ -324,7 +324,7 @@
     }
     .home-bento__grid-item.is--1 { grid-area: 1 / 1 / 8 / 2; gap: 1.25rem; justify-content: flex-start; align-items: center; padding: 3rem 2rem 2.75rem; }
     .home-bento__grid-item.is--2 { grid-area: 1 / 2 / 9 / 3; padding-top: 2.625rem; justify-content: flex-start; }
-    .home-bento__grid-item.is--3 { grid-area: 1 / 3 / 8 / 4; gap: 2rem; text-align: center; justify-content: center; padding: 0 1.7rem; }
+    .home-bento__grid-item.is--3 { grid-area: 1 / 3 / 8 / 4; gap: 1.25rem; text-align: center; justify-content: flex-start; align-items: center; padding: 3rem 1.7rem 2rem; }
     .home-bento__grid-item.is--4 { grid-area: 8 / 1 / 13 / 2; justify-content: flex-end; align-items: center; padding-bottom: 2rem; }
     .home-bento__grid-item.is--5 { grid-area: 8 / 3 / 13 / 4; justify-content: flex-end; align-items: center; padding-bottom: 2rem; }
     .home-bento__grid-item.is--6 { grid-area: 9 / 2 / 13 / 3; padding: 2.5rem 2rem; justify-content: center; }
@@ -425,6 +425,113 @@
       font-size: 1rem;
       font-weight: 500;
       line-height: 1;
+    }
+
+    .bestsellers {
+      width: 100%;
+      margin: 0 auto;
+      padding: 80px 14px 80px;
+      color: #180102;
+    }
+
+    .bestsellers__title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+      color: #180102;
+      text-align: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2.5rem;
+      padding: 2.5rem;
+      background: none;
+      border: 2px solid;
+      text-decoration: none;
+      color: #180102;
+      min-height: 22rem;
+      transition: transform 0.25s ease;
+    }
+
+    .product-card:nth-child(1) { border-radius: 4rem 4rem 4rem 1rem; }
+    .product-card:nth-child(2) { border-radius: 4rem 4rem 1rem 1rem; }
+    .product-card:nth-child(3) { border-radius: 4rem 1rem 4rem 4rem; }
+    .product-card:nth-child(4) { border-radius: 1rem 4rem 4rem 1rem; }
+    .product-card:nth-child(5) { border-radius: 1rem 1rem 4rem 4rem; }
+
+    .product-card.is-coral { border-color: #e36b4f; }
+    .product-card.is-blue { border-color: #2e8ad6; }
+    .product-card.is-green { border-color: #849445; }
+    .product-card.is-orange { border-color: #f56f1d; }
+    .product-card.is-yellow { border-color: #f5f56f; }
+    .product-card.is-pink { border-color: #f56f1d; }
+
+    .product-card:hover { transform: translateY(-3px); }
+
+    .product-card__top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .product-card__media {
+      width: 100%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 0;
+      background: none;
+    }
+
+    .product-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-card__name {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #180102;
+    }
+
+    .product-card__cat {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+      margin: 0;
+    }
+
+    .product-card__price {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #180102;
+    }
+
+    .product-card .news-read {
+      height: auto;
+      padding: 0;
+      border: 0;
     }
 
     .newsroom {
@@ -738,6 +845,7 @@
       .footer-cols { max-width: none; width: 100%; row-gap: 40px; }
       .footer-row.is-bottom { gap: 20px; }
       .home-bento { padding: 64px 14px 56px; gap: 48px; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
       .news-featured { grid-template-columns: 1fr; }
       .news-featured__content { padding: 1.5rem 0 0; }
       .news-list { grid-template-columns: 1fr; padding-top: 2.5rem; }
@@ -754,9 +862,11 @@
       .footer-cols { grid-template-columns: 1fr 1fr; }
       .site-footer { padding: 12px 8px 0; }
       .home-bento { padding: 48px 8px 40px; }
+      .bestsellers { padding: 8px 8px 48px; }
       .newsroom { padding: 56px 8px 64px; }
       .newsroom__title { margin-bottom: 2.5rem; }
       .news-card { min-height: 0; gap: 2.5rem; border-radius: 2.5rem !important; }
+      .product-card { min-height: 0; gap: 1.5rem; padding: 1.5rem; border-radius: 2.5rem !important; }
       .home-bento__grid {
         grid-template-columns: 1fr;
         grid-template-rows: none;
@@ -818,6 +928,98 @@
   </div>
 
   <main class="page-content" id="icerik">
+
+  <section class="bestsellers" id="urunler">
+    <h2 class="bestsellers__title">Çok Satanlar</h2>
+    <div class="product-grid">
+      <a class="product-card is-coral" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
+          </div>
+          <div class="product-card__name">Premium Köpek Yemi</div>
+          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+          <div class="product-card__price">₺ 1.249,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-blue" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
+          </div>
+          <div class="product-card__name">Çiğneme Kemiği</div>
+          <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
+          <div class="product-card__price">₺ 189,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-green" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-home.png" alt="Köpek yatağı" />
+          </div>
+          <div class="product-card__name">Köpek Yatağı</div>
+          <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
+          <div class="product-card__price">₺ 899,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-orange" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
+          </div>
+          <div class="product-card__name">Gezdirme Tasması</div>
+          <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
+          <div class="product-card__price">₺ 329,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-pink" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
+          </div>
+          <div class="product-card__name">Premium Köpek Yemi</div>
+          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+          <div class="product-card__price">₺ 1.249,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
   <section class="home-bento">
     <h2 class="home-bento__title">Dostlarınız için modern<br>bir bakım dünyası</h2>
     <div class="home-bento__grid">
@@ -845,6 +1047,7 @@
           <h3>Kuş bakımı</h3>
           <p>Yem, kafes ve bakım ürünleriyle kuşlarınız için ferah bir yaşam alanı kurun.</p>
         </div>
+        <img class="bento-cover" src="media/kus.png" alt="Kuş bakımı ürünü" />
       </a>
 
       <a class="home-bento__grid-item is--4" href="#kedi" data-go="kedi">
