@@ -6,7 +6,7 @@
   <title>PETDOSTUM</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #2e8ad6;
@@ -14,6 +14,21 @@
       --ink-soft: rgba(255, 255, 255, 0.78);
       --pill: rgba(255, 255, 255, 0.22);
       --pill-dot: #1a5f96;
+      --cta-cream: #ece4d7;
+      --cta-cream-soft: #f8f0e3;
+      --cta-coral: #e36b4f;
+      --cta-pink: #f3b8c4;
+      --cta-green: #849445;
+      --cta-ink: #180102;
+      --glow-spark: #9fd4ff;
+      --glow-spark-glow: rgba(120, 200, 255, 0.95);
+      --glow-spark-soft: rgba(80, 170, 255, 0.55);
+      --glow-icon-filter:
+        brightness(0) saturate(100%)
+        invert(58%) sepia(70%) saturate(1200%) hue-rotate(175deg) brightness(1.08)
+        drop-shadow(0 0 6px rgba(120, 200, 255, 0.95))
+        drop-shadow(0 0 16px rgba(80, 170, 255, 0.7))
+        drop-shadow(0 0 28px rgba(46, 138, 214, 0.45));
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,7 +69,7 @@
     .ui {
       position: absolute;
       inset: 0;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -131,66 +146,626 @@
       border-bottom-color: #fff;
     }
 
+    nav.menu button.menu-more {
+      appearance: none;
+      border: 0;
+      border-bottom: 0;
+      background: rgba(255, 255, 255, 0.14);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      align-self: center;
+      color: #fff;
+      padding: 0;
+      text-align: center;
+      transition: background 0.25s ease, transform 0.25s ease;
+      pointer-events: auto;
+    }
+
+    .menu-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 4px;
+      align-self: center;
+    }
+
+    nav.menu button.menu-action {
+      appearance: none;
+      border: 0;
+      border-bottom: 0;
+      background: rgba(255, 255, 255, 0.14);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      padding: 0;
+      transition: background 0.25s ease, transform 0.25s ease;
+      pointer-events: auto;
+    }
+
+    nav.menu button.menu-action svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    nav.menu button.menu-action:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.24);
+      transform: translateY(-1px);
+      border-bottom-color: transparent;
+    }
+
+    nav.menu button.menu-more:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.24);
+      transform: translateY(-1px);
+      border-bottom-color: transparent;
+    }
+
+    nav.menu button.menu-more i {
+      display: block;
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Tam ekran site menüsü */
+    .site-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+      background:
+        radial-gradient(110% 80% at 8% 0%, rgba(255, 255, 255, 0.14), transparent 52%),
+        radial-gradient(90% 70% at 90% 100%, rgba(255, 255, 255, 0.06), transparent 50%),
+        linear-gradient(
+          155deg,
+          color-mix(in srgb, var(--bg) 62%, #8a946e),
+          color-mix(in srgb, var(--bg) 72%, #6f7a58) 48%,
+          color-mix(in srgb, var(--bg) 78%, #556047)
+        );
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .site-menu.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .site-menu__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(18px, 3vw, 32px) clamp(22px, 4vw, 48px);
+      flex-shrink: 0;
+    }
+
+    .site-menu__logo {
+      display: block;
+      line-height: 0;
+      text-decoration: none;
+    }
+
+    .site-menu__logo img {
+      height: 72px;
+      width: auto;
+      display: block;
+      mix-blend-mode: screen;
+    }
+
+    .site-menu__close {
+      appearance: none;
+      border: 1.5px solid rgba(255, 255, 255, 0.75);
+      background: transparent;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-menu__close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: rotate(90deg);
+    }
+
+    .site-menu__close svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .site-menu__body {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(200px, 280px) 1fr;
+      gap: 0;
+      padding: 0 clamp(22px, 4vw, 48px);
+      align-items: stretch;
+    }
+
+    .site-menu__nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      padding: 24px 28px 24px 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .site-menu__nav-btn {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      border-radius: 999px;
+      text-align: left;
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .site-menu__nav-btn em {
+      font-style: normal;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      margin-right: 10px;
+      opacity: 0.7;
+      vertical-align: middle;
+    }
+
+    .site-menu__nav-btn svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .site-menu__nav-btn:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .site-menu__nav-btn.is-on {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .site-menu__nav-btn.is-on svg {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    .site-menu__panel-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: clamp(24px, 4vw, 48px) clamp(28px, 5vw, 80px);
+      min-height: 0;
+    }
+
+    .site-menu__panel {
+      width: min(100%, 720px);
+      display: none;
+      margin: 0;
+    }
+
+    .site-menu__panel.is-on {
+      display: block;
+      animation: menu-panel-in 0.35s ease;
+    }
+
+    @keyframes menu-panel-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .site-menu__panel-head {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 28px;
+    }
+
+    .site-menu__panel-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .site-menu__panel-icon img {
+      width: 58%;
+      height: 58%;
+      object-fit: contain;
+      display: block;
+      filter: invert(1);
+    }
+
+    .site-menu__panel-kicker {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+
+    .site-menu__panel-title {
+      font-family: "Fraunces", serif;
+      font-size: calc(clamp(1.8rem, 3vw, 2.4rem) + 7pt);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .site-menu__links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 48px;
+      margin-bottom: 32px;
+    }
+
+    .site-menu__links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 0;
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      font-size: 1.02rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+
+    .site-menu__links a:hover {
+      color: #fff;
+      padding-left: 4px;
+    }
+
+    .site-menu__links a svg {
+      width: 13px;
+      height: 13px;
+      opacity: 0.55;
+      flex-shrink: 0;
+    }
+
+    .site-menu__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255, 255, 255, 0.75);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .site-menu__cta:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .site-menu__cta svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .site-menu__foot {
+      flex-shrink: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px 32px;
+      padding: 22px clamp(22px, 4vw, 48px) 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .site-menu__foot-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 32px;
+    }
+
+    .site-menu__foot-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.2s ease;
+    }
+
+    .site-menu__foot-links a:hover { color: #fff; }
+
+    .site-menu__foot-links a:hover .site-menu__foot-icon {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .site-menu__foot-links strong {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .site-menu__foot-links a > span {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.35;
+      opacity: 0.92;
+    }
+
+    .site-menu__foot-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: #fff;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .site-menu__foot-icon svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .site-menu__social {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .site-menu__social span {
+      font-size: 0.85rem;
+      opacity: 0.75;
+      margin-right: 6px;
+    }
+
+    .site-menu__social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .site-menu__social a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .site-menu__social svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    body.is-menu-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      .site-menu__body {
+        grid-template-columns: 1fr;
+        overflow: auto;
+      }
+      .site-menu__nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 8px 0 18px;
+        justify-content: flex-start;
+      }
+      .site-menu__nav-btn {
+        font-size: 1.1rem;
+        padding: 12px 16px;
+      }
+      .site-menu__links {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .site-menu__foot {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
     .copy {
-      max-width: 34rem;
+      max-width: 28rem;
       margin-top: auto;
       margin-bottom: clamp(12px, 3vh, 28px);
       padding-right: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .copy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .copy-badge__dash {
+      width: 1rem;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.9);
+      flex-shrink: 0;
     }
 
     h1 {
       font-family: "Fraunces", serif;
       font-weight: 600;
-      font-size: clamp(2.8rem, 6.5vw, 5rem);
+      font-size: calc(clamp(2.8rem, 6.5vw, 5rem) + 7pt);
       line-height: 1.02;
       letter-spacing: -0.03em;
-      margin-bottom: 1rem;
+      margin: 0;
     }
 
     h1 span { display: block; }
 
     .lead {
-      max-width: 26rem;
+      max-width: 24rem;
       font-size: 0.98rem;
       line-height: 1.65;
       color: var(--ink-soft);
       font-weight: 400;
+      margin: 0;
+    }
+
+    .copy-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 0.35rem;
     }
 
     .cta {
-      position: absolute;
-      right: clamp(24px, 4vw, 48px);
-      bottom: clamp(22px, 3.5vw, 40px);
       display: inline-flex;
       align-items: center;
-      gap: 14px;
-      padding: 10px 10px 10px 20px;
+      gap: 12px;
+      padding: 12px 16px 12px 20px;
       border-radius: 999px;
-      background: var(--pill);
-      backdrop-filter: blur(10px);
-      color: #fff;
+      border: 1.5px solid var(--cta-cream);
+      background: rgba(236, 228, 215, 0.92);
+      color: var(--cta-ink);
       text-decoration: none;
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: background 0.25s, transform 0.25s;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, border-color 0.25s;
       pointer-events: auto;
     }
 
     .cta:hover {
-      background: rgba(255, 255, 255, 0.32);
+      background: var(--cta-cream-soft);
+      border-color: var(--cta-cream-soft);
       transform: translateY(-1px);
     }
 
     .cta i {
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: var(--pill-dot);
+      background: var(--cta-coral);
       display: grid;
       place-items: center;
     }
 
-    .cta svg { width: 14px; height: 14px; }
+    .cta svg { width: 13px; height: 13px; }
+
+    .cta-buy {
+      appearance: none;
+      border: 1.5px solid var(--cta-cream);
+      background: transparent;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border-radius: 999px;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.25s ease, border-color 0.25s;
+      pointer-events: auto;
+    }
+
+    .cta-buy:hover {
+      transform: translateY(-1px);
+      border-color: var(--cta-cream-soft);
+    }
+
+    .cta-buy__inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 18px 8px 8px;
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .cta-buy__icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--cta-pink);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .cta-buy__icon svg {
+      width: 15px;
+      height: 15px;
+    }
 
     .hint {
       position: absolute;
@@ -206,6 +781,240 @@
 
     .hint.is-gone { opacity: 0; }
 
+    /* Ürün hotspot’ları — hayvan etrafı tooltip + çizgi */
+    .hotspots {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    .hotspots.is-on { opacity: 1; }
+
+    .hotspot-tip {
+      position: absolute;
+      display: block;
+      width: 104px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-family: "DM Sans", system-ui, sans-serif;
+      text-align: center;
+      pointer-events: auto;
+      cursor: pointer;
+      overflow: visible;
+    }
+
+    /* Sol: sağ kenar bağlanma noktasında → hayvanın soluna yaslanır, üzerine binmez */
+    .hotspot-tip--left {
+      transform: translate(-100%, -50%);
+    }
+
+    /* Sağ: sol kenar bağlanma noktasında → hayvanın sağına yaslanır, üzerine binmez */
+    .hotspot-tip--right {
+      transform: translate(0%, -50%);
+    }
+
+    /* Çizgi buton içinde; hover transform’dan etkilenmez */
+    .hotspot-tip__line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hotspot-tip__line path {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.82);
+      stroke-width: 1.55;
+      vector-effect: non-scaling-stroke;
+      stroke-linecap: round;
+      stroke-dasharray: 1.5 5.8;
+      opacity: 0.85;
+      transition: stroke 0.25s ease, opacity 0.25s ease;
+    }
+
+    .hotspot-tip.is-on .hotspot-tip__line path,
+    .hotspot-tip:hover .hotspot-tip__line path {
+      stroke: #fff;
+      opacity: 1;
+    }
+
+    .hotspot-tip__line .anchor-dot {
+      fill: #e8ff9a;
+      filter: drop-shadow(0 0 4px rgba(200, 255, 110, 1))
+              drop-shadow(0 0 12px rgba(170, 240, 70, 0.75))
+              drop-shadow(0 0 22px rgba(150, 230, 60, 0.4));
+    }
+
+    .hotspot-tip__line .anchor-flare {
+      fill: rgba(220, 255, 140, 0.35);
+      filter: blur(1.5px);
+    }
+
+    .hotspot-tip__line .mid-dot {
+      fill: rgba(255, 255, 255, 0.92);
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.55));
+    }
+
+    /* Hover sadece ürün gövdesinde — çizgi yerinde kalır */
+    .hotspot-tip__body {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.28s ease;
+      will-change: transform;
+    }
+
+    .hotspot-tip--left:hover .hotspot-tip__body,
+    .hotspot-tip--left.is-on .hotspot-tip__body,
+    .hotspot-tip--right:hover .hotspot-tip__body,
+    .hotspot-tip--right.is-on .hotspot-tip__body {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .hotspot-tip__media {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 8px 22px rgba(24, 1, 2, 0.14);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hotspot-tip__thumb {
+      width: 68%;
+      height: 68%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hotspot-tip__meta {
+      display: block;
+      max-width: 120px;
+    }
+
+    .hotspot-tip__label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+    }
+
+    .hotspot-glows {
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glow-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 72px;
+      height: 72px;
+      margin-left: -36px;
+      margin-top: -36px;
+      opacity: 0;
+      --gx: 0px;
+      --gy: -16px;
+      transform: translate(var(--gx), calc(var(--gy) + 12px)) scale(0.72);
+      pointer-events: none;
+      will-change: opacity, transform;
+    }
+
+    .glow-icon.is-play {
+      animation: glow-float-away 1.4s ease-out forwards;
+    }
+
+    @keyframes glow-float-away {
+      0% {
+        opacity: 0;
+        transform: translate(var(--gx), calc(var(--gy) + 18px)) scale(0.72);
+      }
+      25% {
+        opacity: 1;
+        transform: translate(var(--gx), var(--gy)) scale(1);
+      }
+      75% {
+        opacity: 1;
+        transform: translate(var(--gx), var(--gy)) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--gx), calc(var(--gy) - 58px)) scale(0.88);
+      }
+    }
+
+    .glow-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: var(--glow-icon-filter);
+    }
+
+    .glow-spark {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      margin-left: -2.5px;
+      margin-top: -2.5px;
+      border-radius: 50%;
+      background: var(--glow-spark);
+      opacity: 0;
+      pointer-events: none;
+      --sx: 0px;
+      --sy: 0px;
+      --rise: 28px;
+      --dur: 1s;
+      --delay: 0s;
+      box-shadow:
+        0 0 6px var(--glow-spark-glow),
+        0 0 14px var(--glow-spark-soft),
+        0 0 22px var(--glow-spark-soft);
+      will-change: opacity, transform;
+    }
+
+    .glow-spark.is-play {
+      animation: spark-float-away var(--dur) ease-out var(--delay) forwards;
+    }
+
+    @keyframes spark-float-away {
+      0% {
+        opacity: 0;
+        transform: translate(var(--sx), var(--sy)) scale(0.6);
+      }
+      15% {
+        opacity: 1;
+      }
+      55% {
+        opacity: 0.95;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--sx), calc(var(--sy) - var(--rise))) scale(0.5);
+      }
+    }
+
     .wait {
       display: none;
       position: absolute;
@@ -218,7 +1027,10 @@
 
     body.is-wait .wait { display: grid; }
     body.is-wait canvas#view,
-    body.is-wait .hint { opacity: 0; pointer-events: none; }
+    body.is-wait .hint,
+    body.is-wait .hotspots { opacity: 0; pointer-events: none; }
+
+    body.is-wait .hotspots { visibility: hidden; }
 
     .load {
       position: absolute;
@@ -270,15 +1082,20 @@
       color: #180102;
     }
 
-    .home-bento__title {
+    .home-bento__title,
+    .bestsellers__title,
+    .brands__title {
       font-family: "DM Sans", system-ui, sans-serif;
       font-weight: 500;
-      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-size: calc(clamp(1.6rem, 3vw, 2rem) + 7pt);
       line-height: 1.18;
       letter-spacing: -0.03em;
+      color: #180102;
+    }
+
+    .home-bento__title {
       text-align: center;
       max-width: 18em;
-      color: #180102;
     }
 
     .home-bento__grid {
@@ -430,27 +1247,96 @@
     .bestsellers {
       width: 100%;
       margin: 0 auto;
-      padding: 80px 14px 80px;
+      padding: 80px 0 80px;
       color: #180102;
+      overflow: visible;
+    }
+
+    .bestsellers__top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 0 clamp(14px, 3vw, 48px);
+      margin-bottom: 2rem;
     }
 
     .bestsellers__title {
-      font-family: "DM Sans", system-ui, sans-serif;
-      font-weight: 600;
-      font-size: clamp(1.6rem, 3vw, 2rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 3rem;
-      color: #180102;
+      grid-column: 2;
+      margin: 0;
       text-align: center;
     }
 
-    .product-grid {
+    .bestsellers__controls {
+      grid-column: 3;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .bestsellers__nav {
+      pointer-events: auto;
+      appearance: none;
+      border: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #180102;
+      color: #fff;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1rem;
+      place-items: center;
+      cursor: pointer;
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+
+    .bestsellers__nav:hover:not(:disabled) {
+      transform: scale(1.04);
+    }
+
+    .bestsellers__nav:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .bestsellers__nav svg {
+      width: 14px;
+      height: 13px;
+      display: block;
+    }
+
+    .bestsellers__nav.is-prev svg {
+      transform: scaleX(-1);
+    }
+
+    .bestsellers__slider {
+      overflow: hidden;
+      cursor: grab;
+      touch-action: pan-y;
+      padding: 2.75rem 0 3rem;
+    }
+
+    .bestsellers__slider.is-dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .bestsellers__track {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      width: 100%;
+      padding: 0 clamp(14px, 3vw, 48px);
+    }
+
+    .bestsellers__slide {
+      flex: 0 0 clamp(220px, 26vw, 280px);
+      min-width: 0;
     }
 
     .product-card {
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -462,14 +1348,15 @@
       text-decoration: none;
       color: #180102;
       min-height: 22rem;
-      transition: transform 0.25s ease;
+      will-change: transform;
+      transform-origin: center center;
     }
 
-    .product-card:nth-child(1) { border-radius: 4rem 4rem 4rem 1rem; }
-    .product-card:nth-child(2) { border-radius: 4rem 4rem 1rem 1rem; }
-    .product-card:nth-child(3) { border-radius: 4rem 1rem 4rem 4rem; }
-    .product-card:nth-child(4) { border-radius: 1rem 4rem 4rem 1rem; }
-    .product-card:nth-child(5) { border-radius: 1rem 1rem 4rem 4rem; }
+    .bestsellers__slide:nth-child(5n + 1) .product-card { border-radius: 4rem 4rem 4rem 1rem; }
+    .bestsellers__slide:nth-child(5n + 2) .product-card { border-radius: 4rem 4rem 1rem 1rem; }
+    .bestsellers__slide:nth-child(5n + 3) .product-card { border-radius: 4rem 1rem 4rem 4rem; }
+    .bestsellers__slide:nth-child(5n + 4) .product-card { border-radius: 1rem 4rem 4rem 1rem; }
+    .bestsellers__slide:nth-child(5n + 5) .product-card { border-radius: 1rem 1rem 4rem 4rem; }
 
     .product-card.is-coral { border-color: #e36b4f; }
     .product-card.is-blue { border-color: #2e8ad6; }
@@ -478,7 +1365,9 @@
     .product-card.is-yellow { border-color: #f5f56f; }
     .product-card.is-pink { border-color: #f56f1d; }
 
-    .product-card:hover { transform: translateY(-3px); }
+    .product-card:hover .product-card__media {
+      transform: scale(1.03);
+    }
 
     .product-card__top {
       display: flex;
@@ -496,6 +1385,8 @@
       overflow: hidden;
       padding: 0;
       background: none;
+      pointer-events: none;
+      transition: transform 0.28s ease;
     }
 
     .product-card__media img {
@@ -534,6 +1425,309 @@
       border: 0;
     }
 
+    /* Nasıl çalışır — Aardvark flow uyarlaması */
+    .flow {
+      position: relative;
+      margin: 12px 14px 0;
+      padding: clamp(48px, 6vw, 88px) clamp(18px, 4vw, 56px) clamp(56px, 7vw, 96px);
+      background: #ece4d7;
+      border-radius: clamp(40px, 6vw, 80px);
+      overflow: hidden;
+      color: #180102;
+    }
+
+    .flow__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.55;
+      color: #fff;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .flow__bg svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .flow__inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+
+    .flow__header-main {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(16px, 3vw, 36px);
+      flex-wrap: wrap;
+    }
+
+    .flow__title {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: calc(clamp(2.4rem, 6vw, 4.5rem) + 7pt);
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin: 0;
+    }
+
+    .flow__note {
+      font-family: "Caveat", cursive;
+      font-weight: 600;
+      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+      line-height: 1.15;
+      color: #3b308f;
+      max-width: 24ch;
+      transform: rotate(-3deg);
+    }
+
+    .flow__cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .flow__cta-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #180102;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .flow__cta-logo img {
+      width: 78%;
+      height: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .flow__cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: #ff008c;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .flow__cta-btn:hover {
+      transform: translateY(-2px);
+      background: #e0007c;
+    }
+
+    .flow__cta-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .flow__list {
+      --flow-overlap: clamp(28px, 4vw, 52px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 28px 0 20px;
+      position: relative;
+      cursor: default;
+    }
+
+    .flow__item {
+      flex: 0 1 280px;
+      max-width: 280px;
+      width: 100%;
+      margin-left: calc(var(--flow-overlap) * -1);
+      position: relative;
+      z-index: 1;
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    .flow__item:first-child { margin-left: 0; }
+
+    .flow__item.is-active {
+      z-index: 8;
+    }
+
+    .flow__card {
+      height: 100%;
+      min-height: clamp(340px, 42vw, 420px);
+      border-radius: 1.75rem;
+      padding: 1.5rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 18px 40px rgba(24, 1, 2, 0.08);
+      will-change: transform;
+      transform: translateX(var(--card-x, 0%));
+      transition: transform 0.85s cubic-bezier(0.34, 1.45, 0.64, 1);
+    }
+
+    .flow__card.is-cyan { background: #b7dbf5; }
+    .flow__card.is-pink { background: #f3b8c4; }
+    .flow__card.is-yellow { background: #efc9b8; }
+    .flow__card.is-purple { background: #c9d6a4; }
+
+    .flow__step {
+      font-family: "Caveat", cursive;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+      text-align: center;
+      line-height: 1;
+    }
+
+    .flow__visual {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      min-height: 140px;
+    }
+
+    .flow__visual img {
+      width: min(100%, 212px);
+      height: auto;
+      display: block;
+    }
+
+    .flow__card-title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.25rem, 2vw, 1.3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    .flow__card-text {
+      font-size: 0.98rem;
+      line-height: 1.45;
+      margin: 0.4rem 0 0;
+      color: rgba(24, 1, 2, 0.78);
+    }
+
+    /* Markalarımız — logo marquee */
+    .brands {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: clamp(48px, 6vw, 72px) 14px clamp(56px, 7vw, 80px);
+      background: #ffffff;
+      color: #180102;
+    }
+
+    .brands__title {
+      text-align: center;
+      margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .brands__marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+
+    .brands__track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      gap: clamp(28px, 4vw, 48px);
+      animation: brands-marquee 42s linear infinite;
+      will-change: transform;
+    }
+
+    .brands__marquee:hover .brands__track {
+      animation-play-state: paused;
+    }
+
+    @keyframes brands-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .brands__track {
+        animation: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+    }
+
+    .brands__logo {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      background: rgba(236, 228, 215, 0.65);
+      border: 2px solid #ece4d7;
+      border-radius: 12px;
+    }
+
+    .brands__logo img {
+      display: block;
+      width: 100%;
+      max-width: 100px;
+      aspect-ratio: 326 / 234;
+      height: auto;
+      object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+      .flow {
+        margin: 8px 8px 0;
+        border-radius: 40px;
+        padding: 40px 16px 48px;
+      }
+      .flow__header {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 36px;
+      }
+      .flow__cta {
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+      .flow__list {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+        scrollbar-width: none;
+        --flow-overlap: 36px;
+      }
+      .flow__list::-webkit-scrollbar { display: none; }
+      .flow__item {
+        flex: 0 0 240px;
+        scroll-snap-align: center;
+      }
+    }
+
     .newsroom {
       width: 100%;
       max-width: 1400px;
@@ -546,7 +1740,7 @@
     .newsroom__title {
       font-family: "DM Sans", system-ui, sans-serif;
       font-weight: 500;
-      font-size: clamp(2rem, 4vw, 2.25rem);
+      font-size: calc(clamp(2rem, 4vw, 2.25rem) + 7pt);
       letter-spacing: -0.03em;
       text-align: center;
       margin-bottom: 5rem;
@@ -845,7 +2039,8 @@
       .footer-cols { max-width: none; width: 100%; row-gap: 40px; }
       .footer-row.is-bottom { gap: 20px; }
       .home-bento { padding: 64px 14px 56px; gap: 48px; }
-      .product-grid { grid-template-columns: 1fr 1fr; }
+      .bestsellers__nav { width: 42px; height: 42px; }
+      .bestsellers__slide { flex-basis: clamp(200px, 42vw, 260px); }
       .news-featured { grid-template-columns: 1fr; }
       .news-featured__content { padding: 1.5rem 0 0; }
       .news-list { grid-template-columns: 1fr; padding-top: 2.5rem; }
@@ -856,15 +2051,25 @@
       header { flex-direction: column; align-items: flex-start; gap: 16px; }
       nav.menu { gap: 14px; flex-wrap: wrap; }
       nav.menu button span { font-size: 0.98rem; }
-      .cta { position: static; margin-top: 28px; align-self: flex-start; }
       .ui { pointer-events: auto; }
-      .copy { margin-bottom: 30vh; }
+      .copy { margin-bottom: 30vh; max-width: none; padding-right: 12%; }
+      .hotspots { display: none; }
       .footer-cols { grid-template-columns: 1fr 1fr; }
       .site-footer { padding: 12px 8px 0; }
       .home-bento { padding: 48px 8px 40px; }
-      .bestsellers { padding: 8px 8px 48px; }
+      .bestsellers { padding: 48px 0 48px; }
+      .bestsellers__top {
+        grid-template-columns: 1fr auto;
+        margin-bottom: 1.25rem;
+      }
+      .bestsellers__title {
+        grid-column: 1;
+        text-align: left;
+      }
+      .bestsellers__controls { grid-column: 2; }
       .newsroom { padding: 56px 8px 64px; }
       .newsroom__title { margin-bottom: 2.5rem; }
+      .brands { padding: 48px 8px 56px; }
       .news-card { min-height: 0; gap: 2.5rem; border-radius: 2.5rem !important; }
       .product-card { min-height: 0; gap: 1.5rem; padding: 1.5rem; border-radius: 2.5rem !important; }
       .home-bento__grid {
@@ -890,6 +2095,33 @@
     </div>
     <canvas id="view" aria-hidden="true"></canvas>
 
+    <div class="hotspots" id="hotspots" aria-hidden="true">
+      <div class="hotspot-glows" id="hotspotGlows">
+        <div class="glow-icon" data-glow="heart">
+          <img src="media/icons/icon-heart.svg" alt="" />
+        </div>
+        <div class="glow-icon" data-glow="crown">
+          <img src="media/icons/icon-crown.svg" alt="" />
+        </div>
+        <div class="glow-icon" data-glow="butterfly">
+          <img src="media/icons/icon-butterfly.svg" alt="" />
+        </div>
+        <div class="glow-icon" data-glow="happy">
+          <img src="media/icons/icon-happy.svg" alt="" />
+        </div>
+        <div class="glow-icon" data-glow="lightbulb">
+          <img src="media/icons/icon-lightbulb.svg" alt="" />
+        </div>
+        <i class="glow-spark" data-spark="0"></i>
+        <i class="glow-spark" data-spark="1"></i>
+        <i class="glow-spark" data-spark="2"></i>
+        <i class="glow-spark" data-spark="3"></i>
+        <i class="glow-spark" data-spark="4"></i>
+        <i class="glow-spark" data-spark="5"></i>
+      </div>
+      <div id="hotspotList"></div>
+    </div>
+
     <div class="ui">
       <header>
         <a class="logo" href="#kedi" data-go="kedi" aria-label="PETDOSTUM">
@@ -900,39 +2132,236 @@
           <button type="button" data-go="kopek"><em>02</em><span>Köpek</span></button>
           <button type="button" data-go="kus"><em>03</em><span>Kuş</span></button>
           <button type="button" data-go="balik"><em>04</em><span>Balık</span></button>
+          <div class="menu-tools">
+            <button type="button" class="menu-action" aria-label="Ara">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/>
+                <path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button type="button" class="menu-action" aria-label="Giriş yap">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
+                <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button type="button" class="menu-more" id="menuOpen" aria-label="Menüyü aç" aria-expanded="false" aria-controls="siteMenu">
+              <i></i><i></i><i></i>
+            </button>
+          </div>
         </nav>
       </header>
 
       <div class="copy">
+        <div class="copy-badge">
+          <span class="copy-badge__dash" aria-hidden="true"></span>
+          Pet dostum seçkisi
+        </div>
         <h1>
-          <span id="lineA">Merhaba</span>
-          <span id="lineB">Dostum</span>
+          <span id="lineA">Neden Bu</span>
+          <span id="lineB">Kadar Meraklı?</span>
         </h1>
         <p class="lead" id="lead">
-          Mama, oyuncak, bakım ürünleri ve daha fazlasıyla minik dostunuzun mutluluğu için ihtiyacınız olan her şey.
+          Fareyi ortadaki dostun etrafında gezdir. Mama, oyuncak ve bakım ürünleriyle kedinin dünyasını keşfet.
         </p>
+        <div class="copy-actions">
+          <a class="cta" href="#icerik" id="cta">
+            Hemen Başla
+            <i aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </i>
+          </a>
+          <button type="button" class="cta-buy" id="ctaBuy">
+            <span class="cta-buy__inner">
+              <span class="cta-buy__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.5 8.5h11l-1.1 9.2a1.6 1.6 0 0 1-1.6 1.4H9.2a1.6 1.6 0 0 1-1.6-1.4L6.5 8.5Z" stroke="#180102" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M9 8.5V7.2a3 3 0 0 1 6 0v1.3" stroke="#180102" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              Satın Al
+            </span>
+          </button>
+        </div>
       </div>
     </div>
-
-    <a class="cta" href="#icerik" id="cta">
-      Keşfet
-      <i aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </i>
-    </a>
 
     <div class="hint" id="hint">Fareyi gezdir</div>
     <div class="wait" id="wait">Yakında</div>
   </div>
 
+  <div class="site-menu" id="siteMenu" aria-hidden="true">
+    <div class="site-menu__top">
+      <a class="site-menu__logo" href="#kedi" data-go="kedi" data-menu-close aria-label="PETDOSTUM">
+        <img src="pedlogo.png" alt="PETDOSTUM" />
+      </a>
+      <button type="button" class="site-menu__close" id="menuClose" aria-label="Menüyü kapat">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="site-menu__body">
+      <div class="site-menu__nav" role="tablist" aria-label="Kategoriler">
+        <button type="button" class="site-menu__nav-btn is-on" data-menu-cat="kedi" role="tab" aria-selected="true">
+          <span><em>01</em>Kedi</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="kopek" role="tab" aria-selected="false">
+          <span><em>02</em>Köpek</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="kus" role="tab" aria-selected="false">
+          <span><em>03</em>Kuş</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="balik" role="tab" aria-selected="false">
+          <span><em>04</em>Balık</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="site-menu__panel-wrap">
+        <div class="site-menu__panel is-on" data-menu-panel="kedi" role="tabpanel">
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/cat.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Kedi</div>
+              <h2 class="site-menu__panel-title">Kedi Mamaları</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="#urunler">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Yavru Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="#urunler" data-go="kedi" data-menu-close>Tüm Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="kopek" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/dog.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Köpek</div>
+              <h2 class="site-menu__panel-title">Köpek Mamaları</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="#urunler">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Yavru Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="#urunler" data-go="kopek" data-menu-close>Tüm Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="kus" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/bird.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Kuş</div>
+              <h2 class="site-menu__panel-title">Kuş Ürünleri</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="#urunler">Kuş Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Kafes &amp; Aksesuar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Tünek &amp; Yuva <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Vitamin &amp; Bakım <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Oyuncaklar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Kum &amp; Hijyen <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="#urunler" data-go="kus" data-menu-close>Tüm Kuş Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="balik" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/fish.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Balık</div>
+              <h2 class="site-menu__panel-title">Akvaryum Ürünleri</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="#urunler">Balık Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Filtre &amp; Pompa <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Isıtıcı &amp; Aydınlatma <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Su Düzenleyici <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Bitki &amp; Dekor <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#urunler">Akvaryum Setleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="#urunler" data-go="balik" data-menu-close>Tüm Akvaryum Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-menu__foot">
+      <div class="site-menu__foot-links">
+        <a href="mailto:info@petdostum.com">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h16v10H4v-10Z" stroke="currentColor" stroke-width="1.7"/><path d="m4.5 8 7.5 5.5L19.5 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </i>
+          <span><strong>E-posta</strong> info@petdostum.com</span>
+        </a>
+        <a href="#icerik">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="11" r="2.2" stroke="currentColor" stroke-width="1.7"/></svg>
+          </i>
+          <span><strong>Mağazalarımız</strong> Size en yakın mağazayı bulun.</span>
+        </a>
+        <a href="tel:08501234567">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 5h3l1.2 3.2-1.8 1.2a10 10 0 0 0 4.2 4.2l1.2-1.8L19 13v3a2 2 0 0 1-2.2 2A13 13 0 0 1 6 7.2 2 2 0 0 1 8 5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </i>
+          <span><strong>Bize Ulaşın</strong> 0850 123 45 67</span>
+        </a>
+      </div>
+      <div class="site-menu__social">
+        <span>Sosyal Medya</span>
+        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="7.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 8h2V5h-2a4 4 0 0 0-4 4v2H8v3h2v6h3v-6h2.2l.8-3H13V9a1 1 0 0 1 1-1Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://youtube.com" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="10" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 10.2v3.6L14.5 12 11 10.2Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://tiktok.com" aria-label="TikTok" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 5.5c.8 1.7 2.2 2.8 4 3v2.6c-1.5-.1-2.9-.6-4-1.4v5.4A4.9 4.9 0 1 1 9.2 10.4v2.7a2.3 2.3 0 1 0 2.3 2.3V5.5H14Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <main class="page-content" id="icerik">
 
   <section class="bestsellers" id="urunler">
-    <h2 class="bestsellers__title">Çok Satanlar</h2>
-    <div class="product-grid">
-      <a class="product-card is-coral" href="#kopek" data-go="kopek">
+    <div class="bestsellers__top">
+      <h2 class="bestsellers__title">Çok Satanlar</h2>
+      <div class="bestsellers__controls">
+        <button type="button" class="bestsellers__nav is-prev" data-bestsellers-prev aria-label="Önceki ürünler" disabled>
+          <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+        </button>
+        <button type="button" class="bestsellers__nav is-next" data-bestsellers-next aria-label="Sonraki ürünler">
+          <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="bestsellers__slider" data-bestsellers-slider>
+      <div class="bestsellers__track" data-bestsellers-track>
+      <div class="bestsellers__slide">
+<a class="product-card is-coral" href="#kopek" data-go="kopek">
         <div class="product-card__top">
           <div class="product-card__media">
             <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
@@ -949,7 +2378,9 @@
           </svg>
         </span>
       </a>
-      <a class="product-card is-blue" href="#kopek" data-go="kopek">
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-blue" href="#kopek" data-go="kopek">
         <div class="product-card__top">
           <div class="product-card__media">
             <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
@@ -966,7 +2397,9 @@
           </svg>
         </span>
       </a>
-      <a class="product-card is-green" href="#kopek" data-go="kopek">
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-green" href="#kopek" data-go="kopek">
         <div class="product-card__top">
           <div class="product-card__media">
             <img src="media/product/dog-home.png" alt="Köpek yatağı" />
@@ -983,7 +2416,9 @@
           </svg>
         </span>
       </a>
-      <a class="product-card is-orange" href="#kopek" data-go="kopek">
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-orange" href="#kopek" data-go="kopek">
         <div class="product-card__top">
           <div class="product-card__media">
             <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
@@ -1000,7 +2435,9 @@
           </svg>
         </span>
       </a>
-      <a class="product-card is-pink" href="#kopek" data-go="kopek">
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-pink" href="#kopek" data-go="kopek">
         <div class="product-card__top">
           <div class="product-card__media">
             <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
@@ -1017,6 +2454,184 @@
           </svg>
         </span>
       </a>
+      </div>
+      <div class="bestsellers__slide">
+        <a class="product-card is-coral" href="#kopek" data-go="kopek">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
+                  </div>
+                  <div class="product-card__name">Premium Köpek Yemi</div>
+                  <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+                  <div class="product-card__price">₺ 1.249,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-blue" href="#kopek" data-go="kopek">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
+                  </div>
+                  <div class="product-card__name">Çiğneme Kemiği</div>
+                  <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
+                  <div class="product-card__price">₺ 189,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-green" href="#kopek" data-go="kopek">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Köpek yatağı" />
+                  </div>
+                  <div class="product-card__name">Köpek Yatağı</div>
+                  <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
+                  <div class="product-card__price">₺ 899,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-orange" href="#kopek" data-go="kopek">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
+                  </div>
+                  <div class="product-card__name">Gezdirme Tasması</div>
+                  <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
+                  <div class="product-card__price">₺ 329,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-pink" href="#kopek" data-go="kopek">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
+                  </div>
+                  <div class="product-card__name">Premium Köpek Yemi</div>
+                  <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+                  <div class="product-card__price">₺ 1.249,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <section class="flow" id="nasil-calisir" aria-label="Nasıl çalışır">
+    <div class="flow__bg" aria-hidden="true">
+      <svg viewBox="0 0 1440 420" fill="none" preserveAspectRatio="none">
+        <path d="M0 220C180 140 320 320 520 260C720 200 820 80 1020 120C1220 160 1320 280 1440 220V420H0V220Z" fill="currentColor" opacity="0.55"/>
+        <path d="M0 300C220 240 380 360 580 310C780 260 900 180 1100 210C1300 240 1380 300 1440 280V420H0V300Z" fill="currentColor" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="flow__inner">
+      <header class="flow__header">
+        <div class="flow__header-main">
+          <h2 class="flow__title">Neden Biz?</h2>
+          <p class="flow__note">Dostunuz için doğru ürünü seçmenin en keyifli yolu</p>
+        </div>
+        <div class="flow__cta">
+          <!-- <div class="flow__cta-logo" aria-hidden="true">
+            <img src="pedlogo.png" alt="" />
+          </div> -->
+          <a class="flow__cta-btn" href="#urunler">
+            Alışverişe başla
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </header>
+
+      <ul class="flow__list" data-call-out>
+        <li class="flow__item" data-call-out-item>
+          <article class="flow__card is-cyan" data-call-out-child>
+            <div class="flow__visual" aria-hidden="true">
+              <img src="media/p-alternatif.png" alt="Geniş Ürün Yelpazesi" />
+            </div>
+            <div>
+              <h3 class="flow__card-title">Geniş Ürün Yelpazesi</h3>
+              <p class="flow__card-text">Farklı ihtiyaçlara hitap eden geniş ürün seçenekleri.</p>
+            </div>
+          </article>
+        </li>
+        <li class="flow__item" data-call-out-item>
+          <article class="flow__card is-pink" data-call-out-child>
+            <div class="flow__visual" aria-hidden="true">
+              <img src="media/p-guven.png" alt="Güvenli Alışveriş" />
+            </div>
+            <div>
+              <h3 class="flow__card-title">Güvenli Alışveriş</h3>
+              <p class="flow__card-text">Güvenli ve kolay alışveriş deneyimi</p>
+            </div>
+          </article>
+        </li>
+        <li class="flow__item" data-call-out-item>
+          <article class="flow__card is-yellow" data-call-out-child>
+            <div class="flow__visual" aria-hidden="true">
+              <img src="media/p-kargo.png" alt="Özenli ve Hızlı" />
+            </div>
+            <div>
+              <h3 class="flow__card-title">Özenli ve Hızlı</h3>
+              <p class="flow__card-text">Siparişlerini hızlıca hazırlıyor aynı gün kargoya veriyoruz.</p>
+            </div>
+          </article>
+        </li>
+        <li class="flow__item" data-call-out-item>
+          <article class="flow__card is-purple" data-call-out-child>
+            <div class="flow__visual" aria-hidden="true">
+              <img src="media/p-destek.png" alt="Daima Yanındayız" />
+            </div>
+            <div>
+              <h3 class="flow__card-title">Daima Yanındayız</h3>
+              <p class="flow__card-text">İhtiyaç duyduğun her an destek olmaya hazırız.</p>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="brands" id="markalar" aria-labelledby="brandsTitle">
+    <h2 class="brands__title" id="brandsTitle">Markalarımız</h2>
+    <div class="brands__marquee" aria-label="Marka logoları">
+      <div class="brands__track" id="brandsTrack"></div>
     </div>
   </section>
 
@@ -1230,9 +2845,9 @@
   <script>
     window.PAGES = {
       kedi: {
-        a: "Merhaba",
-        b: "Dostum",
-        lead: "Mama, oyuncak, bakım ürünleri ve daha fazlasıyla minik dostunuzun mutluluğu için ihtiyacınız olan her şey.",
+        a: "Neden Bu",
+        b: "Kadar Meraklı?",
+        lead: "Fareyi ortadaki dostun etrafında gezdir. Mama, oyuncak ve bakım ürünleriyle kedinin dünyasını keşfet.",
         wait: false,
         canvas: "kedi",
         folder: "kedi-canvas/",
@@ -1240,11 +2855,21 @@
         bg: "#2e8ad6",
         headX: 0.63,
         headY: 0.42,
-        pillDot: "#1a5f96"
+        glowHeadY: 0.22,
+        pillDot: "#1a5f96",
+        glowSpark: "#9fd4ff",
+        glowSparkGlow: "rgba(120, 200, 255, 0.95)",
+        glowSparkSoft: "rgba(80, 170, 255, 0.55)",
+        glowIconFilter: "brightness(0) saturate(100%) invert(58%) sepia(70%) saturate(1200%) hue-rotate(175deg) brightness(1.08) drop-shadow(0 0 6px rgba(120, 200, 255, 0.95)) drop-shadow(0 0 16px rgba(80, 170, 255, 0.7)) drop-shadow(0 0 28px rgba(46, 138, 214, 0.45))",
+        tips: [
+          { label: "Seramik Mama Kabı", img: "media/kedi-kabi.png", side: "left", ty: 0.30, ax: 0.47, ay: 0.36, bend: 0.7, glow: "crown" },
+          { label: "Premium Kedi Ödülü", img: "media/product/dog-bone.png", side: "left", ty: 0.56, ax: 0.45, ay: 0.54, bend: -0.65, glow: "heart" },
+          { label: "Dinlenme Yatağı", img: "media/product/dog-home.png", side: "right", ty: 0.58, ax: 0.78, ay: 0.56, bend: 0.7, glow: "butterfly" }
+        ]
       },
       kopek: {
-        a: "Sadık",
-        b: "Dost",
+        a: "Sadık Bakış",
+        b: "Seni Bekler",
         lead: "Fareyi gezdir, köpek seni takip etsin. 360° bakış halkasıyla ikinci field study’yi keşfet.",
         wait: false,
         canvas: "kopek",
@@ -1253,7 +2878,17 @@
         bg: "#849445",
         headX: 0.62,
         headY: 0.45,
-        pillDot: "#5a6b2e"
+        glowHeadY: 0.22,
+        pillDot: "#5a6b2e",
+        glowSpark: "#e8ffb0",
+        glowSparkGlow: "rgba(200, 255, 120, 0.95)",
+        glowSparkSoft: "rgba(170, 240, 80, 0.55)",
+        glowIconFilter: "brightness(0) saturate(100%) invert(89%) sepia(28%) saturate(700%) hue-rotate(35deg) brightness(1.05) drop-shadow(0 0 6px rgba(180, 255, 90, 0.95)) drop-shadow(0 0 16px rgba(160, 240, 70, 0.7)) drop-shadow(0 0 28px rgba(140, 220, 60, 0.4))",
+        tips: [
+          { label: "Doğal İp Oyuncak", img: "media/product/dog-bone.png", side: "left", ty: 0.26, ax: 0.47, ay: 0.34, bend: 0.75, glow: "crown" },
+          { label: "Tahılsız Kuru Mama", img: "media/product/dog-eat.png", side: "left", ty: 0.55, ax: 0.45, ay: 0.54, bend: -0.7, glow: "heart" },
+          { label: "Deri Köpek Tasması", img: "media/product/dog-belt.png", side: "right", ty: 0.58, ax: 0.79, ay: 0.54, bend: 0.75, glow: "happy" }
+        ]
       },
       kus: {
         a: "Hafif",
@@ -1266,7 +2901,16 @@
         bg: "#a24b5d",
         headX: 0.68,
         headY: 0.42,
-        pillDot: "#6e2f3d"
+        glowHeadY: 0.22,
+        pillDot: "#6e2f3d",
+        glowSpark: "#ffb8c8",
+        glowSparkGlow: "rgba(255, 160, 180, 0.95)",
+        glowSparkSoft: "rgba(220, 100, 130, 0.55)",
+        glowIconFilter: "brightness(0) saturate(100%) invert(62%) sepia(35%) saturate(900%) hue-rotate(310deg) brightness(1.08) drop-shadow(0 0 6px rgba(255, 160, 180, 0.95)) drop-shadow(0 0 16px rgba(220, 100, 130, 0.7)) drop-shadow(0 0 28px rgba(162, 75, 93, 0.45))",
+        tips: [
+          { label: "Doğal Tünek", img: "media/product/dog-home.png", side: "left", ty: 0.32, ax: 0.49, ay: 0.40, bend: 0.7, glow: "butterfly" },
+          { label: "Vitaminli Kuş Yemi", img: "media/product/dog-eat2.png", side: "right", ty: 0.52, ax: 0.79, ay: 0.50, bend: -0.7, glow: "lightbulb" }
+        ]
       },
       balik: {
         a: "Sakin",
@@ -1276,10 +2920,19 @@
         canvas: "balik",
         folder: "balik-canvas/",
         manifestKey: "BALIK_MANIFEST",
-        bg: "#f56f1d",
+        bg: "#dabb80",
         headX: 0.70,
         headY: 0.48,
-        pillDot: "#b84810"
+        glowHeadY: 0.24,
+        pillDot: "#a8884a",
+        glowSpark: "#fff0c8",
+        glowSparkGlow: "rgba(255, 230, 160, 0.95)",
+        glowSparkSoft: "rgba(220, 180, 100, 0.5)",
+        glowIconFilter: "brightness(0) saturate(100%) invert(92%) sepia(28%) saturate(600%) hue-rotate(346deg) brightness(1.08) drop-shadow(0 0 6px rgba(255, 230, 160, 0.95)) drop-shadow(0 0 16px rgba(230, 190, 110, 0.7)) drop-shadow(0 0 28px rgba(200, 160, 80, 0.4))",
+        tips: [
+          { label: "Akıllı Filtre", img: "media/product/dog-belt.png", side: "left", ty: 0.36, ax: 0.51, ay: 0.46, bend: 0.65, glow: "lightbulb" },
+          { label: "Premium Balık Yemi", img: "media/product/dog-eat.png", side: "right", ty: 0.56, ax: 0.87, ay: 0.54, bend: -0.65, glow: "happy" }
+        ]
       }
     };
   </script>
@@ -1297,6 +2950,11 @@
       const loadBar = document.getElementById("loadBar");
       const waitEl = document.getElementById("wait");
       const stage = canvas.parentElement;
+      const hotspotsEl = document.getElementById("hotspots");
+      const hotspotList = document.getElementById("hotspotList");
+      const hotspotGlows = document.getElementById("hotspotGlows");
+      const glowIcons = hotspotGlows ? hotspotGlows.querySelectorAll(".glow-icon") : [];
+      const glowSparks = hotspotGlows ? hotspotGlows.querySelectorAll(".glow-spark") : [];
 
       const cache = {};
       let keys = [];
@@ -1321,6 +2979,10 @@
       let hasPointer = false;
       let active = "kedi";
       let tickStarted = false;
+      let tipNodes = [];
+      let activeTip = -1;
+      let glowKind = null;
+      let glowUntil = 0;
 
       function wrap01(v) {
         v %= 1;
@@ -1357,6 +3019,291 @@
         };
       }
 
+      function animalPoint(nx, ny) {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const rect = stage.getBoundingClientRect();
+        if (!box) {
+          return { x: rect.width * nx, y: rect.height * ny };
+        }
+        return {
+          x: (box.dx + nx * box.dw) / dpr,
+          y: (box.dy + ny * box.dh) / dpr
+        };
+      }
+
+      function ovalPath(from, to, side, bendMul) {
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+        const sign = bendMul != null ? Math.sign(bendMul) || 1 : (side === "left" ? -1 : 1);
+        const amt = Math.abs(bendMul != null ? bendMul : 1);
+        /* Kısa çizgide hafif oval kavis */
+        const bulge = Math.min(12, Math.max(6, len * 0.35)) * amt * sign;
+        const c1 = {
+          x: from.x + dx * 0.28 + nx * bulge,
+          y: from.y + dy * 0.28 + ny * bulge
+        };
+        const c2 = {
+          x: from.x + dx * 0.72 + nx * bulge * 0.9,
+          y: from.y + dy * 0.72 + ny * bulge * 0.9
+        };
+        return "M " + from.x.toFixed(1) + " " + from.y.toFixed(1) +
+          " C " + c1.x.toFixed(1) + " " + c1.y.toFixed(1) +
+          ", " + c2.x.toFixed(1) + " " + c2.y.toFixed(1) +
+          ", " + to.x.toFixed(1) + " " + to.y.toFixed(1);
+      }
+
+      function pointOnCubic(from, c1, c2, to, t) {
+        const u = 1 - t;
+        return {
+          x: u * u * u * from.x + 3 * u * u * t * c1.x + 3 * u * t * t * c2.x + t * t * t * to.x,
+          y: u * u * u * from.y + 3 * u * u * t * c1.y + 3 * u * t * t * c2.y + t * t * t * to.y
+        };
+      }
+
+      function tipAttachPoint(el, side) {
+        /* Media’nın hover transform’undan bağımsız sabit bağlama noktası */
+        const stageRect = stage.getBoundingClientRect();
+        const tipRect = el.getBoundingClientRect();
+        const media = el.querySelector(".hotspot-tip__media");
+        const mw = media ? media.offsetWidth : tipRect.width;
+        const mh = media ? media.offsetHeight : 64;
+        const mx = tipRect.left - stageRect.left + (tipRect.width - mw) / 2;
+        const cy = tipRect.top - stageRect.top + mh / 2;
+        if (side === "left") {
+          return { x: mx + mw - 2, y: cy };
+        }
+        return { x: mx + 2, y: cy };
+      }
+
+      function toTipLocal(el, pt) {
+        const r = el.getBoundingClientRect();
+        const s = stage.getBoundingClientRect();
+        return {
+          x: pt.x - (r.left - s.left),
+          y: pt.y - (r.top - s.top)
+        };
+      }
+
+      function clearTips() {
+        tipNodes = [];
+        activeTip = -1;
+        if (hotspotList) hotspotList.innerHTML = "";
+        if (hotspotsEl) hotspotsEl.classList.remove("is-on");
+        stopGlow();
+      }
+
+      function placeGlowHead() {
+        if (!hotspotGlows) return;
+        const page = window.PAGES[active] || {};
+        const glowNy = page.glowHeadY != null ? page.glowHeadY : Math.max(0.08, headNy - 0.16);
+        const headGlow = animalPoint(headNx, glowNy);
+        hotspotGlows.style.left = headGlow.x + "px";
+        hotspotGlows.style.top = headGlow.y + "px";
+      }
+
+      function stopGlow() {
+        glowKind = null;
+        glowUntil = 0;
+        glowIcons.forEach(function (icon) {
+          icon.classList.remove("is-play");
+        });
+        glowSparks.forEach(function (spark) {
+          spark.classList.remove("is-play");
+        });
+      }
+
+      function startGlow(kind) {
+        if (!hotspotGlows || !kind) return;
+        placeGlowHead();
+        glowKind = kind;
+        glowUntil = performance.now() + 1400;
+
+        glowIcons.forEach(function (icon) {
+          icon.classList.remove("is-play");
+          const on = icon.getAttribute("data-glow") === kind;
+          if (!on) return;
+          icon.style.setProperty("--gx", "0px");
+          icon.style.setProperty("--gy", "-16px");
+          /* animasyonu yeniden başlat */
+          void icon.offsetWidth;
+          icon.classList.add("is-play");
+        });
+
+        glowSparks.forEach(function (spark, i) {
+          spark.classList.remove("is-play");
+          /* Her partikül bağımsız: ayrı konum, süre, gecikme */
+          const sx = -18 + Math.random() * 36;
+          const sy = -6 - Math.random() * 16;
+          const rise = 18 + Math.random() * 22;
+          const dur = 0.7 + Math.random() * 0.7;
+          const delay = Math.random() * 0.45;
+          spark.style.setProperty("--sx", sx.toFixed(1) + "px");
+          spark.style.setProperty("--sy", sy.toFixed(1) + "px");
+          spark.style.setProperty("--rise", rise.toFixed(1) + "px");
+          spark.style.setProperty("--dur", dur.toFixed(2) + "s");
+          spark.style.setProperty("--delay", delay.toFixed(2) + "s");
+          spark.style.animationDelay = "";
+          spark.style.animationTimingFunction = "";
+          void spark.offsetWidth;
+          spark.classList.add("is-play");
+        });
+      }
+
+      function updateGlows() {
+        if (!hotspotGlows || !ready || loading) {
+          if (glowUntil) stopGlow();
+          return;
+        }
+        if (!glowUntil) return;
+        if (performance.now() >= glowUntil) {
+          stopGlow();
+          return;
+        }
+        placeGlowHead();
+      }
+
+      function buildTips(page) {
+        clearTips();
+        if (!page || !page.tips || !page.tips.length || !hotspotList) return;
+
+        const ns = "http://www.w3.org/2000/svg";
+        page.tips.forEach(function (tip, i) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "hotspot-tip hotspot-tip--" + (tip.side || "right");
+          btn.dataset.index = String(i);
+
+          const svg = document.createElementNS(ns, "svg");
+          svg.setAttribute("class", "hotspot-tip__line");
+          svg.setAttribute("aria-hidden", "true");
+          svg.setAttribute("overflow", "visible");
+
+          const path = document.createElementNS(ns, "path");
+          svg.appendChild(path);
+
+          const mid = document.createElementNS(ns, "circle");
+          mid.setAttribute("class", "mid-dot");
+          mid.setAttribute("r", "2.2");
+          svg.appendChild(mid);
+
+          const flare = document.createElementNS(ns, "circle");
+          flare.setAttribute("class", "anchor-flare");
+          flare.setAttribute("r", "10");
+          svg.appendChild(flare);
+
+          const dot = document.createElementNS(ns, "circle");
+          dot.setAttribute("class", "anchor-dot");
+          dot.setAttribute("r", "3.2");
+          svg.appendChild(dot);
+
+          const body = document.createElement("span");
+          body.className = "hotspot-tip__body";
+          body.innerHTML =
+            '<span class="hotspot-tip__media">' +
+              '<img class="hotspot-tip__thumb" src="' + tip.img + '" alt="" />' +
+            "</span>" +
+            '<span class="hotspot-tip__meta">' +
+              '<span class="hotspot-tip__label">' + tip.label + "</span>" +
+            "</span>";
+
+          btn.appendChild(svg);
+          btn.appendChild(body);
+
+          btn.addEventListener("mouseenter", function () {
+            activeTip = i;
+            syncTips();
+            startGlow(tip.glow || "heart");
+          });
+          btn.addEventListener("mouseleave", function () {
+            if (activeTip === i) activeTip = -1;
+            syncTips();
+            stopGlow();
+          });
+          btn.addEventListener("focus", function () {
+            activeTip = i;
+            syncTips();
+            startGlow(tip.glow || "heart");
+          });
+          btn.addEventListener("blur", function () {
+            if (activeTip === i) activeTip = -1;
+            syncTips();
+            stopGlow();
+          });
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const dest = document.getElementById("urunler");
+            if (dest) dest.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+          hotspotList.appendChild(btn);
+
+          tipNodes.push({ el: btn, svg: svg, path: path, mid: mid, flare: flare, dot: dot, data: tip });
+        });
+
+        hotspotsEl.classList.add("is-on");
+        requestAnimationFrame(function () {
+          syncTips();
+        });
+      }
+
+      function syncTips() {
+        if (!tipNodes.length) return;
+
+        /* Ürün kenarı ↔ hayvan noktası arası sabit kısa boşluk (px) */
+        const GAP = 16;
+        const SHIFT_X = -36;
+
+        tipNodes.forEach(function (node, i) {
+          const tip = node.data;
+          const side = tip.side || "right";
+          const anchor = animalPoint(tip.ax, tip.ay);
+          anchor.x += SHIFT_X;
+          const tipY = animalPoint(tip.ax, tip.ty != null ? tip.ty : tip.ay).y;
+          const tipX = side === "left" ? anchor.x - GAP : anchor.x + GAP;
+
+          node.el.style.left = tipX + "px";
+          node.el.style.top = tipY + "px";
+          node.el.classList.toggle("is-on", activeTip === i);
+
+          const from = tipAttachPoint(node.el, side);
+          const fromL = toTipLocal(node.el, from);
+          const toL = toTipLocal(node.el, anchor);
+          const bendMul = tip.bend != null ? tip.bend : (side === "left" ? -1 : 1);
+
+          const dx = toL.x - fromL.x;
+          const dy = toL.y - fromL.y;
+          const len = Math.hypot(dx, dy) || 1;
+          const nx = -dy / len;
+          const ny = dx / len;
+          const sign = Math.sign(bendMul) || 1;
+          const amt = Math.abs(bendMul);
+          const bulge = Math.min(12, Math.max(6, len * 0.35)) * amt * sign;
+          const c1 = {
+            x: fromL.x + dx * 0.28 + nx * bulge,
+            y: fromL.y + dy * 0.28 + ny * bulge
+          };
+          const c2 = {
+            x: fromL.x + dx * 0.72 + nx * bulge * 0.9,
+            y: fromL.y + dy * 0.72 + ny * bulge * 0.9
+          };
+
+          node.path.setAttribute("d", ovalPath(fromL, toL, side, bendMul));
+
+          const midPt = pointOnCubic(fromL, c1, c2, toL, 0.45);
+          node.mid.setAttribute("cx", midPt.x.toFixed(1));
+          node.mid.setAttribute("cy", midPt.y.toFixed(1));
+          node.mid.style.opacity = activeTip === i ? "1" : "0.7";
+
+          node.dot.setAttribute("cx", toL.x.toFixed(1));
+          node.dot.setAttribute("cy", toL.y.toFixed(1));
+          node.flare.setAttribute("cx", toL.x.toFixed(1));
+          node.flare.setAttribute("cy", toL.y.toFixed(1));
+          node.flare.setAttribute("r", activeTip === i ? "12" : "8");
+        });
+      }
+
       function indexFromU(u) {
         const n = keys.length;
         const x = wrap01(u) * n;
@@ -1383,6 +3330,7 @@
         const dw = sample.width * s;
         const dh = sample.height * s;
         box = { w: w, h: h, dx: (w - dw) / 2, dy: (h - dh) / 2, dw: dw, dh: dh };
+        syncTips();
       }
 
       function draw(bmp) {
@@ -1449,6 +3397,7 @@
         dist += (targetDist - dist) * k;
         softU = lerpU(softU, targetU, k);
         paint();
+        updateGlows();
         requestAnimationFrame(tick);
       }
 
@@ -1475,6 +3424,12 @@
         if (!page.bg) return;
         document.documentElement.style.setProperty("--bg", page.bg);
         document.documentElement.style.setProperty("--pill-dot", page.pillDot || "#1a5f96");
+        document.documentElement.style.setProperty("--glow-spark", page.glowSpark || "#9fd4ff");
+        document.documentElement.style.setProperty("--glow-spark-glow", page.glowSparkGlow || "rgba(120, 200, 255, 0.95)");
+        document.documentElement.style.setProperty("--glow-spark-soft", page.glowSparkSoft || "rgba(80, 170, 255, 0.55)");
+        if (page.glowIconFilter) {
+          document.documentElement.style.setProperty("--glow-icon-filter", page.glowIconFilter);
+        }
         fill = page.bg;
         headNx = page.headX;
         headNy = page.headY;
@@ -1499,11 +3454,13 @@
         const id = page.canvas;
         if (cache[id]) {
           usePacked(cache[id]);
+          buildTips(page);
           return;
         }
 
         loading = true;
         ready = false;
+        clearTips();
         load.classList.remove("is-gone");
         loadText.textContent = "Hazırlanıyor…";
         loadBar.style.width = "0%";
@@ -1548,6 +3505,7 @@
         loading = false;
         load.classList.add("is-gone");
         usePacked(cache[id]);
+        buildTips(page);
       }
 
       async function setPage(id) {
@@ -1568,6 +3526,7 @@
           waitEl.textContent = data.waitText;
           hasPointer = false;
           targetDist = 0;
+          clearTips();
           return;
         }
 
@@ -1597,6 +3556,7 @@
       stage.addEventListener("pointerleave", function () {
         hasPointer = false;
         targetDist = 0;
+        stopGlow();
       });
 
       document.querySelectorAll("[data-go]").forEach(function (el) {
@@ -1615,6 +3575,11 @@
         if (dest) dest.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 
+      document.getElementById("ctaBuy").addEventListener("click", function () {
+        const dest = document.getElementById("urunler");
+        if (dest) dest.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
       if (!tickStarted) {
         tickStarted = true;
         requestAnimationFrame(tick);
@@ -1622,6 +3587,464 @@
 
       const hash = (location.hash || "#kedi").slice(1);
       setPage(window.PAGES[hash] ? hash : "kedi");
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const menu = document.getElementById("siteMenu");
+      const openBtn = document.getElementById("menuOpen");
+      const closeBtn = document.getElementById("menuClose");
+      if (!menu || !openBtn || !closeBtn) return;
+
+      function setMenuCat(id) {
+        if (!window.PAGES || !window.PAGES[id]) id = "kedi";
+        document.querySelectorAll("[data-menu-cat]").forEach(function (btn) {
+          const on = btn.getAttribute("data-menu-cat") === id;
+          btn.classList.toggle("is-on", on);
+          btn.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        document.querySelectorAll("[data-menu-panel]").forEach(function (panel) {
+          const on = panel.getAttribute("data-menu-panel") === id;
+          panel.classList.toggle("is-on", on);
+          if (on) panel.removeAttribute("hidden");
+          else panel.setAttribute("hidden", "");
+        });
+      }
+
+      function openMenu() {
+        const hash = (location.hash || "#kedi").slice(1);
+        setMenuCat(window.PAGES && window.PAGES[hash] ? hash : "kedi");
+        menu.classList.add("is-open");
+        menu.setAttribute("aria-hidden", "false");
+        openBtn.setAttribute("aria-expanded", "true");
+        document.body.classList.add("is-menu-open");
+        closeBtn.focus();
+      }
+
+      function closeMenu() {
+        menu.classList.remove("is-open");
+        menu.setAttribute("aria-hidden", "true");
+        openBtn.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("is-menu-open");
+        openBtn.focus();
+      }
+
+      openBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (menu.classList.contains("is-open")) closeMenu();
+        else openMenu();
+      });
+
+      closeBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        closeMenu();
+      });
+
+      document.querySelectorAll("[data-menu-cat]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setMenuCat(btn.getAttribute("data-menu-cat"));
+        });
+      });
+
+      document.querySelectorAll("[data-menu-close]").forEach(function (el) {
+        el.addEventListener("click", function () {
+          closeMenu();
+        });
+      });
+
+      menu.querySelectorAll('.site-menu__links a[href="#urunler"]').forEach(function (el) {
+        el.addEventListener("click", function () {
+          closeMenu();
+          const dest = document.getElementById("urunler");
+          if (dest) {
+            setTimeout(function () {
+              dest.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 50);
+          }
+        });
+      });
+
+      addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && menu.classList.contains("is-open")) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const viewport = document.querySelector("[data-bestsellers-slider]");
+      const track = document.querySelector("[data-bestsellers-track]");
+      const prevBtn = document.querySelector("[data-bestsellers-prev]");
+      const nextBtn = document.querySelector("[data-bestsellers-next]");
+      if (!viewport || !track || !prevBtn || !nextBtn) return;
+
+      const slides = Array.prototype.slice.call(track.querySelectorAll(".bestsellers__slide"));
+      if (!slides.length) return;
+
+      function rand(min, max, step) {
+        const n = min + Math.random() * (max - min);
+        return Math.round(n / step) * step;
+      }
+
+      /* Aardvark ParallaxSlider: tek tek kartlara rastgele çapraz + dikey ofset */
+      const itemSettings = slides.map(function (slide, index) {
+        const el = slide.querySelector(".product-card") || slide;
+        const direction = index % 2 === 0 ? -1 : 1;
+        const rotation = rand(1.5, 3, 0.1) * direction;
+        const yOffset = rand(3, 9, 0.1) * direction;
+        el.style.willChange = "transform";
+        return { slide: slide, el: el, rotation: rotation, yOffset: yOffset };
+      });
+
+      let current = 0;
+      let target = 0;
+      let maxScroll = 0;
+      let stride = 0;
+      let isDragging = false;
+      let isTouching = false;
+      let dragStartX = 0;
+      let dragStartTarget = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let scrollDirection = null;
+      let lastTs = 0;
+      const LERP = 0.225;
+      const BOUNCE = 40;
+
+      function measure() {
+        const first = slides[0];
+        const styles = getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap) || 16;
+        const w = first.getBoundingClientRect().width;
+        stride = w + gap;
+        let total = 0;
+        slides.forEach(function (s, i) {
+          total += s.getBoundingClientRect().width;
+          if (i < slides.length - 1) total += gap;
+        });
+        const pad = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight) || 0;
+        maxScroll = Math.max(0, total - (viewport.clientWidth - pad) + 32);
+        target = clamp(target, -maxScroll, 0);
+        current = clamp(current, -maxScroll - BOUNCE, BOUNCE);
+      }
+
+      function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+      }
+
+      function damp(a, b, lambda, dt) {
+        return a + (b - a) * (1 - Math.exp(-lambda * dt));
+      }
+
+      function applyX() {
+        const x = current;
+        slides.forEach(function (slide) {
+          slide.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
+        });
+      }
+
+      /* Merkeze göre sin güçü → yukarı/aşağı + hafif rotate (Aardvark ile aynı formül) */
+      function applyParallax() {
+        const wrapRect = viewport.getBoundingClientRect();
+        const wrapCenter = wrapRect.left + wrapRect.width / 2;
+        const maxDistance = wrapRect.width / 2 || 1;
+
+        itemSettings.forEach(function (item) {
+          const rect = item.el.getBoundingClientRect();
+          const elCenter = rect.left + rect.width / 2;
+          const norm = (elCenter - wrapCenter) / maxDistance;
+          const clamped = clamp(norm, -2, 2);
+          const strength = Math.sin(clamped * 1.2);
+          const moveY = strength * item.yOffset;
+          const rotate = strength * item.rotation;
+          item.el.style.transform =
+            "translateY(" + moveY.toFixed(3) + "%) rotate(" + rotate.toFixed(3) + "deg)";
+        });
+      }
+
+      function progress() {
+        if (maxScroll <= 0) return 1;
+        return clamp(-target / maxScroll, 0, 1);
+      }
+
+      function updateArrows() {
+        prevBtn.disabled = progress() <= 0.02 && target >= -2;
+        nextBtn.disabled = progress() >= 0.95;
+        prevBtn.classList.toggle("is-disabled", prevBtn.disabled);
+        nextBtn.classList.toggle("is-disabled", nextBtn.disabled);
+      }
+
+      function goToNext() {
+        target = clamp(Math.round((target - stride) / stride) * stride, -maxScroll, 0);
+      }
+
+      function goToPrev() {
+        target = clamp(Math.round((target + stride) / stride) * stride, -maxScroll, 0);
+      }
+
+      prevBtn.addEventListener("click", function () { goToPrev(); });
+      nextBtn.addEventListener("click", function () { goToNext(); });
+
+      function onDown(clientX) {
+        isDragging = true;
+        dragStartX = clientX;
+        dragStartTarget = target;
+        viewport.classList.add("is-dragging");
+      }
+
+      function onMove(clientX) {
+        if (!isDragging) return;
+        const dx = clientX - dragStartX;
+        let next = dragStartTarget + dx;
+        if (next > BOUNCE) next = BOUNCE;
+        else if (next < -maxScroll - BOUNCE) next = -maxScroll - BOUNCE;
+        target = next;
+      }
+
+      function onUp() {
+        if (!isDragging) return;
+        isDragging = false;
+        viewport.classList.remove("is-dragging");
+        if (target > 0) target = 0;
+        else if (target < -maxScroll) target = -maxScroll;
+      }
+
+      viewport.addEventListener("mousedown", function (e) {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        onDown(e.clientX);
+      });
+      window.addEventListener("mousemove", function (e) {
+        if (!isDragging || isTouching) return;
+        onMove(e.clientX);
+      });
+      window.addEventListener("mouseup", function () {
+        if (isTouching) return;
+        onUp();
+      });
+
+      viewport.addEventListener("touchstart", function (e) {
+        const t = e.touches[0];
+        touchStartX = t.clientX;
+        touchStartY = t.clientY;
+        scrollDirection = null;
+        isTouching = true;
+        onDown(t.clientX);
+      }, { passive: true });
+
+      window.addEventListener("touchmove", function (e) {
+        if (!isTouching) return;
+        const t = e.touches[0];
+        const dx = Math.abs(t.clientX - touchStartX);
+        const dy = Math.abs(t.clientY - touchStartY);
+        if (!scrollDirection && (dx > 5 || dy > 5)) {
+          scrollDirection = dx > dy ? "horizontal" : "vertical";
+        }
+        if (scrollDirection === "horizontal") {
+          e.preventDefault();
+          onMove(t.clientX);
+        }
+      }, { passive: false });
+
+      window.addEventListener("touchend", function () {
+        isTouching = false;
+        scrollDirection = null;
+        onUp();
+      });
+
+      /* Sürüklerken link tıklamasını engelle */
+      track.querySelectorAll("a").forEach(function (link) {
+        let down = false;
+        let dragged = false;
+        let sx = 0;
+        let sy = 0;
+        link.addEventListener("pointerdown", function (e) {
+          down = true;
+          dragged = false;
+          sx = e.clientX;
+          sy = e.clientY;
+        });
+        window.addEventListener("pointermove", function (e) {
+          if (!down) return;
+          if (Math.abs(e.clientX - sx) > 5 || Math.abs(e.clientY - sy) > 5) dragged = true;
+        });
+        window.addEventListener("pointerup", function () { down = false; });
+        link.addEventListener("click", function (e) {
+          if (dragged) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          dragged = false;
+        }, true);
+      });
+
+      addEventListener("resize", function () {
+        measure();
+        applyX();
+        applyParallax();
+        updateArrows();
+      });
+
+      function tick(ts) {
+        const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0.016;
+        lastTs = ts;
+        current = damp(current, target, 1 / LERP, dt);
+        applyX();
+        applyParallax();
+        updateArrows();
+        requestAnimationFrame(tick);
+      }
+
+      measure();
+      applyX();
+      applyParallax();
+      updateArrows();
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const containers = document.querySelectorAll("[data-call-out]");
+      if (!containers.length) return;
+
+      function randPose(spreadRot) {
+        return {
+          x: (Math.random() - 0.5) * 10,
+          y: (Math.random() - 0.5) * 10,
+          rot: (Math.random() - 0.5) * spreadRot
+        };
+      }
+
+      function setItemTransform(el, pose, scale) {
+        const s = scale == null ? 1 : scale;
+        el.style.transform =
+          "translate(" + pose.x.toFixed(2) + "%," + pose.y.toFixed(2) + "%) rotate(" + pose.rot.toFixed(2) + "deg) scale(" + s + ")";
+      }
+
+      containers.forEach(function (container) {
+        const items = Array.prototype.slice.call(container.querySelectorAll("[data-call-out-item]"));
+        const cards = Array.prototype.slice.call(container.querySelectorAll("[data-call-out-child]"));
+        if (!items.length || items.length !== cards.length) return;
+
+        let currentPortion = 0;
+        let entered = false;
+
+        items.forEach(function (item, i) {
+          const pose = randPose(15);
+          item._pose = pose;
+          item.style.opacity = "0";
+          setItemTransform(item, { x: pose.x, y: pose.y + 150, rot: pose.rot }, 1);
+          item.style.transition = "none";
+          cards[i].style.setProperty("--card-x", "0%");
+        });
+
+        function newPortion(i) {
+          items.forEach(function (item, index) {
+            item.classList.toggle("is-active", index === i);
+            item.style.zIndex = index === i ? "8" : String(index + 1);
+          });
+
+          items[i].style.transition = "transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1)";
+          setItemTransform(items[i], { x: 0, y: 0, rot: 0 }, 1.075);
+
+          cards.forEach(function (card, index) {
+            if (index !== i) {
+              card.style.setProperty("--card-x", (45 / (index - i)).toFixed(2) + "%");
+            } else {
+              card.style.setProperty("--card-x", "0%");
+            }
+          });
+        }
+
+        function resetPortion(index) {
+          const pose = randPose(20);
+          items[index]._pose = pose;
+          items[index].style.transition = "transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1)";
+          setItemTransform(items[index], pose, 1);
+          items[index].classList.remove("is-active");
+        }
+
+        function resetAllCards() {
+          cards.forEach(function (card) {
+            card.style.setProperty("--card-x", "0%");
+          });
+        }
+
+        container.addEventListener("mousemove", function (e) {
+          if (window.matchMedia("(hover: none)").matches) return;
+          const rect = container.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const percentage = mouseX / rect.width;
+          const activePortion = Math.ceil(percentage * items.length);
+
+          if (
+            currentPortion !== activePortion &&
+            activePortion > 0 &&
+            activePortion <= items.length
+          ) {
+            if (currentPortion !== 0) resetPortion(currentPortion - 1);
+            currentPortion = activePortion;
+            newPortion(currentPortion - 1);
+          }
+        });
+
+        container.addEventListener("mouseleave", function () {
+          if (currentPortion > 0) resetPortion(currentPortion - 1);
+          currentPortion = 0;
+          items.forEach(function (item) {
+            item.classList.remove("is-active");
+            item.style.zIndex = "";
+          });
+          resetAllCards();
+        });
+
+        const io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting || entered) return;
+              entered = true;
+              items.forEach(function (item, i) {
+                window.setTimeout(function () {
+                  item.style.opacity = "1";
+                  item.style.transition =
+                    "transform 1.05s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease";
+                  setItemTransform(item, item._pose, 1);
+                }, i * 88);
+              });
+              io.disconnect();
+            });
+          },
+          { threshold: 0.2 }
+        );
+        io.observe(container.closest(".flow") || container);
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const track = document.getElementById("brandsTrack");
+      if (!track) return;
+
+      for (let i = 1; i <= 13; i++) {
+        const item = document.createElement("div");
+        item.className = "brands__logo";
+        const img = document.createElement("img");
+        img.src = "media/brand/m-" + i + ".jpg";
+        img.alt = "Marka logosu";
+        img.loading = "lazy";
+        item.appendChild(img);
+        track.appendChild(item);
+      }
+
+      track.querySelectorAll(".brands__logo").forEach(function (logo) {
+        track.appendChild(logo.cloneNode(true));
+      });
     })();
   </script>
 </body>

@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PETDOSTUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #2e8ad6;
+      --ink: #fff;
+      --ink-soft: rgba(255, 255, 255, 0.78);
+      --pill: rgba(255, 255, 255, 0.22);
+      --pill-dot: #1a5f96;
+      --cta-cream: #ece4d7;
+      --cta-cream-soft: #f8f0e3;
+      --cta-coral: #e36b4f;
+      --cta-pink: #f3b8c4;
+      --cta-green: #849445;
+      --cta-ink: #180102;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Dışta halka, ortada nokta — özel mouse imleci */
+    html, body, .stage, canvas#view, .ui, button, a {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='14' fill='none' stroke='%23000' stroke-width='2'/%3E%3Ccircle cx='20' cy='20' r='14' fill='none' stroke='%23fff' stroke-width='1'/%3E%3Ccircle cx='20' cy='20' r='3.4' fill='%23000'/%3E%3Ccircle cx='20' cy='20' r='2.4' fill='%23fff'/%3E%3C/svg%3E") 20 20, crosshair;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage {
+      position: relative;
+      height: calc(100svh - 28px);
+      margin: 14px 14px 0;
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--bg);
+      transition: background 0.35s ease;
+    }
+
+    canvas#view {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: var(--bg);
+      transition: background 0.35s ease;
+    }
+
+    .ui {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(22px, 3.5vw, 40px) clamp(24px, 4vw, 48px);
+      pointer-events: none;
+    }
+
+    .ui a, .ui button { pointer-events: auto; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: block;
+      line-height: 0;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 100px;
+      width: auto;
+      display: block;
+      mix-blend-mode: screen;
+    }
+
+    nav.menu {
+      display: flex;
+      align-items: flex-end;
+      gap: clamp(22px, 3vw, 40px);
+    }
+
+    nav.menu button {
+      appearance: none;
+      border: 0;
+      background: none;
+      color: rgba(255, 255, 255, 0.55);
+      padding: 0 0 10px;
+      border-bottom: 3px solid transparent;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+
+    nav.menu button em {
+      font-style: normal;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      font-family: "DM Sans", system-ui, sans-serif;
+    }
+
+    nav.menu button span {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    nav.menu button:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    nav.menu button.is-on {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+
+    .copy {
+      max-width: 28rem;
+      margin-top: auto;
+      margin-bottom: clamp(12px, 3vh, 28px);
+      padding-right: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .copy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .copy-badge i {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--cta-cream-soft);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .copy-badge i svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: clamp(2.8rem, 6.5vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    h1 span { display: block; }
+
+    .lead {
+      max-width: 24rem;
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .copy-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 0.35rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px 12px 20px;
+      border-radius: 999px;
+      border: 1.5px solid var(--cta-cream);
+      background: rgba(236, 228, 215, 0.92);
+      color: var(--cta-ink);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, border-color 0.25s;
+      pointer-events: auto;
+    }
+
+    .cta:hover {
+      background: var(--cta-cream-soft);
+      border-color: var(--cta-cream-soft);
+      transform: translateY(-1px);
+    }
+
+    .cta i {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--cta-coral);
+      display: grid;
+      place-items: center;
+    }
+
+    .cta svg { width: 13px; height: 13px; }
+
+    .cta-buy {
+      appearance: none;
+      border: 1.5px solid var(--cta-cream);
+      background: transparent;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border-radius: 999px;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.25s ease, border-color 0.25s;
+      pointer-events: auto;
+    }
+
+    .cta-buy:hover {
+      transform: translateY(-1px);
+      border-color: var(--cta-cream-soft);
+    }
+
+    .cta-buy__inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 18px 8px 8px;
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .cta-buy__icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--cta-pink);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .cta-buy__icon svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .hint {
+      position: absolute;
+      right: 18%;
+      top: 22%;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .hint.is-gone { opacity: 0; }
+
+    /* Ürün hotspot’ları — hayvan etrafı tooltip + çizgi */
+    .hotspots {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    .hotspots.is-on { opacity: 1; }
+
+    .hotspot-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .hotspot-lines path {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.82);
+      stroke-width: 1.55;
+      stroke-linecap: round;
+      stroke-dasharray: 1.5 5.8;
+      opacity: 0.85;
+      transition: stroke 0.25s ease, opacity 0.25s ease, stroke-width 0.25s ease;
+    }
+
+    .hotspot-lines path.is-on {
+      stroke: #fff;
+      opacity: 1;
+      stroke-width: 1.85;
+    }
+
+    .hotspot-lines .anchor-dot {
+      fill: #e8ff9a;
+      filter: drop-shadow(0 0 4px rgba(200, 255, 110, 1))
+              drop-shadow(0 0 12px rgba(170, 240, 70, 0.75))
+              drop-shadow(0 0 22px rgba(150, 230, 60, 0.4));
+    }
+
+    .hotspot-lines .anchor-flare {
+      fill: rgba(220, 255, 140, 0.35);
+      filter: blur(1.5px);
+    }
+
+    .hotspot-lines .mid-dot {
+      fill: rgba(255, 255, 255, 0.92);
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.55));
+    }
+
+    .hotspot-tip {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 118px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-family: "DM Sans", system-ui, sans-serif;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform 0.28s ease;
+      will-change: transform;
+    }
+
+    .hotspot-tip:hover,
+    .hotspot-tip.is-on {
+      transform: translate(-50%, -50%) translateY(-3px) scale(1.03);
+    }
+
+    .hotspot-tip__media {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 10px 28px rgba(24, 1, 2, 0.16);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hotspot-tip__thumb {
+      width: 68%;
+      height: 68%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hotspot-tip__meta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      max-width: 140px;
+    }
+
+    .hotspot-tip__label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+    }
+
+    .hotspot-tip__plus {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      background: transparent;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-size: 0.78rem;
+      font-weight: 500;
+      line-height: 1;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+    }
+
+    .hotspot-tip:hover .hotspot-tip__plus,
+    .hotspot-tip.is-on .hotspot-tip__plus {
+      transform: rotate(45deg);
+      background: rgba(255, 255, 255, 0.95);
+      color: #4a5a28;
+    }
+
+    .hotspot-glows {
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glow-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 64px;
+      height: 64px;
+      margin-left: -32px;
+      margin-top: -32px;
+      opacity: 0;
+      --gx: 0px;
+      --gy: -58px;
+      transform: translate(var(--gx), calc(var(--gy) + 10px)) scale(0.82);
+      transition: opacity 0.32s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      filter:
+        drop-shadow(0 0 6px rgba(180, 255, 90, 0.95))
+        drop-shadow(0 0 18px rgba(160, 240, 70, 0.65))
+        drop-shadow(0 0 32px rgba(140, 220, 60, 0.35));
+      will-change: opacity, transform;
+      pointer-events: none;
+    }
+
+    .glow-icon.is-on {
+      opacity: 1;
+      transform: translate(var(--gx), var(--gy)) scale(1);
+    }
+
+    .glow-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .glow-icon path,
+    .glow-icon polygon {
+      fill: none;
+      stroke: #c8f06a;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .glow-spark {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      margin-left: -3.5px;
+      margin-top: -3.5px;
+      border-radius: 50%;
+      background: #e4ff9c;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow:
+        0 0 8px rgba(200, 255, 120, 0.95),
+        0 0 18px rgba(170, 240, 80, 0.55);
+      transition: opacity 0.28s ease, transform 0.35s ease;
+    }
+
+    .glow-spark.is-on {
+      opacity: 0.95;
+    }
+
+    .wait {
+      display: none;
+      position: absolute;
+      inset: 0;
+      place-items: center;
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      background: var(--bg);
+    }
+
+    body.is-wait .wait { display: grid; }
+    body.is-wait canvas#view,
+    body.is-wait .hint,
+    body.is-wait .hotspots { opacity: 0; pointer-events: none; }
+
+    body.is-wait .hotspots { visibility: hidden; }
+
+    .load {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      font-size: 0.9rem;
+      transition: opacity 0.4s, visibility 0.4s;
+    }
+
+    .load-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .load-bar {
+      width: 140px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+      overflow: hidden;
+    }
+
+    .load-bar > i {
+      display: block;
+      height: 1px;
+      width: 0;
+      background: #fff;
+    }
+
+    .load.is-gone {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .home-bento {
+      background: #ffffff;
+      margin: 0;
+      padding: 96px 14px 80px;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 96px;
+      color: #180102;
+    }
+
+    .line-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 28px 14px 12px;
+      background: #ffffff;
+    }
+
+    .line-loading canvas {
+      width: 150px;
+      height: auto;
+      display: block;
+    }
+
+    .home-bento__title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      text-align: center;
+      max-width: 18em;
+      color: #180102;
+    }
+
+    .home-bento__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: repeat(12, minmax(3.5rem, 1fr));
+      gap: 1rem;
+      width: 100%;
+      min-height: min(78vw, 1080px);
+    }
+
+    .home-bento__grid-item {
+      z-index: 1;
+      background: #ece4d7;
+      border-radius: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .home-bento__grid-item.is--3 h3 {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: #180102;
+      position: relative;
+      z-index: 1;
+    }
+
+    .home-bento__grid-item.is--2::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(#ece4d7 0 28%, rgba(236, 228, 215, 0) 52%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .home-bento__grid-item.is--1 { grid-area: 1 / 1 / 8 / 2; gap: 1.25rem; justify-content: flex-start; align-items: center; padding: 3rem 2rem 2.75rem; }
+    .home-bento__grid-item.is--2 { grid-area: 1 / 2 / 9 / 3; padding-top: 2.625rem; justify-content: flex-start; }
+    .home-bento__grid-item.is--3 { grid-area: 1 / 3 / 8 / 4; gap: 1.25rem; text-align: center; justify-content: flex-start; align-items: center; padding: 3rem 1.7rem 2rem; }
+    .home-bento__grid-item.is--4 { grid-area: 8 / 1 / 13 / 2; justify-content: flex-end; align-items: center; padding-bottom: 2rem; }
+    .home-bento__grid-item.is--5 { grid-area: 8 / 3 / 13 / 4; justify-content: flex-end; align-items: center; padding-bottom: 2rem; }
+    .home-bento__grid-item.is--6 { grid-area: 9 / 2 / 13 / 3; padding: 2.5rem 2rem; justify-content: center; }
+
+    .bento-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.55rem;
+      max-width: 19.3rem;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bento-header .bento-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      object-fit: contain;
+      display: block;
+      margin-bottom: 0.55rem;
+    }
+
+    .bento-header h3 {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: #180102;
+    }
+
+    .bento-header p {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .bento-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bento-product {
+      width: min(78%, 16rem);
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      margin: auto;
+      align-self: center;
+      pointer-events: none;
+    }
+
+    .bento-mark {
+      width: 5.5rem;
+      height: 5.5rem;
+      position: relative;
+    }
+
+    .bento-mark i {
+      position: absolute;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .bento-mark .a {
+      width: 3.6rem;
+      height: 3.6rem;
+      background: #e36b4f;
+      left: 0;
+      top: 0.4rem;
+    }
+
+    .bento-mark .b {
+      width: 3.2rem;
+      height: 3.2rem;
+      background: #f3b8c4;
+      right: 0;
+      bottom: 0;
+    }
+
+    .bento-tag {
+      position: relative;
+      z-index: 1;
+      background: rgba(24, 1, 2, 0.2);
+      backdrop-filter: blur(44px);
+      color: #f8f0e3;
+      border-radius: 2.5rem;
+      padding: 1rem 1.15rem;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .bestsellers {
+      width: 100%;
+      margin: 0 auto;
+      padding: 80px 14px 80px;
+      color: #180102;
+    }
+
+    .bestsellers__title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+      color: #180102;
+      text-align: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2.5rem;
+      padding: 2.5rem;
+      background: none;
+      border: 2px solid;
+      text-decoration: none;
+      color: #180102;
+      min-height: 22rem;
+      transition: transform 0.25s ease;
+    }
+
+    .product-card:nth-child(1) { border-radius: 4rem 4rem 4rem 1rem; }
+    .product-card:nth-child(2) { border-radius: 4rem 4rem 1rem 1rem; }
+    .product-card:nth-child(3) { border-radius: 4rem 1rem 4rem 4rem; }
+    .product-card:nth-child(4) { border-radius: 1rem 4rem 4rem 1rem; }
+    .product-card:nth-child(5) { border-radius: 1rem 1rem 4rem 4rem; }
+
+    .product-card.is-coral { border-color: #e36b4f; }
+    .product-card.is-blue { border-color: #2e8ad6; }
+    .product-card.is-green { border-color: #849445; }
+    .product-card.is-orange { border-color: #f56f1d; }
+    .product-card.is-yellow { border-color: #f5f56f; }
+    .product-card.is-pink { border-color: #f56f1d; }
+
+    .product-card:hover { transform: translateY(-3px); }
+
+    .product-card__top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .product-card__media {
+      width: 100%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 0;
+      background: none;
+    }
+
+    .product-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-card__name {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: #180102;
+    }
+
+    .product-card__cat {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+      margin: 0;
+    }
+
+    .product-card__price {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #180102;
+    }
+
+    .product-card .news-read {
+      height: auto;
+      padding: 0;
+      border: 0;
+    }
+
+    .newsroom {
+      width: 100%;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 80px 14px 96px;
+      color: #180102;
+    }
+
+    .newsroom__title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(2rem, 4vw, 2.25rem);
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-bottom: 5rem;
+      color: #180102;
+    }
+
+    .news-featured {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1rem;
+      align-items: stretch;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .news-featured__image {
+      aspect-ratio: 696 / 492;
+      background: #ece4d7;
+      border-radius: 2rem 4rem 2rem 2rem;
+      overflow: hidden;
+    }
+
+    .news-featured__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .news-featured__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.5rem 2.5rem;
+      text-align: left;
+      gap: 2rem;
+    }
+
+    .news-featured__top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+      max-width: 24rem;
+    }
+
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .news-tag {
+      padding: 0.625rem 0.9rem;
+      border-radius: 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #f8f0e3;
+      background: #3dac91;
+      line-height: 1;
+    }
+
+    .news-tag.is-blog { background: #dbb154; }
+
+    .news-date {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .news-featured__top h3,
+    .news-card h3 {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.35rem, 2vw, 1.5rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: #180102;
+    }
+
+    .news-featured__top p,
+    .news-card p {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .news-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 60px;
+      padding: 0 24px 0 28px;
+      border: 1.5px solid #180102;
+      border-radius: 40px;
+      color: #180102;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .news-read svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .news-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      padding-top: 5rem;
+    }
+
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 4rem;
+      padding: 2.5rem;
+      background: #ece4d7;
+      border-radius: 4rem;
+      text-decoration: none;
+      color: inherit;
+      min-height: 22rem;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .news-card:nth-child(1) { border-radius: 4rem 4rem 4rem 1rem; }
+    .news-card:nth-child(2) { border-radius: 4rem 4rem 1rem 1rem; }
+    .news-card:nth-child(3) { border-radius: 4rem 1rem 4rem 4rem; }
+
+    .news-card__top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .news-card .news-read {
+      height: auto;
+      padding: 0;
+      border: 0;
+    }
+
+    .news-card:hover {
+      background: #dbb154;
+      color: #f8f0e3;
+    }
+
+    .news-card.is-announce:hover { background: #3dac91; }
+    .news-card.is-care:hover { background: #63a4bc; }
+
+    .news-card:hover h3 { color: #f8f0e3; }
+    .news-card:hover p,
+    .news-card:hover .news-date,
+    .news-card:hover .news-read { color: rgba(248, 240, 227, 0.8); }
+    .news-card:hover .news-tag { background: rgba(248, 240, 227, 0.2); color: #f8f0e3; }
+
+    .site-footer {
+      padding: 16px 16px 0;
+      color: #180102;
+      background: transparent;
+      margin: 0;
+    }
+
+    .footer-panel {
+      background: #f8f0e3;
+      border-radius: 64px 64px 0 0;
+      padding: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 144px;
+    }
+
+    .footer-row {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      max-width: 410px;
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .footer-title {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.35rem, 2.2vw, 2rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #180102;
+    }
+
+    .footer-note {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: rgba(24, 1, 2, 0.4);
+      font-weight: 400;
+    }
+
+    .footer-cols {
+      flex: 1 1 420px;
+      max-width: 652px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 16px;
+      row-gap: 124px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer-col h3 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgba(24, 1, 2, 0.4);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.7rem;
+    }
+
+    .footer-col a {
+      color: #180102;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-col a:hover { opacity: 0.55; }
+
+    .footer-col a svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .footer-contact {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .footer-copy,
+    .footer-legal a {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #aca396;
+      text-decoration: none;
+    }
+
+    .footer-legal a:hover { opacity: 0.7; }
+
+    .footer-row.is-bottom {
+      align-items: flex-end;
+    }
+
+    .footer-row.is-bottom .footer-brand { gap: 0; }
+
+    @media (max-width: 1280px) {
+      .home-bento__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(12, minmax(4.2rem, 1fr));
+        min-height: 70rem;
+      }
+      .home-bento__grid-item.is--1 { grid-area: 1 / 1 / 5 / 2; }
+      .home-bento__grid-item.is--2 { grid-area: 1 / 2 / 6 / 3; }
+      .home-bento__grid-item.is--3 { grid-area: 9 / 1 / 13 / 2; }
+      .home-bento__grid-item.is--4 { grid-area: 5 / 1 / 9 / 2; }
+      .home-bento__grid-item.is--5 { grid-area: 10 / 2 / 13 / 3; }
+      .home-bento__grid-item.is--6 { grid-area: 6 / 2 / 10 / 3; }
+    }
+
+    @media (max-width: 900px) {
+      .footer-panel { padding: 40px 28px 48px; gap: 72px; border-radius: 40px 40px 0 0; }
+      .footer-row { flex-direction: column; gap: 48px; }
+      .footer-brand { max-width: none; gap: 20px; }
+      .footer-cols { max-width: none; width: 100%; row-gap: 40px; }
+      .footer-row.is-bottom { gap: 20px; }
+      .home-bento { padding: 64px 14px 56px; gap: 48px; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+      .news-featured { grid-template-columns: 1fr; }
+      .news-featured__content { padding: 1.5rem 0 0; }
+      .news-list { grid-template-columns: 1fr; padding-top: 2.5rem; }
+    }
+
+    @media (max-width: 720px) {
+      .stage { height: calc(100svh - 16px); margin: 8px 8px 0; border-radius: 20px; }
+      header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      nav.menu { gap: 14px; flex-wrap: wrap; }
+      nav.menu button span { font-size: 0.98rem; }
+      .ui { pointer-events: auto; }
+      .copy { margin-bottom: 30vh; max-width: none; padding-right: 12%; }
+      .hotspots { display: none; }
+      .footer-cols { grid-template-columns: 1fr 1fr; }
+      .site-footer { padding: 12px 8px 0; }
+      .home-bento { padding: 48px 8px 40px; }
+      .bestsellers { padding: 8px 8px 48px; }
+      .newsroom { padding: 56px 8px 64px; }
+      .newsroom__title { margin-bottom: 2.5rem; }
+      .news-card { min-height: 0; gap: 2.5rem; border-radius: 2.5rem !important; }
+      .product-card { min-height: 0; gap: 1.5rem; padding: 1.5rem; border-radius: 2.5rem !important; }
+      .home-bento__grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        min-height: 0;
+      }
+      .home-bento__grid-item {
+        grid-area: auto !important;
+        min-height: 17rem;
+      }
+      .home-bento__grid-item.is--2 { min-height: 22rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="load" id="load">
+      <div class="load-inner">
+        <span id="loadText">Hazırlanıyor…</span>
+        <div class="load-bar" aria-hidden="true"><i id="loadBar"></i></div>
+      </div>
+    </div>
+    <canvas id="view" aria-hidden="true"></canvas>
+
+    <div class="hotspots" id="hotspots" aria-hidden="true">
+      <svg class="hotspot-lines" id="hotspotLines" aria-hidden="true"></svg>
+      <div class="hotspot-glows" id="hotspotGlows">
+        <div class="glow-icon" id="glowHeart" data-glow="heart">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M24 40.5S9.5 31.2 9.5 20.4A8.8 8.8 0 0 1 24 14.8a8.8 8.8 0 0 1 14.5 5.6C38.5 31.2 24 40.5 24 40.5Z"/>
+          </svg>
+        </div>
+        <div class="glow-icon" id="glowCrown" data-glow="crown">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M7 33.5h34l-2.8 7H9.8L7 33.5Z"/>
+            <path d="M7 33.5 13.5 15l10.5 11L34.5 15 41 33.5"/>
+            <path d="M13.5 15v-3.5M24 26v-5M34.5 15v-3.5"/>
+            <path d="M13.5 11.5h0M24 21h0M34.5 11.5h0" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <i class="glow-spark" data-spark="0"></i>
+        <i class="glow-spark" data-spark="1"></i>
+        <i class="glow-spark" data-spark="2"></i>
+        <i class="glow-spark" data-spark="3"></i>
+        <i class="glow-spark" data-spark="4"></i>
+      </div>
+      <div id="hotspotList"></div>
+    </div>
+
+    <div class="ui">
+      <header>
+        <a class="logo" href="#kedi" data-go="kedi" aria-label="PETDOSTUM">
+          <img src="pedlogo.png" alt="PETDOSTUM" />
+        </a>
+        <nav class="menu" aria-label="Menü">
+          <button type="button" class="is-on" data-go="kedi"><em>01</em><span>Kedi</span></button>
+          <button type="button" data-go="kopek"><em>02</em><span>Köpek</span></button>
+          <button type="button" data-go="kus"><em>03</em><span>Kuş</span></button>
+          <button type="button" data-go="balik"><em>04</em><span>Balık</span></button>
+        </nav>
+      </header>
+
+      <div class="copy">
+        <div class="copy-badge">
+          <i aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12.5l4.2 4.2L19 7" stroke="#180102" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </i>
+          Pet dostum seçkisi
+        </div>
+        <h1>
+          <span id="lineA">Neden Bu</span>
+          <span id="lineB">Kadar Meraklı?</span>
+        </h1>
+        <p class="lead" id="lead">
+          Fareyi ortadaki dostun etrafında gezdir. Mama, oyuncak ve bakım ürünleriyle kedinin dünyasını keşfet.
+        </p>
+        <div class="copy-actions">
+          <a class="cta" href="#icerik" id="cta">
+            Hemen Başla
+            <i aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </i>
+          </a>
+          <button type="button" class="cta-buy" id="ctaBuy">
+            <span class="cta-buy__inner">
+              <span class="cta-buy__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.5 8.5h11l-1.1 9.2a1.6 1.6 0 0 1-1.6 1.4H9.2a1.6 1.6 0 0 1-1.6-1.4L6.5 8.5Z" stroke="#180102" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M9 8.5V7.2a3 3 0 0 1 6 0v1.3" stroke="#180102" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              Satın Al
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hint" id="hint">Fareyi gezdir</div>
+    <div class="wait" id="wait">Yakında</div>
+  </div>
+
+  <div class="line-loading" aria-hidden="true">
+    <canvas id="lineLoad" width="300" height="201"></canvas>
+  </div>
+
+  <main class="page-content" id="icerik">
+
+  <section class="bestsellers" id="urunler">
+    <h2 class="bestsellers__title">Çok Satanlar</h2>
+    <div class="product-grid">
+      <a class="product-card is-coral" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
+          </div>
+          <div class="product-card__name">Premium Köpek Yemi</div>
+          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+          <div class="product-card__price">₺ 1.249,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-blue" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
+          </div>
+          <div class="product-card__name">Çiğneme Kemiği</div>
+          <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
+          <div class="product-card__price">₺ 189,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-green" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-home.png" alt="Köpek yatağı" />
+          </div>
+          <div class="product-card__name">Köpek Yatağı</div>
+          <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
+          <div class="product-card__price">₺ 899,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-orange" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
+          </div>
+          <div class="product-card__name">Gezdirme Tasması</div>
+          <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
+          <div class="product-card__price">₺ 329,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="product-card is-pink" href="#kopek" data-go="kopek">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
+          </div>
+          <div class="product-card__name">Premium Köpek Yemi</div>
+          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+          <div class="product-card__price">₺ 1.249,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <section class="home-bento">
+    <h2 class="home-bento__title">Dostlarınız için modern<br>bir bakım dünyası</h2>
+    <div class="home-bento__grid">
+      <a class="home-bento__grid-item is--1" href="#kedi" data-go="kedi">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/cat.svg" alt="" />
+          <h3>Kedi Mama Kapları</h3>
+          <p>Mama, kum ve tırmalama ürünleriyle kedinizin günlük konforunu tamamlayın.</p>
+        </div>
+        <img class="bento-product" src="media/kedi-kabi.png" alt="Kedi mama kabı" />
+      </a>
+
+      <a class="home-bento__grid-item is--2" href="#kopek" data-go="kopek">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/dog.svg" alt="" />
+          <h3>Köpek bakımı</h3>
+          <p>Gezdirme, ödül ve oyuncaklarla sadık dostunuzun enerjisini doğru yönlendirin.</p>
+        </div>
+        <img class="bento-cover" src="media/kopek.png" alt="Köpek bakımı" />
+      </a>
+
+      <a class="home-bento__grid-item is--3" href="#kus" data-go="kus">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/bird.svg" alt="" />
+          <h3>Kuş bakımı</h3>
+          <p>Yem, kafes ve bakım ürünleriyle kuşlarınız için ferah bir yaşam alanı kurun.</p>
+        </div>
+        <img class="bento-cover" src="media/kus.png" alt="Kuş bakımı ürünü" />
+      </a>
+
+      <a class="home-bento__grid-item is--4" href="#kedi" data-go="kedi">
+        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
+          <source src="media/cat-look.mp4" type="video/mp4" />
+        </video>
+        <div class="bento-tag">Kedi koleksiyonu</div>
+      </a>
+
+      <a class="home-bento__grid-item is--5" href="#balik" data-go="balik">
+        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
+          <source src="media/fish-eat.mp4" type="video/mp4" />
+        </video>
+        <div class="bento-tag">Akvaryum</div>
+      </a>
+
+      <a class="home-bento__grid-item is--6" href="#balik" data-go="balik">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/fish.svg" alt="" />
+          <h3>Balık bakımı</h3>
+          <p>Yem, su düzenleyici ve akvaryum ekipmanlarıyla sakin ve sağlıklı bir ortam sağlayın.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="newsroom" id="blog">
+    <h2 class="newsroom__title">Blog</h2>
+    <a class="news-featured" href="#blog">
+      <div class="news-featured__image">
+        <img src="media/kopek.png" alt="Yaz bakımı rehberi" />
+      </div>
+      <div class="news-featured__content">
+        <div class="news-featured__top">
+          <div class="news-meta">
+            <span class="news-tag">Duyuru</span>
+            <span class="news-date">12 Ağustos 2026</span>
+          </div>
+          <h3>PETDOSTUM yaz bakımı rehberi yayında</h3>
+          <p>Sıcak havalarda kedi ve köpekler için mama, su ve yürüyüş önerilerini bir araya getirdik. Dostunuzun yazı daha rahat geçsin diye pratik ipuçları paylaştık.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+    <div class="news-list">
+      <a class="news-card" href="#blog">
+        <div class="news-card__top">
+          <div class="news-meta">
+            <span class="news-tag is-blog">Blog yazısı</span>
+            <span class="news-date">27 Temmuz 2026</span>
+          </div>
+          <h3>Kediniz için doğru mama kabı nasıl seçilir?</h3>
+          <p>Yükseklik, malzeme ve kaymaz taban… Evdeki kediniz için mama kabı seçerken dikkat etmeniz gerekenleri özetledik.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="news-card is-announce" href="#blog">
+        <div class="news-card__top">
+          <div class="news-meta">
+            <span class="news-tag">Duyuru</span>
+            <span class="news-date">27 Temmuz 2026</span>
+          </div>
+          <h3>Balık yemlerinde yüzde 20 indirim başladı</h3>
+          <p>Seçili akvaryum yemlerinde sınırlı süre kampanya. Dostlarınız için taze ve dengeli beslenmeyi kaçırmayın.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="news-card is-care" href="#blog">
+        <div class="news-card__top">
+          <div class="news-meta">
+            <span class="news-tag is-blog">Blog yazısı</span>
+            <span class="news-date">14 Temmuz 2026</span>
+          </div>
+          <h3>Kuş kafesi kurulumunda dikkat edilmesi gerekenler</h3>
+          <p>Yer seçimi, tüneklik ve yemlik düzeni… Kuşunuz için ferah ve güvenli bir yaşam alanı nasıl kurulur, adım adım anlattık.</p>
+        </div>
+        <span class="news-read">
+          Devamını oku
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer" id="kesfet">
+    <div class="footer-panel">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <h2 class="footer-title">PETDOSTUM, dostlarınızın her yerde mutlu ve bakımlı olabildiği bir dünya kuruyor.</h2>
+          <p class="footer-note">Türkiye’de tasarlandı.<br />Dostlarınız için özenle seçildi.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h3>Keşfet</h3>
+            <ul>
+              <li><a href="#kedi" data-go="kedi">Kedi</a></li>
+              <li><a href="#kopek" data-go="kopek">Köpek</a></li>
+              <li>
+                <a href="#kus" data-go="kus">
+                  Bakım rehberi
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="#balik" data-go="balik">
+                  Ürün kataloğu
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Mağaza</h3>
+            <ul>
+              <li><a href="#hakkimizda">Hakkımızda</a></li>
+              <li><a href="#siparis">Sipariş takibi</a></li>
+              <li><a href="#sss">Sıkça sorulanlar</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Sosyal</h3>
+            <ul>
+              <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+              <li><a href="https://x.com/" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+              <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <ul>
+              <li><a class="footer-contact" href="mailto:merhaba@petdostum.com">Bize yazın</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-row is-bottom">
+        <div class="footer-brand">
+          <div class="footer-copy">© 2026 PETDOSTUM</div>
+        </div>
+        <div class="footer-cols footer-legal">
+          <div class="footer-col">
+            <a href="#gizlilik">Gizlilik Politikası</a>
+          </div>
+          <div class="footer-col">
+            <a href="#iade">Teslimat ve İade</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.PAGES = {
+      kedi: {
+        a: "Neden Bu",
+        b: "Kadar Meraklı?",
+        lead: "Fareyi ortadaki dostun etrafında gezdir. Mama, oyuncak ve bakım ürünleriyle kedinin dünyasını keşfet.",
+        wait: false,
+        canvas: "kedi",
+        folder: "kedi-canvas/",
+        manifestKey: "KEDI_MANIFEST",
+        bg: "#2e8ad6",
+        headX: 0.63,
+        headY: 0.42,
+        glowHeadY: 0.26,
+        pillDot: "#1a5f96",
+        tips: [
+          { label: "Seramik Mama Kabı", img: "media/kedi-kabi.png", side: "left", tx: 0.30, ty: 0.28, ax: 0.42, ay: 0.36, bend: 1.1, glow: "crown" },
+          { label: "Premium Kedi Ödülü", img: "media/product/dog-bone.png", side: "left", tx: 0.27, ty: 0.56, ax: 0.40, ay: 0.54, bend: -1, glow: "heart" },
+          { label: "Dinlenme Yatağı", img: "media/product/dog-home.png", side: "right", tx: 0.82, ty: 0.58, ax: 0.70, ay: 0.56, bend: 1, glow: "spark" }
+        ]
+      },
+      kopek: {
+        a: "Sadık Bakış",
+        b: "Seni Bekler",
+        lead: "Fareyi gezdir, köpek seni takip etsin. 360° bakış halkasıyla ikinci field study’yi keşfet.",
+        wait: false,
+        canvas: "kopek",
+        folder: "kopek-canvas/",
+        manifestKey: "KOPEK_MANIFEST",
+        bg: "#849445",
+        headX: 0.62,
+        headY: 0.45,
+        glowHeadY: 0.28,
+        pillDot: "#5a6b2e",
+        tips: [
+          { label: "Doğal İp Oyuncak", img: "media/product/dog-bone.png", side: "left", tx: 0.30, ty: 0.24, ax: 0.42, ay: 0.34, bend: 1.15, glow: "crown" },
+          { label: "Tahılsız Kuru Mama", img: "media/product/dog-eat.png", side: "left", tx: 0.26, ty: 0.54, ax: 0.40, ay: 0.54, bend: -1.05, glow: "heart" },
+          { label: "Deri Köpek Tasması", img: "media/product/dog-belt.png", side: "right", tx: 0.84, ty: 0.56, ax: 0.70, ay: 0.52, bend: 1.1, glow: "spark" }
+        ]
+      },
+      kus: {
+        a: "Hafif",
+        b: "Kanat",
+        lead: "Fareyi gezdir, kuş seni izlesin. 360° bakış halkasıyla üçüncü field study’yi keşfet.",
+        wait: false,
+        canvas: "kus",
+        folder: "kus-canvas/",
+        manifestKey: "KUS_MANIFEST",
+        bg: "#a24b5d",
+        headX: 0.68,
+        headY: 0.42,
+        glowHeadY: 0.26,
+        pillDot: "#6e2f3d",
+        tips: [
+          { label: "Doğal Tünek", img: "media/product/dog-home.png", side: "left", tx: 0.28, ty: 0.30, ax: 0.44, ay: 0.40, bend: 1.05, glow: "crown" },
+          { label: "Vitaminli Kuş Yemi", img: "media/product/dog-eat2.png", side: "right", tx: 0.84, ty: 0.52, ax: 0.72, ay: 0.48, bend: -1, glow: "heart" }
+        ]
+      },
+      balik: {
+        a: "Sakin",
+        b: "Dalga",
+        lead: "Fareyi gezdir, balık sana dönsün. Kase içindeki bakış halkasıyla dördüncü field study’yi keşfet.",
+        wait: false,
+        canvas: "balik",
+        folder: "balik-canvas/",
+        manifestKey: "BALIK_MANIFEST",
+        bg: "#f56f1d",
+        headX: 0.70,
+        headY: 0.48,
+        glowHeadY: 0.30,
+        pillDot: "#b84810",
+        tips: [
+          { label: "Akıllı Filtre", img: "media/product/dog-belt.png", side: "left", tx: 0.28, ty: 0.34, ax: 0.46, ay: 0.46, bend: 1, glow: "crown" },
+          { label: "Premium Balık Yemi", img: "media/product/dog-eat.png", side: "right", tx: 0.84, ty: 0.56, ax: 0.74, ay: 0.52, bend: -1, glow: "heart" }
+        ]
+      }
+    };
+  </script>
+
+  <script>
+    (function () {
+      const FOLLOW = 11;
+      const SETTLE = 4;
+
+      const canvas = document.getElementById("view");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const hint = document.getElementById("hint");
+      const load = document.getElementById("load");
+      const loadText = document.getElementById("loadText");
+      const loadBar = document.getElementById("loadBar");
+      const waitEl = document.getElementById("wait");
+      const stage = canvas.parentElement;
+      const hotspotsEl = document.getElementById("hotspots");
+      const hotspotList = document.getElementById("hotspotList");
+      const hotspotLines = document.getElementById("hotspotLines");
+      const hotspotGlows = document.getElementById("hotspotGlows");
+      const glowHeart = document.getElementById("glowHeart");
+      const glowCrown = document.getElementById("glowCrown");
+      const glowSparks = hotspotGlows ? hotspotGlows.querySelectorAll(".glow-spark") : [];
+
+      const cache = {};
+      let keys = [];
+      let ring = [];
+      let centerBmp = null;
+      let fill = "#2e8ad6";
+      let headNx = 0.63;
+      let headNy = 0.42;
+      let ready = false;
+      let loading = false;
+      let targetU = 0;
+      let softU = 0;
+      let targetDist = 0;
+      let dist = 0;
+      let lastTs = 0;
+      let lastMove = 0;
+      let shown = -2;
+      let box = null;
+      let hintHidden = false;
+      let pointerX = 0;
+      let pointerY = 0;
+      let hasPointer = false;
+      let active = "kedi";
+      let tickStarted = false;
+      let tipNodes = [];
+      let activeTip = -1;
+
+      function wrap01(v) {
+        v %= 1;
+        return v < 0 ? v + 1 : v;
+      }
+
+      function lerpU(a, b, k) {
+        let d = b - a;
+        if (d > 0.5) d -= 1;
+        if (d < -0.5) d += 1;
+        return wrap01(a + d * k);
+      }
+
+      function angleToU(dx, dy) {
+        let a = Math.atan2(dy, dx) - Math.PI / 2;
+        if (a < 0) a += Math.PI * 2;
+        return a / (Math.PI * 2);
+      }
+
+      function headOnScreen() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        if (!box) {
+          const rect = stage.getBoundingClientRect();
+          return {
+            x: rect.width * 0.5,
+            y: rect.height * 0.5,
+            reach: Math.min(rect.width, rect.height) * 0.42
+          };
+        }
+        return {
+          x: (box.dx + headNx * box.dw) / dpr,
+          y: (box.dy + headNy * box.dh) / dpr,
+          reach: Math.min(stage.clientWidth, stage.clientHeight) * 0.42
+        };
+      }
+
+      function animalPoint(nx, ny) {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const rect = stage.getBoundingClientRect();
+        if (!box) {
+          return { x: rect.width * nx, y: rect.height * ny };
+        }
+        return {
+          x: (box.dx + nx * box.dw) / dpr,
+          y: (box.dy + ny * box.dh) / dpr
+        };
+      }
+
+      function ovalPath(from, to, side, bendMul) {
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+        /* Hayvandan dışarı bakan oval yay — kısa ama belirgin kavis */
+        const sign = bendMul != null ? Math.sign(bendMul) || 1 : (side === "left" ? -1 : 1);
+        const amt = Math.abs(bendMul != null ? bendMul : 1);
+        const bulge = Math.min(42, Math.max(18, len * 0.48)) * amt * sign;
+        const c1 = {
+          x: from.x + dx * 0.22 + nx * bulge,
+          y: from.y + dy * 0.22 + ny * bulge
+        };
+        const c2 = {
+          x: from.x + dx * 0.78 + nx * bulge * 0.92,
+          y: from.y + dy * 0.78 + ny * bulge * 0.92
+        };
+        return "M " + from.x.toFixed(1) + " " + from.y.toFixed(1) +
+          " C " + c1.x.toFixed(1) + " " + c1.y.toFixed(1) +
+          ", " + c2.x.toFixed(1) + " " + c2.y.toFixed(1) +
+          ", " + to.x.toFixed(1) + " " + to.y.toFixed(1);
+      }
+
+      function pointOnCubic(from, c1, c2, to, t) {
+        const u = 1 - t;
+        return {
+          x: u * u * u * from.x + 3 * u * u * t * c1.x + 3 * u * t * t * c2.x + t * t * t * to.x,
+          y: u * u * u * from.y + 3 * u * u * t * c1.y + 3 * u * t * t * c2.y + t * t * t * to.y
+        };
+      }
+
+      function tipAttachPoint(el, side) {
+        const tipRect = el.getBoundingClientRect();
+        const stageRect = stage.getBoundingClientRect();
+        const media = el.querySelector(".hotspot-tip__media");
+        const mr = media ? media.getBoundingClientRect() : tipRect;
+        const cx = mr.left - stageRect.left + mr.width / 2;
+        const cy = mr.top - stageRect.top + mr.height / 2;
+        const r = mr.width * 0.48;
+        /* Kısa çizgi: dairenin hayvan tarafındaki kenarından çıksın */
+        const outward = side === "left" ? 1 : -1;
+        return {
+          x: cx + outward * r * 0.55,
+          y: cy + r * 0.15
+        };
+      }
+
+      function clearTips() {
+        tipNodes = [];
+        activeTip = -1;
+        if (hotspotList) hotspotList.innerHTML = "";
+        if (hotspotLines) hotspotLines.innerHTML = "";
+        if (hotspotsEl) hotspotsEl.classList.remove("is-on");
+        setGlow(false, false, false);
+      }
+
+      function buildTips(page) {
+        clearTips();
+        if (!page || !page.tips || !page.tips.length || !hotspotList || !hotspotLines) return;
+
+        const ns = "http://www.w3.org/2000/svg";
+        page.tips.forEach(function (tip, i) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "hotspot-tip hotspot-tip--" + (tip.side || "right");
+          btn.dataset.index = String(i);
+          btn.innerHTML =
+            '<span class="hotspot-tip__media">' +
+              '<img class="hotspot-tip__thumb" src="' + tip.img + '" alt="" />' +
+            "</span>" +
+            '<span class="hotspot-tip__meta">' +
+              '<span class="hotspot-tip__label">' + tip.label + "</span>" +
+              '<span class="hotspot-tip__plus" aria-hidden="true">+</span>' +
+            "</span>";
+          btn.addEventListener("mouseenter", function () {
+            activeTip = i;
+            syncTips();
+            updateGlows();
+          });
+          btn.addEventListener("mouseleave", function () {
+            if (activeTip === i) activeTip = -1;
+            syncTips();
+            updateGlows();
+          });
+          btn.addEventListener("focus", function () {
+            activeTip = i;
+            syncTips();
+            updateGlows();
+          });
+          btn.addEventListener("blur", function () {
+            if (activeTip === i) activeTip = -1;
+            syncTips();
+            updateGlows();
+          });
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const dest = document.getElementById("urunler");
+            if (dest) dest.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+          hotspotList.appendChild(btn);
+
+          const path = document.createElementNS(ns, "path");
+          path.setAttribute("data-line", String(i));
+          hotspotLines.appendChild(path);
+
+          const mid = document.createElementNS(ns, "circle");
+          mid.setAttribute("class", "mid-dot");
+          mid.setAttribute("data-mid", String(i));
+          mid.setAttribute("r", "2.2");
+          hotspotLines.appendChild(mid);
+
+          const flare = document.createElementNS(ns, "circle");
+          flare.setAttribute("class", "anchor-flare");
+          flare.setAttribute("data-flare", String(i));
+          flare.setAttribute("r", "10");
+          hotspotLines.appendChild(flare);
+
+          const dot = document.createElementNS(ns, "circle");
+          dot.setAttribute("class", "anchor-dot");
+          dot.setAttribute("data-dot", String(i));
+          dot.setAttribute("r", "3.2");
+          hotspotLines.appendChild(dot);
+
+          tipNodes.push({ el: btn, path: path, mid: mid, flare: flare, dot: dot, data: tip });
+        });
+
+        hotspotsEl.classList.add("is-on");
+        requestAnimationFrame(function () {
+          syncTips();
+          updateGlows();
+        });
+      }
+
+      function syncTips() {
+        if (!tipNodes.length) return;
+        const rect = stage.getBoundingClientRect();
+        hotspotLines.setAttribute("viewBox", "0 0 " + rect.width + " " + rect.height);
+        hotspotLines.setAttribute("width", String(rect.width));
+        hotspotLines.setAttribute("height", String(rect.height));
+
+        tipNodes.forEach(function (node, i) {
+          const tip = node.data;
+          const pos = animalPoint(tip.tx, tip.ty);
+          const anchor = animalPoint(tip.ax, tip.ay);
+          node.el.style.left = pos.x + "px";
+          node.el.style.top = pos.y + "px";
+
+          const from = tipAttachPoint(node.el, tip.side || "right");
+          const dx = anchor.x - from.x;
+          const dy = anchor.y - from.y;
+          const len = Math.hypot(dx, dy) || 1;
+          const bendMul = tip.bend != null ? tip.bend : (tip.side === "left" ? -1 : 1);
+          const sign = Math.sign(bendMul) || 1;
+          const amt = Math.abs(bendMul);
+          const bulge = Math.min(42, Math.max(18, len * 0.48)) * amt * sign;
+          const nx = -dy / len;
+          const ny = dx / len;
+          const c1 = {
+            x: from.x + dx * 0.22 + nx * bulge,
+            y: from.y + dy * 0.22 + ny * bulge
+          };
+          const c2 = {
+            x: from.x + dx * 0.78 + nx * bulge * 0.92,
+            y: from.y + dy * 0.78 + ny * bulge * 0.92
+          };
+
+          node.path.setAttribute("d", ovalPath(from, anchor, tip.side || "right", bendMul));
+          node.path.classList.toggle("is-on", activeTip === i);
+
+          const midPt = pointOnCubic(from, c1, c2, anchor, 0.45);
+          node.mid.setAttribute("cx", midPt.x.toFixed(1));
+          node.mid.setAttribute("cy", midPt.y.toFixed(1));
+          node.mid.style.opacity = activeTip === i ? "1" : "0.7";
+
+          node.dot.setAttribute("cx", anchor.x.toFixed(1));
+          node.dot.setAttribute("cy", anchor.y.toFixed(1));
+          node.flare.setAttribute("cx", anchor.x.toFixed(1));
+          node.flare.setAttribute("cy", anchor.y.toFixed(1));
+          node.flare.setAttribute("r", activeTip === i ? "14" : "9");
+          node.el.classList.toggle("is-on", activeTip === i);
+        });
+      }
+
+      function setGlow(heartOn, crownOn, sparksOn) {
+        if (!glowHeart || !glowCrown) return;
+        glowHeart.classList.toggle("is-on", !!heartOn);
+        glowCrown.classList.toggle("is-on", !!crownOn);
+        glowSparks.forEach(function (spark) {
+          spark.classList.toggle("is-on", !!sparksOn);
+        });
+      }
+
+      function updateGlows() {
+        if (!hotspotGlows || !ready || loading) {
+          setGlow(false, false, false);
+          return;
+        }
+
+        /* Glow yalnızca ürün tooltip hover’ında — karakterin kafasının üstünde */
+        if (activeTip < 0 || !tipNodes[activeTip]) {
+          setGlow(false, false, false);
+          return;
+        }
+
+        const tip = tipNodes[activeTip].data;
+        const kind = tip.glow || "spark";
+        const page = window.PAGES[active] || {};
+        const glowNy = page.glowHeadY != null ? page.glowHeadY : Math.max(0.08, headNy - 0.16);
+        const headGlow = animalPoint(headNx, glowNy);
+
+        /* Kalp / taç / kıvılcım hep karakter kafasının üstünde */
+        hotspotGlows.style.left = headGlow.x + "px";
+        hotspotGlows.style.top = headGlow.y + "px";
+
+        const heartOn = kind === "heart";
+        const crownOn = kind === "crown";
+        const sparksOn = true;
+
+        glowHeart.style.setProperty("--gx", heartOn ? "-4px" : "0px");
+        glowHeart.style.setProperty("--gy", heartOn ? "-8px" : "0px");
+        glowCrown.style.setProperty("--gx", crownOn ? "2px" : "0px");
+        glowCrown.style.setProperty("--gy", crownOn ? "-14px" : "0px");
+
+        const sparkOffsets = [
+          [-18, -12], [16, -18], [-2, -28], [24, 2], [-24, 4]
+        ];
+        const t = performance.now() / 420;
+        glowSparks.forEach(function (spark, i) {
+          const o = sparkOffsets[i] || [0, -12];
+          const wobble = Math.sin(t + i) * 3;
+          spark.style.transform = "translate(" + (o[0] + wobble) + "px," + (o[1] - Math.abs(wobble)) + "px)";
+        });
+
+        setGlow(heartOn, crownOn, sparksOn);
+      }
+
+      function indexFromU(u) {
+        const n = keys.length;
+        const x = wrap01(u) * n;
+        const i = Math.min(n - 1, Math.floor(x));
+        const p = x - i;
+        const start = ring.starts[i];
+        const count = ring.counts[i];
+        if (count <= 1) return start;
+        return start + p * (count - 1);
+      }
+
+      function layout() {
+        const rect = stage.getBoundingClientRect();
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const w = Math.floor(rect.width * dpr);
+        const h = Math.floor(rect.height * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+        const sample = centerBmp || (ring[0] && ring[0].bmp);
+        if (!sample) return;
+        const s = Math.max(w / sample.width, h / sample.height);
+        const dw = sample.width * s;
+        const dh = sample.height * s;
+        box = { w: w, h: h, dx: (w - dw) / 2, dy: (h - dh) / 2, dw: dw, dh: dh };
+        syncTips();
+      }
+
+      function draw(bmp) {
+        if (!box || !bmp) return;
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = fill;
+        ctx.fillRect(0, 0, box.w, box.h);
+        ctx.drawImage(bmp, box.dx, box.dy, box.dw, box.dh);
+      }
+
+      function paint() {
+        if (!ready || !box || loading) return;
+        const page = window.PAGES[active];
+        if (!page || page.wait || !page.canvas) return;
+        if (dist < 0.16) {
+          if (shown !== -1) {
+            shown = -1;
+            draw(centerBmp);
+          }
+          return;
+        }
+        const len = ring.length;
+        let i = Math.round(indexFromU(softU));
+        i = ((i % len) + len) % len;
+        const frame = ring[i];
+        if (shown !== i) {
+          shown = i;
+          draw(frame.bmp);
+        }
+      }
+
+      function onMove(e) {
+        const page = window.PAGES[active];
+        if (!page || page.wait || !page.canvas || loading) return;
+        const rect = stage.getBoundingClientRect();
+        pointerX = e.clientX - rect.left;
+        pointerY = e.clientY - rect.top;
+        hasPointer = true;
+        lastMove = performance.now();
+        if (!hintHidden) {
+          hintHidden = true;
+          hint.classList.add("is-gone");
+        }
+      }
+
+      function tick(ts) {
+        const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0.016;
+        lastTs = ts;
+        const page = window.PAGES[active];
+        const live = ready && !loading && page && !page.wait && page.canvas;
+
+        if (!live || !hasPointer) {
+          targetDist = 0;
+        } else {
+          const head = headOnScreen();
+          const dx = pointerX - head.x;
+          const dy = pointerY - head.y;
+          targetDist = Math.hypot(dx, dy) / head.reach;
+          targetU = angleToU(dx, dy);
+        }
+
+        const moving = live && hasPointer && ts - lastMove < 160;
+        const k = 1 - Math.exp(-(moving ? FOLLOW : SETTLE) * dt);
+        dist += (targetDist - dist) * k;
+        softU = lerpU(softU, targetU, k);
+        paint();
+        updateGlows();
+        requestAnimationFrame(tick);
+      }
+
+      function loadImage(src) {
+        return new Promise(function (resolve, reject) {
+          const img = new Image();
+          img.onload = function () { resolve(img); };
+          img.onerror = function () { reject(new Error(src)); };
+          img.src = src;
+        });
+      }
+
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+          const s = document.createElement("script");
+          s.src = src;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { reject(new Error(src)); };
+          document.head.appendChild(s);
+        });
+      }
+
+      function applyTheme(page) {
+        if (!page.bg) return;
+        document.documentElement.style.setProperty("--bg", page.bg);
+        document.documentElement.style.setProperty("--pill-dot", page.pillDot || "#1a5f96");
+        fill = page.bg;
+        headNx = page.headX;
+        headNy = page.headY;
+      }
+
+      function usePacked(packed) {
+        keys = packed.keys;
+        ring = packed.ring;
+        centerBmp = packed.centerBmp;
+        fill = packed.bg;
+        shown = -2;
+        softU = 0;
+        dist = 0;
+        targetDist = 0;
+        hasPointer = false;
+        layout();
+        ready = true;
+        paint();
+      }
+
+      async function loadAnimal(page) {
+        const id = page.canvas;
+        if (cache[id]) {
+          usePacked(cache[id]);
+          buildTips(page);
+          return;
+        }
+
+        loading = true;
+        ready = false;
+        clearTips();
+        load.classList.remove("is-gone");
+        loadText.textContent = "Hazırlanıyor…";
+        loadBar.style.width = "0%";
+
+        const base = new URL(page.folder, location.href).href;
+        if (!window[page.manifestKey]) await loadScript(base + "manifest.js");
+        const manifest = window[page.manifestKey];
+        if (!manifest || !manifest.ring || !manifest.ring.length) throw new Error("manifest");
+
+        const files = {};
+        files[manifest.center.file] = true;
+        manifest.ring.forEach(function (item) { files[item.file] = true; });
+        const list = Object.keys(files);
+        const images = {};
+        let done = 0;
+
+        async function loadOne(file) {
+          images[file] = await loadImage(base + file);
+          done += 1;
+          const pct = Math.round((done / list.length) * 100);
+          loadText.textContent = "Hazırlanıyor… " + pct + "%";
+          loadBar.style.width = pct + "%";
+        }
+
+        for (let i = 0; i < list.length; i += 12) {
+          await Promise.all(list.slice(i, i + 12).map(loadOne));
+        }
+
+        const packedRing = manifest.ring.map(function (item) {
+          return { bmp: images[item.file], t: item.t, name: item.name };
+        });
+        packedRing.starts = manifest.starts;
+        packedRing.counts = manifest.counts;
+
+        cache[id] = {
+          keys: manifest.keys,
+          ring: packedRing,
+          centerBmp: images[manifest.center.file],
+          bg: manifest.bg || page.bg
+        };
+
+        loading = false;
+        load.classList.add("is-gone");
+        usePacked(cache[id]);
+        buildTips(page);
+      }
+
+      async function setPage(id) {
+        const data = window.PAGES[id];
+        if (!data) return;
+        active = id;
+
+        document.querySelectorAll("nav button").forEach(function (btn) {
+          btn.classList.toggle("is-on", btn.dataset.go === id);
+        });
+        document.getElementById("lineA").textContent = data.a;
+        document.getElementById("lineB").textContent = data.b;
+        document.getElementById("lead").textContent = data.lead;
+        history.replaceState(null, "", "#" + id);
+
+        if (data.wait) {
+          document.body.classList.add("is-wait");
+          waitEl.textContent = data.waitText;
+          hasPointer = false;
+          targetDist = 0;
+          clearTips();
+          return;
+        }
+
+        document.body.classList.remove("is-wait");
+        applyTheme(data);
+
+        try {
+          await loadAnimal(data);
+        } catch (err) {
+          console.error(err);
+          loadText.textContent = "Yüklenemedi";
+          load.classList.remove("is-gone");
+        }
+      }
+
+      let resizeT = 0;
+      addEventListener("resize", function () {
+        clearTimeout(resizeT);
+        resizeT = setTimeout(function () {
+          layout();
+          shown = -2;
+          if (ready) paint();
+        }, 100);
+      });
+
+      stage.addEventListener("pointermove", onMove, { passive: true });
+      stage.addEventListener("pointerleave", function () {
+        hasPointer = false;
+        targetDist = 0;
+        setGlow(false, false, false);
+      });
+
+      document.querySelectorAll("[data-go]").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+          e.preventDefault();
+          setPage(el.dataset.go);
+          if (el.closest(".site-footer") || el.closest(".home-bento")) {
+            stage.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      document.getElementById("cta").addEventListener("click", function (e) {
+        e.preventDefault();
+        const dest = document.getElementById("icerik");
+        if (dest) dest.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      document.getElementById("ctaBuy").addEventListener("click", function () {
+        const dest = document.getElementById("urunler");
+        if (dest) dest.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      if (!tickStarted) {
+        tickStarted = true;
+        requestAnimationFrame(tick);
+      }
+
+      const hash = (location.hash || "#kedi").slice(1);
+      setPage(window.PAGES[hash] ? hash : "kedi");
+    })();
+  </script>
+
+  <script src="media/loading/frames-manifest.js"></script>
+  <script>
+    (function () {
+      const meta = window.LOADING_FRAMES;
+      const canvas = document.getElementById("lineLoad");
+      if (!meta || !canvas) return;
+
+      const ctx = canvas.getContext("2d");
+      canvas.width = meta.width;
+      canvas.height = meta.height;
+
+      const images = new Array(meta.count);
+      let loaded = 0;
+      let ready = false;
+      let index = 0;
+      let lastTs = 0;
+      const frameMs = 1000 / (meta.fps || 24);
+      let acc = 0;
+
+      function draw() {
+        if (!ready) return;
+        const img = images[index];
+        if (!img) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+      }
+
+      function tick(ts) {
+        if (!ready) {
+          requestAnimationFrame(tick);
+          return;
+        }
+        if (!lastTs) lastTs = ts;
+        acc += ts - lastTs;
+        lastTs = ts;
+        while (acc >= frameMs) {
+          acc -= frameMs;
+          index = (index + 1) % meta.count;
+          draw();
+        }
+        requestAnimationFrame(tick);
+      }
+
+      meta.files.forEach(function (file, i) {
+        const img = new Image();
+        img.onload = function () {
+          loaded += 1;
+          if (loaded === meta.count) {
+            ready = true;
+            draw();
+          }
+        };
+        img.src = meta.base + file;
+        images[i] = img;
+      });
+
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
