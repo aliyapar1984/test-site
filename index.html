@@ -24,14 +24,84 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Dışta halka, ortada nokta — özel mouse imleci */
-    html, body, .stage, canvas#view, .ui, button, a {
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='14' fill='none' stroke='%23000' stroke-width='2'/%3E%3Ccircle cx='20' cy='20' r='14' fill='none' stroke='%23fff' stroke-width='1'/%3E%3Ccircle cx='20' cy='20' r='3.4' fill='%23000'/%3E%3Ccircle cx='20' cy='20' r='2.4' fill='%23fff'/%3E%3C/svg%3E") 20 20, crosshair;
+    /* Özel imleç — minus99 tarzı durumlar + mix-blend-mode: difference */
+    .cursor {
+      display: none;
     }
 
-    @media (hover: none), (pointer: coarse) {
-      html, body, .stage, canvas#view, .ui, button, a {
-        cursor: auto;
+    @media (hover: hover) and (pointer: fine) {
+      html.has-custom-cursor,
+      html.has-custom-cursor * {
+        cursor: none !important;
+      }
+
+      .cursor {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+        width: 14px;
+        height: 14px;
+        margin: 0;
+        border-radius: 50%;
+        background: #fff;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+        transition:
+          width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+          height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+          border-radius 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.2s ease;
+        will-change: transform, width, height;
+      }
+
+      .cursor__label {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        opacity: 0;
+        /* difference içinde siyah = arka planı olduğu gibi bırakır → metin/ikon net görünür */
+        color: #000;
+        font-family: "DM Sans", system-ui, sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        line-height: 1;
+        white-space: nowrap;
+        transition: opacity 0.25s ease;
+        pointer-events: none;
+      }
+
+      .cursor__label svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+        flex-shrink: 0;
+      }
+
+      .cursor.is-hover {
+        width: 42px;
+        height: 42px;
+      }
+
+      .cursor.is-drag {
+        width: 124px;
+        height: 48px;
+        border-radius: 999px;
+      }
+
+      .cursor.is-drag .cursor__label {
+        opacity: 1;
+      }
+
+      .cursor.is-hidden {
+        opacity: 0;
       }
     }
 
@@ -239,15 +309,7 @@
       display: flex;
       flex-direction: column;
       color: #fff;
-      background:
-        radial-gradient(110% 80% at 8% 0%, rgba(255, 255, 255, 0.14), transparent 52%),
-        radial-gradient(90% 70% at 90% 100%, rgba(255, 255, 255, 0.06), transparent 50%),
-        linear-gradient(
-          155deg,
-          color-mix(in srgb, var(--bg) 62%, #8a946e),
-          color-mix(in srgb, var(--bg) 72%, #6f7a58) 48%,
-          color-mix(in srgb, var(--bg) 78%, #556047)
-        );
+      background: #347c68;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -265,7 +327,11 @@
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      padding: clamp(22px, 3.5vw, 40px) clamp(24px, 4vw, 48px) clamp(18px, 3vw, 28px);
+      /* .stage margin (14px) + .ui padding — banner header ile birebir hiza */
+      padding:
+        calc(14px + clamp(22px, 3.5vw, 40px))
+        calc(14px + clamp(24px, 4vw, 48px))
+        clamp(18px, 3vw, 28px);
       flex-shrink: 0;
       width: 100%;
       box-sizing: border-box;
@@ -273,22 +339,39 @@
 
     .site-menu__logo {
       flex-shrink: 0;
+      display: block;
+      line-height: 0;
+    }
+
+    .site-menu__logo img {
+      display: block;
     }
 
     .site-menu__header-nav {
       margin-left: auto;
+      align-items: center;
+      align-self: center;
+      gap: 0;
     }
 
+    .site-menu__header-nav .menu-tools {
+      margin-left: 0;
+      align-self: center;
+    }
+
+    /* Ara / giriş ile aynı genişlik — X, hamburger ile aynı noktada */
     .site-menu__tool-spacer {
       width: 42px;
       height: 42px;
       flex-shrink: 0;
       pointer-events: none;
+      visibility: hidden;
     }
 
     .site-menu__close.menu-more {
       flex-direction: row;
       gap: 0;
+      align-self: center;
     }
 
     .site-menu__close svg {
@@ -297,10 +380,7 @@
       display: block;
     }
 
-    .site-menu__close:hover {
-      transform: rotate(90deg);
-    }
-
+    .site-menu__close:hover,
     nav.menu button.menu-more.site-menu__close:hover {
       transform: rotate(90deg);
     }
@@ -635,6 +715,7 @@
       .site-menu__top {
         gap: 12px;
         flex-shrink: 0;
+        align-items: center;
       }
 
       .site-menu__tool-spacer {
@@ -1170,11 +1251,8 @@
       inset: 0;
       overflow: hidden;
       touch-action: none;
-      cursor: grab;
       user-select: none;
     }
-
-    .campaign-slider__viewport.is-dragging { cursor: grabbing; }
 
     .campaign-slider__track {
       display: flex;
@@ -1347,13 +1425,21 @@
         align-items: flex-end;
       }
 
+      /* Mobil: navigasyon dikey, slide yatay */
+      body.is-campaigns .campaign-slider__controls {
+        flex-direction: column;
+        align-items: center;
+      }
+
       .campaign-slider__controls {
         gap: 10px;
       }
 
       .campaign-slider__pagination {
+        flex-direction: column;
         gap: 10px;
-        min-height: 56px;
+        min-height: 0;
+        min-width: 56px;
       }
 
       .campaign-hint {
@@ -1644,13 +1730,11 @@
 
     .bestsellers__slider {
       overflow: hidden;
-      cursor: grab;
       touch-action: pan-y;
       padding: 2.75rem 0 3rem;
     }
 
     .bestsellers__slider.is-dragging {
-      cursor: grabbing;
       user-select: none;
     }
 
@@ -2854,8 +2938,23 @@
       .hint { display: none; }
     }
 
+    /* Kampanyalar sekmesi masaüstünde yok — mobil ana banner kampanya */
+    @media (min-width: 721px) {
+      nav.menu button[data-go="kampanyalar"] {
+        display: none !important;
+      }
+    }
+
     @media (max-width: 720px) {
       html, body { overflow-x: clip; }
+
+      /* Mobilde hayvan canvas / poster yok; kampanya slider ana banner */
+      canvas#view,
+      .stage-poster,
+      .hint,
+      .hotspots {
+        display: none !important;
+      }
 
       .stage {
         height: 100svh;
@@ -2870,8 +2969,11 @@
         pointer-events: none;
       }
 
+      /* Stage margin yok — banner .ui ile aynı padding */
       .site-menu__top {
         padding: 16px 18px 12px;
+        gap: 12px;
+        align-items: center;
       }
 
       .site-menu__close svg {
@@ -2914,12 +3016,6 @@
 
       .copy-action__text strong { font-size: 1rem; }
       .copy-action__text em { font-size: 0.92rem; }
-
-      .hotspots { display: none; }
-
-      canvas#view { display: none !important; }
-
-      .stage-poster { display: block; }
 
       .flow {
         margin: 0;
@@ -3023,7 +3119,7 @@
       .faq__item-a p { font-size: 0.92rem; padding-bottom: 1rem; }
       .faq__visual { margin-top: 1.5rem; }
 
-      .site-footer { padding: 0; }
+      .site-footer { padding: 0 12px; }
       .footer-panel { padding: 24px 16px 18px; gap: 16px; border-radius: 28px 28px 0 0; }
       .footer-title { font-size: clamp(1.15rem, 5vw, 1.4rem); }
       .footer-row { gap: 20px; }
@@ -4160,19 +4256,24 @@
       let pointerY = 0;
       let hasPointer = false;
       let active = "kedi";
+      let lastAnimal = "kedi";
       let tickStarted = false;
       let tipNodes = [];
       let activeTip = -1;
       let campaignIndex = 0;
       let campaignSlides = [];
       let campaignX = 0;
-      let campaignWidth = 0;
+      let campaignSize = 0;
       let campaignDragging = false;
       let campaignPointerId = null;
-      let campaignStartX = 0;
+      let campaignStartPos = 0;
       let campaignStartOffset = 0;
       let campaignAutoTimer = null;
       const CAMPAIGN_AUTO_MS = 5000;
+
+      function isMobileBanner() {
+        return window.matchMedia("(max-width: 720px)").matches;
+      }
 
       function stopCampaignAutoplay() {
         if (campaignAutoTimer) {
@@ -4214,14 +4315,14 @@
       }
 
       function campaignOffsetFor(index) {
-        return -index * campaignWidth;
+        return -index * campaignSize;
       }
 
-      function setCampaignTransform(x, animate) {
+      function setCampaignTransform(offset, animate) {
         if (!campaignTrack) return;
-        campaignX = x;
+        campaignX = offset;
         campaignTrack.style.transition = animate ? "transform 0.42s cubic-bezier(0.22, 1, 0.36, 1)" : "none";
-        campaignTrack.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
+        campaignTrack.style.transform = "translate3d(" + offset.toFixed(2) + "px,0,0)";
       }
 
       function syncCampaignDots() {
@@ -4245,15 +4346,15 @@
 
       function measureCampaign() {
         if (!campaignViewport) return;
-        const width = campaignViewport.clientWidth;
-        if (!width) return;
-        campaignWidth = width;
+        const size = campaignViewport.clientWidth;
+        if (!size) return;
+        campaignSize = size;
         setCampaignTransform(campaignOffsetFor(campaignIndex), false);
       }
 
       function refreshCampaignLayout() {
         measureCampaign();
-        if (!campaignWidth && campaignSlider && !campaignSlider.hidden) {
+        if (!campaignSize && campaignSlider && !campaignSlider.hidden) {
           requestAnimationFrame(refreshCampaignLayout);
         }
       }
@@ -4341,10 +4442,10 @@
         campaignViewport.addEventListener("pointerdown", function (e) {
           if (e.button > 0) return;
           stopCampaignAutoplay();
-          if (!campaignWidth) refreshCampaignLayout();
+          if (!campaignSize) refreshCampaignLayout();
           campaignDragging = true;
           campaignPointerId = e.pointerId;
-          campaignStartX = e.clientX;
+          campaignStartPos = e.clientX;
           campaignStartOffset = campaignX;
           campaignViewport.classList.add("is-dragging");
           campaignViewport.setPointerCapture(e.pointerId);
@@ -4352,10 +4453,10 @@
         });
 
         campaignViewport.addEventListener("pointermove", function (e) {
-          if (!campaignDragging || e.pointerId !== campaignPointerId || !campaignWidth) return;
+          if (!campaignDragging || e.pointerId !== campaignPointerId || !campaignSize) return;
           e.preventDefault();
-          const dx = e.clientX - campaignStartX;
-          let next = campaignStartOffset + dx;
+          const delta = e.clientX - campaignStartPos;
+          let next = campaignStartOffset + delta;
           const min = campaignOffsetFor(campaignSlides.length - 1);
           const max = 0;
           if (next > max) next = max + (next - max) * 0.28;
@@ -4368,14 +4469,14 @@
           campaignDragging = false;
           campaignPointerId = null;
           campaignViewport.classList.remove("is-dragging");
-          if (!campaignWidth) {
+          if (!campaignSize) {
             refreshCampaignLayout();
             return;
           }
-          const dx = campaignX - campaignStartOffset;
-          const threshold = Math.min(90, campaignWidth * 0.18);
-          if (dx <= -threshold) goCampaign(campaignIndex + 1);
-          else if (dx >= threshold) goCampaign(campaignIndex - 1);
+          const delta = campaignX - campaignStartOffset;
+          const threshold = Math.min(90, campaignSize * 0.18);
+          if (delta <= -threshold) goCampaign(campaignIndex + 1);
+          else if (delta >= threshold) goCampaign(campaignIndex - 1);
           else goCampaign(campaignIndex);
         }
 
@@ -4392,8 +4493,16 @@
 
       bindCampaignSlider();
 
-      function isMobileBanner() {
-        return window.matchMedia("(max-width: 720px)").matches;
+      function resolveBannerPage(id) {
+        const data = window.PAGES[id];
+        if (!data) return isMobileBanner() ? "kampanyalar" : "kedi";
+        if (isMobileBanner()) {
+          /* Mobil ana banner: yalnızca kampanya slider */
+          return "kampanyalar";
+        }
+        /* Masaüstü: kedi/köpek/kuş/balık — kampanya yok */
+        if (data.campaigns) return lastAnimal || "kedi";
+        return id;
       }
 
       function syncBannerMode(packed) {
@@ -4905,9 +5014,11 @@
       }
 
       async function setPage(id) {
+        id = resolveBannerPage(id);
         const data = window.PAGES[id];
         if (!data) return;
         active = id;
+        if (data.canvas) lastAnimal = id;
 
         document.querySelectorAll("header nav.menu button[data-go]").forEach(function (btn) {
           btn.classList.toggle("is-on", btn.dataset.go === id);
@@ -4955,11 +5066,24 @@
       addEventListener("resize", function () {
         clearTimeout(resizeT);
         resizeT = setTimeout(async function () {
+          const mobile = isMobileBanner();
           const data = window.PAGES[active];
-          if (data && data.campaigns) {
+
+          if (mobile) {
+            if (!data || !data.campaigns) {
+              await setPage("kampanyalar");
+              return;
+            }
             refreshCampaignLayout();
+            if (data) document.getElementById("lead").textContent = pageLead(data);
             return;
           }
+
+          if (data && data.campaigns) {
+            await setPage(lastAnimal || "kedi");
+            return;
+          }
+
           if (data && !data.wait) {
             await ensureDesktopAssets(data);
             const packed = data.canvas && cache[data.canvas];
@@ -5000,7 +5124,12 @@
       }
 
       const hash = (location.hash || "#kedi").slice(1);
-      setPage(window.PAGES[hash] ? hash : "kedi");
+      if (isMobileBanner()) {
+        setPage("kampanyalar");
+      } else {
+        const startId = window.PAGES[hash] && !window.PAGES[hash].campaigns ? hash : "kedi";
+        setPage(startId);
+      }
       window.setPage = setPage;
     })();
   </script>
@@ -5569,6 +5698,100 @@
           return;
         }
         block.classList.add("is-success");
+      });
+    })();
+  </script>
+
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor__label">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Kaydır</span>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+
+  <script>
+    (function () {
+      const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!finePointer.matches) return;
+
+      const cursor = document.getElementById("cursor");
+      if (!cursor) return;
+
+      document.documentElement.classList.add("has-custom-cursor");
+
+      let x = 0;
+      let y = 0;
+      let visible = false;
+
+      const HOVER_SEL = "a, button, [role='button'], [data-go], .menu-more, .menu-action, .copy-action, .campaign-slider__pag-btn, .campaign-slider__arrow, .bestsellers__nav, .site-menu__nav-btn, .site-menu__links a, .site-menu__cta, .product-card, .home-bento__grid-item, input, label, .footer-col__head";
+      const DRAG_SEL = "[data-campaign-viewport], .campaign-slider__viewport, [data-bestsellers-slider], .bestsellers__slider";
+
+      function setPos(clientX, clientY) {
+        x = clientX;
+        y = clientY;
+        cursor.style.transform = "translate3d(" + x + "px," + y + "px,0) translate(-50%,-50%)";
+        if (!visible) {
+          visible = true;
+          cursor.classList.remove("is-hidden");
+        }
+      }
+
+      function clearStates() {
+        cursor.classList.remove("is-hover", "is-drag");
+      }
+
+      function applyStateFromTarget(target) {
+        if (!target || !(target instanceof Element)) {
+          clearStates();
+          return;
+        }
+        /* Link / buton hover öncelikli; slider alanında drag */
+        if (target.closest(HOVER_SEL)) {
+          cursor.classList.add("is-hover");
+          cursor.classList.remove("is-drag");
+          return;
+        }
+        if (target.closest(DRAG_SEL)) {
+          cursor.classList.add("is-drag");
+          cursor.classList.remove("is-hover");
+          return;
+        }
+        clearStates();
+      }
+
+      document.addEventListener("pointermove", function (e) {
+        if (e.pointerType && e.pointerType !== "mouse") return;
+        setPos(e.clientX, e.clientY);
+        applyStateFromTarget(e.target);
+      }, { passive: true });
+
+      document.addEventListener("pointerdown", function (e) {
+        if (e.pointerType && e.pointerType !== "mouse") return;
+        applyStateFromTarget(e.target);
+      }, { passive: true });
+
+      document.addEventListener("pointerover", function (e) {
+        if (e.pointerType && e.pointerType !== "mouse") return;
+        applyStateFromTarget(e.target);
+      }, { passive: true });
+
+      document.addEventListener("mouseleave", function () {
+        cursor.classList.add("is-hidden");
+        visible = false;
+      });
+
+      document.addEventListener("mouseenter", function () {
+        cursor.classList.remove("is-hidden");
+      });
+
+      finePointer.addEventListener("change", function () {
+        if (!finePointer.matches) {
+          document.documentElement.classList.remove("has-custom-cursor");
+          cursor.classList.add("is-hidden");
+        } else {
+          document.documentElement.classList.add("has-custom-cursor");
+        }
       });
     })();
   </script>
