@@ -2938,13 +2938,6 @@
       .hint { display: none; }
     }
 
-    /* Kampanyalar sekmesi masaüstünde yok — mobil ana banner kampanya */
-    @media (min-width: 721px) {
-      nav.menu button[data-go="kampanyalar"] {
-        display: none !important;
-      }
-    }
-
     @media (max-width: 720px) {
       html, body { overflow-x: clip; }
 
@@ -4500,8 +4493,7 @@
           /* Mobil ana banner: yalnızca kampanya slider */
           return "kampanyalar";
         }
-        /* Masaüstü: kedi/köpek/kuş/balık — kampanya yok */
-        if (data.campaigns) return lastAnimal || "kedi";
+        /* Masaüstü: kedi/köpek/kuş/balık + kampanyalar */
         return id;
       }
 
@@ -5080,7 +5072,8 @@
           }
 
           if (data && data.campaigns) {
-            await setPage(lastAnimal || "kedi");
+            refreshCampaignLayout();
+            if (data) document.getElementById("lead").textContent = pageLead(data);
             return;
           }
 
@@ -5127,8 +5120,7 @@
       if (isMobileBanner()) {
         setPage("kampanyalar");
       } else {
-        const startId = window.PAGES[hash] && !window.PAGES[hash].campaigns ? hash : "kedi";
-        setPage(startId);
+        setPage(window.PAGES[hash] ? hash : "kedi");
       }
       window.setPage = setPage;
     })();
