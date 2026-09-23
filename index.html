@@ -1736,6 +1736,17 @@
 
     .bestsellers__slider.is-dragging {
       user-select: none;
+      cursor: grabbing;
+    }
+
+    .bestsellers__slider.is-dragging a {
+      pointer-events: none;
+    }
+
+    .bestsellers__slider a,
+    .bestsellers__slider img {
+      -webkit-user-drag: none;
+      user-select: none;
     }
 
     .bestsellers__track {
@@ -1759,7 +1770,7 @@
       align-items: flex-start;
       gap: 2.5rem;
       padding: 2.5rem;
-      background: none;
+      background: #fff;
       border: 2px solid;
       text-decoration: none;
       color: #180102;
@@ -2144,6 +2155,170 @@
         scroll-snap-align: center;
       }
     }
+
+
+    /* Kategori ürün tabları — blog öncesi */
+    .shop-tabs {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 14px 64px;
+      color: #180102;
+      box-sizing: border-box;
+    }
+
+    .shop-tabs__head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .shop-tabs__title {
+      margin: 0;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 500;
+      font-size: calc(clamp(1.6rem, 3vw, 2rem) + 7pt);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: #180102;
+    }
+
+    .shop-tabs__tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px;
+      background: rgba(236, 228, 215, 0.7);
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(24, 1, 2, 0.06);
+    }
+
+    .shop-tabs__tab {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 0 22px 0 10px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: rgba(24, 1, 2, 0.72);
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .shop-tabs__tab-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: inset 0 0 0 1.5px rgba(24, 1, 2, 0.14);
+      flex-shrink: 0;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .shop-tabs__tab-icon img {
+      width: 28px;
+      height: 28px;
+      display: block;
+      object-fit: contain;
+      opacity: 1;
+      filter: brightness(0);
+    }
+
+    .shop-tabs__tab:hover {
+      color: #180102;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .shop-tabs__tab.is-on {
+      background: var(--cta-coral);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(227, 107, 79, 0.28);
+    }
+
+    .shop-tabs__tab.is-on .shop-tabs__tab-icon {
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .shop-tabs__tab.is-on .shop-tabs__tab-icon img {
+      filter: brightness(0);
+    }
+
+    .shop-tabs__panel {
+      display: none;
+    }
+
+    .shop-tabs__panel.is-on {
+      display: block;
+    }
+
+    .shop-tabs__grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .shop-tabs__grid > .product-card {
+      min-height: 20rem;
+      padding: 1.75rem;
+      gap: 1.75rem;
+    }
+
+    .shop-tabs__grid > .product-card:nth-child(5n + 1) { border-radius: 4rem 4rem 4rem 1rem; }
+    .shop-tabs__grid > .product-card:nth-child(5n + 2) { border-radius: 4rem 4rem 1rem 1rem; }
+    .shop-tabs__grid > .product-card:nth-child(5n + 3) { border-radius: 4rem 1rem 4rem 4rem; }
+    .shop-tabs__grid > .product-card:nth-child(5n + 4) { border-radius: 1rem 4rem 4rem 1rem; }
+    .shop-tabs__grid > .product-card:nth-child(5n + 5) { border-radius: 1rem 1rem 4rem 4rem; }
+
+    .shop-tabs__more {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .shop-tabs__more a {
+      display: inline-flex;
+      align-items: center;
+      height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: rgba(24, 1, 2, 0.08);
+      color: #180102;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .shop-tabs__more a:hover {
+      background: rgba(24, 1, 2, 0.14);
+    }
+
+    .shop-tabs__more a svg {
+      display: none;
+    }
+
+    @media (max-width: 1100px) {
+      .shop-tabs__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
 
     .newsroom {
       width: 100%;
@@ -3088,6 +3263,42 @@
 
       .product-card__name { font-size: 1.15rem; }
 
+
+      .shop-tabs { padding: 48px 12px 40px; }
+
+      .shop-tabs__tabs {
+        width: 100%;
+        border-radius: 1.5rem;
+        gap: 4px;
+      }
+
+      .shop-tabs__tab {
+        flex: 1 1 calc(50% - 4px);
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 10px;
+        font-size: 0.88rem;
+        gap: 8px;
+      }
+
+      .shop-tabs__tab-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .shop-tabs__tab-icon img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .shop-tabs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+      .shop-tabs__grid > .product-card {
+        min-height: 0;
+        gap: 1rem;
+        padding: 1.15rem;
+        border-radius: 2rem !important;
+      }
+
       .newsroom { padding: 48px 12px 56px; }
       .newsroom__title { margin-bottom: 2rem; font-size: clamp(1.35rem, 5.5vw, 1.65rem); }
       .news-featured__image { border-radius: 1.5rem 2.5rem 1.5rem 1.5rem; }
@@ -3347,15 +3558,15 @@
             </div>
           </div>
           <div class="site-menu__links">
-            <a href="#urunler">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Yavru Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yavru Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-          <a class="site-menu__cta" href="#urunler" data-go="kedi" data-menu-close>Tüm Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="site-menu__cta" href="urunler.html" data-go="kedi" data-menu-close>Tüm Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
 
         <div class="site-menu__panel" data-menu-panel="kopek" role="tabpanel" hidden>
@@ -3367,15 +3578,15 @@
             </div>
           </div>
           <div class="site-menu__links">
-            <a href="#urunler">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Yavru Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yavru Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-          <a class="site-menu__cta" href="#urunler" data-go="kopek" data-menu-close>Tüm Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="site-menu__cta" href="urunler.html" data-go="kopek" data-menu-close>Tüm Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
 
         <div class="site-menu__panel" data-menu-panel="kus" role="tabpanel" hidden>
@@ -3387,14 +3598,14 @@
             </div>
           </div>
           <div class="site-menu__links">
-            <a href="#urunler">Kuş Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Kafes &amp; Aksesuar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Tünek &amp; Yuva <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Vitamin &amp; Bakım <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Oyuncaklar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Kum &amp; Hijyen <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kuş Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kafes &amp; Aksesuar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tünek &amp; Yuva <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Vitamin &amp; Bakım <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Oyuncaklar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kum &amp; Hijyen <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-          <a class="site-menu__cta" href="#urunler" data-go="kus" data-menu-close>Tüm Kuş Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="site-menu__cta" href="urunler.html" data-go="kus" data-menu-close>Tüm Kuş Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
 
         <div class="site-menu__panel" data-menu-panel="balik" role="tabpanel" hidden>
@@ -3406,14 +3617,14 @@
             </div>
           </div>
           <div class="site-menu__links">
-            <a href="#urunler">Balık Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Filtre &amp; Pompa <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Isıtıcı &amp; Aydınlatma <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Su Düzenleyici <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Bitki &amp; Dekor <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a href="#urunler">Akvaryum Setleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Balık Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Filtre &amp; Pompa <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Isıtıcı &amp; Aydınlatma <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Su Düzenleyici <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Bitki &amp; Dekor <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Akvaryum Setleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-          <a class="site-menu__cta" href="#urunler" data-go="balik" data-menu-close>Tüm Akvaryum Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="site-menu__cta" href="urunler.html" data-go="balik" data-menu-close>Tüm Akvaryum Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
     </div>
@@ -3466,6 +3677,269 @@
     </div>
   </section>
 
+  <section class="home-bento">
+    <h2 class="home-bento__title">Dostlarınız için modern<br>bir bakım dünyası</h2>
+    <div class="home-bento__grid">
+      <a class="home-bento__grid-item is--1" href="#kedi" data-go="kedi">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/cat.svg" alt="" />
+          <h3>Kedi Mama Kapları</h3>
+          <p>Mama, kum ve tırmalama ürünleriyle kedinizin günlük konforunu tamamlayın.</p>
+        </div>
+        <img class="bento-product" src="media/kedi-kabi.png" alt="Kedi mama kabı" />
+      </a>
+
+      <a class="home-bento__grid-item is--2" href="#kopek" data-go="kopek">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/dog.svg" alt="" />
+          <h3>Köpek bakımı</h3>
+          <p>Gezdirme, ödül ve oyuncaklarla sadık dostunuzun enerjisini doğru yönlendirin.</p>
+        </div>
+        <img class="bento-cover" src="media/kopek.png" alt="Köpek bakımı" />
+      </a>
+
+      <a class="home-bento__grid-item is--3" href="#kus" data-go="kus">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/bird.svg" alt="" />
+          <h3>Kuş bakımı</h3>
+          <p>Yem, kafes ve bakım ürünleriyle kuşlarınız için ferah bir yaşam alanı kurun.</p>
+        </div>
+        <img class="bento-cover" src="media/kus.png" alt="Kuş bakımı ürünü" />
+      </a>
+
+      <a class="home-bento__grid-item is--4" href="#kedi" data-go="kedi">
+        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
+          <source src="media/cat-look.mp4" type="video/mp4" />
+        </video>
+        <div class="bento-tag">Kedi koleksiyonu</div>
+      </a>
+
+      <a class="home-bento__grid-item is--5" href="#balik" data-go="balik">
+        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
+          <source src="media/fish-eat.mp4" type="video/mp4" />
+        </video>
+        <div class="bento-tag">Akvaryum</div>
+      </a>
+
+      <a class="home-bento__grid-item is--6" href="#balik" data-go="balik">
+        <div class="bento-header">
+          <img class="bento-icon" src="media/fish.svg" alt="" />
+          <h3>Balık bakımı</h3>
+          <p>Yem, su düzenleyici ve akvaryum ekipmanlarıyla sakin ve sağlıklı bir ortam sağlayın.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="bestsellers" id="urunler" data-product-slider>
+    <div class="bestsellers__top">
+      <h2 class="bestsellers__title">Çok Satanlar</h2>
+      <div class="bestsellers__controls">
+        <button type="button" class="bestsellers__nav is-prev" data-bestsellers-prev aria-label="Önceki ürünler" disabled>
+          <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+        </button>
+        <button type="button" class="bestsellers__nav is-next" data-bestsellers-next aria-label="Sonraki ürünler">
+          <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="bestsellers__slider" data-bestsellers-slider>
+      <div class="bestsellers__track" data-bestsellers-track>
+      <div class="bestsellers__slide">
+<a class="product-card is-coral" href="urun-detay.html">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
+          </div>
+          <div class="product-card__name">Premium Köpek Yemi</div>
+          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+          <div class="product-card__price">₺ 1.249,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-blue" href="urun-detay.html">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
+          </div>
+          <div class="product-card__name">Çiğneme Kemiği</div>
+          <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
+          <div class="product-card__price">₺ 189,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-green" href="urun-detay.html">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-home.png" alt="Köpek yatağı" />
+          </div>
+          <div class="product-card__name">Köpek Yatağı</div>
+          <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
+          <div class="product-card__price">₺ 899,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-orange" href="urun-detay.html">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
+          </div>
+          <div class="product-card__name">Gezdirme Tasması</div>
+          <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
+          <div class="product-card__price">₺ 329,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      </div>
+      <div class="bestsellers__slide">
+<a class="product-card is-pink" href="urun-detay.html">
+        <div class="product-card__top">
+          <div class="product-card__media">
+            <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
+          </div>
+          <div class="product-card__name">Premium Köpek Yemi</div>
+          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+          <div class="product-card__price">₺ 1.249,00</div>
+        </div>
+        <span class="news-read">
+          İncele
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      </div>
+      <div class="bestsellers__slide">
+        <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
+                  </div>
+                  <div class="product-card__name">Premium Köpek Yemi</div>
+                  <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+                  <div class="product-card__price">₺ 1.249,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
+                  </div>
+                  <div class="product-card__name">Çiğneme Kemiği</div>
+                  <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
+                  <div class="product-card__price">₺ 189,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Köpek yatağı" />
+                  </div>
+                  <div class="product-card__name">Köpek Yatağı</div>
+                  <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
+                  <div class="product-card__price">₺ 899,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
+                  </div>
+                  <div class="product-card__name">Gezdirme Tasması</div>
+                  <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
+                  <div class="product-card__price">₺ 329,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+              <div class="bestsellers__slide">
+        <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
+                  </div>
+                  <div class="product-card__name">Premium Köpek Yemi</div>
+                  <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
+                  <div class="product-card__price">₺ 1.249,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              </div>
+      </div>
+    </div>
+    
+  </section>
+
   <section class="flow" id="nasil-calisir" aria-label="Nasıl çalışır">
     <div class="flow__bg" aria-hidden="true">
       <svg viewBox="0 0 1440 420" fill="none" preserveAspectRatio="none">
@@ -3483,7 +3957,7 @@
           <!-- <div class="flow__cta-logo" aria-hidden="true">
             <img src="pedlogo.png" alt="" />
           </div> -->
-          <a class="flow__cta-btn" href="#urunler">
+          <a class="flow__cta-btn" href="urunler.html">
             Alışverişe başla
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -3539,122 +4013,249 @@
     </div>
   </section>
 
-  <section class="bestsellers" id="urunler">
-    <div class="bestsellers__top">
-      <h2 class="bestsellers__title">Çok Satanlar</h2>
-      <div class="bestsellers__controls">
-        <button type="button" class="bestsellers__nav is-prev" data-bestsellers-prev aria-label="Önceki ürünler" disabled>
-          <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+  <section class="shop-tabs" id="kategori-urunler" data-shop-tabs aria-label="Kategori ürünleri">
+    <div class="shop-tabs__head">
+      <h2 class="shop-tabs__title">Dostuna göre keşfet</h2>
+      <div class="shop-tabs__tabs" role="tablist" aria-label="Hayvan kategorileri">
+        <button type="button" class="shop-tabs__tab is-on" role="tab" id="shop-tab-kedi" aria-selected="true" aria-controls="shop-panel-kedi" data-shop-tab="kedi">
+          <span class="shop-tabs__tab-icon" aria-hidden="true"><img src="media/cat.svg" alt="" /></span>
+          <span>Kedi</span>
         </button>
-        <button type="button" class="bestsellers__nav is-next" data-bestsellers-next aria-label="Sonraki ürünler">
-          <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+        <button type="button" class="shop-tabs__tab" role="tab" id="shop-tab-kopek" aria-selected="false" aria-controls="shop-panel-kopek" data-shop-tab="kopek" tabindex="-1">
+          <span class="shop-tabs__tab-icon" aria-hidden="true"><img src="media/dog.svg" alt="" /></span>
+          <span>Köpek</span>
+        </button>
+        <button type="button" class="shop-tabs__tab" role="tab" id="shop-tab-kus" aria-selected="false" aria-controls="shop-panel-kus" data-shop-tab="kus" tabindex="-1">
+          <span class="shop-tabs__tab-icon" aria-hidden="true"><img src="media/bird.svg" alt="" /></span>
+          <span>Kuş</span>
+        </button>
+        <button type="button" class="shop-tabs__tab" role="tab" id="shop-tab-balik" aria-selected="false" aria-controls="shop-panel-balik" data-shop-tab="balik" tabindex="-1">
+          <span class="shop-tabs__tab-icon" aria-hidden="true"><img src="media/fish.svg" alt="" /></span>
+          <span>Balık</span>
         </button>
       </div>
     </div>
-    <div class="bestsellers__slider" data-bestsellers-slider>
-      <div class="bestsellers__track" data-bestsellers-track>
-      <div class="bestsellers__slide">
-<a class="product-card is-coral" href="#kopek" data-go="kopek">
-        <div class="product-card__top">
-          <div class="product-card__media">
-            <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
-          </div>
-          <div class="product-card__name">Premium Köpek Yemi</div>
-          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
-          <div class="product-card__price">₺ 1.249,00</div>
-        </div>
-        <span class="news-read">
-          İncele
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </a>
-      </div>
-      <div class="bestsellers__slide">
-<a class="product-card is-blue" href="#kopek" data-go="kopek">
-        <div class="product-card__top">
-          <div class="product-card__media">
-            <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
-          </div>
-          <div class="product-card__name">Çiğneme Kemiği</div>
-          <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
-          <div class="product-card__price">₺ 189,00</div>
-        </div>
-        <span class="news-read">
-          İncele
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </a>
-      </div>
-      <div class="bestsellers__slide">
-<a class="product-card is-green" href="#kopek" data-go="kopek">
-        <div class="product-card__top">
-          <div class="product-card__media">
-            <img src="media/product/dog-home.png" alt="Köpek yatağı" />
-          </div>
-          <div class="product-card__name">Köpek Yatağı</div>
-          <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
-          <div class="product-card__price">₺ 899,00</div>
-        </div>
-        <span class="news-read">
-          İncele
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </a>
-      </div>
-      <div class="bestsellers__slide">
-<a class="product-card is-orange" href="#kopek" data-go="kopek">
-        <div class="product-card__top">
-          <div class="product-card__media">
-            <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
-          </div>
-          <div class="product-card__name">Gezdirme Tasması</div>
-          <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
-          <div class="product-card__price">₺ 329,00</div>
-        </div>
-        <span class="news-read">
-          İncele
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </a>
-      </div>
-      <div class="bestsellers__slide">
-<a class="product-card is-pink" href="#kopek" data-go="kopek">
-        <div class="product-card__top">
-          <div class="product-card__media">
-            <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
-          </div>
-          <div class="product-card__name">Premium Köpek Yemi</div>
-          <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
-          <div class="product-card__price">₺ 1.249,00</div>
-        </div>
-        <span class="news-read">
-          İncele
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </a>
-      </div>
-      <div class="bestsellers__slide">
-        <a class="product-card is-coral" href="#kopek" data-go="kopek">
+        <div class="shop-tabs__panel is-on" role="tabpanel" id="shop-panel-kedi" aria-labelledby="shop-tab-kedi" data-shop-panel="kedi">
+          <div class="shop-tabs__grid">
+              <a class="product-card is-coral" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
+                    <img src="media/slide-kedi.png" alt="Sterilised Kedi Maması 2 kg" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Premium Köpek Yemi</div>
+                  <div class="product-card__name">Sterilised Kedi Maması 2 kg</div>
+                  <div class="product-card__cat">Kısırlaştırılmış kediler için dengeli formül.</div>
+                  <div class="product-card__price">₺ 689,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/kedi-kabi.png" alt="Yavru Kedi Maması 1.5 kg" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Yavru Kedi Maması 1.5 kg</div>
+                  <div class="product-card__cat">Büyüme dönemine özel protein desteği.</div>
+                  <div class="product-card__price">₺ 429,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Kedi Kumu Topaklanan 10 L" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kedi Kumu Topaklanan 10 L</div>
+                  <div class="product-card__cat">Düşük toz, güçlü koku kontrolü.</div>
+                  <div class="product-card__price">₺ 249,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Seramik Mama Kabı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Seramik Mama Kabı</div>
+                  <div class="product-card__cat">Kaymaz tabanlı günlük beslenme kabı.</div>
+                  <div class="product-card__price">₺ 189,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Tüy Bakım Fırçası" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Tüy Bakım Fırçası</div>
+                  <div class="product-card__cat">Düzenli tarama ve tüy bakımı için.</div>
+                  <div class="product-card__price">₺ 159,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Kedi Ödül Çubuğu" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kedi Ödül Çubuğu</div>
+                  <div class="product-card__cat">Eğitim anları için lezzetli ödül.</div>
+                  <div class="product-card__price">₺ 79,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/slide-kedi.png" alt="İnteraktif Kedi Oyuncağı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">İnteraktif Kedi Oyuncağı</div>
+                  <div class="product-card__cat">Av içgüdüsünü destekleyen oyun.</div>
+                  <div class="product-card__price">₺ 219,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/kedi-kabi.png" alt="Kedi Tırmalama Tahtası" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kedi Tırmalama Tahtası</div>
+                  <div class="product-card__cat">Pati sağlığı ve stres azaltma.</div>
+                  <div class="product-card__price">₺ 549,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Somınlı Yetişkin Mama 3 kg" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Somınlı Yetişkin Mama 3 kg</div>
+                  <div class="product-card__cat">Hassas sindirim için seçilmiş formül.</div>
+                  <div class="product-card__price">₺ 519,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Kedi Sütü Takviyesi" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kedi Sütü Takviyesi</div>
+                  <div class="product-card__cat">Laktozsuz ek besin desteği.</div>
+                  <div class="product-card__price">₺ 129,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Taşıma Çantası Soft" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Taşıma Çantası Soft</div>
+                  <div class="product-card__cat">Veteriner ve yolculuk için güvenli taşıma.</div>
+                  <div class="product-card__price">₺ 799,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Kedi Yatak Minderi" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kedi Yatak Minderi</div>
+                  <div class="product-card__cat">Yumuşak dinlenme alanı.</div>
+                  <div class="product-card__price">₺ 399,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+          </div>
+          <div class="shop-tabs__more">
+            <a href="urunler.html">Tüm kedi ürünleri
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="shop-tabs__panel" role="tabpanel" id="shop-panel-kopek" aria-labelledby="shop-tab-kopek" data-shop-panel="kopek" hidden>
+          <div class="shop-tabs__grid">
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Premium Köpek Yemi 15 kg" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Premium Köpek Yemi 15 kg</div>
                   <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
                   <div class="product-card__price">₺ 1.249,00</div>
                 </div>
@@ -3666,14 +4267,12 @@
                   </svg>
                 </span>
               </a>
-              </div>
-              <div class="bestsellers__slide">
-        <a class="product-card is-blue" href="#kopek" data-go="kopek">
+              <a class="product-card is-blue" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-bone.png" alt="Çiğneme kemiği" />
+                    <img src="media/product/dog-bone.png" alt="Doğal Çiğneme Kemiği" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Çiğneme Kemiği</div>
+                  <div class="product-card__name">Doğal Çiğneme Kemiği</div>
                   <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
                   <div class="product-card__price">₺ 189,00</div>
                 </div>
@@ -3685,14 +4284,12 @@
                   </svg>
                 </span>
               </a>
-              </div>
-              <div class="bestsellers__slide">
-        <a class="product-card is-green" href="#kopek" data-go="kopek">
+              <a class="product-card is-green" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-home.png" alt="Köpek yatağı" />
+                    <img src="media/product/dog-home.png" alt="Konfor Köpek Yatağı" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Köpek Yatağı</div>
+                  <div class="product-card__name">Konfor Köpek Yatağı</div>
                   <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
                   <div class="product-card__price">₺ 899,00</div>
                 </div>
@@ -3704,12 +4301,10 @@
                   </svg>
                 </span>
               </a>
-              </div>
-              <div class="bestsellers__slide">
-        <a class="product-card is-orange" href="#kopek" data-go="kopek">
+              <a class="product-card is-orange" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-belt.png" alt="Gezdirme tasması" />
+                    <img src="media/product/dog-belt.png" alt="Gezdirme Tasması" loading="lazy" />
                   </div>
                   <div class="product-card__name">Gezdirme Tasması</div>
                   <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
@@ -3723,16 +4318,14 @@
                   </svg>
                 </span>
               </a>
-              </div>
-              <div class="bestsellers__slide">
-        <a class="product-card is-pink" href="#kopek" data-go="kopek">
+              <a class="product-card is-pink" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-eat2.png" alt="Premium köpek yemi" />
+                    <img src="media/product/dog-eat2.png" alt="Yavru Köpek Maması 3 kg" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Premium Köpek Yemi</div>
-                  <div class="product-card__cat">Dengeli ve besleyici formül, tüm ırklar için.</div>
-                  <div class="product-card__price">₺ 1.249,00</div>
+                  <div class="product-card__name">Yavru Köpek Maması 3 kg</div>
+                  <div class="product-card__cat">Büyüme dönemine özel beslenme desteği.</div>
+                  <div class="product-card__price">₺ 334,00</div>
                 </div>
                 <span class="news-read">
                   İncele
@@ -3742,64 +4335,558 @@
                   </svg>
                 </span>
               </a>
-              </div>
-      </div>
-    </div>
-    
-  </section>
-
-  <section class="home-bento">
-    <h2 class="home-bento__title">Dostlarınız için modern<br>bir bakım dünyası</h2>
-    <div class="home-bento__grid">
-      <a class="home-bento__grid-item is--1" href="#kedi" data-go="kedi">
-        <div class="bento-header">
-          <img class="bento-icon" src="media/cat.svg" alt="" />
-          <h3>Kedi Mama Kapları</h3>
-          <p>Mama, kum ve tırmalama ürünleriyle kedinizin günlük konforunu tamamlayın.</p>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/kopek.png" alt="Protein Ödül Maması" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Protein Ödül Maması</div>
+                  <div class="product-card__cat">Eğitim anları için yüksek proteinli ödül.</div>
+                  <div class="product-card__price">₺ 371,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Ortopedik Minder" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Ortopedik Minder</div>
+                  <div class="product-card__cat">Eklem dostu dinlenme desteği.</div>
+                  <div class="product-card__price">₺ 408,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Ayarlanabilir Boyun Tasması" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Ayarlanabilir Boyun Tasması</div>
+                  <div class="product-card__cat">Güvenli ve konforlu günlük kullanım.</div>
+                  <div class="product-card__price">₺ 445,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Somınlı Yetişkin Mama 8 kg" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Somınlı Yetişkin Mama 8 kg</div>
+                  <div class="product-card__cat">Hassas sindirim için seçilmiş formül.</div>
+                  <div class="product-card__price">₺ 982,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-belt.png" alt="Köpek Şampuanı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Köpek Şampuanı</div>
+                  <div class="product-card__cat">Nazik temizlik ve tüy bakımı.</div>
+                  <div class="product-card__price">₺ 219,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Top Getirme Oyuncağı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Top Getirme Oyuncağı</div>
+                  <div class="product-card__cat">Aktif oyun ve egzersiz için.</div>
+                  <div class="product-card__price">₺ 149,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/kopek.png" alt="Su Kabı Çelik" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Su Kabı Çelik</div>
+                  <div class="product-card__cat">Dayanıklı ve hijyenik suluk.</div>
+                  <div class="product-card__price">₺ 259,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+          </div>
+          <div class="shop-tabs__more">
+            <a href="urunler.html">Tüm köpek ürünleri
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
         </div>
-        <img class="bento-product" src="media/kedi-kabi.png" alt="Kedi mama kabı" />
-      </a>
-
-      <a class="home-bento__grid-item is--2" href="#kopek" data-go="kopek">
-        <div class="bento-header">
-          <img class="bento-icon" src="media/dog.svg" alt="" />
-          <h3>Köpek bakımı</h3>
-          <p>Gezdirme, ödül ve oyuncaklarla sadık dostunuzun enerjisini doğru yönlendirin.</p>
+        <div class="shop-tabs__panel" role="tabpanel" id="shop-panel-kus" aria-labelledby="shop-tab-kus" data-shop-panel="kus" hidden>
+          <div class="shop-tabs__grid">
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/kus.png" alt="Muhabbet Kuşu Yemi 1 kg" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Muhabbet Kuşu Yemi 1 kg</div>
+                  <div class="product-card__cat">Günlük dengeli tohum karışımı.</div>
+                  <div class="product-card__price">₺ 129,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/slide-kus.png" alt="Kafes Tüneği Seti" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kafes Tüneği Seti</div>
+                  <div class="product-card__cat">Doğal ahşap tüneme desteği.</div>
+                  <div class="product-card__price">₺ 189,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Kuş Banyo Kabı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kuş Banyo Kabı</div>
+                  <div class="product-card__cat">Tüy bakımı için pratik banyo.</div>
+                  <div class="product-card__price">₺ 99,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Mineral Gaga Taşı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Mineral Gaga Taşı</div>
+                  <div class="product-card__cat">Gaga sağlığı ve mineral desteği.</div>
+                  <div class="product-card__price">₺ 69,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Kanarya Yemi 500 g" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kanarya Yemi 500 g</div>
+                  <div class="product-card__cat">Şarkı ve enerji için özel karışım.</div>
+                  <div class="product-card__price">₺ 149,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Kuş Oyuncak Çan" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kuş Oyuncak Çan</div>
+                  <div class="product-card__cat">Eğlenceli ve güvenli kafes oyuncağı.</div>
+                  <div class="product-card__price">₺ 79,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/kus.png" alt="Kafes Yem Kabı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kafes Yem Kabı</div>
+                  <div class="product-card__cat">Kolay doldurulan pratik kap.</div>
+                  <div class="product-card__price">₺ 89,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/slide-kus.png" alt="Kuş Vitamini Damlası" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kuş Vitamini Damlası</div>
+                  <div class="product-card__cat">Bağışıklık ve tüy sağlığı desteği.</div>
+                  <div class="product-card__price">₺ 159,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Sultan Papağanı Yemi" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Sultan Papağanı Yemi</div>
+                  <div class="product-card__cat">Zengin yağlı tohum formülü.</div>
+                  <div class="product-card__price">₺ 219,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Kafes Örtüsü" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kafes Örtüsü</div>
+                  <div class="product-card__cat">Gece dinlenmesi için koruma.</div>
+                  <div class="product-card__price">₺ 179,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Kuş Kum Kabı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Kuş Kum Kabı</div>
+                  <div class="product-card__cat">Sindirim desteği için kum.</div>
+                  <div class="product-card__price">₺ 59,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Aynalı Kuş Oyuncağı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Aynalı Kuş Oyuncağı</div>
+                  <div class="product-card__cat">Sosyal etkileşim ve eğlence.</div>
+                  <div class="product-card__price">₺ 89,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+          </div>
+          <div class="shop-tabs__more">
+            <a href="urunler.html">Tüm kuş ürünleri
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
         </div>
-        <img class="bento-cover" src="media/kopek.png" alt="Köpek bakımı" />
-      </a>
-
-      <a class="home-bento__grid-item is--3" href="#kus" data-go="kus">
-        <div class="bento-header">
-          <img class="bento-icon" src="media/bird.svg" alt="" />
-          <h3>Kuş bakımı</h3>
-          <p>Yem, kafes ve bakım ürünleriyle kuşlarınız için ferah bir yaşam alanı kurun.</p>
+        <div class="shop-tabs__panel" role="tabpanel" id="shop-panel-balik" aria-labelledby="shop-tab-balik" data-shop-panel="balik" hidden>
+          <div class="shop-tabs__grid">
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Tropikal Balık Yemi 250 ml" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Tropikal Balık Yemi 250 ml</div>
+                  <div class="product-card__cat">Renk ve canlılık destekli formül.</div>
+                  <div class="product-card__price">₺ 149,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Akvaryum Su Düzenleyici" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Akvaryum Su Düzenleyici</div>
+                  <div class="product-card__cat">Klor ve ağır metal nötralizasyonu.</div>
+                  <div class="product-card__price">₺ 189,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="İç Filtre 600 L/s" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">İç Filtre 600 L/s</div>
+                  <div class="product-card__cat">Temiz su için sessiz filtrasyon.</div>
+                  <div class="product-card__price">₺ 649,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Akvaryum Termometresi" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Akvaryum Termometresi</div>
+                  <div class="product-card__cat">Hassas sıcaklık takibi.</div>
+                  <div class="product-card__price">₺ 79,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-belt.png" alt="Bitki Gübresi Sıvı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Bitki Gübresi Sıvı</div>
+                  <div class="product-card__cat">Canlı bitki gelişimi için.</div>
+                  <div class="product-card__price">₺ 129,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/slide-kedi.png" alt="Balık Ağı Küçük" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Balık Ağı Küçük</div>
+                  <div class="product-card__cat">Güvenli yakalama ve taşıma.</div>
+                  <div class="product-card__price">₺ 59,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="LED Akvaryum Aydınlatma" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">LED Akvaryum Aydınlatma</div>
+                  <div class="product-card__cat">Bitki ve balık için dengeli ışık.</div>
+                  <div class="product-card__price">₺ 429,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Dip Çekici Sifon" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Dip Çekici Sifon</div>
+                  <div class="product-card__cat">Taban temizliği için pratik set.</div>
+                  <div class="product-card__price">₺ 199,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Japon Balığı Yemi" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Japon Balığı Yemi</div>
+                  <div class="product-card__cat">Yüzen pelet formülü.</div>
+                  <div class="product-card__price">₺ 119,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Akvaryum Dekor Mağara" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Akvaryum Dekor Mağara</div>
+                  <div class="product-card__cat">Gizlenme ve stres azaltma alanı.</div>
+                  <div class="product-card__price">₺ 159,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-belt.png" alt="Hava Motoru Sessiz" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Hava Motoru Sessiz</div>
+                  <div class="product-card__cat">Oksijen desteği için kompakt pompa.</div>
+                  <div class="product-card__price">₺ 279,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/slide-kedi.png" alt="Test Kiti pH" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Test Kiti pH</div>
+                  <div class="product-card__cat">Su kalitesi ölçümü.</div>
+                  <div class="product-card__price">₺ 249,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+          </div>
+          <div class="shop-tabs__more">
+            <a href="urunler.html">Tüm balık ürünleri
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
         </div>
-        <img class="bento-cover" src="media/kus.png" alt="Kuş bakımı ürünü" />
-      </a>
-
-      <a class="home-bento__grid-item is--4" href="#kedi" data-go="kedi">
-        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
-          <source src="media/cat-look.mp4" type="video/mp4" />
-        </video>
-        <div class="bento-tag">Kedi koleksiyonu</div>
-      </a>
-
-      <a class="home-bento__grid-item is--5" href="#balik" data-go="balik">
-        <video class="bento-cover" autoplay muted loop playsinline webkit-playsinline>
-          <source src="media/fish-eat.mp4" type="video/mp4" />
-        </video>
-        <div class="bento-tag">Akvaryum</div>
-      </a>
-
-      <a class="home-bento__grid-item is--6" href="#balik" data-go="balik">
-        <div class="bento-header">
-          <img class="bento-icon" src="media/fish.svg" alt="" />
-          <h3>Balık bakımı</h3>
-          <p>Yem, su düzenleyici ve akvaryum ekipmanlarıyla sakin ve sağlıklı bir ortam sağlayın.</p>
-        </div>
-      </a>
-    </div>
   </section>
 
   <section class="newsroom" id="blog">
@@ -5192,7 +6279,7 @@
         });
       });
 
-      menu.querySelectorAll('.site-menu__links a[href="#urunler"]').forEach(function (el) {
+      menu.querySelectorAll('.site-menu__links a[href="urunler.html"]').forEach(function (el) {
         el.addEventListener("click", function () {
           closeMenu();
           const dest = document.getElementById("urunler");
@@ -5212,238 +6299,48 @@
     })();
   </script>
 
+
   <script>
     (function () {
-      const viewport = document.querySelector("[data-bestsellers-slider]");
-      const track = document.querySelector("[data-bestsellers-track]");
-      const prevBtn = document.querySelector("[data-bestsellers-prev]");
-      const nextBtn = document.querySelector("[data-bestsellers-next]");
-      if (!viewport || !track || !prevBtn || !nextBtn) return;
+      const root = document.querySelector("[data-shop-tabs]");
+      if (!root) return;
+      const tabs = root.querySelectorAll("[data-shop-tab]");
+      const panels = root.querySelectorAll("[data-shop-panel]");
+      const MAX = 12;
 
-      const slides = Array.prototype.slice.call(track.querySelectorAll(".bestsellers__slide"));
-      if (!slides.length) return;
-
-      function rand(min, max, step) {
-        const n = min + Math.random() * (max - min);
-        return Math.round(n / step) * step;
-      }
-
-      /* Aardvark ParallaxSlider: tek tek kartlara rastgele çapraz + dikey ofset */
-      const itemSettings = slides.map(function (slide, index) {
-        const el = slide.querySelector(".product-card") || slide;
-        const direction = index % 2 === 0 ? -1 : 1;
-        const rotation = rand(1.5, 3, 0.1) * direction;
-        const yOffset = rand(3, 9, 0.1) * direction;
-        el.style.willChange = "transform";
-        return { slide: slide, el: el, rotation: rotation, yOffset: yOffset };
-      });
-
-      let current = 0;
-      let target = 0;
-      let maxScroll = 0;
-      let stride = 0;
-      let isDragging = false;
-      let isTouching = false;
-      let dragStartX = 0;
-      let dragStartTarget = 0;
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let scrollDirection = null;
-      let lastTs = 0;
-      const LERP = 0.225;
-      const BOUNCE = 40;
-
-      function measure() {
-        const first = slides[0];
-        const styles = getComputedStyle(track);
-        const gap = parseFloat(styles.columnGap || styles.gap) || 16;
-        const w = first.getBoundingClientRect().width;
-        stride = w + gap;
-        let total = 0;
-        slides.forEach(function (s, i) {
-          total += s.getBoundingClientRect().width;
-          if (i < slides.length - 1) total += gap;
+      function activate(id) {
+        tabs.forEach(function (tab) {
+          const on = tab.getAttribute("data-shop-tab") === id;
+          tab.classList.toggle("is-on", on);
+          tab.setAttribute("aria-selected", on ? "true" : "false");
+          tab.tabIndex = on ? 0 : -1;
         });
-        const pad = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight) || 0;
-        maxScroll = Math.max(0, total - (viewport.clientWidth - pad) + 32);
-        target = clamp(target, -maxScroll, 0);
-        current = clamp(current, -maxScroll - BOUNCE, BOUNCE);
-      }
-
-      function clamp(v, min, max) {
-        return Math.max(min, Math.min(max, v));
-      }
-
-      function damp(a, b, lambda, dt) {
-        return a + (b - a) * (1 - Math.exp(-lambda * dt));
-      }
-
-      function applyX() {
-        const x = current;
-        slides.forEach(function (slide) {
-          slide.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
-        });
-      }
-
-      /* Merkeze göre sin güçü → yukarı/aşağı + hafif rotate (Aardvark ile aynı formül) */
-      function applyParallax() {
-        const wrapRect = viewport.getBoundingClientRect();
-        const wrapCenter = wrapRect.left + wrapRect.width / 2;
-        const maxDistance = wrapRect.width / 2 || 1;
-
-        itemSettings.forEach(function (item) {
-          const rect = item.el.getBoundingClientRect();
-          const elCenter = rect.left + rect.width / 2;
-          const norm = (elCenter - wrapCenter) / maxDistance;
-          const clamped = clamp(norm, -2, 2);
-          const strength = Math.sin(clamped * 1.2);
-          const moveY = strength * item.yOffset;
-          const rotate = strength * item.rotation;
-          item.el.style.transform =
-            "translateY(" + moveY.toFixed(3) + "%) rotate(" + rotate.toFixed(3) + "deg)";
-        });
-      }
-
-      function progress() {
-        if (maxScroll <= 0) return 1;
-        return clamp(-target / maxScroll, 0, 1);
-      }
-
-      function updateArrows() {
-        prevBtn.disabled = progress() <= 0.02 && target >= -2;
-        nextBtn.disabled = progress() >= 0.95;
-        prevBtn.classList.toggle("is-disabled", prevBtn.disabled);
-        nextBtn.classList.toggle("is-disabled", nextBtn.disabled);
-      }
-
-      function goToNext() {
-        target = clamp(Math.round((target - stride) / stride) * stride, -maxScroll, 0);
-      }
-
-      function goToPrev() {
-        target = clamp(Math.round((target + stride) / stride) * stride, -maxScroll, 0);
-      }
-
-      prevBtn.addEventListener("click", function () { goToPrev(); });
-      nextBtn.addEventListener("click", function () { goToNext(); });
-
-      function onDown(clientX) {
-        isDragging = true;
-        dragStartX = clientX;
-        dragStartTarget = target;
-        viewport.classList.add("is-dragging");
-      }
-
-      function onMove(clientX) {
-        if (!isDragging) return;
-        const dx = clientX - dragStartX;
-        let next = dragStartTarget + dx;
-        if (next > BOUNCE) next = BOUNCE;
-        else if (next < -maxScroll - BOUNCE) next = -maxScroll - BOUNCE;
-        target = next;
-      }
-
-      function onUp() {
-        if (!isDragging) return;
-        isDragging = false;
-        viewport.classList.remove("is-dragging");
-        if (target > 0) target = 0;
-        else if (target < -maxScroll) target = -maxScroll;
-      }
-
-      viewport.addEventListener("mousedown", function (e) {
-        if (e.button !== 0) return;
-        e.preventDefault();
-        onDown(e.clientX);
-      });
-      window.addEventListener("mousemove", function (e) {
-        if (!isDragging || isTouching) return;
-        onMove(e.clientX);
-      });
-      window.addEventListener("mouseup", function () {
-        if (isTouching) return;
-        onUp();
-      });
-
-      viewport.addEventListener("touchstart", function (e) {
-        const t = e.touches[0];
-        touchStartX = t.clientX;
-        touchStartY = t.clientY;
-        scrollDirection = null;
-        isTouching = true;
-        onDown(t.clientX);
-      }, { passive: true });
-
-      window.addEventListener("touchmove", function (e) {
-        if (!isTouching) return;
-        const t = e.touches[0];
-        const dx = Math.abs(t.clientX - touchStartX);
-        const dy = Math.abs(t.clientY - touchStartY);
-        if (!scrollDirection && (dx > 5 || dy > 5)) {
-          scrollDirection = dx > dy ? "horizontal" : "vertical";
-        }
-        if (scrollDirection === "horizontal") {
-          e.preventDefault();
-          onMove(t.clientX);
-        }
-      }, { passive: false });
-
-      window.addEventListener("touchend", function () {
-        isTouching = false;
-        scrollDirection = null;
-        onUp();
-      });
-
-      /* Sürüklerken link tıklamasını engelle */
-      track.querySelectorAll("a").forEach(function (link) {
-        let down = false;
-        let dragged = false;
-        let sx = 0;
-        let sy = 0;
-        link.addEventListener("pointerdown", function (e) {
-          down = true;
-          dragged = false;
-          sx = e.clientX;
-          sy = e.clientY;
-        });
-        window.addEventListener("pointermove", function (e) {
-          if (!down) return;
-          if (Math.abs(e.clientX - sx) > 5 || Math.abs(e.clientY - sy) > 5) dragged = true;
-        });
-        window.addEventListener("pointerup", function () { down = false; });
-        link.addEventListener("click", function (e) {
-          if (dragged) {
-            e.preventDefault();
-            e.stopPropagation();
+        panels.forEach(function (panel) {
+          const on = panel.getAttribute("data-shop-panel") === id;
+          panel.classList.toggle("is-on", on);
+          if (on) {
+            panel.removeAttribute("hidden");
+            const cards = panel.querySelectorAll(".product-card");
+            cards.forEach(function (card, i) {
+              card.hidden = i >= MAX;
+            });
+          } else {
+            panel.setAttribute("hidden", "");
           }
-          dragged = false;
-        }, true);
-      });
-
-      addEventListener("resize", function () {
-        measure();
-        applyX();
-        applyParallax();
-        updateArrows();
-      });
-
-      function tick(ts) {
-        const dt = lastTs ? Math.min(0.05, (ts - lastTs) / 1000) : 0.016;
-        lastTs = ts;
-        current = damp(current, target, 1 / LERP, dt);
-        applyX();
-        applyParallax();
-        updateArrows();
-        requestAnimationFrame(tick);
+        });
       }
 
-      measure();
-      applyX();
-      applyParallax();
-      updateArrows();
-      requestAnimationFrame(tick);
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          activate(tab.getAttribute("data-shop-tab"));
+        });
+      });
+
+      activate("kedi");
     })();
   </script>
+
+  <script src="js/product-slider.js"></script>
 
   <script>
     (function () {

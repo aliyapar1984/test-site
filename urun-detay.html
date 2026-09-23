@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Konfor Yatak — PETDOSTUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/chrome.css" />
+</head>
+<body class="is-product-detail">
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="PETDOSTUM">
+      <img src="pedlogo.png" alt="PETDOSTUM" />
+    </a>
+    <nav class="menu" aria-label="Menü">
+      <div class="menu-tools">
+        <button type="button" class="menu-action" aria-label="Ara">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="menu-action" aria-label="Giriş yap">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="menu-more" id="menuOpen" aria-label="Menüyü aç" aria-expanded="false" aria-controls="siteMenu">
+          <i></i><i></i><i></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="site-menu" id="siteMenu" aria-hidden="true">
+    <div class="site-menu__top">
+      <a class="logo site-menu__logo" href="index.html" data-menu-close aria-label="PETDOSTUM">
+        <img src="pedlogo.png" alt="PETDOSTUM" />
+      </a>
+      <nav class="menu site-menu__header-nav" aria-label="Menü kontrolleri">
+        <div class="menu-tools">
+          <span class="site-menu__tool-spacer" aria-hidden="true"></span>
+          <span class="site-menu__tool-spacer" aria-hidden="true"></span>
+          <button type="button" class="menu-more site-menu__close" id="menuClose" aria-label="Menüyü kapat">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <div class="site-menu__body">
+      <div class="site-menu__nav" role="tablist" aria-label="Kategoriler">
+        <button type="button" class="site-menu__nav-btn is-on" data-menu-cat="kedi" role="tab" aria-selected="true">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/cat.svg" alt="" />
+          </span>
+          <span><em>01</em>Kedi</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="kopek" role="tab" aria-selected="false">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/dog.svg" alt="" />
+          </span>
+          <span><em>02</em>Köpek</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="kus" role="tab" aria-selected="false">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/bird.svg" alt="" />
+          </span>
+          <span><em>03</em>Kuş</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="balik" role="tab" aria-selected="false">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/fish.svg" alt="" />
+          </span>
+          <span><em>04</em>Balık</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="site-menu__panel-wrap">
+        <div class="site-menu__panel is-on" data-menu-panel="kedi" role="tabpanel">
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/cat.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Kedi</div>
+              <h2 class="site-menu__panel-title">Kedi Mamaları</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yavru Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="kedi" data-menu-close>Tüm Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="kopek" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/dog.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Köpek</div>
+              <h2 class="site-menu__panel-title">Köpek Mamaları</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yavru Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="kopek" data-menu-close>Tüm Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="kus" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/bird.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Kuş</div>
+              <h2 class="site-menu__panel-title">Kuş Ürünleri</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Kuş Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kafes &amp; Aksesuar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tünek &amp; Yuva <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Vitamin &amp; Bakım <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Oyuncaklar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kum &amp; Hijyen <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="kus" data-menu-close>Tüm Kuş Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="balik" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/fish.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Balık</div>
+              <h2 class="site-menu__panel-title">Akvaryum Ürünleri</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Balık Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Filtre &amp; Pompa <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Isıtıcı &amp; Aydınlatma <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Su Düzenleyici <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Bitki &amp; Dekor <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Akvaryum Setleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="balik" data-menu-close>Tüm Akvaryum Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-menu__foot">
+      <div class="site-menu__foot-links">
+        <a href="mailto:info@petdostum.com" aria-label="E-posta: info@petdostum.com">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h16v10H4v-10Z" stroke="currentColor" stroke-width="1.7"/><path d="m4.5 8 7.5 5.5L19.5 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </i>
+          <span><strong>E-posta</strong> info@petdostum.com</span>
+        </a>
+        <a href="index.html#icerik" aria-label="Mağazalarımız">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="11" r="2.2" stroke="currentColor" stroke-width="1.7"/></svg>
+          </i>
+          <span><strong>Mağazalarımız</strong> Size en yakın mağazayı bulun.</span>
+        </a>
+        <a href="tel:08501234567" aria-label="Bize ulaşın: 0850 123 45 67">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 5h3l1.2 3.2-1.8 1.2a10 10 0 0 0 4.2 4.2l1.2-1.8L19 13v3a2 2 0 0 1-2.2 2A13 13 0 0 1 6 7.2 2 2 0 0 1 8 5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </i>
+          <span><strong>Bize Ulaşın</strong> 0850 123 45 67</span>
+        </a>
+      </div>
+      <div class="site-menu__social">
+        <span>Sosyal Medya</span>
+        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="7.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 8h2V5h-2a4 4 0 0 0-4 4v2H8v3h2v6h3v-6h2.2l.8-3H13V9a1 1 0 0 1 1-1Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://youtube.com" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="10" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 10.2v3.6L14.5 12 11 10.2Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://tiktok.com" aria-label="TikTok" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 5.5c.8 1.7 2.2 2.8 4 3v2.6c-1.5-.1-2.9-.6-4-1.4v5.4A4.9 4.9 0 1 1 9.2 10.4v2.7a2.3 2.3 0 1 0 2.3 2.3V5.5H14Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="page-main page-main--detail" id="urun-detay" aria-label="Ürün detayı">
+    <section class="product-detail" data-product-detail>
+      <div class="product-detail__stage">
+        <div class="product-detail__media">
+          <div class="product-detail__gallery" data-detail-gallery>
+            <figure class="product-detail__shot is-on" id="detail-shot-1" data-detail-shot>
+              <img src="media/product/dog-home.png" alt="Konfor köpek yatağı — ön görünüm" />
+            </figure>
+            <figure class="product-detail__shot" id="detail-shot-2" data-detail-shot>
+              <img src="media/product/dog-bone.png" alt="Konfor köpek yatağı — doku detayı" />
+            </figure>
+            <figure class="product-detail__shot" id="detail-shot-3" data-detail-shot>
+              <img src="media/product/dog-belt.png" alt="Konfor köpek yatağı — kullanım" />
+            </figure>
+            <figure class="product-detail__shot" id="detail-shot-4" data-detail-shot>
+              <img src="media/product/dog-eat2.png" alt="Konfor köpek yatağı — yaşam alanı" />
+            </figure>
+          </div>
+          <div class="product-detail__dots" data-detail-dots role="tablist" aria-label="Ürün görselleri"></div>
+        </div>
+
+        <aside class="product-detail__panel">
+          <div class="product-detail__panel-inner">
+            <div class="product-detail__title-wrap">
+              <h1 class="product-detail__name">Tavuklu Pirinçli Kedi Maması</h1>
+            </div>
+
+            <div class="product-detail__meta">
+              <p class="product-detail__brand">Petdostum</p>
+              <p class="product-detail__sku">Barkod: 8690001120457</p>
+              <button type="button" class="product-detail__wish" aria-label="Favorilere ekle" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s-7-4.4-9.2-8.2C1.2 9 2.6 6.2 5.4 5.4c1.8-.5 3.6.2 4.7 1.6L12 9l1.9-2c1.1-1.4 2.9-2.1 4.7-1.6 2.8.8 4.2 3.6 2.6 6.4C19 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            <div class="product-detail__thumbs" role="listbox" aria-label="Boyut seçenekleri">
+              <button type="button" class="product-detail__thumb" data-detail-size="S" aria-label="Boyut S" role="option">
+                <span class="product-detail__thumb-size">400 gr</span>
+                <span class="product-detail__thumb-price">₺ 220,00</span>
+              </button>
+              <button type="button" class="product-detail__thumb is-on" data-detail-size="M" aria-label="Boyut M" role="option" aria-selected="true">
+                <span class="product-detail__thumb-size">1 Kg</span>
+                <span class="product-detail__thumb-price">₺ 260,00</span>
+              </button>
+              <button type="button" class="product-detail__thumb" data-detail-size="L" aria-label="Boyut L" role="option">
+                <span class="product-detail__thumb-size">2 Kg</span>
+                <span class="product-detail__thumb-price">₺ 310,00</span>
+              </button>
+            </div>
+
+            <div class="product-detail__offer">
+              <p class="product-detail__price-note">Sepete özel</p>
+              <p class="product-detail__price">
+                <span class="product-detail__price-old">₺ 320,00</span>
+                <span class="product-detail__price-now">₺ 260,00</span>
+                <span class="product-detail__disc">%19</span>
+              </p>
+            </div>
+
+            <div class="product-detail__buy">
+              <div class="product-detail__qty" data-detail-qty>
+                <button type="button" class="product-detail__qty-btn" data-qty-minus aria-label="Azalt">−</button>
+                <input class="product-detail__qty-input" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="Adet" data-qty-value />
+                <button type="button" class="product-detail__qty-btn" data-qty-plus aria-label="Artır">+</button>
+              </div>
+              <button type="button" class="product-detail__cta">Sepete ekle</button>
+            </div>
+          </div>
+
+          <div class="product-detail__ship" aria-label="Teslimat bilgileri">
+            <div class="product-detail__ship-item">
+              <img class="product-detail__ship-icon" src="media/icons/cargo.svg" alt="" />
+              <p>Bugün 22:00’a kadar siparişte seçili bölgelerde aynı gün teslim.</p>
+            </div>
+            <div class="product-detail__ship-item">
+              <img class="product-detail__ship-icon" src="media/icons/location.svg" alt="" />
+              <p>Türkiye geneli siparişler bugün 16:00’a kadar kargoya verilir.</p>
+            </div>
+          </div>
+
+          <div class="product-detail__nutrition">
+            <dl class="product-detail__specs">
+              <div>
+                <dt>Lezzetler</dt>
+                <dd>Kümes Hayvanı</dd>
+              </div>
+              <div>
+                <dt>Protein</dt>
+                <dd>%37</dd>
+              </div>
+              <div>
+                <dt>Yağ</dt>
+                <dd>%12</dd>
+              </div>
+              <div>
+                <dt>Tahıl Oranı</dt>
+                <dd>Tahıllı</dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+
+      <nav class="product-detail__crumb" aria-label="Sayfa konumu">
+        <a href="index.html">Anasayfa</a>
+        <span aria-hidden="true">/</span>
+        <a href="urunler.html">Ürünler</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Konfor</span>
+      </nav>
+
+      <div class="product-detail__more" data-product-slider>
+        <div class="product-detail__more-head">
+          <div class="product-detail__more-titles">
+            <p class="product-detail__more-kicker">Seçiminize Özel</p>
+            <h2 class="bestsellers__title">Benzer Ürünler</h2>
+          </div>
+          <div class="bestsellers__controls">
+            <a class="product-detail__more-all" href="urunler.html">Tüm ürünler</a>
+            <button type="button" class="bestsellers__nav is-prev" data-bestsellers-prev aria-label="Önceki ürünler" disabled>
+              <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+            </button>
+            <button type="button" class="bestsellers__nav is-next" data-bestsellers-next aria-label="Sonraki ürünler">
+              <svg viewBox="0 0 14 13" fill="none" aria-hidden="true"><path d="M13.58 5.66v.845l-5.994 5.66-1.71-2.063a61.427 61.427 0 0 1 4.265-2.988l-.02-.078c-1.828.196-4.107.294-6.387.294H0V4.835h3.734c2.28 0 4.56.098 6.387.294l.02-.059a67.638 67.638 0 0 1-4.265-3.006L7.586 0l5.994 5.66Z" fill="currentColor"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="bestsellers__slider" data-bestsellers-slider>
+          <div class="bestsellers__track" data-bestsellers-track>
+            <div class="bestsellers__slide">
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Pro Plan Adult Tavuklu Köpek Maması" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Pro Plan Adult Tavuklu Köpek Maması</div>
+                  <div class="product-card__cat">Dengeli formül, tüm ırklar için.</div>
+                  <div class="product-card__price">₺ 2.210,98</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="bestsellers__slide">
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Doğal Çiğneme Kemiği" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Doğal Çiğneme Kemiği</div>
+                  <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
+                  <div class="product-card__price">₺ 223,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="bestsellers__slide">
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Konfor Köpek Yatağı" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Konfor Köpek Yatağı</div>
+                  <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
+                  <div class="product-card__price">₺ 899,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="bestsellers__slide">
+              <a class="product-card is-orange" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-belt.png" alt="Dayanıklı Gezdirme Tasması" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Dayanıklı Gezdirme Tasması</div>
+                  <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
+                  <div class="product-card__price">₺ 329,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="bestsellers__slide">
+              <a class="product-card is-pink" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat2.png" alt="Hills Science Plan Adult Tavuklu Mama" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Hills Science Plan Adult Tavuklu Mama</div>
+                  <div class="product-card__cat">Hassas sindirim için seçilmiş formül.</div>
+                  <div class="product-card__price">₺ 1.890,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="bestsellers__slide">
+              <a class="product-card is-coral" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-eat.png" alt="Yavru Köpek Maması 3 kg" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Yavru Köpek Maması 3 kg</div>
+                  <div class="product-card__cat">Büyüme dönemine özel beslenme desteği.</div>
+                  <div class="product-card__price">₺ 334,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="bestsellers__slide">
+              <a class="product-card is-blue" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-bone.png" alt="Protein Ödül Maması" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Protein Ödül Maması</div>
+                  <div class="product-card__cat">Eğitim anları için yüksek proteinli ödül.</div>
+                  <div class="product-card__price">₺ 371,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="bestsellers__slide">
+              <a class="product-card is-green" href="urun-detay.html">
+                <div class="product-card__top">
+                  <div class="product-card__media">
+                    <img src="media/product/dog-home.png" alt="Ortopedik Minder" loading="lazy" />
+                  </div>
+                  <div class="product-card__name">Ortopedik Minder</div>
+                  <div class="product-card__cat">Eklem dostu dinlenme desteği.</div>
+                  <div class="product-card__price">₺ 408,00</div>
+                </div>
+                <span class="news-read">
+                  İncele
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="product-info" data-product-info aria-label="Ürün bilgileri">
+        <div class="product-info__bar">
+          <p class="product-info__bar-kicker">Ürün detayı</p>
+          <div class="product-info__tabs" role="tablist" aria-label="Bilgi sekmeleri">
+            <button type="button" class="product-info__tab is-on" role="tab" id="info-tab-desc" aria-selected="true" aria-controls="info-panel-desc" data-info-tab="desc">
+              <span class="product-info__tab-num" aria-hidden="true">01</span>
+              <span class="product-info__tab-label">Açıklama</span>
+            </button>
+            <button type="button" class="product-info__tab" role="tab" id="info-tab-features" aria-selected="false" aria-controls="info-panel-features" data-info-tab="features" tabindex="-1">
+              <span class="product-info__tab-num" aria-hidden="true">02</span>
+              <span class="product-info__tab-label">Özellikler</span>
+            </button>
+            <button type="button" class="product-info__tab" role="tab" id="info-tab-return" aria-selected="false" aria-controls="info-panel-return" data-info-tab="return" tabindex="-1">
+              <span class="product-info__tab-num" aria-hidden="true">03</span>
+              <span class="product-info__tab-label">İade</span>
+            </button>
+            <button type="button" class="product-info__tab" role="tab" id="info-tab-ship" aria-selected="false" aria-controls="info-panel-ship" data-info-tab="ship" tabindex="-1">
+              <span class="product-info__tab-num" aria-hidden="true">04</span>
+              <span class="product-info__tab-label">Kargo</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="product-info__panels">
+          <div class="product-info__panel is-on" role="tabpanel" id="info-panel-desc" aria-labelledby="info-tab-desc" data-info-panel="desc">
+            <article class="product-info__slab is-peach">
+              <svg class="product-info__edge is-top is-from-more" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 0h1440v42c-200 40-440 62-720 36S200 4 0 32V0Z"/>
+              </svg>
+              <div class="product-info__body">
+                <div class="product-info__copy">
+                  <p class="product-info__script">Sterilised</p>
+                  <h2 class="product-info__title">İdeal kilo</h2>
+                  <p class="product-info__kicker">Kısırlaştırılmış kediler için</p>
+                  <p class="product-info__text">
+                    Kedinizin kısırlaştırıldıktan sonra, tükettiği besinlerin değişen enerji ihtiyacını desteklemesini sağlamak için bir diyet değişikliği gerekebilir. ROYAL CANIN Kısırlaştırılmış kedi maması, kedinizin kısırlaştırmadan sonra ideal vücut ağırlığını korumasına yardımcı olur.
+                  </p>
+                </div>
+                <figure class="product-info__figure is-radius-a">
+                  <img src="media/slide-kedi.png" alt="Kısırlaştırılmış kedi maması" loading="lazy" />
+                </figure>
+              </div>
+              <svg class="product-info__edge is-bottom is-to-blush" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 100h1440V58c-200-40-440-62-720-36S200 96 0 68v32Z"/>
+              </svg>
+            </article>
+
+            <article class="product-info__slab is-blush">
+              <div class="product-info__body is-reverse">
+                <div class="product-info__copy">
+                  <h2 class="product-info__title">
+                    Özel
+                    <span class="product-info__script is-inline">formül</span>
+                  </h2>
+                  <p class="product-info__kicker">Kilo ve üriner destek</p>
+                  <p class="product-info__text">
+                    Kısırlaştırılmış kedilerde kilo problemi ve mesane taşı problemi gibi özel problemler oluşur. Royal Canin Sterilize 37 kedi maması, kilo alma problemleri ile sterilize kediler için özel olarak geliştirilmiştir:
+                  </p>
+                  <ul class="product-info__list">
+                    <li>Dengeli enerji arzı ile azaltılmış yağ içeriği (%12)</li>
+                    <li>Az karbonhidrat içeriği: örn. hiçbir nişasta içermez (açlık hissini uyandırmaz)</li>
+                    <li>L-Karnitin: (100 mg / kg), yağ tüketimi ve bertaraf edilmesinde yardımcı olur</li>
+                    <li>İdrar dengeli pH düzeyi (pH 6-6,5) yoluyla sağlıklı idrar yolu teşvik edilir</li>
+                    <li>Yüksek protein içeriği (%37) ile kas kütlesi korunur</li>
+                  </ul>
+                </div>
+                <figure class="product-info__figure is-radius-b">
+                  <img src="media/kopek-kiz.png" alt="Sağlıklı beslenen evcil hayvan" loading="lazy" />
+                </figure>
+              </div>
+              <svg class="product-info__edge is-bottom is-to-sage" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 100h1440V64c-220-48-460-70-740-42S220 98 0 72v28Z"/>
+              </svg>
+            </article>
+
+            <article class="product-info__slab is-sage">
+              <div class="product-info__body">
+                <div class="product-info__copy">
+                  <p class="product-info__script is-green">Saklama</p>
+                  <h2 class="product-info__title">Uyarı</h2>
+                  <p class="product-info__kicker">Ambalaj ve muhafaza</p>
+                  <ul class="product-info__list">
+                    <li>Parti kodu, tescil numarası ve son kullanma tarihi için, ambalajın üzerine bakınız.</li>
+                    <li>Serin ve kuru bir yerde saklayınız.</li>
+                  </ul>
+                </div>
+                <figure class="product-info__figure is-radius-c">
+                  <img src="media/kopek.png" alt="Petdostum yaşam alanı" loading="lazy" />
+                </figure>
+              </div>
+              <svg class="product-info__edge is-bottom is-to-faq" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 100h1440V64c-220-48-460-70-740-42S220 98 0 72v28Z"/>
+              </svg>
+            </article>
+
+            <section class="faq is-plain" id="sss" aria-labelledby="faqTitle">
+              <h2 class="faq__title" id="faqTitle">Sıkça sorulan sorular</h2>
+              <div class="faq__body">
+                <div class="faq__list">
+                  <div class="faq__item is-open">
+                    <button type="button" class="faq__item-q" aria-expanded="true">
+                      <span>Bu mama hangi yaş aralığındaki kediler için uygundur?</span>
+                      <span class="faq__icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq__item-a">
+                      <div class="faq__item-a-inner">
+                        <p>Yetişkin, kısırlaştırılmış kediler için formüle edilmiştir. Yavru veya özel tıbbi diyete ihtiyaç duyan kedilerde kullanım öncesi veterinerinize danışmanızı öneririz.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq__item">
+                    <button type="button" class="faq__item-q" aria-expanded="false">
+                      <span>Kısırlaştırılmış kediler için en iyi mama hangisidir?</span>
+                      <span class="faq__icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq__item-a">
+                      <div class="faq__item-a-inner">
+                        <p>Kısırlaştırma sonrası enerji ihtiyacı değişir; kilo yönetimi ve üriner destek sunan sterilize formüller genellikle daha uygundur. Kedinizin yaşı, kilosu ve aktivitesine göre seçim yapmanızı öneririz.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq__item">
+                    <button type="button" class="faq__item-q" aria-expanded="false">
+                      <span>Kedim bu mama ile kilo alır mı?</span>
+                      <span class="faq__icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq__item-a">
+                      <div class="faq__item-a-inner">
+                        <p>Formül, azaltılmış yağ ve L-karnitin ile kilo alımını kontrol etmeye yardımcı olacak şekilde tasarlanmıştır. Beslenme tablosundaki önerilen porsiyonlara uymak önemlidir.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq__item">
+                    <button type="button" class="faq__item-q" aria-expanded="false">
+                      <span>Bu mama tüy dökülmesini önler mi?</span>
+                      <span class="faq__icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq__item-a">
+                      <div class="faq__item-a-inner">
+                        <p>Bu ürünün odak noktası kilo yönetimi ve üriner destektir. Tüy dökülmesi için özel formüller de sunulabilir; ihtiyaca göre ürün danışmanlarımızdan destek alabilirsiniz.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="product-info__panel" role="tabpanel" id="info-panel-features" aria-labelledby="info-tab-features" data-info-panel="features" hidden>
+            <article class="product-info__slab is-peach">
+              <svg class="product-info__edge is-top is-from-more" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 0h1440v42c-200 40-440 62-720 36S200 4 0 32V0Z"/>
+              </svg>
+              <div class="product-info__body is-wide">
+                <div class="product-info__copy is-wide">
+                  <h2 class="product-info__heading">Öne Çıkan Özellikler</h2>
+                  <div class="product-info__table-wrap">
+                    <table class="product-info__table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Özellik</th>
+                          <th scope="col">Açıklama</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">İştah Hissinin Tatmini</th>
+                          <td>Düşük karbonhidrat içeriği ve uygun yağ oranı ile kedinizin açlık hissi kontrol altına alınır.</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Kilo Yönetimi</th>
+                          <td>Sterilize kedilerde kilo alımını önlemeye yardımcı olan özel formül.</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Üriner Sistem Sağlığı</th>
+                          <td>Mineral dengesi ile sağlıklı idrar yolu desteği sağlar.</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Yüksek Protein İçeriği</th>
+                          <td>Kas kütlesini korumak ve sağlıklı bir vücut yapısı desteklenir.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <h3 class="product-info__subheading">İçerik Analizi ve Besin Değerleri</h3>
+                  <div class="product-info__table-wrap">
+                    <table class="product-info__table">
+                      <tbody>
+                        <tr>
+                          <th scope="row">İçindekiler</th>
+                          <td>Kurutulmuş kümes hayvanı proteini, Mısır, Bitkisel proteinizolatı, Bitkisel lifler, Hayvansal yağlar, Hidrolize hayvansal proteinler, Pirinç, Buğday, Pancar küspesi, Mısır gluteni, Mayalar, Mineraller, Balık yağı, Frukto-oligosakkaridler, Soya yağı.</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Analitik Bileşenler</th>
+                          <td>Protein: %37, Yağ: %12, Kül: %7.2, Diyetsel lif: %2.4</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Besleyici Katkı Maddeleri</th>
+                          <td>Vitamin A: 19000 IU, Vitamin D3: 1000 IU, Vitamin E: 480 mg, Demir: 31 mg, İyot: 3.1 mg, Bakır: 10 mg, Manganez: 41 mg, Çinko: 122 mg, Selenyum: 0.05 mg, L-karnitin: 100 mg</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <h3 class="product-info__subheading">Beslenme Rehberi</h3>
+                  <div class="product-info__table-wrap">
+                    <table class="product-info__table is-guide">
+                      <thead>
+                        <tr>
+                          <th scope="col">Kilo</th>
+                          <th scope="col">Evde Yaşayan — 0 Aktivite</th>
+                          <th scope="col">Normal Düzeyde Hareketlilik</th>
+                          <th scope="col">Çok Hareketli</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">3 kg</th><td>50 g</td><td>60 g</td><td>70 g</td></tr>
+                        <tr><th scope="row">4 kg</th><td>55 g</td><td>65 g</td><td>75 g</td></tr>
+                        <tr><th scope="row">5 kg</th><td>60 g</td><td>70 g</td><td>80 g</td></tr>
+                        <tr><th scope="row">6 kg</th><td>65 g</td><td>75 g</td><td>85 g</td></tr>
+                        <tr><th scope="row">7 kg</th><td>70 g</td><td>80 g</td><td>90 g</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="product-info__panel" role="tabpanel" id="info-panel-return" aria-labelledby="info-tab-return" data-info-panel="return" hidden>
+            <article class="product-info__slab is-blush">
+              <svg class="product-info__edge is-top is-from-more" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 0h1440v42c-200 40-440 62-720 36S200 4 0 32V0Z"/>
+              </svg>
+              <div class="product-info__body">
+                <div class="product-info__copy">
+                  <h2 class="product-info__heading">İade Koşulları</h2>
+                  <p class="product-info__text">
+                    Teslimattan itibaren 14 gün içinde, ambalajı açılmamış ve kullanılmamış ürünleri iade edebilirsiniz. İade talebinizi hesabınızdaki “Siparişlerim” bölümünden oluşturmanız yeterlidir.
+                  </p>
+                  <ul class="product-info__list">
+                    <li>Ürün orijinal ambalajında, eksiksiz ve hasarsız olmalıdır.</li>
+                    <li>Gıda ürünlerinde hijyen nedeniyle açılmış ambalajlar iade kapsamı dışındadır.</li>
+                    <li>Onaylanan iadelerde ücret, kullandığınız ödeme yöntemine iade edilir.</li>
+                    <li>Kargo hasarlı teslimatlarda fotoğraflı bildirim ile destek sağlanır.</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="product-info__panel" role="tabpanel" id="info-panel-ship" aria-labelledby="info-tab-ship" data-info-panel="ship" hidden>
+            <article class="product-info__slab is-sage">
+              <svg class="product-info__edge is-top is-from-more" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M0 0h1440v42c-200 40-440 62-720 36S200 4 0 32V0Z"/>
+              </svg>
+              <div class="product-info__body">
+                <div class="product-info__copy">
+                  <h2 class="product-info__heading">Kargo Bilgileri</h2>
+                  <p class="product-info__text">
+                    500 TL ve üzeri siparişlerde kargo ücretsizdir. Altındaki siparişlerde sabit kargo ücreti uygulanır; aynı gün kargoya verilen ürünlerde teslimat genelde 1–3 iş günü sürer.
+                  </p>
+                  <ul class="product-info__list">
+                    <li>Türkiye’nin 81 iline teslimat yapılır.</li>
+                    <li>Seçili bölgelerde bugün 22:00’a kadar verilen siparişlerde aynı gün teslim seçeneği sunulabilir.</li>
+                    <li>Türkiye geneli siparişler bugün 16:00’a kadar kargoya verilir.</li>
+                    <li>Tahmini teslimat süresi ödeme adımında adresinize göre görünür.</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="kesfet">
+    <div class="footer-panel">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <h2 class="footer-title">PETDOSTUM, dostlarınızın her yerde mutlu ve bakımlı olabildiği bir dünya kuruyor.</h2>
+          <div class="footer-brand__lower">
+            <p class="footer-note">Türkiye’de tasarlandı.<br />Dostlarınız için özenle seçildi.</p>
+            <div class="footer-newsletter" id="footerNewsletter">
+              <div class="footer-newsletter__inner">
+                <div class="footer-newsletter__head">
+                  <h3>E-bülten</h3>
+                  <p class="footer-newsletter__lead">Kampanyalar, yeni ürünler ve bakım ipuçları e-postanıza gelsin.</p>
+                </div>
+                <div class="footer-newsletter__body">
+                  <form class="footer-newsletter__form" id="newsletterForm" action="#" method="post" novalidate>
+                    <div class="footer-newsletter__field">
+                      <label class="footer-newsletter__label" for="newsletterEmail">E-posta adresiniz</label>
+                      <input
+                        type="email"
+                        id="newsletterEmail"
+                        name="email"
+                        placeholder="ornek@email.com"
+                        autocomplete="email"
+                        required
+                      />
+                      <button type="submit">Abone ol</button>
+                    </div>
+                  </form>
+                  <p class="footer-newsletter__success" role="status" aria-live="polite">
+                    Teşekkürler! E-bülten listemize eklendiniz.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-cols footer-accordion" id="footerAccordion">
+          <div class="footer-col is-open">
+            <button type="button" class="footer-col__head" aria-expanded="true">
+              <span>Keşfet</span>
+              <span class="footer-col__chev" aria-hidden="true"></span>
+            </button>
+            <div class="footer-col__panel">
+              <div class="footer-col__panel-inner">
+                <ul>
+              <li><a href="index.html#kedi">Kedi</a></li>
+              <li><a href="index.html#kopek">Köpek</a></li>
+              <li>
+                <a href="index.html#kus">
+                  Bakım rehberi
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="index.html#balik">
+                  Ürün kataloğu
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-col">
+            <button type="button" class="footer-col__head" aria-expanded="false">
+              <span>Mağaza</span>
+              <span class="footer-col__chev" aria-hidden="true"></span>
+            </button>
+            <div class="footer-col__panel">
+              <div class="footer-col__panel-inner">
+                <ul>
+              <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
+              <li><a href="index.html#siparis">Sipariş takibi</a></li>
+              <li><a href="index.html#sss">Sıkça sorulanlar</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-col">
+            <button type="button" class="footer-col__head" aria-expanded="false">
+              <span>Sosyal</span>
+              <span class="footer-col__chev" aria-hidden="true"></span>
+            </button>
+            <div class="footer-col__panel">
+              <div class="footer-col__panel-inner">
+                <ul>
+              <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+              <li><a href="https://x.com/" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+              <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-row is-bottom">
+        <p class="footer-copy">© 2026 PETDOSTUM</p>
+        <nav class="footer-legal" aria-label="Yasal">
+          <a href="#gizlilik">Gizlilik Politikası</a>
+          <a href="#iade">Teslimat ve İade</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor__label">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Kaydır</span>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+
+
+  <div class="quick-buy" id="quickBuy" aria-hidden="true">
+    <div class="quick-buy__backdrop" data-quick-close tabindex="-1"></div>
+    <div class="quick-buy__dialog" role="dialog" aria-modal="true" aria-labelledby="quickBuyTitle">
+      <button type="button" class="quick-buy__close" data-quick-close aria-label="Kapat">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="quick-buy__media">
+        <span class="quick-buy__disc" data-qb-disc hidden></span>
+        <span class="quick-buy__flavor" data-qb-flavor hidden aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14.5 4.5c2.2.2 4 2.2 3.8 4.5-.1 1.4-.8 2.5-1.8 3.2l1.7 7.3h-3.1l-1.2-5.1-.8.4v4.7H10v-5.2c-1.7-.8-2.9-2.5-2.9-4.6C7.1 6.4 9.4 4.3 12 4.5c.8 0 1.7.2 2.5.5Z" fill="currentColor"/></svg>
+        </span>
+        <img data-qb-img src="" alt="" />
+      </div>
+      <div class="quick-buy__body">
+        <div class="quick-buy__gift" data-qb-gift hidden>
+          <img data-qb-gift-img src="" alt="" />
+          <span data-qb-gift-text></span>
+        </div>
+        <h2 class="quick-buy__title" id="quickBuyTitle" data-qb-title></h2>
+        <p class="quick-buy__cat" data-qb-cat hidden></p>
+        <div class="quick-buy__rating" data-qb-rating hidden>
+          <span class="quick-buy__stars" data-qb-stars aria-hidden="true"></span>
+          <span data-qb-reviews></span>
+        </div>
+        <div class="quick-buy__size-wrap" data-qb-size-wrap hidden>
+          <label class="quick-buy__label" for="quickBuySize">Paket / beden</label>
+          <select class="quick-buy__size" id="quickBuySize" data-qb-size></select>
+        </div>
+        <div class="quick-buy__prices">
+          <span class="quick-buy__old" data-qb-old hidden></span>
+          <span class="quick-buy__promo" data-qb-promo hidden>Sepete Özel Fiyat</span>
+          <div class="quick-buy__price-row">
+            <span class="quick-buy__now" data-qb-now></span>
+            <span class="quick-buy__save" data-qb-save hidden></span>
+          </div>
+        </div>
+        <button type="button" class="quick-buy__cart" data-qb-cart>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 7h15l-1.4 8.2H7.8L6 7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 7 5 4H2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>
+          Sepete Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/chrome.js"></script>
+  <script src="js/product-slider.js"></script>
+  <script src="js/quick-buy.js"></script>
+</body>
+</html>
