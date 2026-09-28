@@ -16,13 +16,13 @@
     </a>
     <nav class="menu" aria-label="Menü">
       <div class="menu-tools">
-        <button type="button" class="menu-action" aria-label="Ara">
+        <button type="button" class="menu-action" data-header-search aria-label="Ara" aria-haspopup="dialog" aria-controls="headerSearch">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/>
             <path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
-        <button type="button" class="menu-action" aria-label="Giriş yap">
+        <button type="button" class="menu-action" data-header-account aria-label="Giriş yap" aria-haspopup="dialog" aria-controls="headerAuth">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
             <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -35,7 +35,7 @@
     </nav>
   </header>
 
-  <div class="site-menu" id="siteMenu" aria-hidden="true">
+  <div class="site-menu" id="siteMenu" data-menu-theme="kedi" aria-hidden="true">
     <div class="site-menu__top">
       <a class="logo site-menu__logo" href="index.html" data-menu-close aria-label="PETDOSTUM">
         <img src="pedlogo.png" alt="PETDOSTUM" />
@@ -214,6 +214,42 @@
           Dostunuz için seçilmiş mama, oyuncak ve bakım ürünlerini keşfedin.
           Küçük dokunuşlar, her güne büyük mutluluk.
         </p>
+
+        <form class="ai-search" data-ai-search aria-label="AI ürün araması">
+          <p class="ai-search__kicker">AI ile sor</p>
+          <div class="ai-search__shell">
+            <span class="ai-search__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3.5 13.4 8.6 18.5 10 13.4 11.4 12 16.5 10.6 11.4 5.5 10l5.1-1.4L12 3.5Z" fill="currentColor"/>
+                <path d="M18.2 14.2 18.9 16.6 21.3 17.3 18.9 18 18.2 20.4 17.5 18 15.1 17.3l2.4-.7.7-2.4Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <label class="visually-hidden" for="aiSearchInput">Dostunuz için ne arıyorsunuz?</label>
+            <input
+              class="ai-search__input"
+              id="aiSearchInput"
+              type="search"
+              name="q"
+              autocomplete="off"
+              enterkeyhint="search"
+              placeholder="Örn: Kısır kedim için tahılsız mama…"
+              data-ai-input
+            />
+            <button type="submit" class="ai-search__submit">
+              <span>Keşfet</span>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="ai-search__hints" aria-label="Öneri aramaları">
+            <button type="button" class="ai-search__hint" data-ai-hint="Kısır kedi maması">Kısır kedi maması</button>
+            <button type="button" class="ai-search__hint" data-ai-hint="Tahılsız köpek maması">Tahılsız mama</button>
+            <button type="button" class="ai-search__hint" data-ai-hint="Yavru köpek">Yavru köpek</button>
+            <button type="button" class="ai-search__hint" data-ai-hint="Yatak">Konforlu yatak</button>
+          </div>
+          <p class="ai-search__status" data-ai-status hidden aria-live="polite"></p>
+        </form>
       </header>
 
       <div class="product-toolbar">

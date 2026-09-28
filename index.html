@@ -303,18 +303,27 @@
 
     /* Tam ekran site menüsü */
     .site-menu {
+      --menu-bg: #2e8ad6;
       position: fixed;
       inset: 0;
       z-index: 40;
       display: flex;
       flex-direction: column;
       color: #fff;
-      background: #347c68;
+      background: var(--menu-bg);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
+      transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease,
+        background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
+    .site-menu[data-menu-theme="kedi"] { --menu-bg: #2e8ad6; }
+    .site-menu[data-menu-theme="kopek"] { --menu-bg: #849445; }
+    .site-menu[data-menu-theme="kus"] { --menu-bg: #a24b5d; }
+    .site-menu[data-menu-theme="balik"] { --menu-bg: #d4863a; }
 
     .site-menu.is-open {
       opacity: 1;
@@ -3439,13 +3448,13 @@
           <button type="button" data-go="balik"><em>04</em><span>Balık</span></button>
           <button type="button" data-go="kampanyalar"><em>05</em><span>Kampanyalar</span></button>
           <div class="menu-tools">
-            <button type="button" class="menu-action" aria-label="Ara">
+            <button type="button" class="menu-action" data-header-search aria-label="Ara" aria-haspopup="dialog" aria-controls="headerSearch">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/>
                 <path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </button>
-            <button type="button" class="menu-action" aria-label="Giriş yap">
+            <button type="button" class="menu-action" data-header-account aria-label="Giriş yap" aria-haspopup="dialog" aria-controls="headerAuth">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
                 <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -3498,7 +3507,7 @@
     <div class="wait" id="wait">Yakında</div>
   </div>
 
-  <div class="site-menu" id="siteMenu" aria-hidden="true">
+  <div class="site-menu" id="siteMenu" data-menu-theme="kedi" aria-hidden="true">
     <div class="site-menu__top">
       <a class="logo site-menu__logo" href="#kedi" data-go="kedi" data-menu-close aria-label="PETDOSTUM">
         <img src="pedlogo.png" alt="PETDOSTUM" />
@@ -6234,6 +6243,7 @@
           if (on) panel.removeAttribute("hidden");
           else panel.setAttribute("hidden", "");
         });
+        menu.setAttribute("data-menu-theme", id);
       }
 
       function openMenu() {
@@ -6684,5 +6694,6 @@
       });
     })();
   </script>
+  <script src="js/chrome.js"></script>
 </body>
 </html>

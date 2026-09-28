@@ -260,18 +260,27 @@ html, body {
 
     /* Tam ekran site menüsü */
     .site-menu {
+      --menu-bg: #2e8ad6;
       position: fixed;
       inset: 0;
       z-index: 40;
       display: flex;
       flex-direction: column;
       color: #fff;
-      background: #347c68;
+      background: var(--menu-bg);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
+      transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease,
+        background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
+    .site-menu[data-menu-theme="kedi"] { --menu-bg: #2e8ad6; }
+    .site-menu[data-menu-theme="kopek"] { --menu-bg: #849445; }
+    .site-menu[data-menu-theme="kus"] { --menu-bg: #a24b5d; }
+    .site-menu[data-menu-theme="balik"] { --menu-bg: #d4863a; }
 
     .site-menu.is-open {
       opacity: 1;
@@ -1549,6 +1558,171 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
   color: #2c2118;
 }
 
+/* AI arama — ürün listesi intro */
+.ai-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: min(100%, 40rem);
+  margin-top: clamp(6px, 1.5vw, 12px);
+}
+
+.ai-search__kicker {
+  margin: 0;
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  line-height: 1;
+  color: var(--cta-green);
+}
+
+.ai-search__shell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 58px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 1px rgba(24, 1, 2, 0.08),
+    0 12px 28px rgba(44, 33, 24, 0.06);
+  box-sizing: border-box;
+  transition: box-shadow 0.25s ease;
+}
+
+.ai-search__shell:focus-within {
+  box-shadow:
+    inset 0 0 0 1.5px color-mix(in srgb, var(--cta-coral) 55%, #fff),
+    0 14px 30px rgba(227, 107, 79, 0.12);
+}
+
+.ai-search__mark {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--cta-green) 16%, #fff);
+  color: var(--cta-green);
+}
+
+.ai-search__mark svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.ai-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #180102;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(0.92rem, 1.5vw, 1.02rem);
+  font-weight: 500;
+  line-height: 1.3;
+  outline: none;
+}
+
+.ai-search__input::placeholder {
+  color: rgba(24, 1, 2, 0.42);
+  font-weight: 500;
+}
+
+.ai-search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.ai-search__submit {
+  appearance: none;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cta-coral);
+  color: #fff;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ai-search__submit svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.ai-search__submit:hover {
+  background: #d45a3f;
+  transform: translateY(-1px);
+}
+
+.ai-search__hints {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.ai-search__hint {
+  appearance: none;
+  padding: 8px 14px;
+  border: 1px solid rgba(24, 1, 2, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: rgba(24, 1, 2, 0.72);
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.ai-search__hint:hover,
+.ai-search__hint.is-on {
+  color: var(--cta-coral);
+  border-color: color-mix(in srgb, var(--cta-coral) 45%, transparent);
+  background: color-mix(in srgb, var(--cta-coral) 10%, #fff);
+}
+
+.ai-search__status {
+  margin: 0;
+  min-height: 1.2em;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(24, 1, 2, 0.55);
+}
+
+.ai-search.is-busy .ai-search__submit {
+  pointer-events: none;
+  opacity: 0.78;
+}
+
+.ai-search.is-busy .ai-search__mark {
+  animation: ai-search-pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes ai-search-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
 /* Toolbar: filtre / sıralama / görünüm */
 .product-toolbar {
   display: flex;
@@ -2036,6 +2210,11 @@ html.is-filter-open body {
   color: inherit;
   min-width: 0;
   overflow: visible;
+}
+
+.product-tile[hidden],
+.product-banner[hidden] {
+  display: none !important;
 }
 
 .product-tile > .product-tile__hit {
@@ -2687,6 +2866,46 @@ html.is-filter-open body {
   .product-list__intro {
     margin-bottom: 28px;
     gap: 12px;
+  }
+
+  .ai-search {
+    gap: 10px;
+  }
+
+  .ai-search__shell {
+    min-height: 52px;
+    padding: 5px 5px 5px 12px;
+    gap: 8px;
+  }
+
+  .ai-search__mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ai-search__mark svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ai-search__input {
+    font-size: 0.88rem;
+  }
+
+  .ai-search__submit {
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .ai-search__submit span {
+    display: none;
+  }
+
+  .ai-search__hint {
+    padding: 7px 12px;
+    font-size: 0.74rem;
   }
 
   .product-toolbar__right {
