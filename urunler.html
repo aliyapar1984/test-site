@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/chrome.css" />
+  <link rel="stylesheet" href="css/chrome.css?v=16" />
 </head>
 <body>
   <header class="site-header">
@@ -28,6 +28,14 @@
             <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
+        <button type="button" class="menu-action" data-header-cart aria-label="Sepet" aria-haspopup="dialog" aria-controls="headerCart">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 7h15l-1.4 8.2H7.8L6 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M6 7 5 4H2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="9" cy="19.5" r="1.4" fill="currentColor"/>
+            <circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/>
+          </svg>
+        </button>
         <button type="button" class="menu-more" id="menuOpen" aria-label="Menüyü aç" aria-expanded="false" aria-controls="siteMenu">
           <i></i><i></i><i></i>
         </button>
@@ -42,6 +50,7 @@
       </a>
       <nav class="menu site-menu__header-nav" aria-label="Menü kontrolleri">
         <div class="menu-tools">
+          <span class="site-menu__tool-spacer" aria-hidden="true"></span>
           <span class="site-menu__tool-spacer" aria-hidden="true"></span>
           <span class="site-menu__tool-spacer" aria-hidden="true"></span>
           <button type="button" class="menu-more site-menu__close" id="menuClose" aria-label="Menüyü kapat">
@@ -668,14 +677,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Premium Köpek Yemi 15 kg" loading="lazy" />
+                <img src="media/product/kedi-mamsi.png" alt="Kısırlaştırılmış Kedi Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Premium Köpek Yemi 15 kg" data-img="media/product/dog-eat.png" data-price="₺ 149,00" data-old="₺ 329,00" data-disc="%55" data-gift="+4 Hediye" data-gift-img="media/product/dog-eat2.png" data-rating="5" data-reviews="42" data-promo="1" data-save="₺ 180 İndirim" data-sizes="5 Kg|15 Kg" data-size="15 Kg" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava" data-name="Kısırlaştırılmış Kedi Maması" data-img="media/product/kedi-mamsi.png" data-price="₺ 149,00" data-old="₺ 329,00" data-disc="%55" data-gift="+4 Hediye" data-gift-img="media/product/dog-eat2.png" data-rating="5" data-reviews="42" data-promo="1" data-save="₺ 180 İndirim" data-sizes="5 Kg|15 Kg" data-size="15 Kg" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-              <h2 class="product-tile__name">Premium Köpek Yemi 15 kg</h2>
+              <h2 class="product-tile__name">Kısırlaştırılmış Kedi Maması</h2>
               <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 329,00</span>
               <span class="product-tile__price is-sale">₺ 149,00</span>
@@ -687,14 +696,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Tahılsız Köpek Maması 12 kg" loading="lazy" />
+                <img src="media/product/kedi-mamasi-organik.png" alt="Yetişkin Kedi Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Tahılsız Köpek Maması 12 kg" data-img="media/product/dog-eat2.png" data-price="₺ 186,00" data-rating="5" data-reviews="18" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %50 indirim" data-name="Yetişkin Kedi Maması" data-img="media/product/kedi-mamasi-organik.png" data-price="₺ 186,00" data-rating="5" data-reviews="18" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-              <h2 class="product-tile__name">Tahılsız Köpek Maması 12 kg</h2>
+              <h2 class="product-tile__name">Yetişkin Kedi Maması</h2>
               <div class="product-tile__prices">
               <span class="product-tile__price">₺ 186,00</span>
             </div>
@@ -706,14 +715,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Doğal Çiğneme Kemiği" loading="lazy" />
+                <img src="media/product/yavru-kedi-mamasi.png" alt="Somonlu Krema Macun" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Doğal Çiğneme Kemiği" data-img="media/product/dog-bone.png" data-price="₺ 223,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="2 al 1 öde" data-name="Somonlu Krema Macun" data-img="media/product/yavru-kedi-mamasi.png" data-price="₺ 223,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-              <h2 class="product-tile__name">Doğal Çiğneme Kemiği</h2>
+              <h2 class="product-tile__name">Somonlu Krema Macun</h2>
               <div class="product-tile__prices">
               <span class="product-tile__price">₺ 223,00</span>
             </div>
@@ -724,14 +733,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Konfor Köpek Yatağı" loading="lazy" />
+                <img src="media/product/kedi-odul-mamasi.png" alt="Kedi Ödül Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Konfor Köpek Yatağı" data-img="media/product/dog-home.png" data-price="₺ 260,00" data-old="₺ 320,00" data-disc="%19" data-rating="4" data-reviews="9" data-promo="1" data-save="₺ 60 İndirim" data-sizes="S|M|L" data-size="M" data-flavor="1" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Yeni" data-name="Kedi Ödül Maması" data-img="media/product/kedi-odul-mamasi.png" data-price="₺ 260,00" data-old="₺ 320,00" data-disc="%19" data-rating="4" data-reviews="9" data-promo="1" data-save="₺ 60 İndirim" data-sizes="S|M|L" data-size="M" data-flavor="1" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-              <h2 class="product-tile__name">Konfor Köpek Yatağı</h2>
+              <h2 class="product-tile__name">Kedi Ödül Maması</h2>
               <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 320,00</span>
               <span class="product-tile__price is-sale">₺ 260,00</span>
@@ -743,14 +752,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Dayanıklı Gezdirme Tasması" loading="lazy" />
+                <img src="media/product/kedi-kumu.png" alt="Doğal Bentonit Kedi Kumu" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Dayanıklı Gezdirme Tasması" data-img="media/product/dog-belt.png" data-price="₺ 297,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %30 indirim" data-name="Doğal Bentonit Kedi Kumu" data-img="media/product/kedi-kumu.png" data-price="₺ 297,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Dayanıklı Gezdirme Tasması</h2>
+            <h2 class="product-tile__name">Doğal Bentonit Kedi Kumu</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 297,00</span>
             </div>
@@ -761,14 +770,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Yavru Köpek Maması 3 kg" loading="lazy" />
+                <img src="media/product/kedi-temeizleme-urunleri.png" alt="Kedi Bakım Seti" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Yavru Köpek Maması 3 kg" data-img="media/product/dog-eat.png" data-price="₺ 334,00" data-old="₺ 514,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava|Sepette %50 indirim" data-name="Kedi Bakım Seti" data-img="media/product/kedi-temeizleme-urunleri.png" data-price="₺ 334,00" data-old="₺ 514,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Yavru Köpek Maması 3 kg</h2>
+            <h2 class="product-tile__name">Kedi Bakım Seti</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 514,00</span>
               <span class="product-tile__price is-sale">₺ 334,00</span>
@@ -780,14 +789,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Protein Ödül Maması" loading="lazy" />
+                <img src="media/product/kedi-yuvasi.png" alt="Doğal Kedi Evi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Protein Ödül Maması" data-img="media/product/dog-eat2.png" data-price="₺ 371,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava" data-name="Doğal Kedi Evi" data-img="media/product/kedi-yuvasi.png" data-price="₺ 371,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Protein Ödül Maması</h2>
+            <h2 class="product-tile__name">Doğal Kedi Evi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 371,00</span>
             </div>
@@ -798,14 +807,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Ortopedik Dinlenme Minderi" loading="lazy" />
+                <img src="media/product/kedi-pufu.png" alt="Kedi Yatağı" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Ortopedik Dinlenme Minderi" data-img="media/product/dog-bone.png" data-price="₺ 408,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %50 indirim" data-name="Kedi Yatağı" data-img="media/product/kedi-pufu.png" data-price="₺ 408,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Ortopedik Dinlenme Minderi</h2>
+            <h2 class="product-tile__name">Kedi Yatağı</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 408,00</span>
             </div>
@@ -825,14 +834,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Ayarlanabilir Boyun Tasması" loading="lazy" />
+                <img src="media/product/kopek-mamasi.png" alt="Yetişkin Köpek Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Ayarlanabilir Boyun Tasması" data-img="media/product/dog-home.png" data-price="₺ 445,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="2 al 1 öde" data-name="Yetişkin Köpek Maması" data-img="media/product/kopek-mamasi.png" data-price="₺ 445,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Ayarlanabilir Boyun Tasması</h2>
+            <h2 class="product-tile__name">Yetişkin Köpek Maması</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 445,00</span>
             </div>
@@ -843,14 +852,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Somınlı Yetişkin Mama 8 kg" loading="lazy" />
+                <img src="media/product/dog-eat.png" alt="Premium Köpek Yemi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Somınlı Yetişkin Mama 8 kg" data-img="media/product/dog-belt.png" data-price="₺ 482,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Yeni|Kargo bedava" data-name="Premium Köpek Yemi" data-img="media/product/dog-eat.png" data-price="₺ 482,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Somınlı Yetişkin Mama 8 kg</h2>
+            <h2 class="product-tile__name">Premium Köpek Yemi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 482,00</span>
             </div>
@@ -861,14 +870,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Çiğneme Kemikleri Paketi" loading="lazy" />
+                <img src="media/product/dog-eat2.png" alt="Premium Köpek Yemi Gold" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Çiğneme Kemikleri Paketi" data-img="media/product/dog-eat.png" data-price="₺ 519,00" data-old="₺ 699,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %30 indirim" data-name="Premium Köpek Yemi Gold" data-img="media/product/dog-eat2.png" data-price="₺ 519,00" data-old="₺ 699,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Çiğneme Kemikleri Paketi</h2>
+            <h2 class="product-tile__name">Premium Köpek Yemi Gold</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 699,00</span>
               <span class="product-tile__price is-sale">₺ 519,00</span>
@@ -881,14 +890,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Yumuşak Yatak Minderi" loading="lazy" />
+                <img src="media/product/dog-bone.png" alt="Doğal Çiğneme Kemiği" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Yumuşak Yatak Minderi" data-img="media/product/dog-eat2.png" data-price="₺ 556,00" data-old="₺ 736,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava|Sepette %50 indirim" data-name="Doğal Çiğneme Kemiği" data-img="media/product/dog-bone.png" data-price="₺ 556,00" data-old="₺ 736,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Yumuşak Yatak Minderi</h2>
+            <h2 class="product-tile__name">Doğal Çiğneme Kemiği</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 736,00</span>
               <span class="product-tile__price is-sale">₺ 556,00</span>
@@ -900,14 +909,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Premium Köpek Yemi 5 kg" loading="lazy" />
+                <img src="media/product/dog-home.png" alt="Köpek Kulübesi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Premium Köpek Yemi 5 kg" data-img="media/product/dog-bone.png" data-price="₺ 593,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava" data-name="Köpek Kulübesi" data-img="media/product/dog-home.png" data-price="₺ 593,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Premium Köpek Yemi 5 kg</h2>
+            <h2 class="product-tile__name">Köpek Kulübesi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 593,00</span>
             </div>
@@ -918,14 +927,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Diş Temizleme Ödülü" loading="lazy" />
+                <img src="media/product/dog-belt.png" alt="Köpek Tasması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Diş Temizleme Ödülü" data-img="media/product/dog-home.png" data-price="₺ 630,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %50 indirim" data-name="Köpek Tasması" data-img="media/product/dog-belt.png" data-price="₺ 630,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Diş Temizleme Ödülü</h2>
+            <h2 class="product-tile__name">Köpek Tasması</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 630,00</span>
             </div>
@@ -936,14 +945,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Gezdirme Tasması Pro" loading="lazy" />
+                <img src="media/product/kus-yemi.png" alt="Kuş Yemi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Gezdirme Tasması Pro" data-img="media/product/dog-belt.png" data-price="₺ 667,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="2 al 1 öde" data-name="Kuş Yemi" data-img="media/product/kus-yemi.png" data-price="₺ 667,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Gezdirme Tasması Pro</h2>
+            <h2 class="product-tile__name">Kuş Yemi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 667,00</span>
             </div>
@@ -954,14 +963,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Hiperalerjenik Mama 10 kg" loading="lazy" />
+                <img src="media/product/papagan-yemi.png" alt="Papağan Yemi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Hiperalerjenik Mama 10 kg" data-img="media/product/dog-eat.png" data-price="₺ 704,00" data-old="₺ 884,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Yeni|Kargo bedava" data-name="Papağan Yemi" data-img="media/product/papagan-yemi.png" data-price="₺ 704,00" data-old="₺ 884,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Hiperalerjenik Mama 10 kg</h2>
+            <h2 class="product-tile__name">Papağan Yemi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 884,00</span>
               <span class="product-tile__price is-sale">₺ 704,00</span>
@@ -973,14 +982,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Köpek Yatağı Deluxe" loading="lazy" />
+                <img src="media/product/kus-kafesi.png" alt="Kuş Kafesi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Köpek Yatağı Deluxe" data-img="media/product/dog-eat2.png" data-price="₺ 741,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %30 indirim" data-name="Kuş Kafesi" data-img="media/product/kus-kafesi.png" data-price="₺ 741,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Köpek Yatağı Deluxe</h2>
+            <h2 class="product-tile__name">Kuş Kafesi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 741,00</span>
             </div>
@@ -991,14 +1000,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Günlük Gezdirme Seti" loading="lazy" />
+                <img src="media/product/kus-sulugu.png" alt="Kuş Suluğu" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Günlük Gezdirme Seti" data-img="media/product/dog-bone.png" data-price="₺ 778,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava|Sepette %50 indirim" data-name="Kuş Suluğu" data-img="media/product/kus-sulugu.png" data-price="₺ 778,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Günlük Gezdirme Seti</h2>
+            <h2 class="product-tile__name">Kuş Suluğu</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 778,00</span>
             </div>
@@ -1009,14 +1018,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Kuzu Etli Mama 14 kg" loading="lazy" />
+                <img src="media/product/balik-yemi.png" alt="Tropikal Balık Yemi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Kuzu Etli Mama 14 kg" data-img="media/product/dog-home.png" data-price="₺ 815,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava" data-name="Tropikal Balık Yemi" data-img="media/product/balik-yemi.png" data-price="₺ 815,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Kuzu Etli Mama 14 kg</h2>
+            <h2 class="product-tile__name">Tropikal Balık Yemi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 815,00</span>
             </div>
@@ -1027,14 +1036,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Anti-Tüy Bakım Spreyi" loading="lazy" />
+                <img src="media/product/akvaryum.png" alt="Bitkili Akvaryum" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Anti-Tüy Bakım Spreyi" data-img="media/product/dog-belt.png" data-price="₺ 852,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %50 indirim" data-name="Bitkili Akvaryum" data-img="media/product/akvaryum.png" data-price="₺ 852,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Anti-Tüy Bakım Spreyi</h2>
+            <h2 class="product-tile__name">Bitkili Akvaryum</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 852,00</span>
             </div>
@@ -1045,14 +1054,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Çelik Mama Kabı Seti" loading="lazy" />
+                <img src="media/product/kure-akvaryum.png" alt="Küre Akvaryum" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Çelik Mama Kabı Seti" data-img="media/product/dog-eat.png" data-price="₺ 889,00" data-old="₺ 1.069,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="2 al 1 öde" data-name="Küre Akvaryum" data-img="media/product/kure-akvaryum.png" data-price="₺ 889,00" data-old="₺ 1.069,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Çelik Mama Kabı Seti</h2>
+            <h2 class="product-tile__name">Küre Akvaryum</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 1.069,00</span>
               <span class="product-tile__price is-sale">₺ 889,00</span>
@@ -1064,14 +1073,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Eğitici Ödül Atıştırmalık" loading="lazy" />
+                <img src="media/product/balık-akvarum-aksesuar.png" alt="Gemi Aksesuarı" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Eğitici Ödül Atıştırmalık" data-img="media/product/dog-eat2.png" data-price="₺ 926,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Yeni|Kargo bedava" data-name="Gemi Aksesuarı" data-img="media/product/balık-akvarum-aksesuar.png" data-price="₺ 926,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Eğitici Ödül Atıştırmalık</h2>
+            <h2 class="product-tile__name">Gemi Aksesuarı</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 926,00</span>
             </div>
@@ -1083,14 +1092,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Su Geçirmez Yağmurluk" loading="lazy" />
+                <img src="media/product/balık-akvarum-aksesuar-dalgic.png" alt="Dalgıç Aksesuarı" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Su Geçirmez Yağmurluk" data-img="media/product/dog-bone.png" data-price="₺ 963,00" data-old="₺ 1.143,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %30 indirim" data-name="Dalgıç Aksesuarı" data-img="media/product/balık-akvarum-aksesuar-dalgic.png" data-price="₺ 963,00" data-old="₺ 1.143,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Su Geçirmez Yağmurluk</h2>
+            <h2 class="product-tile__name">Dalgıç Aksesuarı</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 1.143,00</span>
               <span class="product-tile__price is-sale">₺ 963,00</span>
@@ -1102,14 +1111,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Ağız Kokusu Önleyici Tablet" loading="lazy" />
+                <img src="media/product/balık-akvarum-aksesuar-hazine.png" alt="Hazine Sandığı" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Ağız Kokusu Önleyici Tablet" data-img="media/product/dog-home.png" data-price="₺ 1.000,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava|Sepette %50 indirim" data-name="Hazine Sandığı" data-img="media/product/balık-akvarum-aksesuar-hazine.png" data-price="₺ 1.000,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Ağız Kokusu Önleyici Tablet</h2>
+            <h2 class="product-tile__name">Hazine Sandığı</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 1.000,00</span>
             </div>
@@ -1120,14 +1129,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Junior Mama 2 kg" loading="lazy" />
+                <img src="media/product/balık-akvaryum-temizleme.png" alt="Akvaryum Temizlik Seti" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Junior Mama 2 kg" data-img="media/product/dog-belt.png" data-price="₺ 1.037,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava" data-name="Akvaryum Temizlik Seti" data-img="media/product/balık-akvaryum-temizleme.png" data-price="₺ 1.037,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Junior Mama 2 kg</h2>
+            <h2 class="product-tile__name">Akvaryum Temizlik Seti</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 1.037,00</span>
             </div>
@@ -1138,14 +1147,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Deri Bakım Losyonu" loading="lazy" />
+                <img src="media/product/kedi-yuvasi-hover.png" alt="Kedi Evi Kurulumu" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Deri Bakım Losyonu" data-img="media/product/dog-eat.png" data-price="₺ 1.074,00" data-old="₺ 1.254,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %50 indirim" data-name="Kedi Evi Kurulumu" data-img="media/product/kedi-yuvasi-hover.png" data-price="₺ 1.074,00" data-old="₺ 1.254,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Deri Bakım Losyonu</h2>
+            <h2 class="product-tile__name">Kedi Evi Kurulumu</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 1.254,00</span>
               <span class="product-tile__price is-sale">₺ 1.074,00</span>
@@ -1157,14 +1166,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Yürüyüş Tasması Soft" loading="lazy" />
+                <img src="media/product/kedi-mamsi.png" alt="Kısırlaştırılmış Kedi Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Yürüyüş Tasması Soft" data-img="media/product/dog-eat2.png" data-price="₺ 1.111,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="2 al 1 öde" data-name="Kısırlaştırılmış Kedi Maması" data-img="media/product/kedi-mamsi.png" data-price="₺ 1.111,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Yürüyüş Tasması Soft</h2>
+            <h2 class="product-tile__name">Kısırlaştırılmış Kedi Maması</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 1.111,00</span>
             </div>
@@ -1175,14 +1184,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Kemik Formunda Ödül" loading="lazy" />
+                <img src="media/product/kedi-mamasi-organik.png" alt="Yetişkin Kedi Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Kemik Formunda Ödül" data-img="media/product/dog-bone.png" data-price="₺ 1.148,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Yeni|Kargo bedava" data-name="Yetişkin Kedi Maması" data-img="media/product/kedi-mamasi-organik.png" data-price="₺ 1.148,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Kemik Formunda Ödül</h2>
+            <h2 class="product-tile__name">Yetişkin Kedi Maması</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 1.148,00</span>
             </div>
@@ -1193,14 +1202,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Tüy Açıcı Tarak" loading="lazy" />
+                <img src="media/product/yavru-kedi-mamasi.png" alt="Somonlu Krema Macun" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Tüy Açıcı Tarak" data-img="media/product/dog-home.png" data-price="₺ 1.185,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %30 indirim" data-name="Somonlu Krema Macun" data-img="media/product/yavru-kedi-mamasi.png" data-price="₺ 1.185,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Tüy Açıcı Tarak</h2>
+            <h2 class="product-tile__name">Somonlu Krema Macun</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 1.185,00</span>
             </div>
@@ -1211,14 +1220,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Organik Köpek Maması 7 kg" loading="lazy" />
+                <img src="media/product/kedi-odul-mamasi.png" alt="Kedi Ödül Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Organik Köpek Maması 7 kg" data-img="media/product/dog-belt.png" data-price="₺ 1.222,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava|Sepette %50 indirim" data-name="Kedi Ödül Maması" data-img="media/product/kedi-odul-mamasi.png" data-price="₺ 1.222,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Organik Köpek Maması 7 kg</h2>
+            <h2 class="product-tile__name">Kedi Ödül Maması</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 1.222,00</span>
             </div>
@@ -1238,14 +1247,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Kışlık Polar Mont" loading="lazy" />
+                <img src="media/product/kedi-kumu.png" alt="Doğal Bentonit Kedi Kumu" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Kışlık Polar Mont" data-img="media/product/dog-eat.png" data-price="₺ 159,00" data-old="₺ 339,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava" data-name="Doğal Bentonit Kedi Kumu" data-img="media/product/kedi-kumu.png" data-price="₺ 159,00" data-old="₺ 339,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Kışlık Polar Mont</h2>
+            <h2 class="product-tile__name">Doğal Bentonit Kedi Kumu</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 339,00</span>
               <span class="product-tile__price is-sale">₺ 159,00</span>
@@ -1257,14 +1266,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Vitaminli Mama Takviyesi" loading="lazy" />
+                <img src="media/product/kedi-temeizleme-urunleri.png" alt="Kedi Bakım Seti" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Vitaminli Mama Takviyesi" data-img="media/product/dog-eat2.png" data-price="₺ 196,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %50 indirim" data-name="Kedi Bakım Seti" data-img="media/product/kedi-temeizleme-urunleri.png" data-price="₺ 196,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Vitaminli Mama Takviyesi</h2>
+            <h2 class="product-tile__name">Kedi Bakım Seti</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 196,00</span>
             </div>
@@ -1275,14 +1284,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Oyun İpli Çekmece" loading="lazy" />
+                <img src="media/product/kedi-yuvasi.png" alt="Doğal Kedi Evi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Oyun İpli Çekmece" data-img="media/product/dog-bone.png" data-price="₺ 233,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="2 al 1 öde" data-name="Doğal Kedi Evi" data-img="media/product/kedi-yuvasi.png" data-price="₺ 233,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Oyun İpli Çekmece</h2>
+            <h2 class="product-tile__name">Doğal Kedi Evi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 233,00</span>
             </div>
@@ -1294,14 +1303,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Paslanmaz Su Sebili" loading="lazy" />
+                <img src="media/product/kedi-pufu.png" alt="Kedi Yatağı" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Paslanmaz Su Sebili" data-img="media/product/dog-home.png" data-price="₺ 270,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Yeni|Kargo bedava" data-name="Kedi Yatağı" data-img="media/product/kedi-pufu.png" data-price="₺ 270,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Paslanmaz Su Sebili</h2>
+            <h2 class="product-tile__name">Kedi Yatağı</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 270,00</span>
             </div>
@@ -1312,14 +1321,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Yavru Diş Halkası" loading="lazy" />
+                <img src="media/product/kopek-mamasi.png" alt="Yetişkin Köpek Maması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Yavru Diş Halkası" data-img="media/product/dog-belt.png" data-price="₺ 307,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %30 indirim" data-name="Yetişkin Köpek Maması" data-img="media/product/kopek-mamasi.png" data-price="₺ 307,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Yavru Diş Halkası</h2>
+            <h2 class="product-tile__name">Yetişkin Köpek Maması</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 307,00</span>
             </div>
@@ -1330,14 +1339,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat.png" alt="Light Mama 10 kg" loading="lazy" />
+                <img src="media/product/dog-eat.png" alt="Premium Köpek Yemi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Light Mama 10 kg" data-img="media/product/dog-eat.png" data-price="₺ 344,00" data-old="₺ 524,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava|Sepette %50 indirim" data-name="Premium Köpek Yemi" data-img="media/product/dog-eat.png" data-price="₺ 344,00" data-old="₺ 524,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Light Mama 10 kg</h2>
+            <h2 class="product-tile__name">Premium Köpek Yemi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 524,00</span>
               <span class="product-tile__price is-sale">₺ 344,00</span>
@@ -1349,14 +1358,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-eat2.png" alt="Reflektörlü Gece Tasması" loading="lazy" />
+                <img src="media/product/dog-eat2.png" alt="Premium Köpek Yemi Gold" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Reflektörlü Gece Tasması" data-img="media/product/dog-eat2.png" data-price="₺ 381,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="1 alana 1 bedava" data-name="Premium Köpek Yemi Gold" data-img="media/product/dog-eat2.png" data-price="₺ 381,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Reflektörlü Gece Tasması</h2>
+            <h2 class="product-tile__name">Premium Köpek Yemi Gold</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 381,00</span>
             </div>
@@ -1367,14 +1376,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-bone.png" alt="Doğal Kulak Temizleyici" loading="lazy" />
+                <img src="media/product/dog-bone.png" alt="Doğal Çiğneme Kemiği" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Doğal Kulak Temizleyici" data-img="media/product/dog-bone.png" data-price="₺ 418,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Sepette %50 indirim" data-name="Doğal Çiğneme Kemiği" data-img="media/product/dog-bone.png" data-price="₺ 418,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Doğal Kulak Temizleyici</h2>
+            <h2 class="product-tile__name">Doğal Çiğneme Kemiği</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 418,00</span>
             </div>
@@ -1386,14 +1395,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-home.png" alt="Comfort Plus Yatak" loading="lazy" />
+                <img src="media/product/dog-home.png" alt="Köpek Kulübesi" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Comfort Plus Yatak" data-img="media/product/dog-home.png" data-price="₺ 455,00" data-old="₺ 635,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="2 al 1 öde" data-name="Köpek Kulübesi" data-img="media/product/dog-home.png" data-price="₺ 455,00" data-old="₺ 635,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Comfort Plus Yatak</h2>
+            <h2 class="product-tile__name">Köpek Kulübesi</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price is-old">₺ 635,00</span>
               <span class="product-tile__price is-sale">₺ 455,00</span>
@@ -1405,14 +1414,14 @@
           <div class="product-tile__visual">
             <a class="product-tile__media-link" href="urun-detay.html" tabindex="-1" aria-hidden="true">
               <div class="product-tile__media">
-                <img src="media/product/dog-belt.png" alt="Günlük Bakım Şampuanı" loading="lazy" />
+                <img src="media/product/dog-belt.png" alt="Köpek Tasması" loading="lazy" />
               </div>
             </a>
-            <button type="button" class="product-tile__quick" data-quick-buy data-name="Günlük Bakım Şampuanı" data-img="media/product/dog-belt.png" data-price="₺ 492,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
+            <button type="button" class="product-tile__quick" data-quick-buy data-campaigns="Yeni|Kargo bedava" data-name="Köpek Tasması" data-img="media/product/dog-belt.png" data-price="₺ 492,00" aria-label="Hızlı satın al"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13 3 6.5 13H12l-1 8L18.5 11H13l0-8Z" fill="currentColor"/></svg><span class="product-tile__quick-tip">Hızlı satın al</span></button>
           </div>
           <a class="product-tile__hit" href="urun-detay.html">
             <div class="product-tile__info">
-            <h2 class="product-tile__name">Günlük Bakım Şampuanı</h2>
+            <h2 class="product-tile__name">Köpek Tasması</h2>
             <div class="product-tile__prices">
               <span class="product-tile__price">₺ 492,00</span>
             </div>
@@ -1567,26 +1576,22 @@
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
       <div class="quick-buy__media">
-        <span class="quick-buy__disc" data-qb-disc hidden></span>
-        <span class="quick-buy__flavor" data-qb-flavor hidden aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M14.5 4.5c2.2.2 4 2.2 3.8 4.5-.1 1.4-.8 2.5-1.8 3.2l1.7 7.3h-3.1l-1.2-5.1-.8.4v4.7H10v-5.2c-1.7-.8-2.9-2.5-2.9-4.6C7.1 6.4 9.4 4.3 12 4.5c.8 0 1.7.2 2.5.5Z" fill="currentColor"/></svg>
-        </span>
         <img data-qb-img src="" alt="" />
       </div>
       <div class="quick-buy__body">
-        <div class="quick-buy__gift" data-qb-gift hidden>
-          <img data-qb-gift-img src="" alt="" />
-          <span data-qb-gift-text></span>
-        </div>
+        <p class="quick-buy__kicker">Hızlı satın al</p>
+        <ul class="quick-buy__campaigns" data-qb-campaigns hidden></ul>
         <h2 class="quick-buy__title" id="quickBuyTitle" data-qb-title></h2>
         <p class="quick-buy__cat" data-qb-cat hidden></p>
         <div class="quick-buy__rating" data-qb-rating hidden>
           <span class="quick-buy__stars" data-qb-stars aria-hidden="true"></span>
           <span data-qb-reviews></span>
         </div>
+        <p class="quick-buy__facts" data-qb-facts hidden></p>
         <div class="quick-buy__size-wrap" data-qb-size-wrap hidden>
-          <label class="quick-buy__label" for="quickBuySizeList">Paket / beden</label>
-          <select class="quick-buy__size" id="quickBuySizeList" data-qb-size></select>
+          <p class="quick-buy__label">Paket / beden</p>
+          <div class="quick-buy__sizes" data-qb-sizes></div>
+          <select class="visually-hidden" id="quickBuySizeList" data-qb-size tabindex="-1" aria-hidden="true"></select>
         </div>
         <div class="quick-buy__prices">
           <span class="quick-buy__old" data-qb-old hidden></span>
@@ -1604,7 +1609,7 @@
     </div>
   </div>
 
-  <script src="js/chrome.js"></script>
-  <script src="js/quick-buy.js"></script>
+  <script src="js/chrome.js?v=22"></script>
+  <script src="js/quick-buy.js?v=5"></script>
 </body>
 </html>

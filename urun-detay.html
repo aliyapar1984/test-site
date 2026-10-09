@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Konfor Yatak — PETDOSTUM</title>
+  <title>Royal Canin Sterilised — PETDOSTUM</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/chrome.css" />
+  <link rel="stylesheet" href="css/chrome.css?v=22" />
 </head>
 <body class="is-product-detail">
   <header class="site-header">
@@ -28,6 +28,14 @@
             <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
+        <button type="button" class="menu-action" data-header-cart aria-label="Sepet" aria-haspopup="dialog" aria-controls="headerCart">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 7h15l-1.4 8.2H7.8L6 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M6 7 5 4H2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="9" cy="19.5" r="1.4" fill="currentColor"/>
+            <circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/>
+          </svg>
+        </button>
         <button type="button" class="menu-more" id="menuOpen" aria-label="Menüyü aç" aria-expanded="false" aria-controls="siteMenu">
           <i></i><i></i><i></i>
         </button>
@@ -42,6 +50,7 @@
       </a>
       <nav class="menu site-menu__header-nav" aria-label="Menü kontrolleri">
         <div class="menu-tools">
+          <span class="site-menu__tool-spacer" aria-hidden="true"></span>
           <span class="site-menu__tool-spacer" aria-hidden="true"></span>
           <span class="site-menu__tool-spacer" aria-hidden="true"></span>
           <button type="button" class="menu-more site-menu__close" id="menuClose" aria-label="Menüyü kapat">
@@ -208,104 +217,126 @@
   <main class="page-main page-main--detail" id="urun-detay" aria-label="Ürün detayı">
     <section class="product-detail" data-product-detail>
       <div class="product-detail__stage">
-        <div class="product-detail__media">
-          <div class="product-detail__gallery" data-detail-gallery>
-            <figure class="product-detail__shot is-on" id="detail-shot-1" data-detail-shot>
-              <img src="media/product/dog-home.png" alt="Konfor köpek yatağı — ön görünüm" />
-            </figure>
-            <figure class="product-detail__shot" id="detail-shot-2" data-detail-shot>
-              <img src="media/product/dog-bone.png" alt="Konfor köpek yatağı — doku detayı" />
-            </figure>
-            <figure class="product-detail__shot" id="detail-shot-3" data-detail-shot>
-              <img src="media/product/dog-belt.png" alt="Konfor köpek yatağı — kullanım" />
-            </figure>
-            <figure class="product-detail__shot" id="detail-shot-4" data-detail-shot>
-              <img src="media/product/dog-eat2.png" alt="Konfor köpek yatağı — yaşam alanı" />
-            </figure>
+        <header class="product-detail__bar">
+          <h1 class="product-detail__name">Royal Canin Sterilised</h1>
+          <button type="button" class="product-detail__cta">Sepete ekle — <span data-detail-cta-price>₺ 353,60</span></button>
+        </header>
+        <div class="product-detail__layout">
+          <div class="product-detail__info">
+            <p class="product-detail__brand">Royal Canin</p>
+            <p class="product-detail__rating"><span aria-hidden="true">★★★★★</span> 4,7 · 116 değerlendirme</p>
+            <p class="product-detail__lead">Kedinizin kısırlaştırıldıktan sonra değişen enerji ihtiyacını desteklemek için bir diyet değişikliği gerekebilir. Bu mama, kısırlaştırma sonrası ideal vücut ağırlığını korumasına yardımcı olur.</p>
+            <ul class="product-detail__points">
+              <li>Kümes hayvanı lezzeti</li>
+              <li>%37 protein, kas kütlesini korur</li>
+              <li>%12 yağ, kilo yönetimine yardımcı</li>
+              <li>Tahıllı formül</li>
+              <li>Orijinal ürün, yetkili satıcı</li>
+            </ul>
+            <p class="product-detail__sku">Barkod 3182550737555</p>
+            <p class="product-detail__assure">PETDOSTUM, Royal Canin yetkili satıcısıdır.</p>
+            <aside class="product-detail__pairs">
+              <h2>Bunu da beğenebilirsiniz</h2>
+              <div class="product-detail__pair">
+                <img src="media/product/kedi-odul-mamasi.png" alt="Kedi Ödül Maması" />
+                <div>
+                  <p class="product-detail__pair-name">Kedi Ödül Maması</p>
+                  <p class="product-detail__pair-price">₺ 223,00</p>
+                </div>
+                <button type="button" class="product-detail__pair-add" data-detail-pair data-name="Kedi Ödül Maması" data-img="media/product/kedi-odul-mamasi.png" data-price="₺ 223,00">Ekle</button>
+              </div>
+            </aside>
           </div>
-          <div class="product-detail__dots" data-detail-dots role="tablist" aria-label="Ürün görselleri"></div>
-        </div>
 
-        <aside class="product-detail__panel">
-          <div class="product-detail__panel-inner">
-            <div class="product-detail__title-wrap">
-              <h1 class="product-detail__name">Tavuklu Pirinçli Kedi Maması</h1>
+          <div class="product-detail__visual">
+            <div class="product-detail__viewport" data-detail-deck>
+              <div class="product-detail__track">
+                <figure class="product-detail__slide is-on" data-detail-slide>
+                  <img src="media/product/kedi-mamsi.png" alt="Kısırlaştırılmış kedi maması" />
+                </figure>
+                <figure class="product-detail__slide" data-detail-slide>
+                  <img src="media/product/kopek-mamasi.png" alt="Yetişkin köpek maması" />
+                </figure>
+                <figure class="product-detail__slide" data-detail-slide>
+                  <img src="media/product/kus-yemi.png" alt="Kuş yemi" />
+                </figure>
+                <figure class="product-detail__slide" data-detail-slide>
+                  <img src="media/product/balik-yemi.png" alt="Tropikal balık yemi" />
+                </figure>
+                <figure class="product-detail__slide" data-detail-slide>
+                  <img src="media/product/dog-eat.png" alt="Premium köpek yemi" />
+                </figure>
+              </div>
             </div>
+            <div class="product-detail__controls">
+              <button type="button" class="product-detail__arrow" data-detail-prev aria-label="Önceki görsel">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="product-detail__pager" data-detail-pager role="tablist" aria-label="Görseller"></div>
+              <button type="button" class="product-detail__arrow" data-detail-next aria-label="Sonraki görsel">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6l6 6-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
 
-            <div class="product-detail__meta">
-              <p class="product-detail__brand">Petdostum</p>
-              <p class="product-detail__sku">Barkod: 8690001120457</p>
-              <button type="button" class="product-detail__wish" aria-label="Favorilere ekle" aria-pressed="false">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s-7-4.4-9.2-8.2C1.2 9 2.6 6.2 5.4 5.4c1.8-.5 3.6.2 4.7 1.6L12 9l1.9-2c1.1-1.4 2.9-2.1 4.7-1.6 2.8.8 4.2 3.6 2.6 6.4C19 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <aside class="product-detail__buybox">
+            <p class="product-detail__price">
+              <span class="product-detail__price-now" data-detail-price>₺ 353,60</span>
+              <span class="product-detail__price-old" data-detail-old>₺ 684,07</span>
+              <span class="product-detail__disc" data-detail-disc>%48</span>
+            </p>
+            <p class="product-detail__save" data-detail-save>Kazancınız: ₺ 330,47</p>
+            <p class="product-detail__skt">SKT: 01.01.2028</p>
+
+            <p class="product-detail__weight-label">Ağırlık</p>
+            <div class="product-detail__weights" role="listbox" aria-label="Ağırlık">
+              <button type="button" class="product-detail__weight is-on" data-detail-size="400" role="option" aria-selected="true">
+                <span>400 gr</span>
+                <span>₺ 353,60</span>
+              </button>
+              <button type="button" class="product-detail__weight" data-detail-size="2" role="option">
+                <span>2 kg</span>
+                <span>₺ 1.340,64</span>
+              </button>
+              <button type="button" class="product-detail__weight" data-detail-size="4" role="option">
+                <span>4 kg</span>
+                <span>₺ 2.360,98</span>
+              </button>
+              <button type="button" class="product-detail__weight" data-detail-size="10" role="option">
+                <span>10 kg</span>
+                <span>₺ 5.131,02</span>
+              </button>
+              <button type="button" class="product-detail__weight" data-detail-size="15" role="option">
+                <span>15 kg</span>
+                <span>₺ 6.010,00</span>
               </button>
             </div>
 
-            <div class="product-detail__thumbs" role="listbox" aria-label="Boyut seçenekleri">
-              <button type="button" class="product-detail__thumb" data-detail-size="S" aria-label="Boyut S" role="option">
-                <span class="product-detail__thumb-size">400 gr</span>
-                <span class="product-detail__thumb-price">₺ 220,00</span>
-              </button>
-              <button type="button" class="product-detail__thumb is-on" data-detail-size="M" aria-label="Boyut M" role="option" aria-selected="true">
-                <span class="product-detail__thumb-size">1 Kg</span>
-                <span class="product-detail__thumb-price">₺ 260,00</span>
-              </button>
-              <button type="button" class="product-detail__thumb" data-detail-size="L" aria-label="Boyut L" role="option">
-                <span class="product-detail__thumb-size">2 Kg</span>
-                <span class="product-detail__thumb-price">₺ 310,00</span>
-              </button>
-            </div>
-
-            <div class="product-detail__offer">
-              <p class="product-detail__price-note">Sepete özel</p>
-              <p class="product-detail__price">
-                <span class="product-detail__price-old">₺ 320,00</span>
-                <span class="product-detail__price-now">₺ 260,00</span>
-                <span class="product-detail__disc">%19</span>
-              </p>
-            </div>
-
-            <div class="product-detail__buy">
+            <div class="product-detail__actions">
               <div class="product-detail__qty" data-detail-qty>
                 <button type="button" class="product-detail__qty-btn" data-qty-minus aria-label="Azalt">−</button>
                 <input class="product-detail__qty-input" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="Adet" data-qty-value />
                 <button type="button" class="product-detail__qty-btn" data-qty-plus aria-label="Artır">+</button>
               </div>
-              <button type="button" class="product-detail__cta">Sepete ekle</button>
+              <button type="button" class="product-detail__now" data-detail-now>Hemen al</button>
             </div>
-          </div>
 
-          <div class="product-detail__ship" aria-label="Teslimat bilgileri">
-            <div class="product-detail__ship-item">
-              <img class="product-detail__ship-icon" src="media/icons/cargo.svg" alt="" />
-              <p>Bugün 22:00’a kadar siparişte seçili bölgelerde aynı gün teslim.</p>
+            <div class="product-detail__delivery">
+              <p>
+                <span class="product-detail__ship-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v4.5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="product-detail__ship-copy"><strong>Aynı gün</strong>Seçili ilçelerde bugün 22:00’a kadar verilen siparişler aynı gün teslim edilir.</span>
+              </p>
+              <p>
+                <span class="product-detail__ship-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M3 7.5h11v9H3v-9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 11h3.2L20 14.2V16.5h-6V11Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="17.8" r="1.3" fill="currentColor"/><circle cx="17" cy="17.8" r="1.3" fill="currentColor"/></svg>
+                </span>
+                <span class="product-detail__ship-copy"><strong>Kargo</strong>Türkiye geneli siparişler bugün 16:00’a kadar kargoya verilir.</span>
+              </p>
             </div>
-            <div class="product-detail__ship-item">
-              <img class="product-detail__ship-icon" src="media/icons/location.svg" alt="" />
-              <p>Türkiye geneli siparişler bugün 16:00’a kadar kargoya verilir.</p>
-            </div>
-          </div>
-
-          <div class="product-detail__nutrition">
-            <dl class="product-detail__specs">
-              <div>
-                <dt>Lezzetler</dt>
-                <dd>Kümes Hayvanı</dd>
-              </div>
-              <div>
-                <dt>Protein</dt>
-                <dd>%37</dd>
-              </div>
-              <div>
-                <dt>Yağ</dt>
-                <dd>%12</dd>
-              </div>
-              <div>
-                <dt>Tahıl Oranı</dt>
-                <dd>Tahıllı</dd>
-              </div>
-            </dl>
-          </div>
-        </aside>
+          </aside>
+        </div>
       </div>
 
       <nav class="product-detail__crumb" aria-label="Sayfa konumu">
@@ -313,7 +344,7 @@
         <span aria-hidden="true">/</span>
         <a href="urunler.html">Ürünler</a>
         <span aria-hidden="true">/</span>
-        <span aria-current="page">Konfor</span>
+        <span aria-current="page">Royal Canin Sterilised</span>
       </nav>
 
       <div class="product-detail__more" data-product-slider>
@@ -339,10 +370,10 @@
               <a class="product-card is-coral" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-eat.png" alt="Pro Plan Adult Tavuklu Köpek Maması" loading="lazy" />
+                    <img src="media/product/kedi-mamsi.png" alt="Kısırlaştırılmış Kedi Maması" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Pro Plan Adult Tavuklu Köpek Maması</div>
-                  <div class="product-card__cat">Dengeli formül, tüm ırklar için.</div>
+                  <div class="product-card__name">Kısırlaştırılmış Kedi Maması</div>
+                  <div class="product-card__cat">Kilo kontrolü ve idrar yolu desteği.</div>
                   <div class="product-card__price">₺ 2.210,98</div>
                 </div>
                 <span class="news-read">
@@ -358,10 +389,10 @@
               <a class="product-card is-blue" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-bone.png" alt="Doğal Çiğneme Kemiği" loading="lazy" />
+                    <img src="media/product/kedi-mamasi-organik.png" alt="Yetişkin Kedi Maması" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Doğal Çiğneme Kemiği</div>
-                  <div class="product-card__cat">Diş sağlığı ve oyun için doğal ödül.</div>
+                  <div class="product-card__name">Yetişkin Kedi Maması</div>
+                  <div class="product-card__cat">Doğal ve besleyici yetişkin formülü.</div>
                   <div class="product-card__price">₺ 223,00</div>
                 </div>
                 <span class="news-read">
@@ -377,10 +408,10 @@
               <a class="product-card is-green" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-home.png" alt="Konfor Köpek Yatağı" loading="lazy" />
+                    <img src="media/product/yavru-kedi-mamasi.png" alt="Somonlu Krema Macun" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Konfor Köpek Yatağı</div>
-                  <div class="product-card__cat">Yumuşak minder, dinlenme ve konfor için.</div>
+                  <div class="product-card__name">Somonlu Krema Macun</div>
+                  <div class="product-card__cat">Yavru kediler için büyüme desteği.</div>
                   <div class="product-card__price">₺ 899,00</div>
                 </div>
                 <span class="news-read">
@@ -396,10 +427,10 @@
               <a class="product-card is-orange" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-belt.png" alt="Dayanıklı Gezdirme Tasması" loading="lazy" />
+                    <img src="media/product/kedi-odul-mamasi.png" alt="Kedi Ödül Maması" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Dayanıklı Gezdirme Tasması</div>
-                  <div class="product-card__cat">Günlük yürüyüşler için dayanıklı aksesuar.</div>
+                  <div class="product-card__name">Kedi Ödül Maması</div>
+                  <div class="product-card__cat">Somonlu, tahılsız ödül.</div>
                   <div class="product-card__price">₺ 329,00</div>
                 </div>
                 <span class="news-read">
@@ -415,10 +446,10 @@
               <a class="product-card is-pink" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-eat2.png" alt="Hills Science Plan Adult Tavuklu Mama" loading="lazy" />
+                    <img src="media/product/kedi-kumu.png" alt="Doğal Bentonit Kedi Kumu" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Hills Science Plan Adult Tavuklu Mama</div>
-                  <div class="product-card__cat">Hassas sindirim için seçilmiş formül.</div>
+                  <div class="product-card__name">Doğal Bentonit Kedi Kumu</div>
+                  <div class="product-card__cat">10 L, ultra topaklanan.</div>
                   <div class="product-card__price">₺ 1.890,00</div>
                 </div>
                 <span class="news-read">
@@ -434,10 +465,10 @@
               <a class="product-card is-coral" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-eat.png" alt="Yavru Köpek Maması 3 kg" loading="lazy" />
+                    <img src="media/product/kedi-temeizleme-urunleri.png" alt="Kedi Bakım Seti" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Yavru Köpek Maması 3 kg</div>
-                  <div class="product-card__cat">Büyüme dönemine özel beslenme desteği.</div>
+                  <div class="product-card__name">Kedi Bakım Seti</div>
+                  <div class="product-card__cat">Şampuan, tarak ve bakım araçları.</div>
                   <div class="product-card__price">₺ 334,00</div>
                 </div>
                 <span class="news-read">
@@ -453,10 +484,10 @@
               <a class="product-card is-blue" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-bone.png" alt="Protein Ödül Maması" loading="lazy" />
+                    <img src="media/product/kedi-yuvasi.png" alt="Doğal Kedi Evi" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Protein Ödül Maması</div>
-                  <div class="product-card__cat">Eğitim anları için yüksek proteinli ödül.</div>
+                  <div class="product-card__name">Doğal Kedi Evi</div>
+                  <div class="product-card__cat">Tırmalama alanlı ahşap kedi evi.</div>
                   <div class="product-card__price">₺ 371,00</div>
                 </div>
                 <span class="news-read">
@@ -472,10 +503,10 @@
               <a class="product-card is-green" href="urun-detay.html">
                 <div class="product-card__top">
                   <div class="product-card__media">
-                    <img src="media/product/dog-home.png" alt="Ortopedik Minder" loading="lazy" />
+                    <img src="media/product/kedi-pufu.png" alt="Kedi Yatağı" loading="lazy" />
                   </div>
-                  <div class="product-card__name">Ortopedik Minder</div>
-                  <div class="product-card__cat">Eklem dostu dinlenme desteği.</div>
+                  <div class="product-card__name">Kedi Yatağı</div>
+                  <div class="product-card__cat">Yumuşak dinlenme yatağı.</div>
                   <div class="product-card__price">₺ 408,00</div>
                 </div>
                 <span class="news-read">
@@ -897,26 +928,22 @@
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
       <div class="quick-buy__media">
-        <span class="quick-buy__disc" data-qb-disc hidden></span>
-        <span class="quick-buy__flavor" data-qb-flavor hidden aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M14.5 4.5c2.2.2 4 2.2 3.8 4.5-.1 1.4-.8 2.5-1.8 3.2l1.7 7.3h-3.1l-1.2-5.1-.8.4v4.7H10v-5.2c-1.7-.8-2.9-2.5-2.9-4.6C7.1 6.4 9.4 4.3 12 4.5c.8 0 1.7.2 2.5.5Z" fill="currentColor"/></svg>
-        </span>
         <img data-qb-img src="" alt="" />
       </div>
       <div class="quick-buy__body">
-        <div class="quick-buy__gift" data-qb-gift hidden>
-          <img data-qb-gift-img src="" alt="" />
-          <span data-qb-gift-text></span>
-        </div>
+        <p class="quick-buy__kicker">Hızlı satın al</p>
+        <ul class="quick-buy__campaigns" data-qb-campaigns hidden></ul>
         <h2 class="quick-buy__title" id="quickBuyTitle" data-qb-title></h2>
         <p class="quick-buy__cat" data-qb-cat hidden></p>
         <div class="quick-buy__rating" data-qb-rating hidden>
           <span class="quick-buy__stars" data-qb-stars aria-hidden="true"></span>
           <span data-qb-reviews></span>
         </div>
+        <p class="quick-buy__facts" data-qb-facts hidden></p>
         <div class="quick-buy__size-wrap" data-qb-size-wrap hidden>
-          <label class="quick-buy__label" for="quickBuySize">Paket / beden</label>
-          <select class="quick-buy__size" id="quickBuySize" data-qb-size></select>
+          <p class="quick-buy__label">Paket / beden</p>
+          <div class="quick-buy__sizes" data-qb-sizes></div>
+          <select class="visually-hidden" id="quickBuySize" data-qb-size tabindex="-1" aria-hidden="true"></select>
         </div>
         <div class="quick-buy__prices">
           <span class="quick-buy__old" data-qb-old hidden></span>
@@ -934,8 +961,8 @@
     </div>
   </div>
 
-  <script src="js/chrome.js"></script>
+  <script src="js/chrome.js?v=22"></script>
   <script src="js/product-slider.js"></script>
-  <script src="js/quick-buy.js"></script>
+  <script src="js/quick-buy.js?v=5"></script>
 </body>
 </html>

@@ -13,6 +13,8 @@
     const openBtn = document.getElementById("menuOpen");
     const closeBtn = document.getElementById("menuClose");
     if (!menu || !openBtn || !closeBtn) return;
+    if (openBtn.getAttribute("data-menu-bound") === "1") return;
+    openBtn.setAttribute("data-menu-bound", "1");
 
     function setMenuCat(id) {
       if (!window.PAGES || !window.PAGES[id]) id = "kedi";
@@ -363,86 +365,162 @@
     const root = document.querySelector("[data-product-detail]");
     if (!root) return;
 
-    const thumbs = root.querySelectorAll("[data-detail-size]");
+    const sizes = {
+      "400": { label: "400 gr", price: "₺ 353,60", old: "₺ 684,07", disc: "%48", save: "Kazancınız: ₺ 330,47" },
+      "2": { label: "2 kg", price: "₺ 1.340,64", old: "", disc: "", save: "" },
+      "4": { label: "4 kg", price: "₺ 2.360,98", old: "", disc: "", save: "" },
+      "10": { label: "10 kg", price: "₺ 5.131,02", old: "", disc: "", save: "" },
+      "15": { label: "15 kg", price: "₺ 6.010,00", old: "", disc: "", save: "" }
+    };
+    const weightBtns = root.querySelectorAll("[data-detail-size]");
+    const priceEl = root.querySelector("[data-detail-price]");
+    const oldEl = root.querySelector("[data-detail-old]");
+    const discEl = root.querySelector("[data-detail-disc]");
+    const saveEl = root.querySelector("[data-detail-save]");
+    const ctaPrice = root.querySelector("[data-detail-cta-price]");
+    let currentSize = "400";
 
-    thumbs.forEach(function (thumb) {
-      thumb.addEventListener("click", function () {
-        thumbs.forEach(function (item) {
-          const on = item === thumb;
-          item.classList.toggle("is-on", on);
-          if (on) item.setAttribute("aria-selected", "true");
-          else item.removeAttribute("aria-selected");
+    function applySize(key) {
+      const size = sizes[key] || sizes["400"];
+      currentSize = sizes[key] ? key : "400";
+      if (priceEl) priceEl.textContent = size.price;
+      if (ctaPrice) ctaPrice.textContent = size.price;
+      if (oldEl) {
+        oldEl.textContent = size.old;
+        oldEl.hidden = !size.old;
+      }
+      if (discEl) {
+        discEl.textContent = size.disc;
+        discEl.hidden = !size.disc;
+      }
+      if (saveEl) {
+        saveEl.textContent = size.save;
+        saveEl.hidden = !size.save;
+      }
+      weightBtns.forEach(function (btn) {
+        const on = btn.getAttribute("data-detail-size") === currentSize;
+        btn.classList.toggle("is-on", on);
+        if (on) btn.setAttribute("aria-selected", "true");
+        else btn.removeAttribute("aria-selected");
+      });
+    }
+
+    weightBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applySize(btn.getAttribute("data-detail-size"));
+      });
+    });
+
+    function addCurrent() {
+      if (!window.PetdostumCart) return;
+      const nameEl = root.querySelector(".product-detail__name");
+      const front = root.querySelector(".product-detail__slide.is-on img");
+      const size = sizes[currentSize] || sizes["400"];
+      window.PetdostumCart.add({
+        name: nameEl ? nameEl.textContent.trim() : "",
+        img: front ? front.getAttribute("src") : "",
+        price: size.price,
+        old: size.old,
+        disc: size.disc,
+        size: size.label
+      });
+    }
+
+    const cta = root.querySelector(".product-detail__cta");
+    if (cta) cta.addEventListener("click", addCurrent);
+
+    root.querySelectorAll("[data-detail-pair]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (!window.PetdostumCart) return;
+        window.PetdostumCart.add({
+          name: btn.getAttribute("data-name") || "",
+          img: btn.getAttribute("data-img") || "",
+          price: btn.getAttribute("data-price") || "",
+          old: "",
+          disc: "",
+          size: ""
         });
       });
     });
 
-    (function initDetailGallery() {
-      const gallery = root.querySelector("[data-detail-gallery]");
-      const dotsRoot = root.querySelector("[data-detail-dots]");
-      if (!gallery) return;
+    const buyNow = root.querySelector("[data-detail-now]");
+    if (buyNow) {
+      buyNow.addEventListener("click", function () {
+        addCurrent();
+        const cartBtn = document.querySelector("[data-header-cart]");
+        if (cartBtn) cartBtn.click();
+      });
+    }
 
-      const shots = Array.prototype.slice.call(gallery.querySelectorAll("[data-detail-shot]"));
-      if (!shots.length) return;
+    (function initDetailDeck() {
+      const deck = root.querySelector("[data-detail-deck]");
+      if (!deck) return;
+      const track = deck.querySelector(".product-detail__track");
+      const slides = Array.prototype.slice.call(deck.querySelectorAll("[data-detail-slide]"));
+      const pager = deck.parentElement && deck.parentElement.querySelector("[data-detail-pager]");
+      const prev = deck.parentElement && deck.parentElement.querySelector("[data-detail-prev]");
+      const next = deck.parentElement && deck.parentElement.querySelector("[data-detail-next]");
+      if (!track || !slides.length) return;
 
-      const mq = window.matchMedia("(max-width: 860px)");
-      let dots = [];
       let active = 0;
-      let scrollLock = false;
+      let timer = 0;
 
-      function setActive(index, fromScroll) {
-        if (index < 0 || index >= shots.length) return;
-        active = index;
-        shots.forEach(function (shot, i) {
-          shot.classList.toggle("is-on", i === index);
+      function place(index) {
+        active = (index + slides.length) % slides.length;
+        track.style.transform = "translateX(" + (-active * 100) + "%)";
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle("is-on", i === active);
         });
-        dots.forEach(function (dot, i) {
-          const on = i === index;
-          dot.classList.toggle("is-on", on);
-          dot.setAttribute("aria-selected", on ? "true" : "false");
-        });
-        if (!fromScroll && mq.matches) {
-          scrollLock = true;
-          shots[index].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-          window.setTimeout(function () { scrollLock = false; }, 420);
+        if (pager) {
+          Array.prototype.forEach.call(pager.children, function (dot, i) {
+            const on = i === active;
+            dot.classList.toggle("is-active", on);
+            dot.setAttribute("aria-selected", on ? "true" : "false");
+          });
         }
       }
 
-      function buildDots() {
-        if (!dotsRoot) return;
-        dotsRoot.innerHTML = "";
-        dots = shots.map(function (shot, i) {
+      function restart() {
+        window.clearInterval(timer);
+        timer = window.setInterval(function () {
+          place(active + 1);
+        }, 4200);
+      }
+
+      if (pager) {
+        slides.forEach(function (slide, i) {
           const btn = document.createElement("button");
           btn.type = "button";
-          btn.className = "product-detail__dot" + (i === 0 ? " is-on" : "");
+          btn.className = "product-detail__pag";
           btn.setAttribute("role", "tab");
           btn.setAttribute("aria-label", "Görsel " + (i + 1));
-          btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
-          btn.addEventListener("click", function () { setActive(i, false); });
-          dotsRoot.appendChild(btn);
-          return btn;
+          btn.addEventListener("click", function () {
+            place(i);
+            restart();
+          });
+          pager.appendChild(btn);
         });
       }
 
-      function syncFromScroll() {
-        if (scrollLock || !mq.matches) return;
-        const left = gallery.scrollLeft;
-        const width = gallery.clientWidth || 1;
-        const index = Math.round(left / width);
-        if (index !== active) setActive(index, true);
+      if (prev) {
+        prev.addEventListener("click", function () {
+          place(active - 1);
+          restart();
+        });
       }
 
-      buildDots();
-      setActive(0, true);
+      if (next) {
+        next.addEventListener("click", function () {
+          place(active + 1);
+          restart();
+        });
+      }
 
-      gallery.addEventListener("scroll", syncFromScroll, { passive: true });
-      window.addEventListener("resize", function () {
-        if (!mq.matches) {
-          gallery.scrollLeft = 0;
-          setActive(0, true);
-        } else {
-          setActive(active, false);
-        }
-      });
+      deck.addEventListener("mouseenter", function () { window.clearInterval(timer); });
+      deck.addEventListener("mouseleave", restart);
+
+      place(0);
+      restart();
     })();
 
     const wish = root.querySelector(".product-detail__wish");
@@ -514,7 +592,8 @@
 
     items.forEach(function (item) {
       const btn = item.querySelector(".faq__item-q");
-      if (!btn) return;
+      if (!btn || btn.getAttribute("data-faq-bound") === "1") return;
+      btn.setAttribute("data-faq-bound", "1");
 
       btn.addEventListener("click", function () {
         const isOpen = item.classList.contains("is-open");
@@ -536,11 +615,17 @@
   /* Header arama + üyelik panelleri */
   (function () {
     function ensureCss() {
+      if (!document.getElementById("headerToolsCritical")) {
+        const style = document.createElement("style");
+        style.id = "headerToolsCritical";
+        style.textContent = ".header-sheet[hidden]{display:none!important}";
+        document.head.appendChild(style);
+      }
       if (document.getElementById("headerToolsCss")) return;
       const link = document.createElement("link");
       link.id = "headerToolsCss";
       link.rel = "stylesheet";
-      link.href = "css/header-tools.css?v=5";
+      link.href = "css/header-tools.css?v=14";
       document.head.appendChild(link);
     }
 
@@ -554,6 +639,7 @@
       const search = document.createElement("div");
       search.id = "headerSearch";
       search.className = "header-sheet";
+      search.setAttribute("hidden", "");
       search.setAttribute("aria-hidden", "true");
       search.innerHTML =
         '<div class="header-sheet__backdrop" data-header-close></div>' +
@@ -583,6 +669,7 @@
       const auth = document.createElement("div");
       auth.id = "headerAuth";
       auth.className = "header-sheet is-auth";
+      auth.setAttribute("hidden", "");
       auth.setAttribute("aria-hidden", "true");
       auth.innerHTML =
         '<div class="header-sheet__backdrop" data-header-close></div>' +
@@ -625,8 +712,33 @@
           "</div>" +
         "</div>";
 
+      const cart = document.createElement("div");
+      cart.id = "headerCart";
+      cart.className = "header-sheet is-cart";
+      cart.setAttribute("hidden", "");
+      cart.setAttribute("aria-hidden", "true");
+      cart.innerHTML =
+        '<div class="header-sheet__backdrop" data-header-close></div>' +
+        '<div class="header-sheet__dialog" role="dialog" aria-modal="true" aria-labelledby="headerCartTitle">' +
+          '<button type="button" class="header-sheet__close" data-header-close aria-label="Kapat">' + svgClose() + "</button>" +
+          '<p class="header-sheet__kicker">Mini sepet</p>' +
+          '<h2 class="header-sheet__title" id="headerCartTitle">Sepetin</h2>' +
+          '<div class="header-cart__empty" data-cart-empty>' +
+            '<span class="header-cart__mark" aria-hidden="true">' +
+              '<svg viewBox="0 0 24 24" fill="none"><path d="M6 7h15l-1.4 8.2H7.8L6 7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 7 5 4H2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="19.5" r="1.4" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/></svg>' +
+            "</span>" +
+            '<p class="header-cart__empty-title">Sepetinizde ürün bulunmamaktadır</p>' +
+          "</div>" +
+          '<ul class="header-cart__list" data-cart-list hidden></ul>' +
+          '<div class="header-cart__foot" data-cart-foot hidden>' +
+            '<span class="header-cart__total-label">Toplam</span>' +
+            '<strong class="header-cart__total" data-cart-total>₺ 0,00</strong>' +
+          "</div>" +
+        "</div>";
+
       document.body.appendChild(search);
       document.body.appendChild(auth);
+      document.body.appendChild(cart);
     }
 
     function wireHeaderButtons() {
@@ -644,6 +756,11 @@
           btn.setAttribute("aria-haspopup", "dialog");
           btn.setAttribute("aria-controls", "headerAuth");
         }
+        if (label.indexOf("sepet") !== -1 && !btn.hasAttribute("data-header-cart")) {
+          btn.setAttribute("data-header-cart", "");
+          btn.setAttribute("aria-haspopup", "dialog");
+          btn.setAttribute("aria-controls", "headerCart");
+        }
       });
     }
 
@@ -653,15 +770,166 @@
 
     const searchSheet = document.getElementById("headerSearch");
     const authSheet = document.getElementById("headerAuth");
-    if (!searchSheet || !authSheet) return;
+    const cartSheet = document.getElementById("headerCart");
+    if (!searchSheet || !authSheet || !cartSheet) return;
+
+    const CART_KEY = "petdostum-cart";
+    const cartEmpty = cartSheet.querySelector("[data-cart-empty]");
+    const cartList = cartSheet.querySelector("[data-cart-list]");
+    const cartFoot = cartSheet.querySelector("[data-cart-foot]");
+    const cartTotal = cartSheet.querySelector("[data-cart-total]");
+
+    function esc(value) {
+      return String(value || "").replace(/[&<>"']/g, function (ch) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+      });
+    }
+
+    function parseMoney(text) {
+      const raw = String(text || "").replace(/[^\d,.-]/g, "").replace(/\./g, "").replace(",", ".");
+      const n = parseFloat(raw);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function formatMoney(n) {
+      return "₺ " + n.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function loadCart() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (err) {
+        return [];
+      }
+    }
+
+    function saveCart(items) {
+      try {
+        localStorage.setItem(CART_KEY, JSON.stringify(items));
+      } catch (err) { /* ignore */ }
+    }
+
+    function cartCount(items) {
+      return items.reduce(function (sum, item) { return sum + (item.qty || 1); }, 0);
+    }
+
+    function renderCart() {
+      const items = loadCart();
+      const count = cartCount(items);
+      document.querySelectorAll("[data-header-cart]").forEach(function (btn) {
+        let badge = btn.querySelector("[data-cart-count]");
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.className = "menu-action__count";
+          badge.setAttribute("data-cart-count", "");
+          btn.appendChild(badge);
+        }
+        if (count > 0) {
+          badge.textContent = String(count);
+          badge.removeAttribute("hidden");
+        } else {
+          badge.textContent = "";
+          badge.setAttribute("hidden", "");
+        }
+      });
+
+      if (!items.length) {
+        if (cartEmpty) cartEmpty.removeAttribute("hidden");
+        if (cartList) {
+          cartList.innerHTML = "";
+          cartList.setAttribute("hidden", "");
+        }
+        if (cartFoot) cartFoot.setAttribute("hidden", "");
+        return;
+      }
+
+      if (cartEmpty) cartEmpty.setAttribute("hidden", "");
+      if (cartList) {
+        cartList.removeAttribute("hidden");
+        cartList.innerHTML = items.map(function (item) {
+          const qty = item.qty || 1;
+          const line = parseMoney(item.price) * qty;
+          const chips = [];
+          if (item.size) chips.push('<span class="header-cart__chip">' + esc(item.size) + "</span>");
+          if (qty > 1) chips.push('<span class="header-cart__chip">' + qty + " adet</span>");
+          if (item.disc) chips.push('<span class="header-cart__disc">' + esc(item.disc) + "</span>");
+          const oldLine = item.old ? parseMoney(item.old) * qty : 0;
+          const priceHtml = item.old
+            ? '<span class="header-cart__prices"><span class="header-cart__old">' + esc(formatMoney(oldLine)) + '</span><span class="header-cart__price is-sale">' + esc(formatMoney(line)) + "</span></span>"
+            : '<p class="header-cart__price">' + esc(formatMoney(line)) + "</p>";
+          return (
+            '<li class="header-cart__item">' +
+              '<span class="header-cart__media">' +
+                '<img src="' + esc(item.img) + '" alt="" />' +
+                '<button type="button" class="header-cart__remove" data-cart-remove="' + esc(item.id) + '" aria-label="Sepetten çıkar">' +
+                  '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
+                "</button>" +
+              "</span>" +
+              '<div class="header-cart__body">' +
+                '<p class="header-cart__name">' + esc(item.name) + "</p>" +
+                '<div class="header-cart__bottom">' +
+                  '<span class="header-cart__meta">' + chips.join("") + "</span>" +
+                  priceHtml +
+                "</div>" +
+              "</div>" +
+            "</li>"
+          );
+        }).join("");
+      }
+      if (cartFoot) cartFoot.removeAttribute("hidden");
+      if (cartTotal) {
+        const sum = items.reduce(function (acc, item) {
+          return acc + parseMoney(item.price) * (item.qty || 1);
+        }, 0);
+        cartTotal.textContent = formatMoney(sum);
+      }
+    }
+
+    window.PetdostumCart = {
+      add: function (product) {
+        const name = String((product && product.name) || "").trim();
+        if (!name) return;
+        const size = String((product && product.size) || "").trim();
+        const id = name + "|" + size;
+        const items = loadCart();
+        const found = items.filter(function (item) { return item.id === id; })[0];
+        if (found) found.qty = (found.qty || 1) + 1;
+        else {
+          items.push({
+            id: id,
+            name: name,
+            img: String((product && product.img) || ""),
+            price: String((product && product.price) || ""),
+            old: String((product && product.old) || ""),
+            disc: String((product && product.disc) || ""),
+            size: size,
+            qty: 1
+          });
+        }
+        if (found && product) {
+          if (product.old) found.old = String(product.old);
+          if (product.disc) found.disc = String(product.disc);
+        }
+        saveCart(items);
+        renderCart();
+      },
+      remove: function (id) {
+        saveCart(loadCart().filter(function (item) { return item.id !== id; }));
+        renderCart();
+      }
+    };
+
+    renderCart();
 
     let lastFocus = null;
     let openSheet = null;
 
     function closeAll(opts) {
       const keepFocus = opts && opts.keepFocus;
-      [searchSheet, authSheet].forEach(function (sheet) {
+      [searchSheet, authSheet, cartSheet].forEach(function (sheet) {
         sheet.classList.remove("is-open");
+        sheet.setAttribute("hidden", "");
         sheet.setAttribute("aria-hidden", "true");
       });
       document.body.classList.remove("is-header-sheet-open");
@@ -700,6 +968,7 @@
       openSheet = sheet;
       placeDialog(sheet);
       sheet.classList.add("is-open");
+      sheet.removeAttribute("hidden");
       sheet.setAttribute("aria-hidden", "false");
       document.body.classList.add("is-header-sheet-open");
       window.setTimeout(function () {
@@ -745,6 +1014,20 @@
         e.stopPropagation();
         if (openSheet !== authSheet) showAuthMode("login");
         open(authSheet, '[data-auth-form="login"] input[name="email"]', authBtn);
+        return;
+      }
+      const cartBtn = e.target.closest("[data-header-cart]");
+      if (cartBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        open(cartSheet, ".header-sheet__close", cartBtn);
+        return;
+      }
+      const removeBtn = e.target.closest("[data-cart-remove]");
+      if (removeBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.PetdostumCart.remove(removeBtn.getAttribute("data-cart-remove"));
         return;
       }
       if (e.target.closest("[data-header-close]")) {
