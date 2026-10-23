@@ -903,9 +903,32 @@ html, body {
       display: flex;
       flex-direction: column;
       gap: 144px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-watermark {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+      line-height: 0;
+    }
+
+    .footer-watermark img {
+      width: clamp(280px, 36vw, 460px);
+      height: auto;
+      display: block;
+      filter: brightness(0);
+      opacity: 0.09;
     }
 
     .footer-row {
+      position: relative;
+      z-index: 1;
       display: flex;
       gap: 32px;
       align-items: flex-start;
@@ -1222,6 +1245,11 @@ html, body {
 
 .footer-panel { padding: 24px 20px 20px; gap: 20px; border-radius: 40px 40px 0 0; }
 
+.footer-watermark img {
+        width: clamp(200px, 48vw, 300px);
+        opacity: 0.07;
+      }
+
 .footer-row { flex-direction: column; gap: 20px; }
 
 .footer-brand { max-width: none; gap: 14px; }
@@ -1342,6 +1370,10 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
 .site-footer { padding: 0 12px; }
 
 .footer-panel { padding: 24px 16px 18px; gap: 16px; border-radius: 28px 28px 0 0; }
+
+.footer-watermark img {
+        width: clamp(180px, 56vw, 260px);
+      }
 
 .footer-title { font-size: clamp(1.15rem, 5vw, 1.4rem); }
 
@@ -1518,13 +1550,21 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
 }
 
 .product-list__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 22rem);
+  align-items: center;
+  gap: clamp(28px, 5vw, 56px);
+  margin: 0 0 clamp(32px, 5vw, 52px);
+  text-align: left;
+  color: #2c2118;
+}
+
+.product-list__copy {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(14px, 2vw, 20px);
-  margin: 0 0 clamp(32px, 5vw, 52px);
-  text-align: center;
-  color: #2c2118;
+  align-items: flex-start;
+  gap: clamp(10px, 1.6vw, 16px);
+  min-width: 0;
 }
 
 .product-list__eyebrow {
@@ -1541,7 +1581,7 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
   margin: 0;
   font-family: "Bebas Neue", "DM Sans", system-ui, sans-serif;
   font-weight: 400;
-  font-size: clamp(5rem, 14vw, 9.5rem);
+  font-size: clamp(4.2rem, 11vw, 8rem);
   line-height: 0.88;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -1550,7 +1590,7 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
 
 .product-list__lead {
   margin: 0;
-  max-width: 36rem;
+  max-width: 28rem;
   font-family: "DM Sans", system-ui, sans-serif;
   font-weight: 500;
   font-size: clamp(0.95rem, 1.6vw, 1.125rem);
@@ -1558,62 +1598,73 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
   color: #2c2118;
 }
 
-/* AI arama — ürün listesi intro */
+/* AI arama — editöryal spine düzeni */
 .ai-search {
+  --ai-ink: #2c2118;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0 25px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ai-ink);
+  box-sizing: border-box;
+}
+
+.ai-search__spine {
+  margin: 0;
+  padding: 10px 0;
+  border-right: 1px solid rgba(69, 69, 69, 0.12);
+}
+
+.ai-search__body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: min(100%, 40rem);
-  margin-top: clamp(6px, 1.5vw, 12px);
+  align-items: stretch;
+  gap: 10px;
+  min-width: 0;
+  padding: 4px 0 2px;
 }
 
 .ai-search__kicker {
   margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(44, 33, 24, 0.48);
+}
+
+.ai-search__prompt {
+  margin: 0;
   font-family: "Caveat", cursive;
-  font-weight: 600;
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
-  line-height: 1;
-  color: var(--cta-coral);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 3.6vw, 2.75rem);
+  line-height: 0.95;
+  color: var(--ai-ink);
 }
 
 .ai-search__shell {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  min-height: 58px;
-  padding: 6px 6px 6px 14px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow:
-    inset 0 0 0 1px rgba(24, 1, 2, 0.08),
-    0 12px 28px rgba(44, 33, 24, 0.06);
+  margin-top: 4px;
+  padding: 0 0 10px;
+  border: 0;
+  border-bottom: 2px solid rgba(44, 33, 24, 0.16);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   box-sizing: border-box;
-  transition: box-shadow 0.25s ease;
+  transition: border-color 0.2s ease;
 }
 
 .ai-search__shell:focus-within {
-  box-shadow:
-    inset 0 0 0 1.5px color-mix(in srgb, var(--cta-coral) 55%, #fff),
-    0 14px 30px rgba(227, 107, 79, 0.12);
-}
-
-.ai-search__mark {
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--cta-coral) 16%, #fff);
-  color: var(--cta-coral);
-}
-
-.ai-search__mark svg {
-  width: 18px;
-  height: 18px;
-  display: block;
+  border-bottom-color: var(--cta-coral);
 }
 
 .ai-search__input {
@@ -1624,14 +1675,15 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
   background: transparent;
   color: #180102;
   font-family: "DM Sans", system-ui, sans-serif;
-  font-size: clamp(0.92rem, 1.5vw, 1.02rem);
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.35;
+  padding: 6px 0;
   outline: none;
 }
 
 .ai-search__input::placeholder {
-  color: rgba(24, 1, 2, 0.42);
+  color: rgba(24, 1, 2, 0.34);
   font-weight: 500;
 }
 
@@ -1642,85 +1694,103 @@ nav.menu button.menu-action svg { width: 16px; height: 16px; }
 .ai-search__submit {
   appearance: none;
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 0 18px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
   border: 0;
-  border-radius: 999px;
+  border-radius: 50%;
   background: var(--cta-coral);
   color: #fff;
-  font-family: "DM Sans", system-ui, sans-serif;
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .ai-search__submit svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   display: block;
 }
 
 .ai-search__submit:hover {
   background: #d45a3f;
-  transform: translateY(-1px);
+  transform: translateX(2px);
 }
 
 .ai-search__hints {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
   width: 100%;
+  margin-top: 4px;
 }
 
 .ai-search__hint {
   appearance: none;
-  padding: 8px 14px;
-  border: 1px solid rgba(24, 1, 2, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: rgba(24, 1, 2, 0.72);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(44, 33, 24, 0.08);
+  border-radius: 0;
+  background: transparent;
+  color: rgba(44, 33, 24, 0.72);
   font-family: "DM Sans", system-ui, sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.3;
+  text-align: left;
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.ai-search__hint span {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--cta-coral);
+  opacity: 0.85;
+}
+
+.ai-search__hint:last-child {
+  border-bottom: 0;
 }
 
 .ai-search__hint:hover,
 .ai-search__hint.is-on {
   color: var(--cta-coral);
-  border-color: color-mix(in srgb, var(--cta-coral) 45%, transparent);
-  background: color-mix(in srgb, var(--cta-coral) 10%, #fff);
+  padding-left: 4px;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
 .ai-search__status {
-  margin: 0;
+  margin: 4px 0 0;
   min-height: 1.2em;
   font-family: "DM Sans", system-ui, sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: rgba(24, 1, 2, 0.55);
+  color: rgba(44, 33, 24, 0.5);
 }
 
 .ai-search.is-busy .ai-search__submit {
   pointer-events: none;
-  opacity: 0.78;
+  opacity: 0.72;
 }
 
-.ai-search.is-busy .ai-search__mark {
-  animation: ai-search-pulse 0.9s ease-in-out infinite;
-}
-
-@keyframes ai-search-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+@media (prefers-reduced-motion: reduce) {
+  .ai-search__submit:hover,
+  .ai-search__hint:hover,
+  .ai-search__hint.is-on {
+    transform: none;
+    padding-left: 0;
+  }
 }
 
 /* Toolbar: filtre / sıralama / görünüm */
@@ -2705,6 +2775,11 @@ html.is-filter-open body {
 }
 
 @media (max-width: 1100px) {
+  .product-list__intro {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
   .product-list__grid.is-cols-5,
   .product-list__grid.is-cols-4 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2864,48 +2939,51 @@ html.is-filter-open body {
   }
 
   .product-list__intro {
+    grid-template-columns: 1fr;
+    align-items: stretch;
     margin-bottom: 28px;
-    gap: 12px;
+    gap: 20px;
+  }
+
+  .product-list__title {
+    font-size: clamp(3.6rem, 18vw, 5.5rem);
   }
 
   .ai-search {
-    gap: 10px;
+    gap: 0 14px;
+  }
+
+  .ai-search__spine {
+    padding: 6px 0;
+  }
+
+  .ai-search__prompt {
+    font-size: clamp(1.85rem, 8vw, 2.3rem);
   }
 
   .ai-search__shell {
-    min-height: 52px;
-    padding: 5px 5px 5px 12px;
-    gap: 8px;
+    padding-bottom: 8px;
+    gap: 10px;
   }
 
-  .ai-search__mark {
-    width: 30px;
-    height: 30px;
+  .ai-search__input {
+    font-size: 0.92rem;
   }
 
-  .ai-search__mark svg {
+  .ai-search__submit {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ai-search__submit svg {
     width: 16px;
     height: 16px;
   }
 
-  .ai-search__input {
-    font-size: 0.88rem;
-  }
-
-  .ai-search__submit {
-    min-height: 42px;
-    padding: 0 14px;
-    font-size: 0.8rem;
-    gap: 6px;
-  }
-
-  .ai-search__submit span {
-    display: none;
-  }
-
   .ai-search__hint {
-    padding: 7px 12px;
-    font-size: 0.74rem;
+    padding: 8px 0;
+    font-size: 0.82rem;
+    gap: 10px;
   }
 
   .product-toolbar__right {

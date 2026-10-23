@@ -2748,9 +2748,32 @@
       display: flex;
       flex-direction: column;
       gap: 144px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-watermark {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+      line-height: 0;
+    }
+
+    .footer-watermark img {
+      width: clamp(280px, 36vw, 460px);
+      height: auto;
+      display: block;
+      filter: brightness(0);
+      opacity: 0.09;
     }
 
     .footer-row {
+      position: relative;
+      z-index: 1;
       display: flex;
       gap: 32px;
       align-items: flex-start;
@@ -3079,6 +3102,7 @@
 
     @media (max-width: 900px) {
       .footer-panel { padding: 24px 20px 20px; gap: 20px; border-radius: 40px 40px 0 0; }
+      .footer-watermark img { width: clamp(200px, 48vw, 300px); opacity: 0.07; }
       .footer-row { flex-direction: column; gap: 20px; }
       .footer-brand { max-width: none; gap: 14px; }
       .footer-brand__lower { gap: 16px; }
@@ -3389,6 +3413,7 @@
 
       .site-footer { padding: 0 12px; }
       .footer-panel { padding: 24px 16px 18px; gap: 16px; border-radius: 28px 28px 0 0; }
+      .footer-watermark img { width: clamp(180px, 56vw, 260px); }
       .footer-title { font-size: clamp(1.15rem, 5vw, 1.4rem); }
       .footer-row { gap: 20px; }
       .footer-brand { gap: 14px; }
@@ -5272,6 +5297,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="footer-watermark" aria-hidden="true">
+        <img src="pedlogo.png" alt="" />
       </div>
       <div class="footer-row is-bottom">
         <p class="footer-copy">© 2026 PETDOSTUM</p>
