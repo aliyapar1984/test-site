@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PETDOSTUM yaz bakımı rehberi yayında — PETDOSTUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/chrome.css?v=32" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="PETDOSTUM">
+      <img src="pedlogo.png" alt="PETDOSTUM" />
+    </a>
+    <nav class="menu" aria-label="Menü">
+      <div class="menu-tools">
+        <button type="button" class="menu-action" data-header-search aria-label="Ara" aria-haspopup="dialog" aria-controls="headerSearch">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="menu-action" data-header-account aria-label="Giriş yap" aria-haspopup="dialog" aria-controls="headerAuth">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="menu-action" data-header-cart aria-label="Sepet" aria-haspopup="dialog" aria-controls="headerCart">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 7h15l-1.4 8.2H7.8L6 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M6 7 5 4H2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="9" cy="19.5" r="1.4" fill="currentColor"/>
+            <circle cx="17.5" cy="19.5" r="1.4" fill="currentColor"/>
+          </svg>
+        </button>
+        <button type="button" class="menu-more" id="menuOpen" aria-label="Menüyü aç" aria-expanded="false" aria-controls="siteMenu">
+          <i></i><i></i><i></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="site-menu" id="siteMenu" data-menu-theme="kedi" aria-hidden="true">
+    <div class="site-menu__top">
+      <a class="logo site-menu__logo" href="index.html" data-menu-close aria-label="PETDOSTUM">
+        <img src="pedlogo.png" alt="PETDOSTUM" />
+      </a>
+      <nav class="menu site-menu__header-nav" aria-label="Menü kontrolleri">
+        <div class="menu-tools">
+          <span class="site-menu__tool-spacer" aria-hidden="true"></span>
+          <span class="site-menu__tool-spacer" aria-hidden="true"></span>
+          <span class="site-menu__tool-spacer" aria-hidden="true"></span>
+          <button type="button" class="menu-more site-menu__close" id="menuClose" aria-label="Menüyü kapat">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <div class="site-menu__body">
+      <div class="site-menu__nav" role="tablist" aria-label="Kategoriler">
+        <button type="button" class="site-menu__nav-btn is-on" data-menu-cat="kedi" role="tab" aria-selected="true">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/cat.svg" alt="" />
+          </span>
+          <span><em>01</em>Kedi</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="kopek" role="tab" aria-selected="false">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/dog.svg" alt="" />
+          </span>
+          <span><em>02</em>Köpek</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="kus" role="tab" aria-selected="false">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/bird.svg" alt="" />
+          </span>
+          <span><em>03</em>Kuş</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="site-menu__nav-btn" data-menu-cat="balik" role="tab" aria-selected="false">
+          <span class="site-menu__nav-icon-wrap" aria-hidden="true">
+            <img class="site-menu__nav-icon" src="media/fish.svg" alt="" />
+          </span>
+          <span><em>04</em>Balık</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="site-menu__panel-wrap">
+        <div class="site-menu__panel is-on" data-menu-panel="kedi" role="tabpanel">
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/cat.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Kedi</div>
+              <h2 class="site-menu__panel-title">Kedi Mamaları</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yavru Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="kedi" data-menu-close>Tüm Kedi Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="kopek" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/dog.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Köpek</div>
+              <h2 class="site-menu__panel-title">Köpek Mamaları</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Kuru Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yaş Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Ödül Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Yavru Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Veteriner Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tahılsız Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Doğal &amp; Organik Mamalar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="kopek" data-menu-close>Tüm Köpek Mamaları <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="kus" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/bird.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Kuş</div>
+              <h2 class="site-menu__panel-title">Kuş Ürünleri</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Kuş Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kafes &amp; Aksesuar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Tünek &amp; Yuva <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Vitamin &amp; Bakım <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Oyuncaklar <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Kum &amp; Hijyen <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="kus" data-menu-close>Tüm Kuş Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="site-menu__panel" data-menu-panel="balik" role="tabpanel" hidden>
+          <div class="site-menu__panel-head">
+            <div class="site-menu__panel-icon"><img src="media/fish.svg" alt="" /></div>
+            <div>
+              <div class="site-menu__panel-kicker">Balık</div>
+              <h2 class="site-menu__panel-title">Akvaryum Ürünleri</h2>
+            </div>
+          </div>
+          <div class="site-menu__links">
+            <a href="urunler.html">Balık Yemleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Filtre &amp; Pompa <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Isıtıcı &amp; Aydınlatma <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Su Düzenleyici <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Bitki &amp; Dekor <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="urunler.html">Akvaryum Setleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <a class="site-menu__cta" href="urunler.html" data-go="balik" data-menu-close>Tüm Akvaryum Ürünleri <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-menu__foot">
+      <div class="site-menu__foot-links">
+        <a href="mailto:info@petdostum.com" aria-label="E-posta: info@petdostum.com">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h16v10H4v-10Z" stroke="currentColor" stroke-width="1.7"/><path d="m4.5 8 7.5 5.5L19.5 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </i>
+          <span><strong>E-posta</strong> info@petdostum.com</span>
+        </a>
+        <a href="index.html#icerik" aria-label="Mağazalarımız">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="11" r="2.2" stroke="currentColor" stroke-width="1.7"/></svg>
+          </i>
+          <span><strong>Mağazalarımız</strong> Size en yakın mağazayı bulun.</span>
+        </a>
+        <a href="tel:08501234567" aria-label="Bize ulaşın: 0850 123 45 67">
+          <i class="site-menu__foot-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 5h3l1.2 3.2-1.8 1.2a10 10 0 0 0 4.2 4.2l1.2-1.8L19 13v3a2 2 0 0 1-2.2 2A13 13 0 0 1 6 7.2 2 2 0 0 1 8 5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </i>
+          <span><strong>Bize Ulaşın</strong> 0850 123 45 67</span>
+        </a>
+      </div>
+      <div class="site-menu__social">
+        <span>Sosyal Medya</span>
+        <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="7.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 8h2V5h-2a4 4 0 0 0-4 4v2H8v3h2v6h3v-6h2.2l.8-3H13V9a1 1 0 0 1 1-1Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://youtube.com" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="10" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 10.2v3.6L14.5 12 11 10.2Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://tiktok.com" aria-label="TikTok" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 5.5c.8 1.7 2.2 2.8 4 3v2.6c-1.5-.1-2.9-.6-4-1.4v5.4A4.9 4.9 0 1 1 9.2 10.4v2.7a2.3 2.3 0 1 0 2.3 2.3V5.5H14Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+      <main class="page-main" id="blog-detay" aria-label="Blog yazısı">
+    <article class="post-page">
+      <nav class="post-page__crumb" aria-label="Sayfa yolu">
+        <a href="index.html">Ana sayfa</a>
+        <span aria-hidden="true">/</span>
+        <a href="blog.html">Blog</a>
+        <span aria-hidden="true">/</span>
+        <span>PETDOSTUM yaz bakımı rehberi yayında</span>
+      </nav>
+
+      <header class="post-page__header">
+        <div class="blog-meta">
+          <span class="blog-tag">Duyuru</span>
+          <time datetime="2026-08-12">12 Ağustos 2026</time>
+        </div>
+        <h1 class="post-page__title">PETDOSTUM yaz bakımı rehberi yayında</h1>
+        <p class="post-page__lead">Sıcak havalarda kedi ve köpekler için mama, su ve yürüyüş önerilerini bir araya getirdik.</p>
+      </header>
+
+      <div class="post-page__hero">
+        <img src="media/kopek.png" alt="" />
+      </div>
+
+      <div class="post-page__content">
+        <p>Yaz aylarında dostlarınızın ritmi değişir. Daha kısa yürüyüşler, daha sık su molaları ve serin dinlenme alanları; küçük dokunuşlarla büyük fark yaratır.</p>
+      <h2>Su her zaman erişilebilir olsun</h2>
+      <p>Özellikle köpeklerde öğleden sonra yürüyüşlerini sabaha veya akşama kaydırın. Mama kabının yanında ikinci bir su kabı bulundurmak, sıcakta sıvı kaybını dengelemeye yardımcı olur.</p>
+      <h2>Mama miktarını gözlemleyin</h2>
+      <p>İştah düşüşü normal olabilir; ani kilo kaybı varsa veterinerinize danışın. Yaş mama veya ıslatılmış mama, sıcak günlerde tercih edilebilir.</p>
+      <h2>Evde serin bir köşe</h2>
+      <p>Doğrudan güneş almayan bir alan, serin bir yatak ve havalandırma yaz konforunun temeli. Kediler yüksek ve gölgeli noktaları sever; bu alanları açık tutun.</p>
+      <blockquote>Küçük rutinler, sıcak günleri dostunuz için daha sakin ve güvenli hale getirir.</blockquote>
+      <p>Detaylı ürün seçkileri için mağazamıza uğrayabilir veya online koleksiyonumuza göz atabilirsiniz.</p>
+      </div>
+
+      <footer class="post-page__foot">
+        <a class="blog-more" href="blog.html">
+          Tüm yazılar
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+        </a>
+        <a class="blog-more" href="urunler.html">
+          Ürünleri keşfet
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+        </a>
+      </footer>
+
+      <aside class="post-related" aria-label="İlgili yazılar">
+        <h2 class="post-related__title">İlginizi çekebilir</h2>
+        <div class="post-related__grid">
+            <a class="post-related__item" href="blog-mama-kabi.html"><span>Devam</span><strong>Kediniz için doğru mama kabı</strong></a>
+            <a class="post-related__item" href="blog-tasma.html"><span>Devam</span><strong>Köpek tasması seçimi</strong></a>
+            <a class="post-related__item" href="blog-kus-kafesi.html"><span>Devam</span><strong>Kuş kafesi kurulumu</strong></a>
+        </div>
+      </aside>
+    </article>
+  </main>
+
+  <footer class="site-footer" id="kesfet">
+    <div class="footer-panel">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <h2 class="footer-title">PETDOSTUM, dostlarınızın her yerde mutlu ve bakımlı olabildiği bir dünya kuruyor.</h2>
+          <div class="footer-brand__lower">
+            <p class="footer-note">Türkiye’de tasarlandı.<br />Dostlarınız için özenle seçildi.</p>
+            <div class="footer-newsletter" id="footerNewsletter">
+              <div class="footer-newsletter__inner">
+                <div class="footer-newsletter__head">
+                  <h3>E-bülten</h3>
+                  <p class="footer-newsletter__lead">Kampanyalar, yeni ürünler ve bakım ipuçları e-postanıza gelsin.</p>
+                </div>
+                <div class="footer-newsletter__body">
+                  <form class="footer-newsletter__form" id="newsletterForm" action="#" method="post" novalidate>
+                    <div class="footer-newsletter__field">
+                      <label class="footer-newsletter__label" for="newsletterEmail">E-posta adresiniz</label>
+                      <input
+                        type="email"
+                        id="newsletterEmail"
+                        name="email"
+                        placeholder="ornek@email.com"
+                        autocomplete="email"
+                        required
+                      />
+                      <button type="submit">Abone ol</button>
+                    </div>
+                  </form>
+                  <p class="footer-newsletter__success" role="status" aria-live="polite">
+                    Teşekkürler! E-bülten listemize eklendiniz.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-cols footer-accordion" id="footerAccordion">
+          <div class="footer-col is-open">
+            <button type="button" class="footer-col__head" aria-expanded="true">
+              <span>Keşfet</span>
+              <span class="footer-col__chev" aria-hidden="true"></span>
+            </button>
+            <div class="footer-col__panel">
+              <div class="footer-col__panel-inner">
+                <ul>
+              <li><a href="index.html#kedi">Kedi</a></li>
+              <li><a href="index.html#kopek">Köpek</a></li>
+              <li>
+                <a href="index.html#kus">
+                  Bakım rehberi
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="index.html#balik">
+                  Ürün kataloğu
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.15 9.96h10.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9.98 4.12 15.81 9.96 9.98 15.79" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-col">
+            <button type="button" class="footer-col__head" aria-expanded="false">
+              <span>Mağaza</span>
+              <span class="footer-col__chev" aria-hidden="true"></span>
+            </button>
+            <div class="footer-col__panel">
+              <div class="footer-col__panel-inner">
+                <ul>
+              <li><a href="hakkimizda.html">Hakkımızda</a></li>
+              <li><a href="index.html#siparis">Sipariş takibi</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="index.html#sss">Sıkça sorulanlar</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-col">
+            <button type="button" class="footer-col__head" aria-expanded="false">
+              <span>Sosyal</span>
+              <span class="footer-col__chev" aria-hidden="true"></span>
+            </button>
+            <div class="footer-col__panel">
+              <div class="footer-col__panel-inner">
+                <ul>
+              <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+              <li><a href="https://x.com/" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+              <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-watermark" aria-hidden="true">
+        <img src="pedlogo.png" alt="" />
+      </div>
+      <div class="footer-row is-bottom">
+        <p class="footer-copy">© 2026 PETDOSTUM</p>
+        <nav class="footer-legal" aria-label="Yasal">
+          <a href="#gizlilik">Gizlilik Politikası</a>
+          <a href="#iade">Teslimat ve İade</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor__label">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Kaydır</span>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+
+
+  <script src="js/chrome.js?v=22"></script>
+</body>
+</html>
